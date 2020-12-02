@@ -7,9 +7,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="FaultsManagementPU" transaction-type="JTA">
         <!--<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>jdbc/FaultsManagementDS</jta-data-source>
-        <class>pl.lodz.p.it.spjava.fm.model.TechArea</class>
-        <class>pl.lodz.p.it.spjava.fm.model.NewEntity</class>
+        <jta-data-source>jdbc/FaultsManagementDS</jta-data-source> 
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="eclipselink.logging.level" value="FINE"/>

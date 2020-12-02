@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 @Entity
 @SecondaryTable(name = "PERSON")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "typ")
+@DiscriminatorColumn(name = "type")
 public abstract class Account extends AbstractEntity implements Serializable {
 
     public Account() {
@@ -62,7 +62,7 @@ public abstract class Account extends AbstractEntity implements Serializable {
     @Column(table = "PERSON", length = 12, unique = true, nullable = true)
     private String phone;
 
-    @Column(name = "typ", updatable = false)
+    @Column(name = "type", updatable = false)
     private String typ;
 
     public String getPhone() {
