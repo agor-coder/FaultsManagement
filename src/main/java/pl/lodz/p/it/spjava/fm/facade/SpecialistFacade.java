@@ -24,5 +24,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
     public SpecialistFacade() {
         super(Specialist.class);
     }
+
+    
     
 }
