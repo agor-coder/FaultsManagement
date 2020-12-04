@@ -1,4 +1,4 @@
-package pl.lodz.p.it.spjava.fm.web;
+package pl.lodz.p.it.spjava.fm.web.specialist;
 
 
 import javax.enterprise.context.RequestScoped;
