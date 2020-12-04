@@ -16,11 +16,11 @@ public class SpecialistEndpoint {
         specialistFacade.create(specialist);
     }
 
-    public void removeClient(Specialist specialist) {
+    public void removeSpecialist(Specialist specialist) {
         specialistFacade.remove(specialist);
     }
 
-    public List<Specialist> getSpevialists() {
+    public List<Specialist> getSpecialists() {
         return specialistFacade.findAll();
     }
 
