@@ -3,6 +3,7 @@ package pl.lodz.p.it.spjava.fm.web.specialist;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.enpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
@@ -12,19 +13,21 @@ public class SpecialistController implements Serializable {
     @Inject
     private SpecialistEndpoint specialistEndpoint;
     
-    private Specialist newSpecialist;
+    private SpecialistDTO newSpecialistCreate;
 
-    public Specialist getNewSpecialist() {
-        return newSpecialist;
+    public SpecialistDTO getNewSpecialistCreate() {
+        return newSpecialistCreate;
     }
 
-    public void setNewSpecialist(Specialist newSpecialist) {
-        this.newSpecialist = newSpecialist;
+    public void setNewSpecialistCreate(SpecialistDTO newSpecialistCreate) {
+        this.newSpecialistCreate = newSpecialistCreate;
     }
 
-    public void addSpecialist() {
-        specialistEndpoint.addSpecialist(newSpecialist);
-        newSpecialist = null;
+    
+
+    public void addSpecialist(SpecialistDTO specialistDTO) {
+        specialistEndpoint.addSpecialist(newSpecialistCreate);
+        newSpecialistCreate = null;
     }
 
 }

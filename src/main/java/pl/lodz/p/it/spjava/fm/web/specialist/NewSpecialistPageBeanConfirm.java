@@ -4,7 +4,7 @@ package pl.lodz.p.it.spjava.fm.web.specialist;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import pl.lodz.p.it.spjava.fm.model.Specialist;
+import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 
 @Named
 @RequestScoped
@@ -14,15 +14,15 @@ public class NewSpecialistPageBeanConfirm {
   private SpecialistController specialistController;
     
 
-    public Specialist  getSpecialist() {
-        return specialistController. getNewSpecialist();
+    public SpecialistDTO  getSpecialist() {
+        return specialistController. getNewSpecialistCreate();
     }
     
    
 
     public String processConfirm() {
-        System.out.println("processConfirm " + getSpecialist());
-        specialistController.addSpecialist();
+        SpecialistDTO specialistDTO=getSpecialist();
+        specialistController.addSpecialist(specialistDTO);
         return "main";
     }
 }
