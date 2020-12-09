@@ -11,18 +11,18 @@ import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 public class NewSpecialistPageBeanConfirm {
     
   @Inject
-  private SpecialistController specialistController;
+  private NewSpecialistController specialistController;
     
 
-    public SpecialistDTO  getSpecialist() {
-        return specialistController. getNewSpecialistCreate();
-    }
-    
-   
-
-    public String processConfirm() {
-        SpecialistDTO specialistDTO=getSpecialist();
-        specialistController.addSpecialist(specialistDTO);
-        return "main";
-    }
+//    public SpecialistDTO  getSpecialist() {
+//        return specialistController. getNewSpecialistCreate();
+//    }
+//    
+//   
+//
+//    public String processConfirm() {
+//        SpecialistDTO specialistDTO=getSpecialist();
+//        specialistController.addSpecialist(specialistDTO);
+//        return "main";
+//    }
 }

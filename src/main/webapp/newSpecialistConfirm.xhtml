@@ -8,9 +8,9 @@
     <h:body>
          New Specialist
         <h:form>
-            Login: <h:outputText value="#{newSpecialistPageBeanConfirm.specialist.login}" /><br />
+            Login: <h:outputText value="#{newSpecialistController.newSpecialistDTO.login}" /><br />
            
-            <h:commandButton value="OK" action="#{newSpecialistPageBeanConfirm.processConfirm()}"/>
+            <h:commandButton value="OK" action="#{newSpecialistController.addSpecialist()}"/>
             <h:commandButton value="Cancel" action="main" />
         </h:form>
     </h:body>

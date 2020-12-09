@@ -9,19 +9,19 @@
     <h:body>
          New Specialist
         <h:form id="NewSpecialist">
-            * Login: <h:inputText value="#{newSpecialistPageBean.specialist.login}"  id="login"> </h:inputText><h:message for="login" /><br />
-            * Password: <h:inputSecret value="#{newSpecialistPageBean.specialist.password}" required="true" id="password"></h:inputSecret><h:message for="password" /><br />
+            * Login: <h:inputText value="#{newSpecialistController.newSpecialistDTO.login}"  id="login"> </h:inputText><h:message for="login" /><br />
+            * Password: <h:inputSecret value="#{newSpecialistController.newSpecialistDTO.password}" required="true" id="password"></h:inputSecret><h:message for="password" /><br />
             <!--* Password (repeat): <h:inputSecret value="#{newClientController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><h:message for="passwordRepeat" /> <br />-->
 
-            *First name: <h:inputText value="#{newSpecialistPageBean.specialist.firstName}" required="true"  id="firstname"/><h:message for="firstname" /><br />
-            *Sure name: <h:inputText value="#{newSpecialistPageBean.specialist.sureName}" required="true"  id="surename"/><h:message for="surename" /><br />
-            *Email: <h:inputText value="#{newSpecialistPageBean.specialist.email}" required="true"  id="email"/><h:message for="email" /><br />
-            *Department: <h:inputText value="#{newSpecialistPageBean.specialist.department}" required="true"  id="department"/><h:message for="department" /><br />
-            Phone: <h:inputText value="#{newSpecialistPageBean.specialist.phone}"   id="phone"/><h:message for="phone" /><br />
+            *First name: <h:inputText value="#{newSpecialistController.newSpecialistDTO.firstName}" required="true"  id="firstname"/><h:message for="firstname" /><br />
+            *Sure name: <h:inputText value="#{newSpecialistController.newSpecialistDTO.sureName}" required="true"  id="surename"/><h:message for="surename" /><br />
+            *Email: <h:inputText value="#{newSpecialistController.newSpecialistDTO.email}" required="true"  id="email"/><h:message for="email" /><br />
+            *Department: <h:inputText value="#{newSpecialistController.newSpecialistDTO.department}" required="true"  id="department"/><h:message for="department" /><br />
+            Phone: <h:inputText value="#{newSpecialistController.newSpecialistDTO.phone}"   id="phone"/><h:message for="phone" /><br />
 
-            Active: <h:inputText value="#{newSpecialistPageBean.specialist.active}"  id="active"/><h:message for="active" /><br />
+            Active: <h:inputText value="#{newSpecialistController.newSpecialistDTO.active}"  id="active"/><h:message for="active" /><br />
 
-            <h:commandButton value="OK" action="#{newSpecialistPageBean.process()}" />
+            <h:commandButton value="OK" action="#{newSpecialistController.confirmSpecialist()}" />
             <h:commandButton value="Cancel" action="main"  immediate="true"/>
             <!--<h:messages/>-->
         </h:form>
