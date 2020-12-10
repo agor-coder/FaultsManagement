@@ -31,7 +31,7 @@ public class SpecListController implements Serializable {
     public List<SpecialistDTO> getSpecialistsDTO() {
         return specialistsDTO;
     }
- 
+
     public void activateSpecialist(SpecialistDTO specialistDTO) {
         specialistEndpoint.activateSpecialist(specialistDTO);
         init();
@@ -42,5 +42,9 @@ public class SpecListController implements Serializable {
         init();
     }
 
+    public void removeSpecialist(SpecialistDTO specialistDTO) {
+        specialistEndpoint.removeSpecialist(specialistDTO);
+        init();
+    }
 
 }

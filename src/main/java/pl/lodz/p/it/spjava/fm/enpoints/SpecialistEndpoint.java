@@ -58,4 +58,9 @@ public class SpecialistEndpoint {
         tmpSpec.setActive(active);
     }
 
+    public void removeSpecialist(SpecialistDTO specialistDTO) {
+        Specialist tmpSpec = specialistFacade.find(specialistDTO.getId());
+        specialistFacade.remove(tmpSpec);
+    }
+
 }

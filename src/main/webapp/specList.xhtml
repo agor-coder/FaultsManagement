@@ -34,7 +34,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Actions</f:facet>
-                    <h:commandButton value="Remove"  />
+                    <h:commandButton value="Remove"  action="#{specListController.removeSpecialist(specialist)}" />
                     <h:commandButton value="Activate" action="#{specListController.activateSpecialist(specialist)}" /> 
                     <h:commandButton value="Deactivate" action="#{specListController.deactivateSpecialist(specialist)}"  /> 
                     <h:commandButton value="Edit"/> 
