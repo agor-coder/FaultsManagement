@@ -13,11 +13,12 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>newClient.xhtml</from-view-id>
+        <from-view-id>newSpecialist.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>newClientConfirm</from-outcome>
-            <to-view-id>newClientConfirm.xhtml</to-view-id>
+            <from-outcome>newSpecialistConfirm</from-outcome>
+            <to-view-id>newSpecialistConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
+    
 </faces-config>
