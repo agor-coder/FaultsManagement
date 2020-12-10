@@ -11,7 +11,6 @@ import pl.lodz.p.it.spjava.fm.facade.SpecialistFacade;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 @Stateful
-@TransactionAttribute(TransactionAttributeType.NEVER)
 public class SpecialistEndpoint {
 
     @EJB
@@ -31,21 +30,32 @@ public class SpecialistEndpoint {
         specialistFacade.create(specialist);
     }
 
-    public void removeSpecialist(Specialist specialist) {
-        specialistFacade.remove(specialist);
-    }
-
-    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+//    public void removeSpecialist(Specialist specialist) {
+//        specialistFacade.remove(specialist);
+//    }
     public List<SpecialistDTO> getAllSpecialists() {
         List<Specialist> listSpecialist = specialistFacade.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();
         for (Specialist specialist : listSpecialist) {
-            SpecialistDTO specialistDTO = new SpecialistDTO(specialist.getId(), specialist.getLogin(),
+            SpecialistDTO specialistDTO = new SpecialistDTO(specialist.getId(), specialist.getLogin(), specialist.isActive(),
                     specialist.getFirstName(), specialist.getSureName(), specialist.getEmail(), specialist.getPhone(),
                     specialist.getTyp(), specialist.getDepartment());
             listSpecialistDTO.add(specialistDTO);
         }
         return listSpecialistDTO;
+    }
+
+    public void activateSpecialist(SpecialistDTO specialistDTO) {
+        markActive(specialistDTO, true);
+    }
+
+    public void deactivateSpecialist(SpecialistDTO specialistDTO) {
+        markActive(specialistDTO, false);
+    }
+
+    public void markActive(SpecialistDTO specialistDTO, boolean active) {
+        Specialist tmpSpec = specialistFacade.find(specialistDTO.getId());
+        tmpSpec.setActive(active);
     }
 
 }

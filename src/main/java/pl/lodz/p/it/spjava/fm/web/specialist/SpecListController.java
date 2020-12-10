@@ -21,7 +21,6 @@ public class SpecListController implements Serializable {
 //    private EditClientController editClientController;
 //    @Inject
 //    private Conversation conversation;
-
     private List<SpecialistDTO> specialistsDTO;
 
     @PostConstruct
@@ -29,33 +28,19 @@ public class SpecListController implements Serializable {
         specialistsDTO = specialistEndpoint.getAllSpecialists();
     }
 
-     public List<SpecialistDTO> getSpecialistsDTO() {
+    public List<SpecialistDTO> getSpecialistsDTO() {
         return specialistsDTO;
     }
+ 
+    public void activateSpecialist(SpecialistDTO specialistDTO) {
+        specialistEndpoint.activateSpecialist(specialistDTO);
+        init();
+    }
 
-//    public void removeSpecialist(Specialist specialist) {
-//        clientStore.removeClient(client);
-//        init();
-//    }    
-//    public void activateClient(Client client) {
-//        clientStore.activateClient(client);
-//        init();
-//    }    
-//
-//    public void deactivateClient(Client client) {
-//        clientStore.deactivateClient(client);
-//        init();
-//    }    
-//
-//    public String editClient(Client client) {
-//        conversation.begin();
-//        conversation.setTimeout(180000);
-//        editClientController.setEditedClient(client);
-//        return "editClient";
-//        //Nie wywolujemy init(), poniewaz przejscie do EditClient i powrot do lisyty oznacza zmiane widoku,
-//        //a SpecListController jest @ViewScoped wiec zostanie utworzony na nowo
-//       
-//    }
+    public void deactivateSpecialist(SpecialistDTO specialistDTO) {
+        specialistEndpoint.deactivateSpecialist(specialistDTO);
+        init();
+    }
 
-   
+
 }

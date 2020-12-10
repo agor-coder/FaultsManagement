@@ -29,8 +29,8 @@ public abstract class Account extends AbstractEntity implements Serializable {
     protected Long id;
 
     @NotNull(message = "{constraint.notnull}")
-   @Size(min=3,max=32,message="{constraint.string.length.notinrange}")
-    @Pattern(regexp="^[_a-zA-Z0-9-]*$",message="{constraint.string.incorrectchar}")
+    @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
+    @Pattern(regexp = "^[_a-zA-Z0-9-]*$", message = "{constraint.string.incorrectchar}")
     @Column(length = 32, nullable = false, unique = true, updatable = false)
     protected String login;
 
@@ -41,7 +41,7 @@ public abstract class Account extends AbstractEntity implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")
     @Column(nullable = false)
-    protected boolean active = true;
+    protected boolean active;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
@@ -60,7 +60,7 @@ public abstract class Account extends AbstractEntity implements Serializable {
     private String email;
 
     @Size(max = 12, message = "{constraint.string.length.toolong}")
-    @Column(table = "PERSON", length = 12,  nullable = true)
+    @Column(table = "PERSON", length = 12, nullable = true)
     private String phone;
 
     @Column(name = "type", updatable = false)

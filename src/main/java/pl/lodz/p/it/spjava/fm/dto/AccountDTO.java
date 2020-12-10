@@ -22,7 +22,7 @@ public abstract class AccountDTO {
     protected String password;
 
     @NotNull(message = "{constraint.notnull}")
-    protected boolean active = true;
+    protected boolean active;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
@@ -47,9 +47,10 @@ public abstract class AccountDTO {
     }
 
     //bez hasła
-    public AccountDTO(Long id, String login, String firstName, String sureName, String email, String phone, String typ) {
+    public AccountDTO(Long id, String login, boolean active,String firstName, String sureName, String email, String phone, String typ) {
         this.id = id;
         this.login = login;
+        this.active=active;
         this.firstName = firstName;
         this.sureName = sureName;
         this.email = email;

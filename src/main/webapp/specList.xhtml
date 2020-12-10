@@ -11,22 +11,32 @@
         <h:form id="SpecList">
             <h:dataTable value="#{specListController.specialistsDTO}" var="specialist">
                 <h:column>
-                    <f:facet name="header">Login</f:facet>
-                        ${specialist.login}
+                    <f:facet name="header">login</f:facet> ${specialist.login}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">firstName, sureName, email, phone,  department</f:facet>
-                         ${specialist.firstName} ${specialist.sureName} ${specialist.email} ${specialist.phone} ${specialist.department}
+                    <f:facet name="header">name</f:facet> ${specialist.firstName}         
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Active</f:facet>
+                    <f:facet name="header" > sure name</f:facet> ${specialist.sureName}                       
+                </h:column>
+                <h:column>
+                    <f:facet name="header">email</f:facet> ${specialist.email} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> phone</f:facet>${specialist.phone}
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> department</f:facet>${specialist.department}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">active</f:facet>
                     <h:selectBooleanCheckbox value="${specialist.active}" disabled="true" />
                 </h:column>
                 <h:column>
                     <f:facet name="header">Actions</f:facet>
                     <h:commandButton value="Remove"  />
-                    <h:commandButton value="Activate" /> 
-                    <h:commandButton value="Deactivate" /> 
+                    <h:commandButton value="Activate" action="#{specListController.activateSpecialist(specialist)}" /> 
+                    <h:commandButton value="Deactivate" action="#{specListController.deactivateSpecialist(specialist)}"  /> 
                     <h:commandButton value="Edit"/> 
                 </h:column>
             </h:dataTable>
