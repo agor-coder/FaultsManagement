@@ -4,10 +4,6 @@ package pl.lodz.p.it.spjava.fm.facade;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author A
- */
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;

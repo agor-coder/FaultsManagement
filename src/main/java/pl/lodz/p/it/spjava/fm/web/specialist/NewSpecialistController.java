@@ -17,7 +17,7 @@ public class NewSpecialistController implements Serializable {
     @Inject
     private SpecialistEndpoint specialistEndpoint;
 
-    private SpecialistDTO newSpecialistDTO = new SpecialistDTO();
+    private final SpecialistDTO newSpecialistDTO = new SpecialistDTO();
 
     public SpecialistDTO getNewSpecialistDTO() {
         return newSpecialistDTO;
@@ -32,7 +32,6 @@ public class NewSpecialistController implements Serializable {
 //            return "";
 //        }
         conversation.begin();
-        conversation.setTimeout(180000);
         return "newSpecialistConfirm";
     }
 

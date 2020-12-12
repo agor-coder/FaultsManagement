@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>FM - Edit Specialist</title>
+    </h:head>
+    <h:body>
+         EDIT SPECIALIST<br />
+         <br />
+        <h:form id="editSpecialist">
+            LOGIN: <h:outputText value="#{editSpecialistController.editSpecialistDTO.login}"  id="login"> </h:outputText> <h:message for="login" /><br />
+           
+            *First name: <h:inputText value="#{editSpecialistController.editSpecialistDTO.firstName}" required="true"  id="firstname"/><h:message for="firstname" /><br />
+            *Sure name: <h:inputText value="#{editSpecialistController.editSpecialistDTO.sureName}" required="true"  id="surename"/><h:message for="surename" /><br />
+            *Email: <h:inputText value="#{editSpecialistController.editSpecialistDTO.email}" required="true"  id="email"/><h:message for="email" /><br />
+            *Department: <h:inputText value="#{editSpecialistController.editSpecialistDTO.department}" required="true"  id="department"/><h:message for="department" /><br />
+            Phone: <h:inputText value="#{editSpecialistController.editSpecialistDTO.phone}"   id="phone"/><h:message for="phone" /><br />
+            Active: <h:inputText value="#{editSpecialistController.editSpecialistDTO.active}"  id="active"/><h:message for="active" /><br />
+
+            <h:commandButton value="OK" action="#{editSpecialistController.saveEditSpecialistDTO()}" />
+            <h:commandButton value="Cancel" action="main"  immediate="true"/>
+            <!--<h:messages/>-->
+        </h:form>
+    </h:body>
+</html>
+

@@ -3,8 +3,11 @@ package pl.lodz.p.it.spjava.fm.model;
 import java.io.Serializable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
+
+@NamedQuery(name = "Specialist.findLogin", query = "SELECT i FROM Specialist i where i.login = :login")
 @Entity
 @DiscriminatorValue("SPECIALIST")
 public class Specialist extends Account implements Serializable {
@@ -22,5 +25,12 @@ public class Specialist extends Account implements Serializable {
     public void setDepartment(String department) {
         this.department = department;
     }
+
+    @Override
+    public String toString() {
+        return "Specialist{" + "department=" + department + '}';
+    }
+    
+    
 
 }

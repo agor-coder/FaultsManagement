@@ -17,10 +17,13 @@ public class SpecListController implements Serializable {
     @Inject
     private SpecialistEndpoint specialistEndpoint;
 
-//    @Inject
-//    private EditClientController editClientController;
-//    @Inject
-//    private Conversation conversation;
+    @Inject
+    private EditSpecialistController editSpecialistController;
+
+    @Inject
+    private Conversation conversation;
+
+    private SpecialistDTO editedSpecialist;
     private List<SpecialistDTO> specialistsDTO;
 
     @PostConstruct
@@ -47,4 +50,13 @@ public class SpecListController implements Serializable {
         init();
     }
 
+    public String editSpecialist(SpecialistDTO specialistDTO) {
+       conversation.begin();
+        editedSpecialist = specialistEndpoint.getEditedSpecialist(specialistDTO);
+        editSpecialistController.setEditSpecialistDTO(editedSpecialist);
+
+        return "editSpecialist";
+        //No init(), @ViewScoped 
+
+    }
 }

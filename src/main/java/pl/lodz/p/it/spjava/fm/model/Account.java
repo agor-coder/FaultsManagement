@@ -15,7 +15,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
-@SecondaryTable(name = "PERSON")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type")
 public abstract class Account extends AbstractEntity implements Serializable {
@@ -45,22 +44,22 @@ public abstract class Account extends AbstractEntity implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
-    @Column(table = "PERSON", length = 32, nullable = false)
+    @Column(length = 32, nullable = false)
     private String firstName;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
-    @Column(table = "PERSON", length = 32, nullable = false)
+    @Column(length = 32, nullable = false)
     private String sureName;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 6, max = 64, message = "{constraint.string.length.notinrange}")
     //@Pattern(regexp="^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$",message="{constraint.string.incorrectemail}")
-    @Column(table = "PERSON", length = 64, nullable = false)
+    @Column( length = 64, nullable = false)
     private String email;
 
     @Size(max = 12, message = "{constraint.string.length.toolong}")
-    @Column(table = "PERSON", length = 12, nullable = true)
+    @Column( length = 12, nullable = true)
     private String phone;
 
     @Column(name = "type", updatable = false)

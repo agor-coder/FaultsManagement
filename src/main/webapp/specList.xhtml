@@ -37,7 +37,7 @@
                     <h:commandButton value="Remove"  action="#{specListController.removeSpecialist(specialist)}" />
                     <h:commandButton value="Activate" action="#{specListController.activateSpecialist(specialist)}" /> 
                     <h:commandButton value="Deactivate" action="#{specListController.deactivateSpecialist(specialist)}"  /> 
-                    <h:commandButton value="Edit"/> 
+                    <h:commandButton value="Edit" action="#{specListController.editSpecialist(specialist)}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Refresh" action="#{specListController.init()}" />
