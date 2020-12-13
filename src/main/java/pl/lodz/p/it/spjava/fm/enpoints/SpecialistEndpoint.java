@@ -21,19 +21,11 @@ public class SpecialistEndpoint {
         Specialist specialist = new Specialist();
         specialist.setLogin(specialistDTO.getLogin());
         specialist.setPassword(specialistDTO.getPassword());
-        specialist.setFirstName(specialistDTO.getFirstName());
-        specialist.setSureName(specialistDTO.getSureName());
-        specialist.setEmail(specialistDTO.getEmail());
-        specialist.setPhone(specialistDTO.getPhone());
-        specialist.setActive(specialistDTO.isActive());
-        specialist.setDepartment(specialistDTO.getDepartment());
+        writeEditableDataFromDTOToEntity(specialistDTO, specialist);
 
         specialistFacade.create(specialist);
     }
 
-//    public void removeSpecialist(Specialist specialist) {
-//        specialistFacade.remove(specialist);
-//    }
     public List<SpecialistDTO> getAllSpecialists() {
         List<Specialist> listSpecialist = specialistFacade.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();
@@ -78,13 +70,13 @@ public class SpecialistEndpoint {
         specialistFacade.edit(endpointSpecialist);
     }
 
-    private void writeEditableDataFromDTOToEntity(SpecialistDTO editSpecialistDTO, Specialist specialist) {
-        specialist.setFirstName(editSpecialistDTO.getFirstName());
-        specialist.setSureName(editSpecialistDTO.getSureName());
-        specialist.setEmail(editSpecialistDTO.getEmail());
-        specialist.setDepartment(editSpecialistDTO.getDepartment());
-        specialist.setPhone(editSpecialistDTO.getPhone());
-        specialist.setActive(editSpecialistDTO.isActive());
+    private void writeEditableDataFromDTOToEntity(SpecialistDTO SpecialistDTO, Specialist specialist) {
+        specialist.setFirstName(SpecialistDTO.getFirstName());
+        specialist.setSureName(SpecialistDTO.getSureName());
+        specialist.setEmail(SpecialistDTO.getEmail());
+        specialist.setDepartment(SpecialistDTO.getDepartment());
+        specialist.setPhone(SpecialistDTO.getPhone());
+        specialist.setActive(SpecialistDTO.isActive());
     }
 
 }

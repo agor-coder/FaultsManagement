@@ -32,13 +32,11 @@ public class EditSpecialistController implements Serializable {
         if (null == editSpecialistDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
-
         specialistEndpoint.saveSpecialistAfterEdit(editSpecialistDTO);
-        conversation.end();
-        return "specList";
+        return cancelOrEdit();
     }
 
-    public String cancelEdit() {
+    public String cancelOrEdit() {
         conversation.end();
         return "specList";
     }
