@@ -14,7 +14,7 @@ public class EditSpecialistController implements Serializable {
 
     @Inject
     private Conversation conversation;
-    
+
     @Inject
     private SpecialistEndpoint specialistEndpoint;
 
@@ -32,9 +32,14 @@ public class EditSpecialistController implements Serializable {
         if (null == editSpecialistDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
+
         specialistEndpoint.saveSpecialistAfterEdit(editSpecialistDTO);
         conversation.end();
-        return "ClientList";
+        return "specList";
     }
 
+    public String cancelEdit() {
+        conversation.end();
+        return "specList";
+    }
 }

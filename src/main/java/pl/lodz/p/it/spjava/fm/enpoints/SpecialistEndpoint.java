@@ -62,29 +62,29 @@ public class SpecialistEndpoint {
         specialistFacade.remove(tmpSpec);
     }
 
-    public void saveSpecialistAfterEdit(SpecialistDTO editSpecialistDTO) {
+    public SpecialistDTO getEditedSpecialist(SpecialistDTO specialistDTO) {
+        endpointSpecialist = specialistFacade.find(specialistDTO.getId());
+        System.out.println(endpointSpecialist);
+        return DTOConverter.makeSpecialistDTOFromEntity(endpointSpecialist);
+    }
+
+    public void saveSpecialistAfterEdit(SpecialistDTO specialistDTO) {
+        endpointSpecialist = specialistFacade.find(specialistDTO.getId());
         System.out.println(endpointSpecialist);
         if (null == endpointSpecialist) {
             throw new IllegalArgumentException("Brak konta do edycji");
         }
-        editableDataFromDTOToEntity(editSpecialistDTO, endpointSpecialist);
-
+        writeEditableDataFromDTOToEntity(specialistDTO, endpointSpecialist);
         specialistFacade.edit(endpointSpecialist);
     }
 
-    private void editableDataFromDTOToEntity(SpecialistDTO editSpecialistDTO, Specialist specialist) {
+    private void writeEditableDataFromDTOToEntity(SpecialistDTO editSpecialistDTO, Specialist specialist) {
         specialist.setFirstName(editSpecialistDTO.getFirstName());
         specialist.setSureName(editSpecialistDTO.getSureName());
         specialist.setEmail(editSpecialistDTO.getEmail());
         specialist.setDepartment(editSpecialistDTO.getDepartment());
         specialist.setPhone(editSpecialistDTO.getPhone());
         specialist.setActive(editSpecialistDTO.isActive());
-    }
-
-    public SpecialistDTO getEditedSpecialist(SpecialistDTO specialistDTO) {
-        endpointSpecialist = specialistFacade.findLogin(specialistDTO.getLogin());
-        System.out.println(endpointSpecialist);
-        return DTOConverter.makeSpecialistDTOFromEntity(endpointSpecialist);
     }
 
 }

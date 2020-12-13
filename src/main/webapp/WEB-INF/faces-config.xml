@@ -29,6 +29,13 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
-   
+    <navigation-rule>
+        <from-view-id>editSpecialist.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>specList</from-outcome>
+            <to-view-id>specList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
     
 </faces-config>

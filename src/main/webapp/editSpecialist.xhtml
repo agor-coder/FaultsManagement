@@ -20,7 +20,7 @@
             Active: <h:inputText value="#{editSpecialistController.editSpecialistDTO.active}"  id="active"/><h:message for="active" /><br />
 
             <h:commandButton value="OK" action="#{editSpecialistController.saveEditSpecialistDTO()}" />
-            <h:commandButton value="Cancel" action="main"  immediate="true"/>
+            <h:commandButton value="Cancel" action="#{editSpecialistController.cancelEdit()}"  immediate="true"/>
             <!--<h:messages/>-->
         </h:form>
     </h:body>
