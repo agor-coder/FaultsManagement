@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
+import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 
 @Named
 @ConversationScoped
@@ -28,7 +29,7 @@ public class EditSpecialistController implements Serializable {
         this.editSpecialistDTO = editSpecialistDTO;
     }
 
-    public String saveEditSpecialistDTO() {
+    public String saveEditSpecialistDTO()throws AppBaseException {
         if (null == editSpecialistDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }

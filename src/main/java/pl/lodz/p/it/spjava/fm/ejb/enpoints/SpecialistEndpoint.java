@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade;
+import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 
@@ -17,7 +18,7 @@ public class SpecialistEndpoint {
 
     private Specialist endpointSpecialist;
 
-    public void addSpecialist(SpecialistDTO specialistDTO) {
+    public void addSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
         Specialist specialist = new Specialist();
         specialist.setLogin(specialistDTO.getLogin());
         specialist.setPassword(specialistDTO.getPassword());
@@ -49,7 +50,7 @@ public class SpecialistEndpoint {
         tmpSpec.setActive(active);
     }
 
-    public void removeSpecialist(SpecialistDTO specialistDTO) {
+    public void removeSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
         Specialist tmpSpec = specialistFacade.find(specialistDTO.getId());
         specialistFacade.remove(tmpSpec);
     }
@@ -60,7 +61,7 @@ public class SpecialistEndpoint {
         return DTOConverter.makeSpecialistDTOFromEntity(endpointSpecialist);
     }
 
-    public void saveSpecialistAfterEdit(SpecialistDTO specialistDTO) {
+    public void saveSpecialistAfterEdit(SpecialistDTO specialistDTO) throws AppBaseException {
         endpointSpecialist = specialistFacade.find(specialistDTO.getId());
         System.out.println(endpointSpecialist);
         if (null == endpointSpecialist) {

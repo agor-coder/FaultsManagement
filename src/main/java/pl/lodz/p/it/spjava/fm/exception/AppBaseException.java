@@ -3,9 +3,7 @@ package pl.lodz.p.it.spjava.fm.exception;
 
 import javax.ejb.ApplicationException;
 
-/**
- * Klasa bazowego wyjątku aplikacyjnego
- */
+
 @ApplicationException(rollback=true)
 abstract public class AppBaseException extends Exception {
       

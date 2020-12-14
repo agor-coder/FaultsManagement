@@ -6,13 +6,14 @@
         <title>FM - New Specialist Confirm</title>
     </h:head>
     <h:body>
-         New Specialist
-        <h:form>
-            Login: <h:outputText value="#{newSpecialistController.newSpecialistDTO.login}" /><br />
+         New Specialist Confirm
+        <h:form id="NewSpecialistConfirm" >
+            Login: <h:outputText id="login" value="#{newSpecialistController.newSpecialistDTO.login}" /><br />
            
             <h:commandButton value="OK" action="#{newSpecialistController.addSpecialist()}"/>
             <h:commandButton value="Cancel" action="main" />
         </h:form>
+         <h:messages for="login"/>
     </h:body>
 </html>
 

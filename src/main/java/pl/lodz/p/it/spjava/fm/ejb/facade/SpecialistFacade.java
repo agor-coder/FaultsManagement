@@ -1,15 +1,17 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+import org.eclipse.persistence.exceptions.DatabaseException;
+import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
-/**
- *
- * @author A
- */
+
 @Stateless
 public class SpecialistFacade extends AbstractFacade<Specialist> {
 
@@ -24,7 +26,21 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
     public SpecialistFacade() {
         super(Specialist.class);
     }
-
+@Override
+    public void create(Specialist entity) throws AppBaseException {
+        try {
+            super.create(entity);
+            em.flush();
+        } catch (PersistenceException ex) {
+            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
+                throw SpecialistException.createWithDbCheckConstraintKey(entity, ex);
+            } else {
+                throw ex;
+            }
+        }
+    }
+    
+    
     public Specialist findLogin(String login) {
         TypedQuery q = getEntityManager().createNamedQuery("Specialist.findLogin", Specialist.class);
         q.setParameter("login", login);

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
+import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 
 @Named
 @ViewScoped
@@ -45,7 +46,7 @@ public class SpecListController implements Serializable {
         init();
     }
 
-    public void removeSpecialist(SpecialistDTO specialistDTO) {
+    public void removeSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
         specialistEndpoint.removeSpecialist(specialistDTO);
         init();
     }
