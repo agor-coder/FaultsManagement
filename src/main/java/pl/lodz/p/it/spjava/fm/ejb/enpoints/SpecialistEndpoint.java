@@ -1,11 +1,11 @@
-package pl.lodz.p.it.spjava.fm.enpoints;
+package pl.lodz.p.it.spjava.fm.ejb.enpoints;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
-import pl.lodz.p.it.spjava.fm.facade.SpecialistFacade;
+import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 

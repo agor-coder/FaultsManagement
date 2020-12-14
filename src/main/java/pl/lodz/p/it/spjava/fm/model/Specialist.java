@@ -6,9 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
-
-@NamedQuery(name = "Specialist.findLogin", query = "SELECT i FROM Specialist i where i.login = :login")
 @Entity
+@NamedQuery(name = "Specialist.findLogin", query = "SELECT i FROM Specialist i where i.login = :login")
 @DiscriminatorValue("SPECIALIST")
 public class Specialist extends Account implements Serializable {
 

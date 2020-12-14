@@ -1,9 +1,8 @@
-package pl.lodz.p.it.spjava.fm.facade;
+package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 

@@ -8,7 +8,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
-import pl.lodz.p.it.spjava.fm.enpoints.SpecialistEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
 
 @Named
 @ViewScoped
@@ -51,7 +51,7 @@ public class SpecListController implements Serializable {
     }
 
     public String editSpecialist(SpecialistDTO specialistDTO) {
-       conversation.begin();
+        conversation.begin();
         editedSpecialistDTO = specialistEndpoint.getEditedSpecialist(specialistDTO);
         editSpecialistController.setEditSpecialistDTO(editedSpecialistDTO);
 

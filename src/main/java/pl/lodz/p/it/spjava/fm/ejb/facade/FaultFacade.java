@@ -1,17 +1,17 @@
 
-package pl.lodz.p.it.spjava.fm.facade;
+package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import pl.lodz.p.it.spjava.fm.model.TechArea;
+import pl.lodz.p.it.spjava.fm.model.Fault;
 
 /**
  *
  * @author A
  */
 @Stateless
-public class TechAreaFacade extends AbstractFacade<TechArea> {
+public class FaultFacade extends AbstractFacade<Fault> {
 
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
@@ -21,8 +21,8 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
         return em;
     }
 
-    public TechAreaFacade() {
-        super(TechArea.class);
+    public FaultFacade() {
+        super(Fault.class);
     }
     
 }

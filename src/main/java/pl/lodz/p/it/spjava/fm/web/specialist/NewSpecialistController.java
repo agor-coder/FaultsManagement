@@ -6,7 +6,7 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
-import pl.lodz.p.it.spjava.fm.enpoints.SpecialistEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
 
 @Named
 @ConversationScoped

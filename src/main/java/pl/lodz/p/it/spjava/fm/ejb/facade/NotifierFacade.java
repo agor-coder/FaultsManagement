@@ -1,17 +1,17 @@
 
-package pl.lodz.p.it.spjava.fm.facade;
+package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import pl.lodz.p.it.spjava.fm.model.Account;
+import pl.lodz.p.it.spjava.fm.model.Notifier;
 
 /**
  *
  * @author A
  */
 @Stateless
-public class AccountFacade extends AbstractFacade<Account> {
+public class NotifierFacade extends AbstractFacade<Notifier> {
 
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
@@ -21,8 +21,8 @@ public class AccountFacade extends AbstractFacade<Account> {
         return em;
     }
 
-    public AccountFacade() {
-        super(Account.class);
+    public NotifierFacade() {
+        super(Notifier.class);
     }
     
 }

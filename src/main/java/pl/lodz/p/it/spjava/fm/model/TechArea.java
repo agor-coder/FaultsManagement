@@ -19,7 +19,7 @@ public class TechArea extends AbstractEntity implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
-    @Column(nullable = false, length = 32)
+    @Column(nullable = false, length = 32, unique = true)
     private String areaName;
 
     @Override

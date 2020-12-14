@@ -18,5 +18,11 @@ VALUES (-3,'SPECIALIST',1,'2020-12-06 18:40:54.340','login2','123456',1,'2@op.pl
 INSERT INTO SPECIALIST(id,department) VALUES (-3,'ER4');
 
 
+INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-1,'maszynownia','2020-12-07 20:40:54.340',1);
+INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-2,'kotłownia','2020-12-06 18:40:54.340',1);
+INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-3,'elektryczny','2020-12-06 18:40:54.340',1);
+
+
+
 
 

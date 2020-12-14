@@ -1,5 +1,5 @@
 
-package pl.lodz.p.it.spjava.fm.facade;
+package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
