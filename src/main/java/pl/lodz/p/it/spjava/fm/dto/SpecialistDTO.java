@@ -12,10 +12,18 @@ public class SpecialistDTO extends AccountDTO {
     public SpecialistDTO() {
     }
 
-    public SpecialistDTO(Long id, String login, boolean  active,String firstName, String sureName,
+    public SpecialistDTO(Long id, String login, boolean active, String firstName, String sureName,
             String email, String phone, String typ, String department) {
-        super(id, login,active, firstName, sureName, email, phone, typ);
+        super(id, login, active, firstName, sureName, email, phone, typ);
         this.department = department;
+    }
+
+    //do formularza newSpec
+    public SpecialistDTO(String firstName, String sureName,
+            String email, String phone, String department) {
+        super(firstName, sureName, email, phone);
+        this.department = department;
+
     }
 
     @NotNull(message = "{constraint.notnull}")

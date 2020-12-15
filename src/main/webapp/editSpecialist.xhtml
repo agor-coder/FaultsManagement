@@ -17,8 +17,7 @@
             *Email: <h:inputText value="#{editSpecialistController.editSpecialistDTO.email}" required="true"  id="email"/><h:message for="email" /><br />
             *Department: <h:inputText value="#{editSpecialistController.editSpecialistDTO.department}" required="true"  id="department"/><h:message for="department" /><br />
             Phone: <h:inputText value="#{editSpecialistController.editSpecialistDTO.phone}"   id="phone"/><h:message for="phone" /><br />
-            Active: <h:inputText value="#{editSpecialistController.editSpecialistDTO.active}"  id="active"/><h:message for="active" /><br />
-
+            Active: <h:selectBooleanCheckbox value="#{editSpecialistController.editSpecialistDTO.active}"  id="active"/><h:message for="active" /><br />
             <h:commandButton value="OK" action="#{editSpecialistController.saveEditSpecialistDTO()}" />
             <h:commandButton value="Cancel" action="#{editSpecialistController.cancelOrEdit}"  immediate="true"/>
             <!--<h:messages/>-->

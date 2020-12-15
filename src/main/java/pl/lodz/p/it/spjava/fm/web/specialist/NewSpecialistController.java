@@ -24,7 +24,9 @@ public class NewSpecialistController implements Serializable {
     @Inject
     private SpecialistEndpoint specialistEndpoint;
 
-    private final SpecialistDTO newSpecialistDTO = new SpecialistDTO();
+//do formularza new
+    private final SpecialistDTO newSpecialistDTO = new SpecialistDTO("Phil", "Collins", "phil@op.pl", "5345", "er4");
+   // private final SpecialistDTO newSpecialistDTO = new SpecialistDTO();
 
     public SpecialistDTO getNewSpecialistDTO() {
         return newSpecialistDTO;
@@ -41,7 +43,7 @@ public class NewSpecialistController implements Serializable {
         return "newSpecialistConfirm";
     }
 
-     public String addSpecialist() {
+    public String addSpecialist() {
         if (null == newSpecialistDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
@@ -50,9 +52,8 @@ public class NewSpecialistController implements Serializable {
             conversation.end();
             return "main";
         } catch (SpecialistException se) {
-//            if (SpecialistException.KEY_DB_CONSTRAINT.equals(se.getMessage())) {
-            if (true) {
-                ContextUtils.emitInternationalizedMessage("login", SpecialistException.KEY_DB_CONSTRAINT); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
+         if (SpecialistException.KEY_DB_CONSTRAINT.equals(se.getMessage())) {
+                ContextUtils.emitInternationalizedMessage("login", SpecialistException.KEY_DB_CONSTRAINT);
             } else {
                 Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzKlienta wyjatku: ", se);
             }
@@ -60,7 +61,7 @@ public class NewSpecialistController implements Serializable {
         } catch (AppBaseException abe) {
             Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzKlienta wyjatku typu: ", abe.getClass());
             if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
-                ContextUtils.emitInternationalizedMessage(null, abe.getMessage()); //wyjątki aplikacyjne powinny przenosić jedynie klucz do internacjonalizacji
+                ContextUtils.emitInternationalizedMessage(null, abe.getMessage()); 
             }
             return null;
         }

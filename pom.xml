@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>pl.kurs</groupId>
     <artifactId>FaultsManagement</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.15-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>FaultsManagement-1.1-SNAPSHOT</name>
+    <name>FaultsManagement-1.15-SNAPSHOT</name>
     
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

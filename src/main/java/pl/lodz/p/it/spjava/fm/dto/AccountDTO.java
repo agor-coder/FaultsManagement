@@ -34,10 +34,10 @@ public abstract class AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 6, max = 64, message = "{constraint.string.length.notinrange}")
-    //@Pattern(regexp="^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$",message="{constraint.string.incorrectemail}")
+    @Pattern(regexp="^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$",message="{constraint.string.incorrectemail}")
     private String email;
 
-    @Size(max = 12, message = "{constraint.string.length.toolong}")
+    @Size(max = 9, message = "{constraint.string.length.toolong}")
     private String phone;
 
     
@@ -56,6 +56,14 @@ public abstract class AccountDTO {
         this.email = email;
         this.phone = phone;
         this.typ = typ;
+    }
+ //do formularza newAccount
+    public AccountDTO(String firstName, String sureName, String email, String phone) {
+       this.password=password;
+        this.firstName = firstName;
+        this.sureName = sureName;
+        this.email = email;
+        this.phone = phone;
     }
     
     

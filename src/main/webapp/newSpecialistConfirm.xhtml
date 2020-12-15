@@ -3,17 +3,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>FM - New Specialist Confirm</title>
+        <title>FM - New Specialist Confirm</title><br />
     </h:head>
     <h:body>
-         New Specialist Confirm
+        New Specialist Confirm
         <h:form id="NewSpecialistConfirm" >
-            Login: <h:outputText id="login" value="#{newSpecialistController.newSpecialistDTO.login}" /><br />
-           
-            <h:commandButton value="OK" action="#{newSpecialistController.addSpecialist()}"/>
-            <h:commandButton value="Cancel" action="main" />
-        </h:form>
-         <h:messages for="login"/>
+            <h:panelGrid columns="2">
+                Login: <h:outputText id="login" value="#{newSpecialistController.newSpecialistDTO.login}" />
+                <!--Login: <h:outputText id="login" value="#{newSpecialistController.newSpecialistDTO.login}" /><br />-->
+                Frist Name: <h:outputText id="firstname" value="#{newSpecialistController.newSpecialistDTO.firstName}" />
+                Sure name: <h:outputText id="surename" value="#{newSpecialistController.newSpecialistDTO.sureName}" />
+                email: <h:outputText id="email" value="#{newSpecialistController.newSpecialistDTO.email}" />
+                dep: <h:outputText id="department" value="#{newSpecialistController.newSpecialistDTO.department}" />
+                phone: <h:outputText id="phone" value="#{newSpecialistController.newSpecialistDTO.phone}" />
+                active:  <h:selectBooleanCheckbox value="${newSpecialistController.newSpecialistDTO.active}" disabled="true" />
+
+                <h:commandButton value="OK" action="#{newSpecialistController.addSpecialist()}"/>
+                <h:commandButton value="Cancel" action="main" />
+            </h:panelGrid>
+        </h:form> 
     </h:body>
 </html>
 
