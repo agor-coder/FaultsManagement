@@ -6,11 +6,12 @@
         <title>Faults Management</title>
     </h:head>
     <h:body>
-        FAULTS MANAGEMENT
-        
+        #{msg['app.name']} <br />
+        <br />
+
         <ul>
-            <li><h:link outcome="newSpecialist.xhtml" value="Utwórz konto specjalisty"/></li>
-            <li><h:link outcome="specList.xhtml" value="Lista specjalistów"/></li>
+            <li><h:link outcome="newSpecialist.xhtml" value="#{msg['account.createspecialist']}"/></li>
+            <li><h:link outcome="specList.xhtml" value="#{msg['menu.specialist.list']}"/></li>
         </ul>
     </h:body>
 </html>

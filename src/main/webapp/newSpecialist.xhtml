@@ -7,22 +7,38 @@
         <title>FM - New Specialist</title>
     </h:head>
     <h:body>
-         New Specialist
+        #{msg['account.createspecialist']} <br />
+        <br />
         <h:form id="NewSpecialist">
-            * Login: <h:inputText value="#{newSpecialistController.newSpecialistDTO.login}"  id="login"> </h:inputText><h:message for="login" /><br />
-            * Password: <h:inputSecret value="#{newSpecialistController.newSpecialistDTO.password}" required="true" id="password"></h:inputSecret><h:message for="password" /><br />
-            <!--* Password (repeat): <h:inputSecret value="#{newClientController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><h:message for="passwordRepeat" /> <br />-->
+            <h:outputLabel value="#{msg['account.login']}*" for="login" />
+            <h:inputText value="#{newSpecialistController.newSpecialistDTO.login}"  id="login"> </h:inputText><h:message for="login" /><br />
 
-            *First name: <h:inputText value="#{newSpecialistController.newSpecialistDTO.firstName}" required="true"  id="firstname"/><h:message for="firstname" /><br />
-            *Sure name: <h:inputText value="#{newSpecialistController.newSpecialistDTO.sureName}" required="true"  id="surename"/><h:message for="surename" /><br />
-            *Email: <h:inputText value="#{newSpecialistController.newSpecialistDTO.email}" required="true"  id="email"/><h:message for="email" /><br />
-            *Department: <h:inputText value="#{newSpecialistController.newSpecialistDTO.department}" required="true"  id="department"/><h:message for="department" /><br />
-            Phone: <h:inputText value="#{newSpecialistController.newSpecialistDTO.phone}"   id="phone"/><h:message for="phone" /><br />
+            <h:outputLabel value="#{msg['account.password']}*" for="password" />
+            <h:inputSecret value="#{newSpecialistController.newSpecialistDTO.password}" required="true" id="password"></h:inputSecret><h:message for="password" /><br />
 
-            Active: <h:inputText value="#{newSpecialistController.newSpecialistDTO.active}"  id="active"/><h:message for="active" /><br />
+            <h:outputLabel value="#{msg['account.passwordRepeat']}*" for="passwordRepeat" />
+            <h:inputSecret value="#{newSpecialistController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><h:message for="passwordRepeat" /> <br />
 
-            <h:commandButton value="OK" action="#{newSpecialistController.confirmSpecialist()}" />
-            <h:commandButton value="Cancel" action="main"  immediate="true"/>
+            <h:outputLabel value="#{msg['account.name']}*" for="firstname" />
+            <h:inputText value="#{newSpecialistController.newSpecialistDTO.firstName}" required="true"  id="firstname"/><h:message for="firstname" /><br />
+
+            <h:outputLabel value="#{msg['account.surname']}*" for="surename" />
+            <h:inputText value="#{newSpecialistController.newSpecialistDTO.sureName}" required="true"  id="surename"/><h:message for="surename" /><br />
+
+            <h:outputLabel value="#{msg['account.email']}*" for="email" />
+            <h:inputText value="#{newSpecialistController.newSpecialistDTO.email}" required="true"  id="email"/><h:message for="email" /><br />
+
+            <h:outputLabel value="#{msg['account.department']}*" for="department" />
+            <h:inputText value="#{newSpecialistController.newSpecialistDTO.department}" required="true"  id="department"/><h:message for="department" /><br />
+
+            <h:outputLabel value="#{msg['account.phone']}*" for="phone" />
+            <h:inputText value="#{newSpecialistController.newSpecialistDTO.phone}"   id="phone"/><h:message for="phone" /><br />
+
+            <h:outputLabel value="#{msg['account.active']}*" for="active" />
+            <h:inputText value="#{newSpecialistController.newSpecialistDTO.active}" required="true" id="active"/><h:message for="active" /><br />
+
+            <h:commandButton value="${msg['page.confirm']}" action="#{newSpecialistController.confirmSpecialist()}" />
+            <h:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
             <!--<h:messages/>-->
         </h:form>
     </h:body>
