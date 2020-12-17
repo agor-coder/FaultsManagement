@@ -11,6 +11,13 @@
         <param-name>resourceBundle.path</param-name>
         <param-value>i18n.messages</param-value>
     </context-param>
+    
+    <env-entry>
+        <env-entry-name>txRetryLimit</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>3</env-entry-value> 
+    </env-entry>
+    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

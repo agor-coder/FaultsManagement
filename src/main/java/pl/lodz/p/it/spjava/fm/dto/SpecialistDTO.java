@@ -35,4 +35,8 @@ public class SpecialistDTO extends AccountDTO {
         this.department = department;
     }
 
+    @Override
+    public String toString() {
+        return "SpecialistDTO{" + "department=" + department + '}';
+    }
 }

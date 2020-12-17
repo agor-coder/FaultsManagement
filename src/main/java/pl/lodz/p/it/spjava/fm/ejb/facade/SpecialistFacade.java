@@ -2,17 +2,22 @@ package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import org.eclipse.persistence.exceptions.DatabaseException;
+import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
-
 @Stateless
+@Interceptors(LoggingInterceptor.class)
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class SpecialistFacade extends AbstractFacade<Specialist> {
 
     @PersistenceContext(unitName = "FaultsManagementPU")
@@ -26,7 +31,8 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
     public SpecialistFacade() {
         super(Specialist.class);
     }
-@Override
+
+    @Override
     public void create(Specialist entity) throws AppBaseException {
         try {
             super.create(entity);
@@ -39,8 +45,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
             }
         }
     }
-    
-    
+
     public Specialist findLogin(String login) {
         TypedQuery q = getEntityManager().createNamedQuery("Specialist.findLogin", Specialist.class);
         q.setParameter("login", login);
