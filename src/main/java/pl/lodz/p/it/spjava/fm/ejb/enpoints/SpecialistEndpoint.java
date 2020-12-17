@@ -15,7 +15,7 @@ import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
-import pl.lodz.p.it.spjava.fm.ejb.mangers.SpecialistManager;
+import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
@@ -43,9 +43,9 @@ public class SpecialistEndpoint {
         specialist.setLogin(specialistDTO.getLogin());
         specialist.setPassword(specialistDTO.getPassword());
         writeEditableDataFromDTOToEntity(specialistDTO, specialist);
-      
+
         boolean rollbackTX;
-        int retryTXCounter = txRetryLimit;
+        int retryTXCounter = 1;
         do {
             try {
                 specialistManager.createSpecialist(specialist);
@@ -55,13 +55,14 @@ public class SpecialistEndpoint {
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
+                retryTXCounter++;
             }
 
-        } while (rollbackTX && --retryTXCounter > 0);
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
-        if (rollbackTX && retryTXCounter == 0) {
+        if (rollbackTX && retryTXCounter >txRetryLimit) {
 //            throw SpecialistException.createSpecialistExceptionWithTxRetryRollback();
-            throw SpecialistException.createSpecialistExceptionWithTxRetryRollback();
+            throw SpecialistException.createWithDbCheckConstraintKey(specialist);
         }
     }
 

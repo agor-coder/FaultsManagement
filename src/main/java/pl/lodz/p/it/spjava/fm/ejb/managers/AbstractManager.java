@@ -1,4 +1,4 @@
-package pl.lodz.p.it.spjava.fm.ejb.mangers;
+package pl.lodz.p.it.spjava.fm.ejb.managers;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;

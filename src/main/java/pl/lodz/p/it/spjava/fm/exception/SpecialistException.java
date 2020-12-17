@@ -28,8 +28,8 @@ public class SpecialistException extends AppBaseException {
         return ke;
     }
 
-    static public SpecialistException createWithDbCheckConstraintKey(Specialist specialist, Throwable cause) {
-        SpecialistException se = new SpecialistException(KEY_DB_CONSTRAINT, cause);
+    static public SpecialistException createWithDbCheckConstraintKey(Specialist specialist) {
+        SpecialistException se = new SpecialistException(KEY_DB_CONSTRAINT);
         se.specialist = specialist;
         return se;
     }

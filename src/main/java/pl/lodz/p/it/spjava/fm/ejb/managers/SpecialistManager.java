@@ -1,5 +1,5 @@
 
-package pl.lodz.p.it.spjava.fm.ejb.mangers;
+package pl.lodz.p.it.spjava.fm.ejb.managers;
 
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
@@ -15,8 +15,7 @@ import pl.lodz.p.it.spjava.fm.model.Specialist;
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Interceptors(LoggingInterceptor.class)
-public class SpecialistManager extends AbstractManager
-        implements SessionSynchronization {
+public class SpecialistManager extends AbstractManager  implements SessionSynchronization {
     
     @EJB
     private SpecialistFacade specialistFacade;

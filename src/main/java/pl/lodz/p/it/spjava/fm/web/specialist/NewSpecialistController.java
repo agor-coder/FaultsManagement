@@ -5,8 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
@@ -69,11 +67,11 @@ public class NewSpecialistController implements Serializable {
             if (SpecialistException.KEY_DB_CONSTRAINT.equals(se.getMessage())) {
                 ContextUtils.emitInternationalizedMessage("login", SpecialistException.KEY_DB_CONSTRAINT);
             } else {
-                Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzKlienta wyjatku: ", se);
+                Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzSpecjalistę wyjatku: ", se);
             }
             return null;
         } catch (AppBaseException abe) {
-            Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzKlienta wyjatku typu: ", abe.getClass());
+            Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzSpecjalistę wyjatku typu: ", abe.getClass());
             if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
                 ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             }

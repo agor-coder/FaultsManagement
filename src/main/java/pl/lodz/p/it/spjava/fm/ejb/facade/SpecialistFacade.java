@@ -39,7 +39,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
             em.flush();
         } catch (PersistenceException ex) {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
-                throw SpecialistException.createWithDbCheckConstraintKey(entity, ex);
+                throw SpecialistException.createWithDbCheckConstraintKey(entity);
             } else {
                 throw ex;
             }
