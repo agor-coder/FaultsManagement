@@ -9,6 +9,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
+import pl.lodz.p.it.spjava.fm.ejb.interceptor.PerformanceInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
@@ -20,6 +21,7 @@ public class SpecialistManager extends AbstractManager  implements SessionSynchr
     @EJB
     private SpecialistFacade specialistFacade;
     
+    @Interceptors(PerformanceInterceptor.class)
      public void createSpecialist(Specialist specialist) throws AppBaseException {
         specialistFacade.create(specialist);
     }

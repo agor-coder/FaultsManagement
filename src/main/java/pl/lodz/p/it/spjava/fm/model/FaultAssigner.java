@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @DiscriminatorValue("MANAGER")
-public class FaultManager extends Account implements Serializable {
+public class FaultAssigner extends Account implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")
     private String department;

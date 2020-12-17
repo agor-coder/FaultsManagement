@@ -47,7 +47,7 @@ public class Fault extends AbstractEntity implements Serializable {
 
     @JoinColumn(nullable = true)
     @ManyToOne
-    private FaultManager ktoPrzydzielil;
+    private FaultAssigner ktoPrzydzielil;
 
     public FaultStatus getStatus() {
         return status;
@@ -89,11 +89,11 @@ public class Fault extends AbstractEntity implements Serializable {
         this.ktoZlozyl = ktoZlozyl;
     }
 
-    public FaultManager getKtoPrzydzielil() {
+    public FaultAssigner getKtoPrzydzielil() {
         return ktoPrzydzielil;
     }
 
-    public void setKtoPrzydzielil(FaultManager ktoPrzydzielil) {
+    public void setKtoPrzydzielil(FaultAssigner ktoPrzydzielil) {
         this.ktoPrzydzielil = ktoPrzydzielil;
     }
 
