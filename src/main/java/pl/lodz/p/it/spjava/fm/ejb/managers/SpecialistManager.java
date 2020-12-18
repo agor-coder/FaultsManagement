@@ -25,6 +25,11 @@ public class SpecialistManager extends AbstractManager  implements SessionSynchr
      public void createSpecialist(Specialist specialist) throws AppBaseException {
         specialistFacade.create(specialist);
     }
+     
+    @Interceptors(PerformanceInterceptor.class)
+     public void editSpecialist(Specialist specialist) throws AppBaseException {
+        specialistFacade.edit(specialist);
+    }
 
     
 }

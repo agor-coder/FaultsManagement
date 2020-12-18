@@ -16,6 +16,7 @@ import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
+import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
@@ -36,6 +37,15 @@ public class SpecialistEndpoint {
     private int txRetryLimit;
 
     private Specialist endpointSpecialist;
+
+    private Specialist getEndpointSpecialist(SpecialistDTO specDTO) throws AppBaseException {
+        Specialist tmp = specialistFacade.find(specDTO.getId());
+        if (null == tmp) {
+            throw AccountException.createAccountExceptionWithAccountNotFound();
+        }
+        return tmp;
+
+    }
 
     @TransactionAttribute(TransactionAttributeType.NEVER)
     public void addSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
@@ -60,7 +70,7 @@ public class SpecialistEndpoint {
 
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
-        if (rollbackTX && retryTXCounter >txRetryLimit) {
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
 //            throw SpecialistException.createSpecialistExceptionWithTxRetryRollback();
             throw SpecialistException.createWithDbCheckConstraintKey(specialist);
         }
@@ -76,38 +86,56 @@ public class SpecialistEndpoint {
         return listSpecialistDTO;
     }
 
-    public void activateSpecialist(SpecialistDTO specialistDTO) {
+    public void activateSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
         markActive(specialistDTO, true);
     }
 
-    public void deactivateSpecialist(SpecialistDTO specialistDTO) {
+    public void deactivateSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
         markActive(specialistDTO, false);
     }
 
-    public void markActive(SpecialistDTO specialistDTO, boolean active) {
-        Specialist tmpSpec = specialistFacade.find(specialistDTO.getId());
+    public void markActive(SpecialistDTO specialistDTO, boolean active) throws AppBaseException {
+        Specialist tmpSpec = getEndpointSpecialist(specialistDTO);
         tmpSpec.setActive(active);
     }
 
     public void removeSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
-        Specialist tmpSpec = specialistFacade.find(specialistDTO.getId());
+        Specialist tmpSpec = getEndpointSpecialist(specialistDTO);
         specialistFacade.remove(tmpSpec);
     }
 
-    public SpecialistDTO getEditedSpecialist(SpecialistDTO specialistDTO) {
-        endpointSpecialist = specialistFacade.find(specialistDTO.getId());
-        System.out.println(endpointSpecialist);
-        return DTOConverter.makeSpecialistDTOFromEntity(endpointSpecialist);
+    public SpecialistDTO getEditedSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
+        Specialist tmpSpec = getEndpointSpecialist(specialistDTO);
+        return DTOConverter.makeSpecialistDTOFromEntity(tmpSpec);
     }
 
+    @TransactionAttribute(TransactionAttributeType.NEVER)
     public void saveSpecialistAfterEdit(SpecialistDTO specialistDTO) throws AppBaseException {
-        endpointSpecialist = specialistFacade.find(specialistDTO.getId());
-        System.out.println(endpointSpecialist);
-        if (null == endpointSpecialist) {
-            throw new IllegalArgumentException("Brak konta do edycji");
-        }
+        endpointSpecialist = getEndpointSpecialist(specialistDTO);
         writeEditableDataFromDTOToEntity(specialistDTO, endpointSpecialist);
-        specialistFacade.edit(endpointSpecialist);
+
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        do {
+            try {
+                specialistManager.editSpecialist(endpointSpecialist);
+                rollbackTX = specialistManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+            }
+
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            //            throw SpecialistException.createSpecialistExceptionWithTxRetryRollback();
+            throw SpecialistException.createWithDbCheckConstraintKey(endpointSpecialist);
+
+        }
+
     }
 
     private void writeEditableDataFromDTOToEntity(SpecialistDTO SpecialistDTO, Specialist specialist) {

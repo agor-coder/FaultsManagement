@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -18,7 +19,7 @@ import pl.lodz.p.it.spjava.fm.model.Specialist;
 @Stateless
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
-public class SpecialistFacade extends AbstractFacade<Specialist> {
+public class SpecialistFacade extends AbstractFacade<Specialist>  {
 
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
