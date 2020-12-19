@@ -1,7 +1,6 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
-import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -40,7 +39,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist>  {
             em.flush();
         } catch (PersistenceException ex) {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
-                throw SpecialistException.createWithDbCheckConstraintKey(entity);
+                throw SpecialistException.createWithDbCheckConstraintKey(entity, ex);
             } else {
                 throw ex;
             }

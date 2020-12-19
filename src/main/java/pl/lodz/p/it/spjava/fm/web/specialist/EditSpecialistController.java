@@ -1,6 +1,8 @@
 package pl.lodz.p.it.spjava.fm.web.specialist;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -8,6 +10,8 @@ import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
+import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
 @ConversationScoped
@@ -29,12 +33,27 @@ public class EditSpecialistController implements Serializable {
         this.editSpecialistDTO = editSpecialistDTO;
     }
 
-    public String saveEditSpecialistDTO()throws AppBaseException {
+    public String saveEditSpecialistDTO() throws AppBaseException {
         if (null == editSpecialistDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
-        specialistEndpoint.saveSpecialistAfterEdit(editSpecialistDTO);
-        return cancelOrEdit();
+        try {
+            specialistEndpoint.saveSpecialistAfterEdit(editSpecialistDTO);
+            return cancelOrEdit();
+        } catch (SpecialistException se) {
+            if (SpecialistException.KEY_OPTIMISTIC_LOCK.equals(se.getMessage())) {
+                ContextUtils.emitInternationalizedMessage(null, SpecialistException.KEY_OPTIMISTIC_LOCK);
+            } else {
+                Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku: ", se);
+            }
+            return null;
+        } catch (AppBaseException abe) {
+            Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe.getClass());
+            if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
+                ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            }
+            return null;
+        }
     }
 
     public String cancelOrEdit() {

@@ -1,12 +1,14 @@
 package pl.lodz.p.it.spjava.fm.model;
 
 import java.io.Serializable;
+import javax.persistence.Cacheable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Cacheable(false)
 @NamedQuery(name = "Specialist.findLogin", query = "SELECT i FROM Specialist i where i.login = :login")
 @DiscriminatorValue("SPECIALIST")
 public class Specialist extends Account implements Serializable {
