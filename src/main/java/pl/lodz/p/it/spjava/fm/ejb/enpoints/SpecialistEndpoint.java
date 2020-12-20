@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
+import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -25,7 +26,7 @@ import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 @Stateful
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-public class SpecialistEndpoint {
+public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSynchronization{
 
     @Inject
     private SpecialistManager specialistManager;
