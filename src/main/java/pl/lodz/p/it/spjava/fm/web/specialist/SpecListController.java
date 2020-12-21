@@ -25,15 +25,15 @@ public class SpecListController implements Serializable {
     private Conversation conversation;
 
     private SpecialistDTO editedSpecialistDTO;
-    private List<SpecialistDTO> specialistsDTO;
+    private List<SpecialistDTO> ListOfSpecialistsDTO;
 
     @PostConstruct
     public void init() {
-        specialistsDTO = specialistEndpoint.getAllSpecialists();
+        ListOfSpecialistsDTO = specialistEndpoint.getAllSpecialistsAndMakeDTOList();
     }
 
     public List<SpecialistDTO> getSpecialistsDTO() {
-        return specialistsDTO;
+        return ListOfSpecialistsDTO;
     }
 
     public void activateSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {
@@ -53,8 +53,8 @@ public class SpecListController implements Serializable {
 
     public String editSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {
         conversation.begin();
-        editedSpecialistDTO = specialistEndpoint.getEditedSpecialist(specialistDTO);
-        editSpecialistController.setEditSpecialistDTO(editedSpecialistDTO);
+//        editedSpecialistDTO = specialistEndpoint.getEditedSpecialist(specialistDTO);
+        editSpecialistController.setEditSpecialistDTO(specialistDTO);
 
         return "editSpecialist";
         //No init(), @ViewScoped 

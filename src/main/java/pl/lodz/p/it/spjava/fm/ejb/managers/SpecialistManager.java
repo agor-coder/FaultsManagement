@@ -29,7 +29,7 @@ public class SpecialistManager extends AbstractManager implements SessionSynchro
         specialistFacade.create(specialist);
     }
 
-  
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
     @Interceptors(PerformanceInterceptor.class)
     public void editSpecialist(Specialist specialist) throws AppBaseException {
         SpecialistFacade_Serializable.edit(specialist);

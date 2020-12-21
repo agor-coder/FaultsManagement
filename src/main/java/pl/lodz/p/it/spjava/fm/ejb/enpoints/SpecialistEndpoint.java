@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade;
+import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade_Serializable;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
@@ -33,6 +34,8 @@ public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSync
 
     @EJB
     private SpecialistFacade specialistFacade;
+    @EJB
+    private SpecialistFacade_Serializable specialistFacade_Serializable;
 
     @Resource(name = "txRetryLimit")
     private int txRetryLimit;
@@ -41,7 +44,7 @@ public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSync
     
 
     private Specialist getEndpointSpecialist(SpecialistDTO specDTO) throws AppBaseException {
-        Specialist tmp = specialistFacade.find(specDTO.getId());
+        Specialist tmp = specialistFacade_Serializable.find(specDTO.getId());
         if (null == tmp) {
             throw AccountException.createAccountExceptionWithAccountNotFound();
         }
@@ -78,7 +81,7 @@ public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSync
         }
     }
 
-    public List<SpecialistDTO> getAllSpecialists() {
+    public List<SpecialistDTO> getAllSpecialistsAndMakeDTOList() {
         List<Specialist> listSpecialist = specialistFacade.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();
         listSpecialist.stream().map(specialist -> DTOConverter.makeSpecialistDTOFromEntity(specialist))
@@ -111,7 +114,7 @@ public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSync
         return DTOConverter.makeSpecialistDTOFromEntity(tmpSpec);
     }
 
-  @TransactionAttribute(TransactionAttributeType.NEVER)
+//@TransactionAttribute(TransactionAttributeType.NEVER)
     public void saveSpecialistAfterEdit(SpecialistDTO specialistDTO) throws AppBaseException {
         endpointSpecialist = getEndpointSpecialist(specialistDTO);
         writeEditableDataFromDTOToEntity(specialistDTO, endpointSpecialist);
