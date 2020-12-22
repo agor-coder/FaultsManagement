@@ -55,6 +55,7 @@ public class SpecListController implements Serializable {
         conversation.begin();
 //        editedSpecialistDTO = specialistEndpoint.getEditedSpecialist(specialistDTO);
         editSpecialistController.setEditSpecialistDTO(specialistDTO);
+        editSpecialistController.getSpecialistEntityToChange(specialistDTO);
 
         return "editSpecialist";
         //No init(), @ViewScoped 

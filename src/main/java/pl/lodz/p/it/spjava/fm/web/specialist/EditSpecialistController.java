@@ -16,23 +16,27 @@ import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 @Named
 @ConversationScoped
 public class EditSpecialistController implements Serializable {
-
+    
     @Inject
     private Conversation conversation;
-
+    
     @Inject
     private SpecialistEndpoint specialistEndpoint;
-
+    
     private SpecialistDTO editSpecialistDTO = new SpecialistDTO();
-
+    
     public SpecialistDTO getEditSpecialistDTO() {
         return editSpecialistDTO;
     }
-
+    
     public void setEditSpecialistDTO(SpecialistDTO editSpecialistDTO) {
         this.editSpecialistDTO = editSpecialistDTO;
     }
 
+    public void getSpecialistEntityToChange(SpecialistDTO specialistDTO) throws AppBaseException {
+        specialistEndpoint.setEndpointSpecialist(specialistDTO);
+    }
+    
     public String saveEditSpecialistDTO() throws AppBaseException {
         if (null == editSpecialistDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
@@ -55,7 +59,7 @@ public class EditSpecialistController implements Serializable {
             return null;
         }
     }
-
+    
     public String cancelOrEdit() {
         conversation.end();
         return "specList";
