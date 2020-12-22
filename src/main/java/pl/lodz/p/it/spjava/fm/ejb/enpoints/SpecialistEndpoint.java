@@ -68,6 +68,7 @@ public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSync
 
         boolean rollbackTX;
         int retryTXCounter = 1;
+        Throwable cause=null;
         do {
             try {
                 specialistManager.createSpecialist(specialist);
@@ -78,13 +79,14 @@ public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSync
                         + ex.getClass().getName());
                 rollbackTX = true;
                 retryTXCounter++;
+                 cause=ex.getCause();
             }
 
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
         if (rollbackTX && retryTXCounter > txRetryLimit) {
 //            throw SpecialistException.createSpecialistExceptionWithTxRetryRollback();
-            throw SpecialistException.createWithDbCheckConstraintKey(specialist);
+            throw SpecialistException.createWithDbCheckConstraintKey(specialist,cause);
         }
     }
 
