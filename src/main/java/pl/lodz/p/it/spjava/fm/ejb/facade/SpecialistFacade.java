@@ -6,6 +6,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -18,7 +19,7 @@ import pl.lodz.p.it.spjava.fm.model.Specialist;
 @Stateless
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
-public class SpecialistFacade extends AbstractFacade<Specialist>  {
+public class SpecialistFacade extends AbstractFacade<Specialist> {
 
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
@@ -43,6 +44,16 @@ public class SpecialistFacade extends AbstractFacade<Specialist>  {
             } else {
                 throw ex;
             }
+        }
+    }
+
+    @Override
+    public void edit(Specialist entity) throws AppBaseException {
+        try {
+            super.edit(entity);
+            em.flush();
+        } catch (OptimisticLockException oe) {
+            throw SpecialistException.createSpecialistExceptionWithOptimisticLockKey(entity, oe);
         }
     }
 

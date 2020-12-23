@@ -92,9 +92,11 @@ public class ContextUtils {
     }
 
     public static void emitInternationalizedMessage(String id, String key) {
-        FacesMessage msg = new FacesMessage(ContextUtils.getDefaultBundle().getString(key));
-        msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-        FacesContext.getCurrentInstance().addMessage(id, msg);
+        if (ContextUtils.isInternationalizationKeyExist(key)) {
+            FacesMessage msg = new FacesMessage(ContextUtils.getDefaultBundle().getString(key));
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            FacesContext.getCurrentInstance().addMessage(id, msg);
+        }
     }
 
     public static void emitInternationalizedMessageOfException(AppBaseException ex) {

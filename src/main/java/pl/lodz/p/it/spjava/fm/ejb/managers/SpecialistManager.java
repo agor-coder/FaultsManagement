@@ -7,7 +7,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade;
-import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade_Serializable;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.PerformanceInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
@@ -21,18 +20,15 @@ public class SpecialistManager extends AbstractManager implements SessionSynchro
     @EJB
     private SpecialistFacade specialistFacade;
 
-    @EJB
-    private SpecialistFacade_Serializable SpecialistFacade_Serializable;
-
     @Interceptors(PerformanceInterceptor.class)
     public void createSpecialist(Specialist specialist) throws AppBaseException {
         specialistFacade.create(specialist);
     }
 
-@TransactionAttribute(TransactionAttributeType.MANDATORY)
+    @TransactionAttribute(TransactionAttributeType.MANDATORY)
     @Interceptors(PerformanceInterceptor.class)
     public void editSpecialist(Specialist specialist) throws AppBaseException {
-        SpecialistFacade_Serializable.edit(specialist);
+        specialistFacade.edit(specialist);
     }
 
 }

@@ -10,7 +10,6 @@ import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
-import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
@@ -44,13 +43,10 @@ public class NewSpecialistController implements Serializable {
 
     public String confirmSpecialist() {
         if (!passwordRepeat.equals(newSpecialistDTO.getPassword())) {
-             ContextUtils.emitInternationalizedMessage("NewSpecialist:passwordRepeat","account.password.different");
+            ContextUtils.emitInternationalizedMessage("NewSpecialist:passwordRepeat", "account.password.different");
             return "";
         }
-//         if (!(hasloPowtorz.equals(konto.getHaslo()))){
-//            ContextUtils.emitInternationalizedMessage("utworzAdministratoraForm:passwordRepeat", "passwords.not.matching");
-//            return null;
-//        }
+
         conversation.begin();
         return "newSpecialistConfirm";
     }
@@ -63,18 +59,10 @@ public class NewSpecialistController implements Serializable {
             specialistEndpoint.addSpecialist(newSpecialistDTO);
             conversation.end();
             return "main";
-        } catch (SpecialistException se) {
-            if (SpecialistException.KEY_DB_CONSTRAINT.equals(se.getMessage())) {
-                ContextUtils.emitInternationalizedMessage("login", SpecialistException.KEY_DB_CONSTRAINT);
-            } else {
-                Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzSpecjalistę wyjatku: ", se);
-            }
-            return null;
         } catch (AppBaseException abe) {
-            Logger.getLogger(NewSpecialistController.class.getName()).log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzSpecjalistę wyjatku typu: ", abe.getClass());
-            if (ContextUtils.isInternationalizationKeyExist(abe.getMessage())) {
-                ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-            }
+            Logger.getLogger(NewSpecialistController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzSpecjalistę wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }
     }
