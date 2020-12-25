@@ -33,7 +33,7 @@ public class EditSpecialistController implements Serializable {
     }
 
     public void getSpecialistEntityToChange(SpecialistDTO specialistDTO) throws AppBaseException {
-        specialistEndpoint.setEndpointSpecialist(specialistDTO);
+        specialistEndpoint.setEndpointSpecialistFromDTO(specialistDTO);
     }
 
     public String saveEditSpecialistDTO() throws AppBaseException {

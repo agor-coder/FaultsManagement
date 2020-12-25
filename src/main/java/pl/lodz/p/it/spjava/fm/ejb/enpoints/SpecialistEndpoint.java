@@ -41,15 +41,15 @@ public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSync
     private Specialist endpointSpecialist;
     
 
-    private Specialist getEndpointSpecialistToChange(SpecialistDTO specDTO) throws AppBaseException {
-        Specialist tmp = specialistFacade.find(specDTO.getId());
-        if (null == tmp) {
-            throw AccountException.createAccountExceptionWithAccountNotFound();
-        }
-        return tmp;
-
-    }
-    public void setEndpointSpecialist(SpecialistDTO specDTO) throws AppBaseException {
+//    private Specialist getEndpointSpecialistToChange(SpecialistDTO specDTO) throws AppBaseException {
+//        Specialist tmp = specialistFacade.find(specDTO.getId());
+//        if (null == tmp) {
+//            throw AccountException.createAccountExceptionWithAccountNotFound();
+//        }
+//        return tmp;
+//    }
+    
+    public void setEndpointSpecialistFromDTO(SpecialistDTO specDTO) throws AppBaseException {
         endpointSpecialist = specialistFacade.find(specDTO.getId());
         if (null == endpointSpecialist) {
             throw AccountException.createAccountExceptionWithAccountNotFound();
@@ -107,13 +107,13 @@ public class SpecialistEndpoint  extends AbstractEndpoint implements SessionSync
     }
 
     public void markActive(SpecialistDTO specialistDTO, boolean active) throws AppBaseException {
-        endpointSpecialist = getEndpointSpecialistToChange(specialistDTO);
+         setEndpointSpecialistFromDTO(specialistDTO);
         endpointSpecialist.setActive(active);
     }
 
     public void removeSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
-        Specialist tmpSpec = getEndpointSpecialistToChange(specialistDTO);
-        specialistFacade.remove(tmpSpec);
+        setEndpointSpecialistFromDTO(specialistDTO);
+        specialistFacade.remove(endpointSpecialist);
     }
 
     public void saveSpecialistAfterEdit(SpecialistDTO specialistDTO) throws AppBaseException {
