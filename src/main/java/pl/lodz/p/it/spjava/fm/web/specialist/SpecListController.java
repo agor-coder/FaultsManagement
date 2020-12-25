@@ -3,6 +3,7 @@ package pl.lodz.p.it.spjava.fm.web.specialist;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -15,7 +16,7 @@ import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 @ViewScoped
 public class SpecListController implements Serializable {
 
-    @Inject
+    @EJB
     private SpecialistEndpoint specialistEndpoint;
 
     @Inject

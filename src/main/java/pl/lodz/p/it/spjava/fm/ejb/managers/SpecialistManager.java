@@ -1,5 +1,6 @@
 package pl.lodz.p.it.spjava.fm.ejb.managers;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -34,12 +35,15 @@ public class SpecialistManager extends AbstractManager implements SessionSynchro
         specialistFacade.remove(specialist);
     }
 
-    
     public void markActive(Specialist specialist, boolean active) {
         specialistFacade.setActive(specialist, active);
     }
 
     public Specialist find(Long id) {
         return specialistFacade.find(id);
+    }
+
+    public List<Specialist> findAll() {
+        return specialistFacade.findAll();
     }
 }

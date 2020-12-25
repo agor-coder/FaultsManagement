@@ -11,10 +11,8 @@ import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
-import pl.lodz.p.it.spjava.fm.ejb.facade.SpecialistFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
@@ -28,11 +26,8 @@ import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 @TransactionAttribute(TransactionAttributeType.NEVER)
 public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynchronization {
 
-    @Inject
-    private SpecialistManager specialistManager;
-
     @EJB
-    private SpecialistFacade specialistFacade;
+    private SpecialistManager specialistManager;
 
     @Resource(name = "txRetryLimit")
     private int txRetryLimit;
@@ -77,7 +72,7 @@ public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynch
     }
 
     public List<SpecialistDTO> getAllSpecialistsAndMakeDTOList() {
-        List<Specialist> listSpecialist = specialistFacade.findAll();
+        List<Specialist> listSpecialist = specialistManager.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();
         listSpecialist.stream().map(specialist -> DTOConverter.makeSpecialistDTOFromEntity(specialist))
                 .forEachOrdered(specialistDTO -> {

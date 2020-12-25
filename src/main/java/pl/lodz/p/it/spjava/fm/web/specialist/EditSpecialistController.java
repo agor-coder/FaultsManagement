@@ -3,6 +3,7 @@ package pl.lodz.p.it.spjava.fm.web.specialist;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ public class EditSpecialistController implements Serializable {
     @Inject
     private Conversation conversation;
 
-    @Inject
+    @EJB
     private SpecialistEndpoint specialistEndpoint;
 
     private SpecialistDTO editSpecialistDTO = new SpecialistDTO();
