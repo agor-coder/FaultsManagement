@@ -25,10 +25,21 @@ public class SpecialistManager extends AbstractManager implements SessionSynchro
         specialistFacade.create(specialist);
     }
 
-    @TransactionAttribute(TransactionAttributeType.MANDATORY)
     @Interceptors(PerformanceInterceptor.class)
     public void editSpecialist(Specialist specialist) throws AppBaseException {
         specialistFacade.edit(specialist);
     }
 
+    public void remove(Specialist specialist) throws AppBaseException {
+        specialistFacade.remove(specialist);
+    }
+
+    
+    public void markActive(Specialist specialist, boolean active) {
+        specialistFacade.setActive(specialist, active);
+    }
+
+    public Specialist find(Long id) {
+        return specialistFacade.find(id);
+    }
 }

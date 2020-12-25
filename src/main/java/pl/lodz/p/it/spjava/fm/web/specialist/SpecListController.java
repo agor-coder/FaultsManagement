@@ -36,22 +36,22 @@ public class SpecListController implements Serializable {
         return ListOfSpecialistsDTO;
     }
 
-    public void activateSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {
+    public void activateSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {//obsłużyć
         specialistEndpoint.activateSpecialist(specialistDTO);
         init();
     }
 
-    public void deactivateSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {
+    public void deactivateSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {//obsłużyć
         specialistEndpoint.deactivateSpecialist(specialistDTO);
         init();
     }
 
-    public void removeSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
+    public void removeSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {//obsłużyć
         specialistEndpoint.removeSpecialist(specialistDTO);
         init();
     }
 
-    public String editSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {
+    public String editSpecialist(SpecialistDTO specialistDTO) {
         conversation.begin();
 //        editedSpecialistDTO = specialistEndpoint.getEditedSpecialist(specialistDTO);
         editSpecialistController.setEditSpecialistDTO(specialistDTO);

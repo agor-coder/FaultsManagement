@@ -32,11 +32,17 @@ public class EditSpecialistController implements Serializable {
         this.editSpecialistDTO = editSpecialistDTO;
     }
 
-    public void getSpecialistEntityToChange(SpecialistDTO specialistDTO) throws AppBaseException {
-        specialistEndpoint.setEndpointSpecialistFromDTO(specialistDTO);
+    public void getSpecialistEntityToChange(SpecialistDTO specialistDTO) {
+        try {
+            specialistEndpoint.setEndpointSpecialistFromDTO(specialistDTO);
+        } catch (AppBaseException abe) {
+            Logger.getLogger(NewSpecialistController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+        }
     }
 
-    public String saveEditSpecialistDTO() throws AppBaseException {
+    public String saveEditSpecialistDTO() {
         if (null == editSpecialistDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
