@@ -54,7 +54,7 @@ public abstract class Account extends AbstractEntity implements Serializable {
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 6, max = 64, message = "{constraint.string.length.notinrange}")
     @Pattern(regexp = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$", message = "{constraint.string.incorrectemail}")
-    @Column(length = 64, nullable = false)
+    @Column(length = 64, nullable = false, unique = true)
     private String email;
 
     @Size(max = 9, message = "{constraint.string.length.toolong}")
