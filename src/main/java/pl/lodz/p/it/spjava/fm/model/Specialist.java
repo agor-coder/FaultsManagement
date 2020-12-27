@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Cacheable(false)
 @NamedQuery(name = "Specialist.findLogin", query = "SELECT i FROM Specialist i where i.login = :login")
-@DiscriminatorValue("SPECIALIST")
+@DiscriminatorValue("Specjalista")
 public class Specialist extends Account implements Serializable {
 
     private static final int MAX_FAULTS_IN_PROGRESS = 3;

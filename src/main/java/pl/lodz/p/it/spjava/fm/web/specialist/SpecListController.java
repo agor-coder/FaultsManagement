@@ -26,16 +26,17 @@ public class SpecListController implements Serializable {
     private Conversation conversation;
 
     private SpecialistDTO editedSpecialistDTO;
-    private List<SpecialistDTO> ListOfSpecialistsDTO;
+    private List<SpecialistDTO> specialistsDTO;
 
     @PostConstruct
     public void init() {
-        ListOfSpecialistsDTO = specialistEndpoint.getAllSpecialistsAndMakeDTOList();
+        specialistsDTO = specialistEndpoint.getAllSpecialistsAndMakeDTOList();
     }
 
     public List<SpecialistDTO> getSpecialistsDTO() {
-        return ListOfSpecialistsDTO;
+        return specialistsDTO;
     }
+
 
     public void activateSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {//obsłużyć
         specialistEndpoint.activateSpecialist(specialistDTO);

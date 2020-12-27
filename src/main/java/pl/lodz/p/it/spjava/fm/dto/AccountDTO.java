@@ -1,15 +1,15 @@
 package pl.lodz.p.it.spjava.fm.dto;
 
+import java.util.Comparator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
 
-public abstract class AccountDTO {
+public  class AccountDTO{
 
 
-    
     protected Long id;
 
     @NotNull(message = "{constraint.notnull}")
@@ -41,13 +41,13 @@ public abstract class AccountDTO {
     private String phone;
 
     
-    private String typ;
+    private String type;
     
     public AccountDTO() {
     }
 
     //bez hasła
-    public AccountDTO(Long id, String login, boolean active,String firstName, String sureName, String email, String phone, String typ) {
+    public AccountDTO(Long id, String login, boolean active,String firstName, String sureName, String email, String phone, String type) {
         this.id = id;
         this.login = login;
         this.active=active;
@@ -55,7 +55,7 @@ public abstract class AccountDTO {
         this.sureName = sureName;
         this.email = email;
         this.phone = phone;
-        this.typ = typ;
+        this.type = type;
     }
  //do formularza newAccount
     public AccountDTO(String firstName, String sureName, String email, String phone) {
@@ -124,13 +124,19 @@ public abstract class AccountDTO {
         this.login = login;
     }
 
-    public String getTyp() {
-        return typ;
+    public String getType() {
+        return type;
     }
+
+    
 
     public Long getId() {
         return id;
     }
+
+    
+
+    
     
 
 }

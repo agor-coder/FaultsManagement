@@ -62,7 +62,7 @@ public abstract class Account extends AbstractEntity implements Serializable {
     private String phone;
 
     @Column(name = "type", updatable = false)
-    private String typ;
+    private String type;
 
     public String getPhone() {
         return phone;
@@ -125,8 +125,8 @@ public abstract class Account extends AbstractEntity implements Serializable {
         return id;
     }
 
-    public String getTyp() {
-        return typ;
+    public String getType() {
+        return type;
     }
 
     @Override

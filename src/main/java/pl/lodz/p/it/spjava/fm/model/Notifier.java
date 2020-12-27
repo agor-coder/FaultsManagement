@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue("NOTIFIER")
+@DiscriminatorValue("Zgłaszający")
 public class Notifier extends Account implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")

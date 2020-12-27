@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.enpoints;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,6 +76,7 @@ public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynch
         List<Specialist> listSpecialist = specialistManager.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();
         listSpecialist.stream().map(specialist -> DTOConverter.makeSpecialistDTOFromEntity(specialist))
+                .sorted(Comparator.comparing(SpecialistDTO::getSureName))
                 .forEachOrdered(specialistDTO -> {
                     listSpecialistDTO.add(specialistDTO);
                 });

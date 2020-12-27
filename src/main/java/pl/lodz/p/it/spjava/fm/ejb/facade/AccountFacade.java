@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import pl.lodz.p.it.spjava.fm.model.Account;
+import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 /**
  *
@@ -23,6 +24,11 @@ public class AccountFacade extends AbstractFacade<Account> {
 
     public AccountFacade() {
         super(Account.class);
+    }
+    
+     public void setActive(Account entity, boolean active) {
+       em.find(entity.getClass(), entity.getId()).setActive(active);
+       // entity.setActive(active);
     }
     
 }

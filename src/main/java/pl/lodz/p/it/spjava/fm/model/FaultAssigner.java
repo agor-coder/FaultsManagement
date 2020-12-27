@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@DiscriminatorValue("MANAGER")
+@DiscriminatorValue("Przydzielający")
 public class FaultAssigner extends Account implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")
