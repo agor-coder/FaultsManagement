@@ -55,7 +55,6 @@ public class SpecListController implements Serializable {
 
     public String editSpecialist(SpecialistDTO specialistDTO) {
         conversation.begin();
-//        editedSpecialistDTO = specialistEndpoint.getEditedSpecialist(specialistDTO);
         editSpecialistController.setEditSpecialistDTO(specialistDTO);
         editSpecialistController.getSpecialistEntityToChange(specialistDTO);
 

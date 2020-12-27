@@ -37,7 +37,7 @@
                     <h:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" />
                     <h:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" /> 
                     <h:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  /> 
-                    <h:commandButton value="${msg['action.edit']}"  action="#{accountListController.editSpecialist(specialist)}"/>
+                    <h:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.refresh']}" action="#{accountListController.init()}" />

@@ -23,7 +23,7 @@ public class EditSpecialistController implements Serializable {
     @EJB
     private SpecialistEndpoint specialistEndpoint;
 
-    private SpecialistDTO editSpecialistDTO = new SpecialistDTO();
+    private SpecialistDTO editSpecialistDTO;
 
     public SpecialistDTO getEditSpecialistDTO() {
         return editSpecialistDTO;

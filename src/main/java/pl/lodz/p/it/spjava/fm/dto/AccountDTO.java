@@ -1,6 +1,5 @@
 package pl.lodz.p.it.spjava.fm.dto;
 
-import java.util.Comparator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;

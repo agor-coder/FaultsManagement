@@ -3,7 +3,6 @@ package pl.lodz.p.it.spjava.fm.ejb.enpoints;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -26,8 +25,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     @EJB
     private AccountManager accountManager;
 
-    @Resource(name = "txRetryLimit")
-    private int txRetryLimit;
+   
 
     private Account endpointAccount;
 
@@ -38,35 +36,6 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         }
     }
 
-//    public void addSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
-//        Specialist specialist = new Specialist();
-//        specialist.setLogin(specialistDTO.getLogin());
-//        specialist.setPassword(specialistDTO.getPassword());
-//        writeEditableDataFromDTOToEntity(specialistDTO, specialist);
-//
-//        boolean rollbackTX;
-//        int retryTXCounter = 1;
-//        Throwable cause = null;
-//        do {
-//            try {
-//                specialistManager.createSpecialist(specialist);
-//                rollbackTX = specialistManager.isLastTransactionRollback();
-//            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
-//                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
-//                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
-//                        + ex.getClass().getName());
-//                rollbackTX = true;
-//                retryTXCounter++;
-//                cause = ex.getCause();
-//            }
-//
-//        } while (rollbackTX && retryTXCounter <= txRetryLimit);
-//
-//        if (rollbackTX && retryTXCounter > txRetryLimit) {
-////            throw SpecialistException.createSpecialistExceptionWithTxRetryRollback();
-//            throw SpecialistException.createWithDbCheckConstraintKey(specialist, cause);
-//        }
-//    }
     public List<AccountDTO> getAllAccountsAndMakeDTOList() {
         List<Account> listAccount = accountManager.findAll();
         List<AccountDTO> listAccountDTO = new ArrayList<>();

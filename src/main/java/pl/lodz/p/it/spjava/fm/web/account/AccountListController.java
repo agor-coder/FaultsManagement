@@ -25,24 +25,24 @@ public class AccountListController implements Serializable {
     @Inject
     private Conversation conversation;
 
-//    private SpecialistDTO editedSpecialistDTO;
+    private AccountDTO editedAccountDTO;
     private List<AccountDTO> accountsDTO;
 
     @PostConstruct
     public void init() {
-         accountsDTO = accountEndpoint.getAllAccountsAndMakeDTOList();
+        accountsDTO = accountEndpoint.getAllAccountsAndMakeDTOList();
     }
 
     public List<AccountDTO> getAccountsDTO() {
         return accountsDTO;
     }
 
-    public void activateAccount(AccountDTO accountDTO)throws AppBaseException {//obsłużyć
+    public void activateAccount(AccountDTO accountDTO) throws AppBaseException {//obsłużyć
         accountEndpoint.activateAccount(accountDTO);
         init();
     }
 
-    public void deactivateAccount(AccountDTO accountDTO)throws AppBaseException {//obsłużyć
+    public void deactivateAccount(AccountDTO accountDTO) throws AppBaseException {//obsłużyć
         accountEndpoint.deactivateAccount(accountDTO);
         init();
     }
@@ -52,14 +52,13 @@ public class AccountListController implements Serializable {
         init();
     }
 
-//    public String editSpecialist(SpecialistDTO specialistDTO) {
-//        conversation.begin();
-////        editedSpecialistDTO = specialistEndpoint.getEditedSpecialist(specialistDTO);
-//        editSpecialistController.setEditSpecialistDTO(specialistDTO);
-//        editSpecialistController.getSpecialistEntityToChange(specialistDTO);
-//
-//        return "editSpecialist";
-//        //No init(), @ViewScoped 
-//
-//    }
+    public String editAccount(AccountDTO accountDTO) {
+        conversation.begin();   
+        editAccountController.setEditAccountDTO(accountDTO);
+        editAccountController.getAccountEntityToChange(accountDTO);
+
+        return "editAccount";
+        //No init(), @ViewScoped 
+
+    }
 }

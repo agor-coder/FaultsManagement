@@ -9,8 +9,8 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
+import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
+import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
@@ -22,21 +22,23 @@ public class EditAccountController implements Serializable {
     private Conversation conversation;
 
     @EJB
-    private SpecialistEndpoint specialistEndpoint;
+    private AccountEndpoint accountEndpoint;
 
-    private SpecialistDTO editSpecialistDTO = new SpecialistDTO();
+    private AccountDTO editAccountDTO ;
 
-    public SpecialistDTO getEditSpecialistDTO() {
-        return editSpecialistDTO;
+    public AccountDTO getEditAccountDTO() {
+        return editAccountDTO;
     }
 
-    public void setEditSpecialistDTO(SpecialistDTO editSpecialistDTO) {
-        this.editSpecialistDTO = editSpecialistDTO;
+  
+
+    public void setEditAccountDTO(AccountDTO accountDTO) {
+        this.editAccountDTO = accountDTO;
     }
 
-    public void getSpecialistEntityToChange(SpecialistDTO specialistDTO) {
+    public void getAccountEntityToChange(AccountDTO accountDTO) {
         try {
-            specialistEndpoint.setEndpointSpecialistFromDTO(specialistDTO);
+            accountEndpoint.setEndpointAccountFromDTO(accountDTO);
         } catch (AppBaseException abe) {
             Logger.getLogger(NewSpecialistController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
@@ -44,23 +46,23 @@ public class EditAccountController implements Serializable {
         }
     }
 
-    public String saveEditSpecialistDTO() {
-        if (null == editSpecialistDTO) {
-            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
-        }
-        try {
-            specialistEndpoint.saveSpecialistAfterEdit(editSpecialistDTO);
-            return cancelOrEdit();
-        } catch (AppBaseException abe) {
-            Logger.getLogger(NewSpecialistController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
-            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-            return null;
-        }
-    }
+//    public String saveEditSpecialistDTO() {
+//        if (null == editSpecialistDTO) {
+//            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
+//        }
+//        try {
+//            specialistEndpoint.saveSpecialistAfterEdit(editSpecialistDTO);
+//            return cancelOrEdit();
+//        } catch (AppBaseException abe) {
+//            Logger.getLogger(NewSpecialistController.class.getName())
+//                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
+//            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+//            return null;
+//        }
+//    }
 
     public String cancelOrEdit() {
         conversation.end();
-        return "specList";
+        return "accountList";
     }
 }
