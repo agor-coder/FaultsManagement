@@ -21,5 +21,7 @@ public class AccountUtils {
     public static boolean isFaultAssigner(AccountDTO account) {
         return (account instanceof FaultAssignerDTO);
     }
+
+  
     
 }

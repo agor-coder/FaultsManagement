@@ -10,7 +10,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
-import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.AccountManager;
 import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
@@ -32,11 +31,12 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     private Account endpointAccount;
 
     public void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
-        if (accDTO instanceof SpecialistDTO) {
+    
             endpointAccount = specialistManager.find(accDTO.getId());
-            if (null == endpointAccount) {
-                throw AccountException.createAccountExceptionWithAccountNotFound();
-            }
+            System.out.println(endpointAccount + "od enpointa");
+        
+        if (null == endpointAccount) {
+            throw AccountException.createAccountExceptionWithAccountNotFound();
         }
     }
 
@@ -78,16 +78,18 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         accountManager.remove(endpointAccount);
     }
 
-//    public void saveSpecialistAfterEdit(SpecialistDTO specialistDTO) throws AppBaseException {
-//        writeEditableDataFromDTOToEntity(specialistDTO, endpointSpecialist);
-//        specialistManager.editSpecialist(endpointSpecialist);
-//    }
-//    private void writeEditableDataFromDTOToEntity(SpecialistDTO SpecialistDTO, Specialist specialist) {
-//        specialist.setFirstName(SpecialistDTO.getFirstName());
-//        specialist.setSureName(SpecialistDTO.getSureName());
-//        specialist.setEmail(SpecialistDTO.getEmail());
-//        specialist.setDepartment(SpecialistDTO.getDepartment());
-//        specialist.setPhone(SpecialistDTO.getPhone());
-//        specialist.setActive(SpecialistDTO.isActive());
-//    }
+    public void saveAccountAfterEdit(AccountDTO editAccountDTO) throws AppBaseException {
+        writeEditableDataFromDTOToEntity(editAccountDTO, endpointAccount);
+        accountManager.editAccount(endpointAccount);
+    }
+
+    private void writeEditableDataFromDTOToEntity(AccountDTO accountDTO, Account account) {
+        account.setFirstName(accountDTO.getFirstName());
+        account.setSureName(accountDTO.getSureName());
+        account.setEmail(accountDTO.getEmail());
+//        account.setDepartment(SpecialistDTO.getDepartment());
+        account.setPhone(accountDTO.getPhone());
+        account.setActive(accountDTO.isActive());
+    }
+
 }

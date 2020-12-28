@@ -46,26 +46,30 @@ public class EditAccountController implements Serializable {
         }
     }
 
-//    public String saveEditSpecialistDTO() {
-//        if (null == editSpecialistDTO) {
-//            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
-//        }
-//        try {
-//            specialistEndpoint.saveSpecialistAfterEdit(editSpecialistDTO);
-//            return cancelOrEdit();
-//        } catch (AppBaseException abe) {
-//            Logger.getLogger(NewSpecialistController.class.getName())
-//                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
-//            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-//            return null;
-//        }
-//    }
+    
+    public String saveEditAccountDTO() {
+        if (null == editAccountDTO) {
+            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
+        }
+        try {
+            accountEndpoint.saveAccountAfterEdit(editAccountDTO);
+            return cancelOrEdit();
+        } catch (AppBaseException abe) {
+            Logger.getLogger(NewSpecialistController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return null;
+        }
+    }
     public boolean isSpecialist() {
         return AccountUtils.isSpecialist(editAccountDTO);
     }
 
     public boolean isNotifier() {
         return AccountUtils.isNotifier(editAccountDTO);
+    }
+    public boolean isFaultassigner() {
+        return AccountUtils.isFaultAssigner(editAccountDTO);
     }
 
     public String cancelOrEdit() {

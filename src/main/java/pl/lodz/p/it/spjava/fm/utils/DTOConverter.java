@@ -1,9 +1,11 @@
 package pl.lodz.p.it.spjava.fm.utils;
 
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
+import pl.lodz.p.it.spjava.fm.dto.FaultAssignerDTO;
 import pl.lodz.p.it.spjava.fm.dto.NotifierDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.model.Account;
+import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
@@ -20,6 +22,11 @@ public class DTOConverter {
                 notifier.getFirstName(), notifier.getSureName(), notifier.getEmail(), notifier.getPhone(),
                 notifier.getType(), notifier.getEmplacement());
     }
+    private static FaultAssignerDTO makeFaultassignerDTOFromEntity(FaultAssigner assigner) {
+        return null == assigner ? null : new FaultAssignerDTO(assigner.getId(), assigner.getLogin(), assigner.isActive(),
+                assigner.getFirstName(), assigner.getSureName(), assigner.getEmail(), assigner.getPhone(),
+                assigner.getType(), assigner.getDepartment());
+    }
 
     public static AccountDTO makeAccountDTOFromEntity(Account account) {
         return null == account ? null : new AccountDTO(account.getId(), account.getLogin(), account.isActive(),
@@ -33,6 +40,9 @@ public class DTOConverter {
         }
         if (account instanceof Notifier) {
             return makeNotifierDTOFromEntity((Notifier) account);
+        }
+        if (account instanceof FaultAssigner) {
+            return makeFaultassignerDTOFromEntity((FaultAssigner) account);
         }
 
         return null;

@@ -9,6 +9,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.ejb.facade.AccountFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
+import pl.lodz.p.it.spjava.fm.ejb.interceptor.PerformanceInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 
@@ -20,15 +21,11 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
     @EJB
     private AccountFacade accountFacade;
 
-//    @Interceptors(PerformanceInterceptor.class)
-//    public void createSpecialist(Specialist specialist) throws AppBaseException {
-//        accountFacade.create(specialist);
-//    }
 
-//    @Interceptors(PerformanceInterceptor.class)
-//    public void editSpecialist(Specialist specialist) throws AppBaseException {
-//        accountFacade.edit(specialist);
-//    }
+    @Interceptors(PerformanceInterceptor.class)
+    public void editAccount(Account account) throws AppBaseException {
+        accountFacade.edit(account);
+    }
 
     public void remove(Account account) throws AppBaseException {
         accountFacade.remove(account);
