@@ -12,6 +12,7 @@ import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.utils.AccountUtils;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
@@ -24,21 +25,20 @@ public class EditAccountController implements Serializable {
     @EJB
     private AccountEndpoint accountEndpoint;
 
-    private AccountDTO editAccountDTO ;
+    private AccountDTO editAccountDTO;
 
     public AccountDTO getEditAccountDTO() {
         return editAccountDTO;
     }
 
-  
-
     public void setEditAccountDTO(AccountDTO accountDTO) {
-        this.editAccountDTO = accountDTO;
+        editAccountDTO = accountEndpoint.getAccountToEdit(accountDTO);
+        System.out.println(editAccountDTO + "od setedit");
     }
 
     public void getAccountEntityToChange(AccountDTO accountDTO) {
         try {
-            accountEndpoint.setEndpointAccountFromDTO(accountDTO);
+            accountEndpoint.setEndpointAccountFromDTOToEdit(accountDTO);
         } catch (AppBaseException abe) {
             Logger.getLogger(NewSpecialistController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
@@ -60,6 +60,13 @@ public class EditAccountController implements Serializable {
 //            return null;
 //        }
 //    }
+    public boolean isSpecialist() {
+        return AccountUtils.isSpecialist(editAccountDTO);
+    }
+
+    public boolean isNotifier() {
+        return AccountUtils.isNotifier(editAccountDTO);
+    }
 
     public String cancelOrEdit() {
         conversation.end();

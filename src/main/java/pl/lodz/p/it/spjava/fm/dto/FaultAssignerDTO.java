@@ -2,15 +2,15 @@ package pl.lodz.p.it.spjava.fm.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class FaultManagerDTO extends AccountDTO {
+public class FaultAssignerDTO extends AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
     private String department;
 
-    public FaultManagerDTO() {
+    public FaultAssignerDTO() {
     }
 
-    public FaultManagerDTO(Long id, String login, boolean active, String firstName, String sureName, String email,
+    public FaultAssignerDTO(Long id, String login, boolean active, String firstName, String sureName, String email,
             String phone, String typ, String department) {
         super(id, login, active, firstName, sureName, email, phone, typ);
         this.department = department;

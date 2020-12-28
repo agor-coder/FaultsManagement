@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>FM - Edit Account</title>
@@ -12,7 +13,7 @@
         <h:form id="editAccount">
             <h:outputLabel value="#{msg['account.login']}" for="login" />
             <h:outputText value=" - #{editAccountController.editAccountDTO.login}"  id="login"> </h:outputText> <h:message for="login" /><br />
-            
+
             <h:outputLabel value="#{msg['account.type']}" for="type" />
             <h:outputText value=" - #{editAccountController.editAccountDTO.type}"   id="type"/><h:message for="type" /><br />
 
@@ -24,12 +25,17 @@
 
             <h:outputLabel value="#{msg['account.email']}" for="email" />
             <h:inputText value="#{editAccountController.editAccountDTO.email}" required="true"  id="email"/><h:message for="email" /><br />
-           
+
             <h:outputLabel value="#{msg['account.phone']}" for="phone" />
             <h:inputText value="#{editAccountController.editAccountDTO.phone}"   id="phone"/><h:message for="phone" /><br />
 
             <h:outputLabel value="#{msg['account.active']}" for="active" />
             <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active"/><h:message for="active" /><br />
+
+            <c:if test="#{editAccountController.specialist}">
+                <h:outputLabel value="#{msg['account.department']}" for="department" />
+                <h:inputText value="#{editAccountController.editAccountDTO.firstName}" required="true"  id="department"/><h:message for="department" /><br />
+            </c:if>
 
             <h:commandButton value="${msg['action.save']}" action="#{editAccountController.saveEditAccountDTO()}" />
             <h:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>

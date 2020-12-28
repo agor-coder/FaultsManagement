@@ -19,13 +19,13 @@ public class FaultDTO {
 
     private NotifierDTO ktoZlozyl;
 
-    private FaultManagerDTO ktoPrzydzielil;
+    private FaultAssignerDTO ktoPrzydzielil;
 
     public FaultDTO() {
     }
 
     public FaultDTO(Long id, String faultDescribe, TechAreaDTO techArea,
-            SpecialistDTO specialist, NotifierDTO ktoZlozyl, FaultManagerDTO ktoPrzydzielil) {
+            SpecialistDTO specialist, NotifierDTO ktoZlozyl, FaultAssignerDTO ktoPrzydzielil) {
         this.id = id;
         this.faultDescribe = faultDescribe;
         this.techArea = techArea;
@@ -74,11 +74,11 @@ public class FaultDTO {
         this.ktoZlozyl = ktoZlozyl;
     }
 
-    public FaultManagerDTO getKtoPrzydzielil() {
+    public FaultAssignerDTO getKtoPrzydzielil() {
         return ktoPrzydzielil;
     }
 
-    public void setKtoPrzydzielil(FaultManagerDTO ktoPrzydzielil) {
+    public void setKtoPrzydzielil(FaultAssignerDTO ktoPrzydzielil) {
         this.ktoPrzydzielil = ktoPrzydzielil;
     }
 

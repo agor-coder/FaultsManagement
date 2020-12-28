@@ -10,8 +10,10 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
+import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.AccountManager;
+import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
@@ -24,16 +26,30 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     @EJB
     private AccountManager accountManager;
-
-   
+    @EJB
+    private SpecialistManager specialistManager;
 
     private Account endpointAccount;
+
+    public void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
+        if (accDTO instanceof SpecialistDTO) {
+            endpointAccount = specialistManager.find(accDTO.getId());
+            if (null == endpointAccount) {
+                throw AccountException.createAccountExceptionWithAccountNotFound();
+            }
+        }
+    }
 
     public void setEndpointAccountFromDTO(AccountDTO accDTO) throws AppBaseException {
         endpointAccount = accountManager.find(accDTO.getId());
         if (null == endpointAccount) {
             throw AccountException.createAccountExceptionWithAccountNotFound();
         }
+    }
+
+    public AccountDTO getAccountToEdit(AccountDTO accountDTO) {
+        Account tmp = accountManager.find(accountDTO.getId());
+        return DTOConverter.tworzKontoDTOzEncji(tmp); //ta konwersja powinna odwzorować hierarchię podklas Konta na analogiczną hierarchię DTO
     }
 
     public List<AccountDTO> getAllAccountsAndMakeDTOList() {
