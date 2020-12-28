@@ -13,25 +13,25 @@ public class DTOConverter {
 
     public static SpecialistDTO makeSpecialistDTOFromEntity(Specialist specialist) {
         return null == specialist ? null : new SpecialistDTO(specialist.getId(), specialist.getLogin(), specialist.isActive(),
-                specialist.getFirstName(), specialist.getSureName(), specialist.getEmail(), specialist.getPhone(),
-                specialist.getType(), specialist.getDepartment());
+                specialist.isConfirmed(),specialist.getFirstName(), specialist.getSureName(), specialist.getEmail(), 
+                specialist.getPhone(),specialist.getType(), specialist.getDepartment());
     }
 
     private static NotifierDTO makeNotifierDTOFromEntity(Notifier notifier) {
         return null == notifier ? null : new NotifierDTO(notifier.getId(), notifier.getLogin(), notifier.isActive(),
-                notifier.getFirstName(), notifier.getSureName(), notifier.getEmail(), notifier.getPhone(),
+                notifier.isConfirmed(), notifier.getFirstName(), notifier.getSureName(), notifier.getEmail(), notifier.getPhone(),
                 notifier.getType(), notifier.getEmplacement());
     }
 
     private static FaultAssignerDTO makeFaultassignerDTOFromEntity(FaultAssigner assigner) {
         return null == assigner ? null : new FaultAssignerDTO(assigner.getId(), assigner.getLogin(), assigner.isActive(),
-                assigner.getFirstName(), assigner.getSureName(), assigner.getEmail(), assigner.getPhone(),
+                assigner.isConfirmed(),assigner.getFirstName(), assigner.getSureName(), assigner.getEmail(), assigner.getPhone(),
                 assigner.getType(), assigner.getDepartment());
     }
 
     public static AccountDTO makeAccountDTOFromEntity(Account account) {
         return null == account ? null : new AccountDTO(account.getId(), account.getLogin(), account.isActive(),
-                account.getFirstName(), account.getSureName(), account.getEmail(), account.getPhone(),
+                account.isConfirmed(),account.getFirstName(), account.getSureName(), account.getEmail(), account.getPhone(),
                 account.getType());
     }
 

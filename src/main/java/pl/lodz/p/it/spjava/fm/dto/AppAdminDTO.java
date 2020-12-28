@@ -12,8 +12,9 @@ public class AppAdminDTO extends AccountDTO {
     public AppAdminDTO() {
     }
 
-    public AppAdminDTO(Long id, String login, boolean active,String firstName, String sureName, String email, String phone, String typ, String alarmPhone) {
-        super(id, login, active, firstName, sureName, email, phone, typ);
+    public AppAdminDTO(Long id, String login, boolean active, boolean confirmed, String firstName, String sureName,
+            String email, String phone, String typ, String alarmPhone) {
+        super(id, login, active, confirmed, firstName, sureName, email, phone, typ);
         this.alarmPhone = alarmPhone;
     }
 

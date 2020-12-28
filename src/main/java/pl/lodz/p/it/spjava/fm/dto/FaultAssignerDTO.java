@@ -10,9 +10,9 @@ public class FaultAssignerDTO extends AccountDTO {
     public FaultAssignerDTO() {
     }
 
-    public FaultAssignerDTO(Long id, String login, boolean active, String firstName, String sureName, String email,
+    public FaultAssignerDTO(Long id, String login, boolean active,boolean confirmed, String firstName, String sureName, String email,
             String phone, String typ, String department) {
-        super(id, login, active, firstName, sureName, email, phone, typ);
+        super(id, login, active,confirmed, firstName, sureName, email, phone, typ);
         this.department = department;
     }
 

@@ -104,6 +104,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 //        account.setDepartment(SpecialistDTO.getDepartment());
         account.setPhone(accountDTO.getPhone());
         account.setActive(accountDTO.isActive());
+        account.setConfirmed(accountDTO.isConfirmed());
     }
 
 }

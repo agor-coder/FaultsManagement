@@ -40,6 +40,10 @@ public abstract class Account extends AbstractEntity implements Serializable {
     @NotNull(message = "{constraint.notnull}")
     @Column(nullable = false)
     protected boolean active;
+    
+    @NotNull(message = "{constraint.notnull}")
+    @Column(nullable = false)
+    protected boolean confirmed;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
@@ -102,6 +106,14 @@ public abstract class Account extends AbstractEntity implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
     public String getPassword() {

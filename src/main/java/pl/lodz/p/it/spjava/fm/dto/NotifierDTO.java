@@ -11,9 +11,9 @@ public class NotifierDTO extends AccountDTO {
     public NotifierDTO() {
     }
 
-    public NotifierDTO(Long id, String login, boolean active, String firstName, String sureName,
+    public NotifierDTO(Long id, String login, boolean active,boolean confirmed, String firstName, String sureName,
             String email, String phone, String type, String emplacement) {
-        super(id, login, active, firstName, sureName, email, phone, type);
+        super(id, login, active,confirmed, firstName, sureName, email, phone, type);
         this.emplacement = emplacement;
     }
 

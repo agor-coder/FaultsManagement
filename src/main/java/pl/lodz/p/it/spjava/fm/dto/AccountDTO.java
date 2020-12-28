@@ -22,6 +22,11 @@ public  class AccountDTO{
 
     @NotNull(message = "{constraint.notnull}")
     protected boolean active;
+    
+    @NotNull(message = "{constraint.notnull}")
+    protected boolean confirmed;
+    
+    
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
@@ -46,10 +51,11 @@ public  class AccountDTO{
     }
 
     //bez hasła
-    public AccountDTO(Long id, String login, boolean active,String firstName, String sureName, String email, String phone, String type) {
+    public AccountDTO(Long id, String login, boolean active,boolean confirmed,String firstName, String sureName, String email, String phone, String type) {
         this.id = id;
         this.login = login;
         this.active=active;
+        this.confirmed=confirmed;
         this.firstName = firstName;
         this.sureName = sureName;
         this.email = email;
@@ -105,6 +111,14 @@ public  class AccountDTO{
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
     public String getPassword() {

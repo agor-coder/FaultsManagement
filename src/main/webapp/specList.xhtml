@@ -33,6 +33,10 @@
                     <h:selectBooleanCheckbox value="${specialist.active}" disabled="true" />
                 </h:column>
                 <h:column>
+                    <f:facet name="header">#{msg['account.confirmed']}</f:facet>
+                    <h:selectBooleanCheckbox value="${specialist.confirmed}" disabled="true" />
+                </h:column>
+                <h:column>
                     <f:facet name="header">Actions</f:facet>
                     <h:commandButton value="${msg['action.delete']}"  action="#{specListController.removeSpecialist(specialist)}" />
                     <h:commandButton value="${msg['action.activate']}"  action="#{specListController.activateSpecialist(specialist)}" /> 
