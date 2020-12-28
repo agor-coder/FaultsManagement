@@ -22,6 +22,7 @@ public class DTOConverter {
                 notifier.getFirstName(), notifier.getSureName(), notifier.getEmail(), notifier.getPhone(),
                 notifier.getType(), notifier.getEmplacement());
     }
+
     private static FaultAssignerDTO makeFaultassignerDTOFromEntity(FaultAssigner assigner) {
         return null == assigner ? null : new FaultAssignerDTO(assigner.getId(), assigner.getLogin(), assigner.isActive(),
                 assigner.getFirstName(), assigner.getSureName(), assigner.getEmail(), assigner.getPhone(),
@@ -44,7 +45,6 @@ public class DTOConverter {
         if (account instanceof FaultAssigner) {
             return makeFaultassignerDTOFromEntity((FaultAssigner) account);
         }
-
         return null;
     }
 

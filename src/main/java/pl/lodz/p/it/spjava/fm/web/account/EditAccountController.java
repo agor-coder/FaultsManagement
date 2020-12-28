@@ -1,6 +1,5 @@
 package pl.lodz.p.it.spjava.fm.web.account;
 
-import pl.lodz.p.it.spjava.fm.web.specialist.*;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +39,8 @@ public class EditAccountController implements Serializable {
         try {
             accountEndpoint.setEndpointAccountFromDTOToEdit(accountDTO);
         } catch (AppBaseException abe) {
-            Logger.getLogger(NewSpecialistController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }
@@ -56,7 +55,7 @@ public class EditAccountController implements Serializable {
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }

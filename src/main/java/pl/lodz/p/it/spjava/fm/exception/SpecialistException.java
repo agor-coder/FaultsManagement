@@ -7,7 +7,7 @@ import pl.lodz.p.it.spjava.fm.model.Specialist;
 public class SpecialistException extends AppBaseException {
 
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
-    static final public String KEY_OPTIMISTIC_LOCK = "error.specialist.optimisticlock";
+    static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
 
   
 

@@ -12,6 +12,8 @@ import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.AccountManager;
+import pl.lodz.p.it.spjava.fm.ejb.managers.AssignerManager;
+import pl.lodz.p.it.spjava.fm.ejb.managers.NotifierManager;
 import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
@@ -27,14 +29,26 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     private AccountManager accountManager;
     @EJB
     private SpecialistManager specialistManager;
+    @EJB
+    private NotifierManager notifierManager;
+    @EJB
+    private AssignerManager assignerManager;
 
     private Account endpointAccount;
 
     public void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
-    
+        if ("Specjalista".equals(accDTO.getType())) {
             endpointAccount = specialistManager.find(accDTO.getId());
             System.out.println(endpointAccount + "od enpointa");
-        
+
+        } else if ("Zgłaszający".equals(accDTO.getType())) {
+            endpointAccount = notifierManager.find(accDTO.getId());
+            System.out.println(endpointAccount + "od enpointa");
+            
+        } else if ("Przydzielający".equals(accDTO.getType())) {
+            endpointAccount = assignerManager.find(accDTO.getId());
+            System.out.println(endpointAccount + "od enpointa");
+        }
         if (null == endpointAccount) {
             throw AccountException.createAccountExceptionWithAccountNotFound();
         }
@@ -49,7 +63,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     public AccountDTO getAccountToEdit(AccountDTO accountDTO) {
         Account tmp = accountManager.find(accountDTO.getId());
-        return DTOConverter.tworzKontoDTOzEncji(tmp); //ta konwersja powinna odwzorować hierarchię podklas Konta na analogiczną hierarchię DTO
+        return DTOConverter.tworzKontoDTOzEncji(tmp);
     }
 
     public List<AccountDTO> getAllAccountsAndMakeDTOList() {

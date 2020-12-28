@@ -37,7 +37,7 @@ public class EditSpecialistController implements Serializable {
         try {
             specialistEndpoint.setEndpointSpecialistFromDTO(specialistDTO);
         } catch (AppBaseException abe) {
-            Logger.getLogger(NewSpecialistController.class.getName())
+            Logger.getLogger(EditSpecialistController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
@@ -51,7 +51,7 @@ public class EditSpecialistController implements Serializable {
             specialistEndpoint.saveSpecialistAfterEdit(editSpecialistDTO);
             return cancelOrEdit();
         } catch (AppBaseException abe) {
-            Logger.getLogger(NewSpecialistController.class.getName())
+            Logger.getLogger(EditSpecialistController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujSpecjalistę wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
