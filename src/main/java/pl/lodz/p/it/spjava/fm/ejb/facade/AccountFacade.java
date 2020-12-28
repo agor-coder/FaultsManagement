@@ -1,9 +1,12 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
@@ -39,6 +42,12 @@ public class AccountFacade extends AbstractFacade<Account> {
             em.flush();
         } catch (OptimisticLockException oe) {
             throw AccountException.createAccountExceptionWithOptimisticLockKey(oe);
+        } catch (PersistenceException ex) {
+            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
+                throw AccountException.createWithDbCheckConstraintKey(ex);
+            } else {
+                throw ex;
+            }
         }
     }
 

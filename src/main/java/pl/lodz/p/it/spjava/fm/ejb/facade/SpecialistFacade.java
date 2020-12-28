@@ -20,19 +20,19 @@ import pl.lodz.p.it.spjava.fm.model.Specialist;
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class SpecialistFacade extends AbstractFacade<Specialist> {
-    
+
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
-    
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     public SpecialistFacade() {
         super(Specialist.class);
     }
-    
+
     @Override
     public void create(Specialist entity) throws AppBaseException {
         try {
@@ -46,7 +46,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
             }
         }
     }
-    
+
     @Override
     public void edit(Specialist entity) throws AppBaseException {
         try {
@@ -54,18 +54,24 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
             em.flush();
         } catch (OptimisticLockException oe) {
             throw SpecialistException.createSpecialistExceptionWithOptimisticLockKey(entity, oe);
+        } catch (PersistenceException ex) {
+            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
+                throw SpecialistException.createWithDbCheckConstraintKey(entity, ex);
+            } else {
+                throw ex;
+            }
         }
     }
-    
+
     public Specialist findLogin(String login) {
         TypedQuery q = getEntityManager().createNamedQuery("Specialist.findLogin", Specialist.class);
         q.setParameter("login", login);
         return (Specialist) q.getSingleResult();
     }
-    
+
     public void setActive(Specialist entity, boolean active) {
-       em.find(entity.getClass(), entity.getId()).setActive(active);
-       // entity.setActive(active);
+        em.find(entity.getClass(), entity.getId()).setActive(active);
+        // entity.setActive(active);
     }
-    
+
 }
