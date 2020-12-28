@@ -1,11 +1,12 @@
-
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
+import pl.lodz.p.it.spjava.fm.exception.AccountException;
+import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
-import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 /**
  *
@@ -25,10 +26,20 @@ public class AccountFacade extends AbstractFacade<Account> {
     public AccountFacade() {
         super(Account.class);
     }
-    
-     public void setActive(Account entity, boolean active) {
-       em.find(entity.getClass(), entity.getId()).setActive(active);
-       // entity.setActive(active);
+
+    public void setActive(Account entity, boolean active) {
+        em.find(entity.getClass(), entity.getId()).setActive(active);
+        // entity.setActive(active);
     }
-    
+
+    @Override
+    public void edit(Account entity) throws AppBaseException {
+        try {
+            super.edit(entity);
+            em.flush();
+        } catch (OptimisticLockException oe) {
+            throw AccountException.createAccountExceptionWithOptimisticLockKey(oe);
+        }
+    }
+
 }
