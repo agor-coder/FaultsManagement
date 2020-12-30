@@ -52,9 +52,8 @@ public class AccountListController implements Serializable {
     }
 
     public String editAccount(AccountDTO accountDTO) {
-        conversation.begin();   
+        conversation.begin();
         editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
-
 
         return "editAccount";
         //No init(), @ViewScoped 
