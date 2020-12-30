@@ -30,6 +30,11 @@ public class EditAccountController implements Serializable {
         return editAccountDTO;
     }
 
+    void setEditAccountDTOAndGetAccountEntityToEnpoint(AccountDTO accountDTO) {
+        setEditAccountDTO(accountDTO);
+        getAccountEntityToChange(editAccountDTO);
+    }
+
     public void setEditAccountDTO(AccountDTO accountDTO) {
         editAccountDTO = accountEndpoint.getAccountToEdit(accountDTO);
         System.out.println(editAccountDTO + "od setedit");
@@ -37,7 +42,7 @@ public class EditAccountController implements Serializable {
 
     public void getAccountEntityToChange(AccountDTO accountDTO) {
         try {
-            accountEndpoint.setEndpointAccountFromDTOToEdit(accountDTO);
+            accountEndpoint.setEndpointAccountFromDTOToEdit(editAccountDTO);
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
@@ -45,7 +50,6 @@ public class EditAccountController implements Serializable {
         }
     }
 
-    
     public String saveEditAccountDTO() {
         if (null == editAccountDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
@@ -60,6 +64,7 @@ public class EditAccountController implements Serializable {
             return null;
         }
     }
+
     public boolean isSpecialist() {
         return AccountUtils.isSpecialist(editAccountDTO);
     }
@@ -67,6 +72,7 @@ public class EditAccountController implements Serializable {
     public boolean isNotifier() {
         return AccountUtils.isNotifier(editAccountDTO);
     }
+
     public boolean isFaultassigner() {
         return AccountUtils.isFaultAssigner(editAccountDTO);
     }
@@ -75,4 +81,5 @@ public class EditAccountController implements Serializable {
         conversation.end();
         return "accountList";
     }
+
 }

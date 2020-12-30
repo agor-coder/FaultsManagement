@@ -27,28 +27,12 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     @EJB
     private AccountManager accountManager;
-    @EJB
-    private SpecialistManager specialistManager;
-    @EJB
-    private NotifierManager notifierManager;
-    @EJB
-    private AssignerManager assignerManager;
 
     private Account endpointAccount;
 
     public void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
-        if ("Specjalista".equals(accDTO.getType())) {
-            endpointAccount = specialistManager.find(accDTO.getId());
+            endpointAccount = accountManager.find(accDTO.getId());
             System.out.println(endpointAccount + "od enpointa");
-
-        } else if ("Zgłaszający".equals(accDTO.getType())) {
-            endpointAccount = notifierManager.find(accDTO.getId());
-            System.out.println(endpointAccount + "od enpointa");
-            
-        } else if ("Przydzielający".equals(accDTO.getType())) {
-            endpointAccount = assignerManager.find(accDTO.getId());
-            System.out.println(endpointAccount + "od enpointa");
-        }
         if (null == endpointAccount) {
             throw AccountException.createAccountExceptionWithAccountNotFound();
         }
