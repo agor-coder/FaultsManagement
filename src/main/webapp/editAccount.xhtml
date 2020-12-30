@@ -29,10 +29,7 @@
             <h:outputLabel value="#{msg['account.phone']}" for="phone" />
             <h:inputText value="#{editAccountController.editAccountDTO.phone}"   id="phone"/><h:message for="phone" /><br />
 
-            <h:outputLabel value="#{msg['account.active']}" for="active" />
-            <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active"/><h:message for="active" /><br />
-
-            <c:if test="#{editAccountController.specialist}">
+            <c:if test="#{editAccountController.specialist or editAccountController.faultassigner}">
                 <h:outputLabel value="#{msg['account.department']}" for="department" />
                 <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentsp"/><h:message for="departmentsp" /><br />
             </c:if>
@@ -42,10 +39,13 @@
                 <h:inputText value="#{editAccountController.editAccountDTO.emplacement}" required="true"  id="emplacement"/><h:message for="emplacement" /><br />
             </c:if>
             
-            <c:if test="#{editAccountController.faultassigner}">
-                <h:outputLabel value="#{msg['account.department']}" for="department" />
-                <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentfa"/><h:message for="departmentfa" /><br />
-            </c:if>
+            <h:outputLabel value="#{msg['account.active']}" for="active" />
+            <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active"/><h:message for="active" /><br />
+            
+            <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
+            <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.confirmed}"  id="confirmed"/><h:message for="confirmed" /><br />
+
+            
 
             <h:commandButton value="${msg['action.save']}" action="#{editAccountController.saveEditAccountDTO()}" />
             <h:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>

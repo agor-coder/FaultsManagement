@@ -25,7 +25,6 @@ public class AccountListController implements Serializable {
     @Inject
     private Conversation conversation;
 
-    private AccountDTO editedAccountDTO;
     private List<AccountDTO> accountsDTO;
 
     @PostConstruct
@@ -55,8 +54,7 @@ public class AccountListController implements Serializable {
     public String editAccount(AccountDTO accountDTO) {
         conversation.begin();   
         editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
-//        editAccountController.setEditAccountDTO(accountDTO);
-//        editAccountController.getAccountEntityToChange(accountDTO);
+
 
         return "editAccount";
         //No init(), @ViewScoped 

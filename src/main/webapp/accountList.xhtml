@@ -39,7 +39,7 @@
                 <h:column>
                     <f:facet name="header">Actions</f:facet>
                     <h:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" />
-                    <h:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" /> 
+                    <h:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" rendered="#{not row.active}" /> 
                     <h:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  /> 
                     <h:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"/>
                 </h:column>

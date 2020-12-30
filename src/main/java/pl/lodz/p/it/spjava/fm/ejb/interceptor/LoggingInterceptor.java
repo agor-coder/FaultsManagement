@@ -1,5 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.interceptor;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -17,7 +19,8 @@ public class LoggingInterceptor {
         StringBuilder sb = new StringBuilder("Wywołanie metody biznesowej ")
                 .append(invocation.getTarget().getClass().getName()).append('.')
                 .append(invocation.getMethod().getName());
-        sb.append(" z tożsamością: ").append(sessionContext.getCallerPrincipal().getName());
+        sb.append("w dn.: ").append(LocalDateTime.now()).append(" z tożsamością: ")
+                .append(sessionContext.getCallerPrincipal().getName());
         try {
             Object[] parameters = invocation.getParameters();
             if (null != parameters) {
