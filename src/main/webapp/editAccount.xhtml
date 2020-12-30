@@ -46,8 +46,16 @@
             <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.confirmed}"  id="confirmed"/><h:message for="confirmed" /><br />
 
 
+            <c:if test="#{editAccountController.specialist}">
+            <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" />
+            </c:if>
+            <c:if test="#{editAccountController.faultassigner}">
+                <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" />
+            </c:if>
+            <c:if test="#{editAccountController.notifier}">
+            <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
+            </c:if>
             
-            <h:commandButton value="${msg['action.save']}" action="#{editAccountController.saveEditAccountDTO()}" />
             <h:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>
             <!--<h:messages/>-->
         </h:form>

@@ -10,11 +10,17 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
+import pl.lodz.p.it.spjava.fm.dto.FaultAssignerDTO;
+import pl.lodz.p.it.spjava.fm.dto.NotifierDTO;
+import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.AccountManager;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
+import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
+import pl.lodz.p.it.spjava.fm.model.Notifier;
+import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 
 @Stateful
@@ -28,8 +34,8 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     private Account endpointAccount;
 
     public void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
-            endpointAccount = accountManager.find(accDTO.getId());
-            System.out.println(endpointAccount + "od enpointa");
+        endpointAccount = accountManager.find(accDTO.getId());
+        System.out.println(endpointAccount + "od enpointa");
         if (null == endpointAccount) {
             throw AccountException.createAccountExceptionWithAccountNotFound();
         }
@@ -73,8 +79,21 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         accountManager.remove(endpointAccount);
     }
 
-    public void saveAccountAfterEdit(AccountDTO editAccountDTO) throws AppBaseException {
-        writeEditableDataFromDTOToEntity(editAccountDTO, endpointAccount);
+    public void saveSpecialistAfterEdit(AccountDTO specialistDTO) throws AppBaseException {
+        writeEditableDataFromDTOToEntity(specialistDTO, endpointAccount);
+        ((Specialist) endpointAccount).setDepartment(((SpecialistDTO) specialistDTO).getDepartment());
+        accountManager.editAccount(endpointAccount);
+    }
+
+    public void saveAssignerAfterEdit(AccountDTO assignerDTO) throws AppBaseException {
+        writeEditableDataFromDTOToEntity(assignerDTO, endpointAccount);
+        ((FaultAssigner) endpointAccount).setDepartment(((FaultAssignerDTO) assignerDTO).getDepartment());
+        accountManager.editAccount(endpointAccount);
+    }
+
+    public void saveNotifierAfterEdit(AccountDTO notifierDTO) throws AppBaseException {
+        writeEditableDataFromDTOToEntity(notifierDTO, endpointAccount);
+        ((Notifier) endpointAccount).setEmplacement(((NotifierDTO) notifierDTO).getEmplacement());
         accountManager.editAccount(endpointAccount);
     }
 
@@ -82,7 +101,6 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         account.setFirstName(accountDTO.getFirstName());
         account.setSureName(accountDTO.getSureName());
         account.setEmail(accountDTO.getEmail());
-//        account.setDepartment(SpecialistDTO.getDepartment());
         account.setPhone(accountDTO.getPhone());
         account.setActive(accountDTO.isActive());
         account.setConfirmed(accountDTO.isConfirmed());

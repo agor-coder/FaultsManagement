@@ -50,12 +50,41 @@ public class EditAccountController implements Serializable {
         }
     }
 
-    public String saveEditAccountDTO() {
+    public String saveEditedSpecialistDTO() {
         if (null == editAccountDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
         try {
-            accountEndpoint.saveAccountAfterEdit(editAccountDTO);
+            accountEndpoint.saveSpecialistAfterEdit(editAccountDTO);
+            return cancelOrEdit();
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return null;
+        }
+    }
+    
+    public String saveEditedAssignerDTO() {
+        if (null == editAccountDTO) {
+            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
+        }
+        try {
+            accountEndpoint.saveAssignerAfterEdit(editAccountDTO);
+            return cancelOrEdit();
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return null;
+        }
+    }
+    public String saveEditedNotifierDTO() {
+        if (null == editAccountDTO) {
+            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
+        }
+        try {
+            accountEndpoint.saveNotifierAfterEdit(editAccountDTO);
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
