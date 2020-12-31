@@ -56,6 +56,13 @@ public class AccountListController implements Serializable {
         editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
 
         return "editAccount";
+    }
+
+    public String chanePassword(AccountDTO accountDTO) {
+        conversation.begin();
+        editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
+
+        return "changePassword";
         //No init(), @ViewScoped 
 
     }

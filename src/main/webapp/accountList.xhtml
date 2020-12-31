@@ -43,6 +43,7 @@
                     <h:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  rendered="#{row.active}" /> 
                     <h:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" />
                     <h:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"/>
+                    <h:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.chanePassword(row)}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.refresh']}" action="#{accountListController.init()}" />

@@ -72,5 +72,21 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/accountList.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>changePassword</from-outcome>
+            <to-view-id>/changePassword.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>changePassword.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>accountList</from-outcome>
+            <to-view-id>/accountList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
     
 </faces-config>

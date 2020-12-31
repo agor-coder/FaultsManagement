@@ -106,4 +106,10 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         account.setConfirmed(accountDTO.isConfirmed());
     }
 
+    public void changePassword(AccountDTO editAccountDTO) throws AppBaseException{
+       endpointAccount.setPassword(editAccountDTO.getPassword());
+       accountManager.editAccount(endpointAccount);
+      
+    }
+
 }
