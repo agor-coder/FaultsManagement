@@ -6,17 +6,33 @@
         <title>FM - New Specialist Confirm</title><br />
     </h:head>
     <h:body>
-        New Specialist Confirm
+        #{msg['page.confirmRegister']} <br />
+        <br />
         <h:form id="NewSpecialistConfirm" >
             <h:panelGrid columns="2">
-                Login: <h:outputText id="login" value="#{newSpecialistController.newSpecialistDTO.login}" />
-                <!--Login: <h:outputText id="login" value="#{newSpecialistController.newSpecialistDTO.login}" /><br />-->
-                Frist Name: <h:outputText id="firstname" value="#{newSpecialistController.newSpecialistDTO.firstName}" />
-                Sure name: <h:outputText id="surename" value="#{newSpecialistController.newSpecialistDTO.sureName}" />
-                email: <h:outputText id="email" value="#{newSpecialistController.newSpecialistDTO.email}" />
-                dep: <h:outputText id="department" value="#{newSpecialistController.newSpecialistDTO.department}" />
-                phone: <h:outputText id="phone" value="#{newSpecialistController.newSpecialistDTO.phone}" />
-                active:  <h:selectBooleanCheckbox value="${newSpecialistController.newSpecialistDTO.active}" disabled="true" />
+                <h:outputLabel value="#{msg['account.login']}" for="login" />
+                <h:outputText value="#{newSpecialistController.newSpecialistDTO.login}"  id="login"> </h:outputText>
+
+                <h:outputLabel value="#{msg['account.name']}" for="firstname" />
+                <h:outputText value="#{newSpecialistController.newSpecialistDTO.firstName}"   id="firstname"/>
+
+                <h:outputLabel value="#{msg['account.surname']}" for="surename" />
+                <h:outputText value="#{newSpecialistController.newSpecialistDTO.sureName}"  id="surename"/>
+
+                <h:outputLabel value="#{msg['account.email']}" for="email" />
+                <h:outputText value="#{newSpecialistController.newSpecialistDTO.email}"   id="email"/>
+
+                <h:outputLabel value="#{msg['account.department']}" for="department" />
+                <h:outputText value="#{newSpecialistController.newSpecialistDTO.department}"  id="department"/>
+
+                <h:outputLabel value="#{msg['account.phone']}" for="phone" />
+                <h:outputText value="#{newSpecialistController.newSpecialistDTO.phone}"   id="phone"/>
+
+                <h:outputLabel value="#{msg['account.active']}" for="active" />
+                <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.active}"  id="active"  disabled="true"/>
+
+                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
+                <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.confirmed}"  id="confirmed"  disabled="true"/>
 
                 <h:commandButton value="${msg['page.confirmRegister']}" action="#{newSpecialistController.addSpecialist()}"/>
                 <h:commandButton value="${msg['action.cancel']}"  action="main" />

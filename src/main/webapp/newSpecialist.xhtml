@@ -35,8 +35,11 @@
             <h:inputText value="#{newSpecialistController.newSpecialistDTO.phone}"   id="phone"/><h:message for="phone" /><br />
 
             <h:outputLabel value="#{msg['account.active']}*" for="active" />
-            <h:inputText value="#{newSpecialistController.newSpecialistDTO.active}" required="true" id="active"/><h:message for="active" /><br />
+            <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.active}"  id="active"/><h:message for="active" /><br />
 
+            <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
+            <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.confirmed}"  id="confirmed"/><h:message for="confirmed" /><br />
+            
             <h:commandButton value="${msg['page.confirm']}" action="#{newSpecialistController.confirmSpecialist()}" />
             <h:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
             <!--<h:messages/>-->
