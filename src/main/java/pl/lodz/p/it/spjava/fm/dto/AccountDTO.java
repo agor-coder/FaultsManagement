@@ -17,7 +17,8 @@ public  class AccountDTO{
     protected String login;
 
     @NotNull(message = "{constraint.notnull}")
-    @Size(min = 2, message = "{constraint.string.length.tooshort}")
+    //@Size(min = 2, message = "{constraint.string.length.tooshort}")
+    @Size(min=6, max=64, message="{constraint.string.length.notinrange}")
     protected String password;
 
     @NotNull(message = "{constraint.notnull}")

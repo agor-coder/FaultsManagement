@@ -24,26 +24,27 @@ public abstract class Account extends AbstractEntity implements Serializable {
     @Id
     @Column(updatable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    protected Long id;
+    private Long id;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
     @Pattern(regexp = "^[_a-zA-Z0-9-]*$", message = "{constraint.string.incorrectchar}")
     @Column(length = 32, nullable = false, unique = true, updatable = false)
-    protected String login;
+    private String login;
 
     @NotNull(message = "{constraint.notnull}")
-    @Size(min = 2, message = "{constraint.string.length.tooshort}")
-    @Column(length = 50, nullable = false)
-    protected String password;
+    //@Size(min = 2, message = "{constraint.string.length.tooshort}")
+    @Size(min=6, max=64, message="{constraint.string.length.notinrange}") //skrót SHA256
+    @Column(length = 64, nullable = false)
+    private String password;
 
     @NotNull(message = "{constraint.notnull}")
     @Column(nullable = false)
-    protected boolean active;
+    private boolean active;
     
     @NotNull(message = "{constraint.notnull}")
     @Column(nullable = false)
-    protected boolean confirmed;
+    private boolean confirmed;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")

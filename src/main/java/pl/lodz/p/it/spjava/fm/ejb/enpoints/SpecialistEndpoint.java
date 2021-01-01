@@ -109,7 +109,7 @@ public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynch
         specialist.setFirstName(SpecialistDTO.getFirstName());
         specialist.setSureName(SpecialistDTO.getSureName());
         specialist.setEmail(SpecialistDTO.getEmail());
-        specialist.setDepartment(SpecialistDTO.getDepartment());
+        specialist.setDepartment(SpecialistDTO.getDepartment());// nie jego
         specialist.setPhone(SpecialistDTO.getPhone());
         specialist.setActive(SpecialistDTO.isActive());
         specialist.setConfirmed(SpecialistDTO.isConfirmed());

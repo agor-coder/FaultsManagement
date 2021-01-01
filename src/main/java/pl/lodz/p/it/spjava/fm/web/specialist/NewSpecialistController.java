@@ -9,7 +9,7 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
@@ -23,7 +23,7 @@ public class NewSpecialistController implements Serializable {
     private Conversation conversation;
     
     @EJB
-    private SpecialistEndpoint specialistEndpoint;
+    private AccountEndpoint accountEndpoint;
 
 //do formularza new
     private final SpecialistDTO newSpecialistDTO = new SpecialistDTO("Phil", "Collins", "phil@op.pl", "5345", "er4");
@@ -58,7 +58,7 @@ public class NewSpecialistController implements Serializable {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
         try {
-            specialistEndpoint.addSpecialist(newSpecialistDTO);
+            accountEndpoint.addSpecialist(newSpecialistDTO);
             conversation.end();
             return "main";
         } catch (AppBaseException abe) {

@@ -51,4 +51,18 @@ public class AccountFacade extends AbstractFacade<Account> {
         }
     }
 
+    @Override
+    public void create(Account entity) throws AppBaseException {
+        try {
+            super.create(entity);
+            em.flush();
+        } catch (PersistenceException ex) {
+            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
+                throw AccountException.createWithDbCheckConstraintKey(ex);
+            } else {
+                throw ex;
+            }
+        }
+    }
+
 }
