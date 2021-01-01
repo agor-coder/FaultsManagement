@@ -33,7 +33,7 @@ public abstract class Account extends AbstractEntity implements Serializable {
     private String login;
 
     @NotNull(message = "{constraint.notnull}")
-    //@Size(min = 2, message = "{constraint.string.length.tooshort}")
+    //@Size(min=64, max=64, message="{constraint.string.length.notinrange}") //skrót SHA256
     @Size(min=6, max=64, message="{constraint.string.length.notinrange}") //skrót SHA256
     @Column(length = 64, nullable = false)
     private String password;

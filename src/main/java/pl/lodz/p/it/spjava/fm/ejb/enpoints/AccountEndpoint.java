@@ -22,7 +22,6 @@ import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.AccountManager;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
-import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
@@ -37,10 +36,10 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     @EJB
     private AccountManager accountManager;
-    
+
     @Inject
     private HashGenerator hashGenerator;
-    
+
     @Resource(name = "txRetryLimit")
     private int txRetryLimit;
 
@@ -92,12 +91,11 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         accountManager.remove(endpointAccount);
     }
 
-    
-     public void addSpecialist(SpecialistDTO specialistDTO) throws AppBaseException{
-     Specialist specialist = new Specialist();
-     writeDataFromDTOToNewEntity(specialistDTO,specialist);
-     specialist.setDepartment(specialistDTO.getDepartment());
-         boolean rollbackTX;
+    public void addSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
+        Specialist specialist = new Specialist();
+        writeDataFromDTOToNewEntity(specialistDTO, specialist);
+        specialist.setDepartment(specialistDTO.getDepartment());
+        boolean rollbackTX;
         int retryTXCounter = 1;
         Throwable cause = null;
         do {
@@ -112,16 +110,13 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
                 retryTXCounter++;
                 cause = ex.getCause();
             }
-
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
-
+        
         if (rollbackTX && retryTXCounter > txRetryLimit) {
-//            throw SpecialistException.createSpecialistExceptionWithTxRetryRollback();
-            throw SpecialistException.createWithDbCheckConstraintKey(specialist, cause);
+            throw AccountException.createWithDbCheckConstraintKey(cause);
         }
-     }
-    
-     
+    }
+
     public void saveSpecialistAfterEdit(AccountDTO specialistDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(specialistDTO, endpointAccount);
         ((Specialist) endpointAccount).setDepartment(((SpecialistDTO) specialistDTO).getDepartment());
@@ -148,21 +143,21 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         account.setActive(accountDTO.isActive());
         account.setConfirmed(accountDTO.isConfirmed());
     }
- 
+
     private void writeDataFromDTOToNewEntity(AccountDTO accountDTO, Account account) {
-       account.setLogin(accountDTO.getLogin());
-       writeEditableDataFromDTOToEntity(accountDTO, account);
-       account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
-       
+        account.setLogin(accountDTO.getLogin());
+        writeEditableDataFromDTOToEntity(accountDTO, account);
+        account.setPassword(accountDTO.getPassword());
+        //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
+     
+                
+
     }
 
-    public void changePassword(AccountDTO editAccountDTO) throws AppBaseException{
-       endpointAccount.setPassword(editAccountDTO.getPassword());
-       accountManager.editAccount(endpointAccount);
-      
+    public void changePassword(AccountDTO editAccountDTO) throws AppBaseException {
+        endpointAccount.setPassword(editAccountDTO.getPassword());
+        accountManager.editAccount(endpointAccount);
+
     }
-
-
-   
 
 }
