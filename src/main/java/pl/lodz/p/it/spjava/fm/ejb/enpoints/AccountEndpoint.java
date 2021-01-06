@@ -111,7 +111,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
                 cause = ex.getCause();
             }
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
-        
+
         if (rollbackTX && retryTXCounter > txRetryLimit) {
             throw AccountException.createWithDbCheckConstraintKey(cause);
         }
@@ -149,13 +149,12 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         writeEditableDataFromDTOToEntity(accountDTO, account);
         account.setPassword(accountDTO.getPassword());
         //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
-     
-                
 
     }
 
     public void changePassword(AccountDTO editAccountDTO) throws AppBaseException {
         endpointAccount.setPassword(editAccountDTO.getPassword());
+        // endpointAccount.setPassword(hashGenerator.generateHash(editAccountDTO.getPassword()));
         accountManager.editAccount(endpointAccount);
 
     }
