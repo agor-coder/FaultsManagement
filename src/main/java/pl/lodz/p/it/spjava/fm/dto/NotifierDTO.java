@@ -16,6 +16,14 @@ public class NotifierDTO extends AccountDTO {
         super(id, login, active,confirmed, firstName, sureName, email, phone, type);
         this.emplacement = emplacement;
     }
+    
+    //do formularza newNotifier
+    public NotifierDTO(String firstName, String sureName,
+            String email, String phone, String emplacement) {
+        super(firstName, sureName, email, phone);
+        this.emplacement = emplacement;
+
+    }
 
     public String getEmplacement() {
         return emplacement;

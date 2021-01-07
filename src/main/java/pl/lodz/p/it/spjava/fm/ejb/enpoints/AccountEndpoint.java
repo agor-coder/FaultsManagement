@@ -150,6 +150,32 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         }
     }
 
+    public void addNotifier(NotifierDTO notifierDTO) throws AppBaseException {
+        Notifier notifier = new Notifier();
+        writeDataFromDTOToNewEntity(notifierDTO, notifier);
+        notifier.setEmplacement(notifierDTO.getEmplacement());
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        Throwable cause = null;
+        do {
+            try {
+                accountManager.createAccount(notifier);
+                rollbackTX = accountManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+                cause = ex.getCause();
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createWithDbCheckConstraintKey(cause);
+        }
+    }
+
     private void writeDataFromDTOToNewEntity(AccountDTO accountDTO, Account account) {
         account.setLogin(accountDTO.getLogin());
         writeEditableDataFromDTOToEntity(accountDTO, account);

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>FM - New Notifier Confirm</title><br />
+    </h:head>
+    <h:body>
+        #{msg['page.confirmRegister']} <br />
+        <br />
+        <h:form id="NewSpecialistConfirm" >
+            <h:panelGrid columns="2">
+                <h:outputLabel value="#{msg['account.login']}" for="login" />
+                <h:outputText value="#{newNotifierController.newNotifierDTO.login}"  id="login"> </h:outputText>
+
+                <h:outputLabel value="#{msg['account.name']}" for="firstname" />
+                <h:outputText value="#{newNotifierController.newNotifierDTO.firstName}"   id="firstname"/>
+
+                <h:outputLabel value="#{msg['account.surname']}" for="surename" />
+                <h:outputText value="#{newNotifierController.newNotifierDTO.sureName}"  id="surename"/>
+
+                <h:outputLabel value="#{msg['account.email']}" for="email" />
+                <h:outputText value="#{newNotifierController.newNotifierDTO.email}"   id="email"/>
+
+                <h:outputLabel value="#{msg['account.emplacement']}" for="emplacement" />
+                <h:outputText value="#{newNotifierController.newNotifierDTO.emplacement}"  id="emplacement"/>
+
+                <h:outputLabel value="#{msg['account.phone']}" for="phone" />
+                <h:outputText value="#{newNotifierController.newNotifierDTO.phone}"   id="phone"/>
+
+                <h:outputLabel value="#{msg['account.active']}" for="active" />
+                <h:selectBooleanCheckbox value="#{newNotifierController.newNotifierDTO.active}"  id="active"  disabled="true"/>
+
+                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
+                <h:selectBooleanCheckbox value="#{newNotifierController.newNotifierDTO.confirmed}"  id="confirmed"  disabled="true"/>
+
+                <h:commandButton value="${msg['page.confirmRegister']}" action="#{newNotifierController.addNotifier()}"/>
+                <h:commandButton value="${msg['action.cancel']}"  action="main" />
+            </h:panelGrid>
+        </h:form> 
+        <h:messages for="login"/>
+    </h:body>
+</html>
+
