@@ -12,6 +12,7 @@ import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.dto.FaultAssignerDTO;
@@ -25,6 +26,7 @@ import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
+import pl.lodz.p.it.spjava.fm.security.HashGenerator;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 
 @Stateful
@@ -38,6 +40,9 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     private int txRetryLimit;
 
     private Account endpointAccount;
+    
+    @Inject
+    private HashGenerator hashGenerator;
 
     public void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
         endpointAccount = accountManager.find(accDTO.getId());
@@ -148,7 +153,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         account.setLogin(accountDTO.getLogin());
         writeEditableDataFromDTOToEntity(accountDTO, account);
         account.setPassword(accountDTO.getPassword());
-        //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
+       //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
 
     }
 
