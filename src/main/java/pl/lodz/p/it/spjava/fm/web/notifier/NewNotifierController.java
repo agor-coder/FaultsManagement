@@ -45,7 +45,7 @@ public class NewNotifierController implements Serializable {
 
     public String confirmNotifier() {
         if (!passwordRepeat.equals(newNotifierDTO.getPassword())) {
-            ContextUtils.emitInternationalizedMessage("NewSpecialist:passwordRepeat", "account.password.different");
+            ContextUtils.emitInternationalizedMessage("NewNotifier:passwordRepeat", "account.password.different");
             return "";
         }
 

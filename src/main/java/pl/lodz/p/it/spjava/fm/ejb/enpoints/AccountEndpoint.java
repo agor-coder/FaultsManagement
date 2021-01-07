@@ -52,12 +52,12 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         }
     }
 
-    public void setEndpointAccountFromDTO(AccountDTO accDTO) throws AppBaseException {
-        endpointAccount = accountManager.find(accDTO.getId());
-        if (null == endpointAccount) {
-            throw AccountException.createAccountExceptionWithAccountNotFound();
-        }
-    }
+//    public void setEndpointAccountFromDTO(AccountDTO accDTO) throws AppBaseException {
+//        endpointAccount = accountManager.find(accDTO.getId());
+//        if (null == endpointAccount) {
+//            throw AccountException.createAccountExceptionWithAccountNotFound();
+//        }
+//    }
 
     public AccountDTO getAccountToEdit(AccountDTO accountDTO) {
         Account tmp = accountManager.find(accountDTO.getId());
@@ -76,17 +76,17 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     }
 
     public void activateAccount(AccountDTO accountDTO) throws AppBaseException {
-        setEndpointAccountFromDTO(accountDTO);
+        setEndpointAccountFromDTOToEdit(accountDTO);
         accountManager.markActive(endpointAccount, true);
     }
 
     public void deactivateAccount(AccountDTO accountDTO) throws AppBaseException {
-        setEndpointAccountFromDTO(accountDTO);
+        setEndpointAccountFromDTOToEdit(accountDTO);
         accountManager.markActive(endpointAccount, false);
     }
 
     public void removeAccount(AccountDTO accountDTO) throws AppBaseException {
-        setEndpointAccountFromDTO(accountDTO);
+        setEndpointAccountFromDTOToEdit(accountDTO);
         accountManager.remove(endpointAccount);
     }
 
