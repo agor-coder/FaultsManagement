@@ -40,7 +40,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     private int txRetryLimit;
 
     private Account endpointAccount;
-    
+
     @Inject
     private HashGenerator hashGenerator;
 
@@ -119,6 +119,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     public void changePassword(AccountDTO editAccountDTO) throws AppBaseException {
         endpointAccount.setPassword(editAccountDTO.getPassword());
+        //endpointAccount.setPassword(hashGenerator.generateHash(editAccountDTO.getPassword()));
         accountManager.editAccount(endpointAccount);
 
     }
@@ -153,7 +154,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         account.setLogin(accountDTO.getLogin());
         writeEditableDataFromDTOToEntity(accountDTO, account);
         account.setPassword(accountDTO.getPassword());
-       //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
+        //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
 
     }
 
