@@ -12,7 +12,6 @@ import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.dto.FaultAssignerDTO;
@@ -26,7 +25,6 @@ import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
-import pl.lodz.p.it.spjava.fm.security.HashGenerator;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 
 @Stateful
@@ -36,10 +34,6 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     @EJB
     private AccountManager accountManager;
-
-    @Inject
-    private HashGenerator hashGenerator;
-
     @Resource(name = "txRetryLimit")
     private int txRetryLimit;
 
@@ -91,32 +85,6 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         accountManager.remove(endpointAccount);
     }
 
-    public void addSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
-        Specialist specialist = new Specialist();
-        writeDataFromDTOToNewEntity(specialistDTO, specialist);
-        specialist.setDepartment(specialistDTO.getDepartment());
-        boolean rollbackTX;
-        int retryTXCounter = 1;
-        Throwable cause = null;
-        do {
-            try {
-                accountManager.createAccount(specialist);
-                rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
-                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
-                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
-                        + ex.getClass().getName());
-                rollbackTX = true;
-                retryTXCounter++;
-                cause = ex.getCause();
-            }
-        } while (rollbackTX && retryTXCounter <= txRetryLimit);
-
-        if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createWithDbCheckConstraintKey(cause);
-        }
-    }
-
     public void saveSpecialistAfterEdit(AccountDTO specialistDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(specialistDTO, endpointAccount);
         ((Specialist) endpointAccount).setDepartment(((SpecialistDTO) specialistDTO).getDepartment());
@@ -144,18 +112,43 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         account.setConfirmed(accountDTO.isConfirmed());
     }
 
+    public void changePassword(AccountDTO editAccountDTO) throws AppBaseException {
+        endpointAccount.setPassword(editAccountDTO.getPassword());
+        accountManager.editAccount(endpointAccount);
+
+    }
+
+    public void addSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
+        Specialist specialist = new Specialist();
+        writeDataFromDTOToNewEntity(specialistDTO, specialist);
+        specialist.setDepartment(specialistDTO.getDepartment());
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        Throwable cause = null;
+        do {
+            try {
+                accountManager.createAccount(specialist);
+                rollbackTX = accountManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+                cause = ex.getCause();
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createWithDbCheckConstraintKey(cause);
+        }
+    }
+
     private void writeDataFromDTOToNewEntity(AccountDTO accountDTO, Account account) {
         account.setLogin(accountDTO.getLogin());
         writeEditableDataFromDTOToEntity(accountDTO, account);
         account.setPassword(accountDTO.getPassword());
         //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
-
-    }
-
-    public void changePassword(AccountDTO editAccountDTO) throws AppBaseException {
-        endpointAccount.setPassword(editAccountDTO.getPassword());
-        // endpointAccount.setPassword(hashGenerator.generateHash(editAccountDTO.getPassword()));
-        accountManager.editAccount(endpointAccount);
 
     }
 
