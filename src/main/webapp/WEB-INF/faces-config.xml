@@ -31,26 +31,42 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>account/newSpecialist.xhtml</from-view-id>
+        <from-view-id>/account/newSpecialist.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>newSpecialistConfirm</from-outcome>
-            <to-view-id>account/newSpecialistConfirm.xhtml</to-view-id>
+            <to-view-id>/account/newSpecialistConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>specialist/specList.xhtml</from-view-id>
+        <from-view-id>/account/newNotifier.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newNotifierConfirm</from-outcome>
+            <to-view-id>/account/newNotifierConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/account/newAssigner.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newAssignerConfirm</from-outcome>
+            <to-view-id>/account/newAssignerConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/specialist/specList.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editSpecialist</from-outcome>
-            <to-view-id>specialist/editSpecialist.xhtml</to-view-id>
+            <to-view-id>/specialist/editSpecialist.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>specialist/editSpecialist.xhtml</from-view-id>
+        <from-view-id>/specialist/editSpecialist.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>specList</from-outcome>
-            <to-view-id>specialist/specList.xhtml</to-view-id>
+            <to-view-id>/specialist/specList.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>

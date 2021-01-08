@@ -26,7 +26,7 @@ public class NewAssignerController implements Serializable {
     private AccountEndpoint accountEndpoint;
 
 //do formularza new
-    private final AssignerDTO newAssignerDTO = new AssignerDTO("Phil", "Collins", "phil@op.pl", "5345", "er4");
+    private final AssignerDTO newAssignerDTO = new AssignerDTO("John", "Lennon", "john@op.pl", "5388", "IM5");
     // private final AssignerDTO newAssignerDTO = new AssignerDTO();
 
     private String passwordRepeat;
@@ -43,14 +43,14 @@ public class NewAssignerController implements Serializable {
         return newAssignerDTO;
     }
 
-    public String confirmSpecialist() {
+    public String confirmAssigner() {
         if (!passwordRepeat.equals(newAssignerDTO.getPassword())) {
             ContextUtils.emitInternationalizedMessage("NewAssigner:passwordRepeat", "account.password.different");
             return "";
         }
 
         conversation.begin();
-        return "newSpecialistConfirm";
+        return "newAssignerConfirm";
     }
 
     public String addAssigner() {
@@ -66,6 +66,11 @@ public class NewAssignerController implements Serializable {
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }
+    }
+    
+     public String cancel() {
+        conversation.end();
+        return "main";
     }
 
 }

@@ -21,7 +21,7 @@ public class NewNotifierController implements Serializable {
 
     @Inject
     private Conversation conversation;
-    
+
     @EJB
     private AccountEndpoint accountEndpoint;
 
@@ -66,6 +66,11 @@ public class NewNotifierController implements Serializable {
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }
+    }
+
+    public String cancel() {
+        conversation.end();
+        return "main";
     }
 
 }
