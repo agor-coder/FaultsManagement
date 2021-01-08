@@ -15,7 +15,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
-import pl.lodz.p.it.spjava.fm.dto.FaultAssignerDTO;
+import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;
 import pl.lodz.p.it.spjava.fm.dto.NotifierDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
@@ -23,7 +23,7 @@ import pl.lodz.p.it.spjava.fm.ejb.managers.AccountManager;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
-import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
+import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.security.HashGenerator;
@@ -58,7 +58,6 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 //            throw AccountException.createAccountExceptionWithAccountNotFound();
 //        }
 //    }
-
     public AccountDTO getAccountToEdit(AccountDTO accountDTO) {
         Account tmp = accountManager.find(accountDTO.getId());
         return DTOConverter.tworzKontoDTOzEncji(tmp);
@@ -98,7 +97,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     public void saveAssignerAfterEdit(AccountDTO assignerDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(assignerDTO, endpointAccount);
-        ((FaultAssigner) endpointAccount).setDepartment(((FaultAssignerDTO) assignerDTO).getDepartment());
+        ((Assigner) endpointAccount).setDepartment(((AssignerDTO) assignerDTO).getDepartment());
         accountManager.editAccount(endpointAccount);
     }
 
@@ -134,6 +133,32 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         do {
             try {
                 accountManager.createAccount(specialist);
+                rollbackTX = accountManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+                cause = ex.getCause();
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createWithDbCheckConstraintKey(cause);
+        }
+    }
+
+    public void addAssigner(AssignerDTO assignerDTO) throws AppBaseException {
+        Assigner assigner = new Assigner();
+        writeDataFromDTOToNewEntity(assignerDTO, assigner);
+        assigner.setDepartment(assignerDTO.getDepartment());
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        Throwable cause = null;
+        do {
+            try {
+                accountManager.createAccount(assigner);
                 rollbackTX = accountManager.isLastTransactionRollback();
             } catch (AppBaseException | EJBTransactionRolledbackException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter

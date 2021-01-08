@@ -7,11 +7,11 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
-import pl.lodz.p.it.spjava.fm.ejb.facade.FaultAssignerFacade;
+import pl.lodz.p.it.spjava.fm.ejb.facade.AssignerFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.PerformanceInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
-import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
+import pl.lodz.p.it.spjava.fm.model.Assigner;
 
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -19,23 +19,23 @@ import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
 public class AssignerManager extends AbstractManager implements SessionSynchronization {
 
     @EJB
-    private FaultAssignerFacade assignerFacade;
+    private AssignerFacade assignerFacade;
 
     @Interceptors(PerformanceInterceptor.class)
-    public void createAssigner(FaultAssigner assigner) throws AppBaseException {
+    public void createAssigner(Assigner assigner) throws AppBaseException {
         assignerFacade.create(assigner);
     }
 
     @Interceptors(PerformanceInterceptor.class)
-    public void editAssigner(FaultAssigner assigner) throws AppBaseException {
+    public void editAssigner(Assigner assigner) throws AppBaseException {
         assignerFacade.edit(assigner);
     }
 
-    public FaultAssigner find(Long id) {
+    public Assigner find(Long id) {
         return assignerFacade.find(id);
     }
 
-    public List<FaultAssigner> findAll() {
+    public List<Assigner> findAll() {
         return assignerFacade.findAll();
     }
 }

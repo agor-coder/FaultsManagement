@@ -19,15 +19,15 @@ INSERT INTO SPECIALIST(id,department) VALUES (-3,'ER4');
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-4,'Przydzielający',0,0,'2020-12-22 15:39:54.340','login3','123456',1,'3@p.pl','Stefan','Smok','4367');
-INSERT INTO FAULTASSIGNER(id,department) VALUES (-4,'MR4');
+INSERT INTO ASSIGNER(id,department) VALUES (-4,'MR4');
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-5,'Przydzielający',0,0,'2020-12-22 16:39:54.340','login4','123456',1,'35@p.pl','Julian','Ptak','4467');
-INSERT INTO FAULTASSIGNER(id,department) VALUES (-5,'IR4');
+INSERT INTO ASSIGNER(id,department) VALUES (-5,'IR4');
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-6,'Przydzielający',0,0,'2020-12-22 17:39:54.340','login5','123456',1,'36@p.pl','Piotr','Nowy','4457');
-INSERT INTO FAULTASSIGNER(id,department) VALUES (-6,'IR3');
+INSERT INTO ASSIGNER(id,department) VALUES (-6,'IR3');
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-7,'Zgłaszający',0,0,'2020-11-22 12:39:54.340','login6','123456',1,'5@p.pl','Karol','Piszpan','4457');

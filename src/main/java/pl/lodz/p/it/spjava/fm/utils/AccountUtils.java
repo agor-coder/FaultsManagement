@@ -2,7 +2,7 @@
 package pl.lodz.p.it.spjava.fm.utils;
 
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
-import pl.lodz.p.it.spjava.fm.dto.FaultAssignerDTO;
+import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;
 import pl.lodz.p.it.spjava.fm.dto.NotifierDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 
@@ -18,8 +18,8 @@ public class AccountUtils {
         return (account instanceof NotifierDTO);
     }
 
-    public static boolean isFaultAssigner(AccountDTO account) {
-        return (account instanceof FaultAssignerDTO);
+    public static boolean isAssigner(AccountDTO account) {
+        return (account instanceof AssignerDTO);
     }
 
   

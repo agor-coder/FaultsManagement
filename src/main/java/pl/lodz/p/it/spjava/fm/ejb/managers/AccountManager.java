@@ -12,6 +12,7 @@ import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.PerformanceInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
+import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
@@ -46,6 +47,10 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
 
     public void createAccount(Specialist specialist) throws AppBaseException {
         accountFacade.create(specialist);
+    }
+    
+     public void createAccount(Assigner assigner) throws AppBaseException {
+        accountFacade.create(assigner);
     }
 
     public void createAccount(Notifier notifier) throws AppBaseException {

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.spjava.fm.web.specialist;
+package pl.lodz.p.it.spjava.fm.web.assigner;
 
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -8,16 +8,16 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
+import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
 @ConversationScoped
-public class NewSpecialistController implements Serializable {
+public class NewAssignerController implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(NewSpecialistController.class.getName());
+    private static final Logger LOG = Logger.getLogger(NewAssignerController.class.getName());
 
     @Inject
     private Conversation conversation;
@@ -26,8 +26,8 @@ public class NewSpecialistController implements Serializable {
     private AccountEndpoint accountEndpoint;
 
 //do formularza new
-    private final SpecialistDTO newSpecialistDTO = new SpecialistDTO("Phil", "Collins", "phil@op.pl", "5345", "er4");
-    // private final SpecialistDTO newSpecialistDTO = new SpecialistDTO();
+    private final AssignerDTO newAssignerDTO = new AssignerDTO("Phil", "Collins", "phil@op.pl", "5345", "er4");
+    // private final AssignerDTO newAssignerDTO = new AssignerDTO();
 
     private String passwordRepeat;
 
@@ -39,13 +39,13 @@ public class NewSpecialistController implements Serializable {
         this.passwordRepeat = passwordRepeat;
     }
 
-    public SpecialistDTO getNewSpecialistDTO() {
-        return newSpecialistDTO;
+    public AssignerDTO getNewAssignerDTO() {
+        return newAssignerDTO;
     }
 
     public String confirmSpecialist() {
-        if (!passwordRepeat.equals(newSpecialistDTO.getPassword())) {
-            ContextUtils.emitInternationalizedMessage("NewSpecialist:passwordRepeat", "account.password.different");
+        if (!passwordRepeat.equals(newAssignerDTO.getPassword())) {
+            ContextUtils.emitInternationalizedMessage("NewAssigner:passwordRepeat", "account.password.different");
             return "";
         }
 
@@ -53,12 +53,12 @@ public class NewSpecialistController implements Serializable {
         return "newSpecialistConfirm";
     }
 
-    public String addSpecialist() {
-        if (null == newSpecialistDTO) {
+    public String addAssigner() {
+        if (null == newAssignerDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
         try {
-            accountEndpoint.addSpecialist(newSpecialistDTO);
+            accountEndpoint.addAssigner(newAssignerDTO);
             conversation.end();
             return "main";
         } catch (AppBaseException abe) {

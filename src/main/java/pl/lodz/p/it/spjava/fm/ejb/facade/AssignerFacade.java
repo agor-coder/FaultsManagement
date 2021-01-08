@@ -4,14 +4,14 @@ package pl.lodz.p.it.spjava.fm.ejb.facade;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import pl.lodz.p.it.spjava.fm.model.FaultAssigner;
+import pl.lodz.p.it.spjava.fm.model.Assigner;
 
 /**
  *
  * @author A
  */
 @Stateless
-public class FaultAssignerFacade extends AbstractFacade<FaultAssigner> {
+public class AssignerFacade extends AbstractFacade<Assigner> {
 
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
@@ -21,8 +21,8 @@ public class FaultAssignerFacade extends AbstractFacade<FaultAssigner> {
         return em;
     }
 
-    public FaultAssignerFacade() {
-        super(FaultAssigner.class);
+    public AssignerFacade() {
+        super(Assigner.class);
     }
     
 }

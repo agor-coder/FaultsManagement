@@ -129,8 +129,8 @@ public class EditAccountController implements Serializable {
         return AccountUtils.isNotifier(editAccountDTO);
     }
 
-    public boolean isFaultassigner() {
-        return AccountUtils.isFaultAssigner(editAccountDTO);
+    public boolean isAssigner() {
+        return AccountUtils.isAssigner(editAccountDTO);
     }
 
     public String cancelOrEdit() {
