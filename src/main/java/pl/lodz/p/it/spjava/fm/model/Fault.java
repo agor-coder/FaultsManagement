@@ -43,11 +43,11 @@ public class Fault extends AbstractEntity implements Serializable {
 
     @JoinColumn(nullable = false, updatable = false)
     @ManyToOne
-    private Notifier ktoZlozyl;
+    private Notifier whoNotified;
 
     @JoinColumn(nullable = true)
     @ManyToOne
-    private Assigner ktoPrzydzielil;
+    private Assigner whoAssigned;
 
     public FaultStatus getStatus() {
         return status;
@@ -81,20 +81,20 @@ public class Fault extends AbstractEntity implements Serializable {
         this.specialist = specialist;
     }
 
-    public Notifier getKtoZlozyl() {
-        return ktoZlozyl;
+    public Notifier getWhoNotified() {
+        return whoNotified;
     }
 
-    public void setKtoZlozyl(Notifier ktoZlozyl) {
-        this.ktoZlozyl = ktoZlozyl;
+    public void setWhoNotified(Notifier whoNotified) {
+        this.whoNotified = whoNotified;
     }
 
-    public Assigner getKtoPrzydzielil() {
-        return ktoPrzydzielil;
+    public Assigner getWhoAssigned() {
+        return whoAssigned;
     }
 
-    public void setKtoPrzydzielil(Assigner ktoPrzydzielil) {
-        this.ktoPrzydzielil = ktoPrzydzielil;
+    public void setWhoAssigned(Assigner whoAssigned) {
+        this.whoAssigned = whoAssigned;
     }
 
     @Override
