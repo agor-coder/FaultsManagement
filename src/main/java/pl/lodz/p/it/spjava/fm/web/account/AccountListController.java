@@ -2,6 +2,8 @@ package pl.lodz.p.it.spjava.fm.web.account;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
@@ -10,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
+import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 
 @Named
@@ -46,9 +49,15 @@ public class AccountListController implements Serializable {
         init();
     }
 
-    public void removeAccount(AccountDTO accountDTO) throws AppBaseException {//obsłużyć
+    public void removeAccount(AccountDTO accountDTO)  {//obsłużyć
+        try{
         accountEndpoint.removeAccount(accountDTO);
         init();
+        }catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+        }
     }
 
     public String editAccount(AccountDTO accountDTO) {

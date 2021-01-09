@@ -6,6 +6,7 @@ import javax.persistence.OptimisticLockException;
 public class AccountException extends AppBaseException {
 
     static final public String KEY_NOT_FOUND = "error.account.not.found";
+    static final public String ACCOUNT_NOT_REMOVE = "error.account.not.remove";
     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
 
@@ -19,6 +20,10 @@ public class AccountException extends AppBaseException {
 
     public static AccountException createAccountExceptionWithAccountNotFound() {
         AccountException ae = new AccountException(KEY_NOT_FOUND);
+        return ae;
+    }
+    public static AccountException createAccountExceptionWithAccountNotRemove() {
+        AccountException ae = new AccountException(ACCOUNT_NOT_REMOVE);
         return ae;
     }
 
