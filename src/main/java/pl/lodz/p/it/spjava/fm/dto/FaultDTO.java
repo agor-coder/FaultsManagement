@@ -17,22 +17,23 @@ public class FaultDTO {
 
     private SpecialistDTO specialist;
 
-    private NotifierDTO ktoZlozyl;
+    private NotifierDTO whoNotified;
 
-    private AssignerDTO ktoPrzydzielil;
+    private AssignerDTO whoAssigned;
 
     public FaultDTO() {
     }
 
-    public FaultDTO(Long id, String faultDescribe, TechAreaDTO techArea,
-            SpecialistDTO specialist, NotifierDTO ktoZlozyl, AssignerDTO ktoPrzydzielil) {
+    public FaultDTO(Long id, String faultDescribe, 
+            SpecialistDTO specialist, NotifierDTO whoNotified, AssignerDTO whoAssigned) {
         this.id = id;
         this.faultDescribe = faultDescribe;
-        this.techArea = techArea;
+        
         this.specialist = specialist;
-        this.ktoZlozyl = ktoZlozyl;
-        this.ktoPrzydzielil = ktoPrzydzielil;
+        this.whoNotified = whoNotified;
+        this.whoAssigned = whoAssigned;
     }
+//do formularza "zgłoś" - konstruktor
 
     public FaultStatus getStatus() {
         return status;
@@ -66,20 +67,20 @@ public class FaultDTO {
         this.specialist = specialist;
     }
 
-    public NotifierDTO getKtoZlozyl() {
-        return ktoZlozyl;
+    public NotifierDTO getWhoNotified() {
+        return whoNotified;
     }
 
-    public void setKtoZlozyl(NotifierDTO ktoZlozyl) {
-        this.ktoZlozyl = ktoZlozyl;
+    public void setWhoNotified(NotifierDTO whoNotified) {
+        this.whoNotified = whoNotified;
     }
 
-    public AssignerDTO getKtoPrzydzielil() {
-        return ktoPrzydzielil;
+    public AssignerDTO getWhoAssigned() {
+        return whoAssigned;
     }
 
-    public void setKtoPrzydzielil(AssignerDTO ktoPrzydzielil) {
-        this.ktoPrzydzielil = ktoPrzydzielil;
+    public void setWhoAssigned(AssignerDTO whoAssigned) {
+        this.whoAssigned = whoAssigned;
     }
 
     public Long getId() {

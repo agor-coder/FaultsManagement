@@ -4,16 +4,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
-
-public  class AccountDTO{
-
+public class AccountDTO {
 
     protected Long id;
 
     @NotNull(message = "{constraint.notnull}")
-   @Size(min=3,max=32,message="{constraint.string.length.notinrange}")
-    @Pattern(regexp="^[_a-zA-Z0-9-]*$",message="{constraint.string.incorrectchar}")
+    @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
+    @Pattern(regexp = "^[_a-zA-Z0-9-]*$", message = "{constraint.string.incorrectchar}")
     protected String login;
 
     @NotNull(message = "{constraint.notnull}")
@@ -22,11 +19,9 @@ public  class AccountDTO{
 
     @NotNull(message = "{constraint.notnull}")
     protected boolean active;
-    
+
     @NotNull(message = "{constraint.notnull}")
     protected boolean confirmed;
-    
-    
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
@@ -38,41 +33,39 @@ public  class AccountDTO{
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 6, max = 64, message = "{constraint.string.length.notinrange}")
-    @Pattern(regexp="^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$",message="{constraint.string.incorrectemail}")
+    @Pattern(regexp = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$", message = "{constraint.string.incorrectemail}")
     private String email;
 
     @Size(max = 9, message = "{constraint.string.length.toolong}")
     private String phone;
 
-    
     private String type;
-    
+
     public AccountDTO() {
     }
 
     //bez hasła
-    public AccountDTO(Long id, String login, boolean active,boolean confirmed,String firstName, String sureName, String email, String phone, String type) {
+    public AccountDTO(Long id, String login, boolean active, boolean confirmed, String firstName, String sureName, String email, String phone, String type) {
         this.id = id;
         this.login = login;
-        this.active=active;
-        this.confirmed=confirmed;
+        this.active = active;
+        this.confirmed = confirmed;
         this.firstName = firstName;
         this.sureName = sureName;
         this.email = email;
         this.phone = phone;
         this.type = type;
     }
- //do formularza newAccount
+    //do formularza newAccount
+
     public AccountDTO(String firstName, String sureName, String email, String phone) {
-       this.password=password;
+        this.password = password;
         this.firstName = firstName;
         this.sureName = sureName;
         this.email = email;
         this.phone = phone;
     }
-    
-    
-    
+
     public String getPhone() {
         return phone;
     }
@@ -141,15 +134,8 @@ public  class AccountDTO{
         return type;
     }
 
-    
-
     public Long getId() {
         return id;
     }
-
-    
-
-    
-    
 
 }

@@ -75,7 +75,7 @@ public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynch
     public List<SpecialistDTO> getAllSpecialistsAndMakeDTOList() {
         List<Specialist> listSpecialist = specialistManager.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();
-        listSpecialist.stream().map(specialist -> DTOConverter.makeSpecialistDTOFromEntity(specialist))
+        listSpecialist.stream().map(specialist -> DTOConverter.createSpecialistDTOFromEntity(specialist))
                 .sorted(Comparator.comparing(SpecialistDTO::getSureName))
                 .forEachOrdered(specialistDTO -> {
                     listSpecialistDTO.add(specialistDTO);

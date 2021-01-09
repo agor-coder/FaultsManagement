@@ -6,17 +6,16 @@ public class NotifierDTO extends AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
     private String emplacement;
-    
 
     public NotifierDTO() {
     }
 
-    public NotifierDTO(Long id, String login, boolean active,boolean confirmed, String firstName, String sureName,
+    public NotifierDTO(Long id, String login, boolean active, boolean confirmed, String firstName, String sureName,
             String email, String phone, String type, String emplacement) {
-        super(id, login, active,confirmed, firstName, sureName, email, phone, type);
+        super(id, login, active, confirmed, firstName, sureName, email, phone, type);
         this.emplacement = emplacement;
     }
-    
+
     //do formularza newNotifier
     public NotifierDTO(String firstName, String sureName,
             String email, String phone, String emplacement) {
@@ -31,6 +30,11 @@ public class NotifierDTO extends AccountDTO {
 
     public void setEmplacement(String emplacement) {
         this.emplacement = emplacement;
+    }
+
+    @Override
+    public String toString() {
+        return super.getSureName() + " - " + emplacement;
     }
 
 }

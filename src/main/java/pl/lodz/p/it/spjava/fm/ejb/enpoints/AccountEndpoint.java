@@ -60,13 +60,13 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 //    }
     public AccountDTO getAccountToEdit(AccountDTO accountDTO) {
         Account tmp = accountManager.find(accountDTO.getId());
-        return DTOConverter.tworzKontoDTOzEncji(tmp);
+        return DTOConverter.makeAccountDTOfromUserEntity(tmp);
     }
 
     public List<AccountDTO> getAllAccountsAndMakeDTOList() {
         List<Account> listAccount = accountManager.findAll();
         List<AccountDTO> listAccountDTO = new ArrayList<>();
-        listAccount.stream().map(account -> DTOConverter.makeAccountDTOFromEntity(account))
+        listAccount.stream().map(account -> DTOConverter.createAccountDTOFromEntity(account))
                 .sorted(Comparator.comparing(AccountDTO::getLogin))
                 .forEachOrdered(accountDTO -> {
                     listAccountDTO.add(accountDTO);
