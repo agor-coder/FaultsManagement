@@ -15,7 +15,7 @@ public class AssignerDTO extends AccountDTO {
         super(id, login, active, confirmed, firstName, sureName, email, phone, typ);
         this.department = department;
     }
-    
+
     //do formularza newSpec
     public AssignerDTO(String firstName, String sureName,
             String email, String phone, String department) {
@@ -32,4 +32,8 @@ public class AssignerDTO extends AccountDTO {
         this.department = department;
     }
 
+    @Override
+    public String toString() {
+        return super.getSureName() + " - " + department;
+    }
 }

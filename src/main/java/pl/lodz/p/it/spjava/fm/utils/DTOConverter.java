@@ -5,11 +5,13 @@ import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.dto.NotifierDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
+import pl.lodz.p.it.spjava.fm.dto.TechAreaDTO;
 import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
+import pl.lodz.p.it.spjava.fm.model.TechArea;
 
 public class DTOConverter {
 
@@ -37,8 +39,13 @@ public class DTOConverter {
                 account.getType());
     }
 
+    public static TechAreaDTO createTechAreaDTOFromEntity(TechArea area) {
+        return null == area ? null : new TechAreaDTO(area.getId(), area.getAreaName());
+    }
+
     public static FaultDTO createFaultDTOFromEntity(Fault fault) {
         return null == fault ? null : new FaultDTO(fault.getId(), fault.getFaultDescribe(),
+                createTechAreaDTOFromEntity(fault.getTechArea()),
                 createSpecialistDTOFromEntity(fault.getSpecialist()),
                 createNotifierDTOFromEntity(fault.getWhoNotified()),
                 createAssignerDTOFromEntity(fault.getWhoAssigned()));

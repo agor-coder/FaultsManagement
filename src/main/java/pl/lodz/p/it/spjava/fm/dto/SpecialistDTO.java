@@ -37,6 +37,6 @@ public class SpecialistDTO extends AccountDTO {
 
     @Override
     public String toString() {
-        return "SpecialistDTO{" + "department=" + department + '}';
+        return super.getSureName() + " - " + department;
     }
 }

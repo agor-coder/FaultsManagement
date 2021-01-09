@@ -31,7 +31,7 @@ public class Fault extends AbstractEntity implements Serializable {
     private String faultDescribe;
 
     @Column(nullable = false)
-    private FaultStatus status = FaultStatus.NOTIFIED;
+    private FaultStatus status = FaultStatus.NOT_ASSIGNED;
 
     @JoinColumn(nullable = false, updatable = false)
     @ManyToOne
@@ -108,7 +108,7 @@ public class Fault extends AbstractEntity implements Serializable {
     }
 
     public static enum FaultStatus {
-        NOTIFIED, ASSIGNED, IN_PROGRESS, END
+        NOT_ASSIGNED, ASSIGNED,  END
     };
 
 }
