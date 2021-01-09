@@ -43,8 +43,13 @@ public class DTOConverter {
         return null == area ? null : new TechAreaDTO(area.getId(), area.getAreaName());
     }
 
+    public static FaultDTO.FaultStatusDTO createFaultStatusDTOFromEntity(Fault.FaultStatus status) {
+        return null == status ? null : FaultDTO.FaultStatusDTO.valueOf(status.name());
+    }
+
     public static FaultDTO createFaultDTOFromEntity(Fault fault) {
         return null == fault ? null : new FaultDTO(fault.getId(), fault.getFaultDescribe(),
+                createFaultStatusDTOFromEntity(fault.getStatus()),
                 createTechAreaDTOFromEntity(fault.getTechArea()),
                 createSpecialistDTOFromEntity(fault.getSpecialist()),
                 createNotifierDTOFromEntity(fault.getWhoNotified()),

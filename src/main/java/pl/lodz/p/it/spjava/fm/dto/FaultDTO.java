@@ -11,7 +11,7 @@ public class FaultDTO {
     @Size(min = 2, max = 256, message = "{constraint.string.length.notinrange}")
     private String faultDescribe;
 
-    private FaultStatus status = FaultStatus.NOT_ASSIGNED;
+    private FaultStatusDTO status = FaultStatusDTO.NOT_ASSIGNED;
 
     private TechAreaDTO techArea;
 
@@ -24,7 +24,7 @@ public class FaultDTO {
     public FaultDTO() {
     }
 
-    public FaultDTO(Long id, String faultDescribe,  TechAreaDTO techArea,
+    public FaultDTO(Long id, String faultDescribe, FaultStatusDTO status, TechAreaDTO techArea,
             SpecialistDTO specialist, NotifierDTO whoNotified, AssignerDTO whoAssigned) {
         this.id = id;
         this.faultDescribe = faultDescribe;
@@ -36,11 +36,11 @@ public class FaultDTO {
     }
 //do formularza "zgłoś" - konstruktor
 
-    public FaultStatus getStatus() {
+    public FaultStatusDTO getStatus() {
         return status;
     }
 
-    public void setStatus(FaultStatus status) {
+    public void setStatus(FaultStatusDTO status) {
         this.status = status;
     }
 
@@ -88,7 +88,7 @@ public class FaultDTO {
         return id;
     }
 
-    public static enum FaultStatus {
+    public static enum FaultStatusDTO {
         NOT_ASSIGNED, ASSIGNED, END
     };
 
