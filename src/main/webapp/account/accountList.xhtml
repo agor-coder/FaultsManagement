@@ -38,7 +38,7 @@
                     <h:selectBooleanCheckbox value="${row.confirmed}" disabled="true" />
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Actions</f:facet>
+                    <!--<f:facet name="header">Actions</f:facet>-->
                     
                     <h:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" rendered="#{not row.active}" /> 
                     <h:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  rendered="#{row.active}" /> 

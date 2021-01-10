@@ -63,7 +63,7 @@ public abstract class Account extends AbstractEntity implements Serializable {
     private String email;
 
     @Size(max = 9, message = "{constraint.string.length.toolong}")
-    @Column(length = 12, nullable = true)
+    @Column(length = 9, nullable = true)
     private String phone;
 
     @Column(name = "type", updatable = false)

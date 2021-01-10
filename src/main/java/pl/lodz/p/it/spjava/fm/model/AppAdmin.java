@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @NamedQuery(name = "AppAdmin.findAll", query = "SELECT a FROM AppAdmin a")
 @NamedQuery(name = "AppAdmin.findByLogin", query = "SELECT a FROM AppAdmin a WHERE a.login=:login")
 @Entity
-@DiscriminatorValue("ADMIN")
+@DiscriminatorValue("Administrator")
 public class AppAdmin extends Account implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")

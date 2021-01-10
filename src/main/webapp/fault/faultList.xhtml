@@ -29,7 +29,12 @@
                 <h:column>
                     <f:facet name="header">#{msg['fault.status']}</f:facet> ${fault.status} 
                 </h:column>
-
+                <h:column>
+                    <!--<f:facet name="header">Actions</f:facet>-->
+                    <h:commandButton value="${msg['fault.assign']}" />
+                    <h:commandButton value="${msg['fault.finish']}"  />
+                    
+                </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.refresh']}" action="#{faultListController.init()}" />
             <h:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>

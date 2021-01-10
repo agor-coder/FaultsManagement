@@ -10,12 +10,19 @@
         <br />
 
         <ul>
-            <li><h:link outcome="account/newSpecialist.xhtml" value="#{msg['menu.accounts.createspecialist']}"/></li> 
-            <li><h:link outcome="account/newNotifier.xhtml" value="#{msg['menu.accounts.createnotifier']}"/></li> 
-            <li><h:link outcome="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}"/></li>             
-            <li><h:link outcome="specialist/specList.xhtml" value="#{msg['menu.specialist.list']}"/></li>
-            <li><h:link outcome="account/accountList.xhtml" value="#{msg['menu.accounts.list']}"/></li>
+            <li>${msg["menu.accounts"]}</li>
+            <ul>
+                <li><h:link outcome="account/accountList.xhtml" value="#{msg['menu.accounts.list']}"/></li>
+                <li><h:link outcome="account/newAdmin.xhtml" value="#{msg['menu.accounts.createadmin']}"/></li> 
+                <li><h:link outcome="account/newSpecialist.xhtml" value="#{msg['menu.accounts.createspecialist']}"/></li> 
+                <li><h:link outcome="account/newNotifier.xhtml" value="#{msg['menu.accounts.createnotifier']}"/></li> 
+                <li><h:link outcome="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}"/></li>             
+                <li><h:link outcome="specialist/specList.xhtml" value="#{msg['menu.specialist.list']}"/></li>
+            </ul>
+            <li>${msg["menu.faults"]}</li>
+            <ul>
             <li><h:link outcome="fault/faultList.xhtml" value="#{msg['menu.faults.list']}"/></li>
+        </ul>
         </ul>
     </h:body>
 </html>

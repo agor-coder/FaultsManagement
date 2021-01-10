@@ -1,15 +1,13 @@
-
 package pl.lodz.p.it.spjava.fm.utils;
 
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
+import pl.lodz.p.it.spjava.fm.dto.AppAdminDTO;
 import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;
 import pl.lodz.p.it.spjava.fm.dto.NotifierDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 
-
-
-
 public class AccountUtils {
+
     public static boolean isSpecialist(AccountDTO account) {
         return (account instanceof SpecialistDTO);
     }
@@ -22,6 +20,8 @@ public class AccountUtils {
         return (account instanceof AssignerDTO);
     }
 
-  
-    
+    public static boolean isAppAdmin(AccountDTO account) {
+      return (account instanceof AppAdminDTO);
+    }
+
 }

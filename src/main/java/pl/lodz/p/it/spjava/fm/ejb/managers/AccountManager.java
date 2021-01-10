@@ -12,6 +12,7 @@ import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.PerformanceInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
+import pl.lodz.p.it.spjava.fm.model.AppAdmin;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
@@ -45,11 +46,15 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
         return accountFacade.findAll();
     }
 
+    public void createAccount(AppAdmin adm) throws AppBaseException {
+        accountFacade.create(adm);
+    }
+
     public void createAccount(Specialist specialist) throws AppBaseException {
         accountFacade.create(specialist);
     }
-    
-     public void createAccount(Assigner assigner) throws AppBaseException {
+
+    public void createAccount(Assigner assigner) throws AppBaseException {
         accountFacade.create(assigner);
     }
 

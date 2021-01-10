@@ -1,12 +1,14 @@
 package pl.lodz.p.it.spjava.fm.utils;
 
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
+import pl.lodz.p.it.spjava.fm.dto.AppAdminDTO;
 import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.dto.NotifierDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.dto.TechAreaDTO;
 import pl.lodz.p.it.spjava.fm.model.Account;
+import pl.lodz.p.it.spjava.fm.model.AppAdmin;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
@@ -15,6 +17,11 @@ import pl.lodz.p.it.spjava.fm.model.TechArea;
 
 public class DTOConverter {
 
+    private static AccountDTO createAdminDTOFromEntity(AppAdmin adm) {
+       return null == adm ? null : new AppAdminDTO(adm.getId(), adm.getLogin(), adm.isActive(),
+                adm.isConfirmed(), adm.getFirstName(), adm.getSureName(), adm.getEmail(),
+                adm.getPhone(), adm.getType(), adm.getAlarmPhone());
+    }
     public static SpecialistDTO createSpecialistDTOFromEntity(Specialist specialist) {
         return null == specialist ? null : new SpecialistDTO(specialist.getId(), specialist.getLogin(), specialist.isActive(),
                 specialist.isConfirmed(), specialist.getFirstName(), specialist.getSureName(), specialist.getEmail(),
@@ -66,7 +73,11 @@ public class DTOConverter {
         if (account instanceof Assigner) {
             return createAssignerDTOFromEntity((Assigner) account);
         }
+        if (account instanceof AppAdmin) {
+            return createAdminDTOFromEntity((AppAdmin) account);
+        }
         return null;
     }
+
 
 }

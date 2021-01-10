@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>FM - New Admin</title>
+    </h:head>
+    <h:body>
+        #{msg['menu.accounts.createadmin']} <br />
+        <br />
+        <h:form id="NewAdmin">
+            <h:outputLabel value="#{msg['account.login']}*" for="login" />
+            <h:inputText value="#{newAdminController.newAdminDTO.login}"  id="login"> </h:inputText><h:message for="login" /><br />
+
+            <h:outputLabel value="#{msg['account.password']}*" for="password" />
+            <h:inputSecret value="#{newAdminController.newAdminDTO.password}" required="true" id="password"></h:inputSecret><h:message for="password" /><br />
+
+            <h:outputLabel value="#{msg['account.passwordRepeat']}*" for="passwordRepeat" />
+            <h:inputSecret value="#{newAdminController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><h:message for="passwordRepeat" /> <br />
+
+            <h:outputLabel value="#{msg['account.name']}*" for="firstname" />
+            <h:inputText value="#{newAdminController.newAdminDTO.firstName}" required="true"  id="firstname"/><h:message for="firstname" /><br />
+
+            <h:outputLabel value="#{msg['account.surname']}*" for="surename" />
+            <h:inputText value="#{newAdminController.newAdminDTO.sureName}" required="true"  id="surename"/><h:message for="surename" /><br />
+
+            <h:outputLabel value="#{msg['account.email']}*" for="email" />
+            <h:inputText value="#{newAdminController.newAdminDTO.email}" required="true"  id="email"/><h:message for="email" /><br />
+
+            <h:outputLabel value="#{msg['account.alarmphone']}*" for="alarmphone" />
+            <h:inputText value="#{newAdminController.newAdminDTO.alarmPhone}" required="true"  id="alarmphone"/><h:message for="alarmphone" /><br />
+
+            <h:outputLabel value="#{msg['account.phone']}" for="phone" />
+            <h:inputText value="#{newAdminController.newAdminDTO.phone}"   id="phone"/><h:message for="phone" /><br />
+
+            <h:outputLabel value="#{msg['account.active']}*" for="active" />
+            <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.active}"  id="active"/><h:message for="active" /><br />
+
+            <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
+            <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.confirmed}"  id="confirmed"/><h:message for="confirmed" /><br />
+            
+            <h:commandButton value="${msg['page.confirm']}" action="#{newAdminController.confirmAdmin()}" />
+            <h:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
+            <!--<h:messages/>-->
+        </h:form>
+    </h:body>
+</html>
+

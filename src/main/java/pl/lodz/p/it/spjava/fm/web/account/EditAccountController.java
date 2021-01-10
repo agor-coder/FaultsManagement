@@ -60,6 +60,20 @@ public class EditAccountController implements Serializable {
         }
     }
 
+    public String saveEditedAdminDTO() {
+        if (null == editAccountDTO) {
+            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
+        }
+        try {
+            accountEndpoint.saveAdminAfterEdit(editAccountDTO);
+            return cancelOrEdit();
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return null;
+        }
+    }
     public String saveEditedSpecialistDTO() {
         if (null == editAccountDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
@@ -121,6 +135,9 @@ public class EditAccountController implements Serializable {
         }
     }
 
+    public boolean isAppAdmin() {
+        return AccountUtils.isAppAdmin(editAccountDTO);
+    }
     public boolean isSpecialist() {
         return AccountUtils.isSpecialist(editAccountDTO);
     }

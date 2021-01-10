@@ -11,11 +11,11 @@
         EDIT ACCOUNT<br />
         <br />
         <h:form id="editAccount">
-            <h:outputLabel value="#{msg['account.login']}" for="login" />
-            <h:outputText value=" - #{editAccountController.editAccountDTO.login}"  id="login"> </h:outputText> <h:message for="login" /><br />
-
             <h:outputLabel value="#{msg['account.type']}" for="type" />
             <h:outputText value=" - #{editAccountController.editAccountDTO.type}"   id="type"/><h:message for="type" /><br />
+
+            <h:outputLabel value="#{msg['account.login']}" for="login" />
+            <h:outputText value=" - #{editAccountController.editAccountDTO.login}"  id="login"> </h:outputText> <h:message for="login" /><br />
 
             <h:outputLabel value="#{msg['account.name']}" for="firstname" />
             <h:inputText value="#{editAccountController.editAccountDTO.firstName}" required="true"  id="firstname"/><h:message for="firstname" /><br />
@@ -29,14 +29,19 @@
             <h:outputLabel value="#{msg['account.phone']}" for="phone" />
             <h:inputText value="#{editAccountController.editAccountDTO.phone}"   id="phone"/><h:message for="phone" /><br />
 
-            <c:if test="#{editAccountController.specialist or editAccountController.assigner}">
-                <h:outputLabel value="#{msg['account.department']}" for="department" />
-                <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentsp"/><h:message for="departmentsp" /><br />
+            <c:if test="#{editAccountController.appAdmin}">
+                <h:outputLabel value="#{msg['account.alarmphone']}" for="alarmphone" />
+                <h:inputText value="#{editAccountController.editAccountDTO.alarmPhone}" required="true"  id="alarmphone"/><h:message for="alarmphone" /><br />
             </c:if>
 
             <c:if test="#{editAccountController.notifier}">
                 <h:outputLabel value="#{msg['account.emplacement']}" for="emplacement" />
                 <h:inputText value="#{editAccountController.editAccountDTO.emplacement}" required="true"  id="emplacement"/><h:message for="emplacement" /><br />
+            </c:if>
+
+            <c:if test="#{editAccountController.specialist or editAccountController.assigner}">
+                <h:outputLabel value="#{msg['account.department']}" for="department" />
+                <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentsp"/><h:message for="departmentsp" /><br />
             </c:if>
 
             <h:outputLabel value="#{msg['account.active']}" for="active" />
@@ -47,15 +52,18 @@
 
 
             <c:if test="#{editAccountController.specialist}">
-            <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" />
+                <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" />
+            </c:if>
+            <c:if test="#{editAccountController.appAdmin}">
+                <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}" />
             </c:if>
             <c:if test="#{editAccountController.assigner}">
                 <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" />
             </c:if>
             <c:if test="#{editAccountController.notifier}">
-            <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
+                <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
             </c:if>
-            
+
             <h:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>
             <!--<h:messages/>-->
         </h:form>

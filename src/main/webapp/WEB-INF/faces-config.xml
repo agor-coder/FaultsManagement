@@ -30,11 +30,12 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
-        <from-view-id>/account/newSpecialist.xhtml</from-view-id>
+        <from-view-id>/account/newAdmin.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>newSpecialistConfirm</from-outcome>
-            <to-view-id>/account/newSpecialistConfirm.xhtml</to-view-id>
+            <from-outcome>newAdminConfirm</from-outcome>
+            <to-view-id>/account/newAdminConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
@@ -55,6 +56,14 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>/account/newSpecialist.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newSpecialistConfirm</from-outcome>
+            <to-view-id>/account/newSpecialistConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <from-view-id>/specialist/specList.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>editSpecialist</from-outcome>
@@ -62,6 +71,7 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+    
     <navigation-rule>
         <from-view-id>/specialist/editSpecialist.xhtml</from-view-id>
         <navigation-case>
