@@ -91,6 +91,12 @@ public class FaultDTO {
     public boolean isAssigned() {
         return status.name().equals("ASSIGNED");
     }
+    public boolean isNotAssigned() {
+        return status.name().equals("NOT_ASSIGNED");
+    }
+    public boolean isEnd() {
+        return status.name().equals("END");
+    }
     public static enum FaultStatusDTO {
         NOT_ASSIGNED, ASSIGNED, END
     };
