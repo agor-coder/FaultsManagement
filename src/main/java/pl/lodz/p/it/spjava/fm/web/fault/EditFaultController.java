@@ -31,19 +31,15 @@ public class EditFaultController implements Serializable {
     }
 
     void setEditFaultDTOAndGetFaultEntityToEnpoint(FaultDTO faultDTO) {
-        editFaultDTO = faultEndpoint.getFaultToEdit(faultDTO);
-        getFaultEntityToChange(editFaultDTO);
-    }
-
-    private void getFaultEntityToChange(FaultDTO editFaultDTO) {
         try {
-            faultEndpoint.setEndpointFaultFromDTOToEdit(editFaultDTO);
+            editFaultDTO = faultEndpoint.getFaultToEdit(faultDTO);
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujUsterkę wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }
+
 //public String saveEditedFaultDTO() {
 //        if (null == editFaultDTO) {
 //            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");

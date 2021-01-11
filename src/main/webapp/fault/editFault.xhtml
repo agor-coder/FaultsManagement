@@ -18,13 +18,13 @@
             <h:outputText value=" #{editFaultController.editFaultDTO.techArea.areaName}"   id="area" />  <h:message for="area" /><br />
 
             <h:outputLabel value="#{msg['fault.whoNotified']}" for="notifier" /><br />
-            <h:outputText value="#{editFaultController.editFaultDTO.whoNotified}"   id="notifier"/><h:message for="notifier" /><br />
+            <h:outputText value="#{editFaultController.editFaultDTO.whoNotified.sureName}"   id="notifier"/><h:message for="notifier" /><br />
 
             <h:outputLabel value="#{msg['fault.specialist']}" for="specialist" />
-            <h:inputText value="#{editFaultController.editFaultDTO.specialist}"  id="specialist"/><h:message for="specialist" /><br />
+            <h:inputText value="#{editFaultController.editFaultDTO.specialist.sureName}"  id="specialist"/><h:message for="specialist" /><br />
 
             <h:outputLabel value="#{msg['fault.whoAssigned']}" for="assigner" />
-            <h:inputText value="#{editFaultController.editFaultDTO.whoAssigned}"   id="assigner"/><h:message for="assigner" /><br />
+            <h:inputText value="#{editFaultController.editFaultDTO.whoAssigned.sureName}"   id="assigner"/><h:message for="assigner" /><br />
 
             <h:outputLabel value="#{msg['fault.status']}" for="status" />
             <h:inputText value="#{editFaultController.editFaultDTO.status}"   id="status"/><h:message for="status" /><br />

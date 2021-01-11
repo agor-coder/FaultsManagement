@@ -18,13 +18,13 @@
                     <f:facet name="header">#{msg['fault.area']}</f:facet> ${fault.techArea.areaName}
                 </h:column>
                 <h:column>
-                    <f:facet name="header" > #{msg['fault.whoNotified']}</f:facet> ${fault.whoNotified}                       
+                    <f:facet name="header" > #{msg['fault.whoNotified']}</f:facet> ${fault.whoNotified.sureName}                       
                 </h:column>
                 <h:column>
-                    <f:facet name="header">#{msg['fault.specialist']}</f:facet> ${fault.specialist}         
+                    <f:facet name="header">#{msg['fault.specialist']}</f:facet> ${fault.specialist.sureName}         
                 </h:column>
                 <h:column>
-                    <f:facet name="header">#{msg['fault.whoAssigned']}</f:facet> ${fault.whoAssigned} 
+                    <f:facet name="header">#{msg['fault.whoAssigned']}</f:facet> ${fault.whoAssigned.sureName} 
                 </h:column>
                 <h:column>
                     <f:facet name="header">#{msg['fault.status']}</f:facet> ${fault.status} 
