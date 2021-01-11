@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>FM - Edit Fault</title>
+    </h:head>
+    <h:body>
+        EDIT FAULT<br />
+        <br />
+        <h:form id="editFault">
+            <h:outputLabel value="#{msg['fault.describe']}" for="describe" /><br />
+            <h:outputText value=" #{editFaultController.editFaultDTO.faultDescribe}"    id="describe" /><h:message for="describe" /><br />
+
+            <h:outputLabel value="#{msg['fault.area']}" for="area" /><br />
+            <h:outputText value=" #{editFaultController.editFaultDTO.techArea.areaName}"   id="area" />  <h:message for="area" /><br />
+
+            <h:outputLabel value="#{msg['fault.whoNotified']}" for="notifier" /><br />
+            <h:outputText value="#{editFaultController.editFaultDTO.whoNotified}"   id="notifier"/><h:message for="notifier" /><br />
+
+            <h:outputLabel value="#{msg['fault.specialist']}" for="specialist" />
+            <h:inputText value="#{editFaultController.editFaultDTO.specialist}"  id="specialist"/><h:message for="specialist" /><br />
+
+            <h:outputLabel value="#{msg['fault.whoAssigned']}" for="assigner" />
+            <h:inputText value="#{editFaultController.editFaultDTO.whoAssigned}"   id="assigner"/><h:message for="assigner" /><br />
+
+            <h:outputLabel value="#{msg['fault.status']}" for="status" />
+            <h:inputText value="#{editFaultController.editFaultDTO.status}"   id="status"/><h:message for="status" /><br />
+
+
+
+            <h:commandButton value="${msg['action.save']}"   action="#{editFaultController.saveEditedFaultDTO}"/>
+            <h:commandButton value="${msg['action.backToList']}"  action="#{editFaultController.cancelOrEdit}"  immediate="true"/>
+            <!--<h:messages/>-->
+        </h:form>
+    </h:body>
+</html>
+

@@ -88,6 +88,9 @@ public class FaultDTO {
         return id;
     }
 
+    public boolean isAssigned() {
+        return status.name().equals("ASSIGNED");
+    }
     public static enum FaultStatusDTO {
         NOT_ASSIGNED, ASSIGNED, END
     };

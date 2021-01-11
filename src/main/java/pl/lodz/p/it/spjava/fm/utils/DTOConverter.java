@@ -27,6 +27,11 @@ public class DTOConverter {
                 specialist.isConfirmed(), specialist.getFirstName(), specialist.getSureName(), specialist.getEmail(),
                 specialist.getPhone(), specialist.getType(), specialist.getDepartment());
     }
+    public static AccountDTO createAccountDTOFromEntity(Account account) {
+        return null == account ? null : new AccountDTO(account.getId(), account.getLogin(), account.isActive(),
+                account.isConfirmed(), account.getFirstName(), account.getSureName(), account.getEmail(), account.getPhone(),
+                account.getType());
+    }
 
     private static NotifierDTO createNotifierDTOFromEntity(Notifier notifier) {
         return null == notifier ? null : new NotifierDTO(notifier.getId(), notifier.getLogin(), notifier.isActive(),
@@ -40,11 +45,6 @@ public class DTOConverter {
                 assigner.getType(), assigner.getDepartment());
     }
 
-    public static AccountDTO createAccountDTOFromEntity(Account account) {
-        return null == account ? null : new AccountDTO(account.getId(), account.getLogin(), account.isActive(),
-                account.isConfirmed(), account.getFirstName(), account.getSureName(), account.getEmail(), account.getPhone(),
-                account.getType());
-    }
 
     public static TechAreaDTO createTechAreaDTOFromEntity(TechArea area) {
         return null == area ? null : new TechAreaDTO(area.getId(), area.getAreaName());
@@ -78,6 +78,8 @@ public class DTOConverter {
         }
         return null;
     }
+
+   
 
 
 }

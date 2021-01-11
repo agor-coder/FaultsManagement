@@ -98,6 +98,24 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/fault/faultList.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>editFault</from-outcome>
+            <to-view-id>/fault/editFault.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/fault/editFault.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>faultList</from-outcome>
+            <to-view-id>/fault/faultList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
     <navigation-rule>
         <from-view-id>/account/accountList.xhtml</from-view-id>
         <navigation-case>

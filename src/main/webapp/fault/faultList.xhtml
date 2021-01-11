@@ -32,7 +32,8 @@
                 <h:column>
                     <!--<f:facet name="header">Actions</f:facet>-->
                     <h:commandButton value="${msg['fault.assign']}" />
-                    <h:commandButton value="${msg['fault.finish']}"  />
+                    <h:commandButton value="${msg['fault.manage']}"  action="#{faultListController.editFault(fault)}" />
+                    <h:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}" rendered="#{fault.assigned}" />
                     
                 </h:column>
             </h:dataTable>

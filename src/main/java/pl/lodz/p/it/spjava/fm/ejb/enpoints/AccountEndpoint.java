@@ -115,7 +115,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         accountManager.editAccount(endpointAccount);
     }
 
-    private void writeEditableDataFromDTOToEntity(AccountDTO accountDTO, Account account) {
+    private  void writeEditableDataFromDTOToEntity(AccountDTO accountDTO, Account account) {
         account.setFirstName(accountDTO.getFirstName());
         account.setSureName(accountDTO.getSureName());
         account.setEmail(accountDTO.getEmail());
