@@ -12,6 +12,7 @@ import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.Fault;
+import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 /**
  *
@@ -35,6 +36,16 @@ public class FaultFacade extends AbstractFacade<Fault> {
     public void setStatus(Fault entity, String name) throws AppBaseException {
         try {
             em.find(entity.getClass(), entity.getId()).setStatus(Fault.FaultStatus.valueOf(name));
+        } catch (OptimisticLockException oe) {
+            throw FaultException.faultExceptionWithOptimisticLockKey(oe);
+        }
+    }
+
+    public void assignSpecialist(Specialist specialist, Fault entity) throws AppBaseException {
+        try {
+            Fault tmp=em.find(entity.getClass(), entity.getId());
+            tmp.setSpecialist(specialist);
+            tmp.setStatus(Fault.FaultStatus.ASSIGNED);
         } catch (OptimisticLockException oe) {
             throw FaultException.faultExceptionWithOptimisticLockKey(oe);
         }

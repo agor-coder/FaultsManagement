@@ -14,6 +14,7 @@ import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.FaultEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.account.EditAccountController;
+import pl.lodz.p.it.spjava.fm.web.specialist.SpecListController;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
@@ -26,7 +27,9 @@ public class FaultListController implements Serializable {
     private FaultEndpoint faultEndpoint;
     @Inject
     private EditFaultController editFaultController;
-    
+    @Inject
+    private SpecListController specListController;
+
     private List<FaultDTO> faultsDTO;
 
     @PostConstruct
@@ -43,6 +46,12 @@ public class FaultListController implements Serializable {
         editFaultController.setEditFaultDTOAndGetFaultEntityToEnpoint(faultDTO);
 
         return "editFault";
+    }
+
+    public String assign(FaultDTO faultDTO) {
+        conversation.begin();
+        specListController.setFaultDTO(faultDTO);
+        return "specList";
     }
 
     public void setStatusEND(FaultDTO faultDTO) {

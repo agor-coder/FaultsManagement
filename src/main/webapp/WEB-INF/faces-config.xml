@@ -109,6 +109,24 @@
     </navigation-rule>
     
     <navigation-rule>
+        <from-view-id>/fault/faultList.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>specList</from-outcome>
+            <to-view-id>/specialist/specList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/specialist/specList.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>faultList</from-outcome>
+            <to-view-id>/fault/faultList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
         <from-view-id>/fault/editFault.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>faultList</from-outcome>

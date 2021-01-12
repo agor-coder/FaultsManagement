@@ -5,19 +5,23 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
+import pl.lodz.p.it.spjava.fm.ejb.enpoints.FaultEndpoint;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 
 @Named
-@ViewScoped
+@ConversationScoped
 public class SpecListController implements Serializable {
 
     @EJB
     private SpecialistEndpoint specialistEndpoint;
+    @EJB
+    private FaultEndpoint faultEndpoint;
 
     @Inject
     private EditSpecialistController editSpecialistController;
@@ -25,7 +29,7 @@ public class SpecListController implements Serializable {
     @Inject
     private Conversation conversation;
 
-    private SpecialistDTO editedSpecialistDTO;
+    private FaultDTO faultDTO;
     private List<SpecialistDTO> specialistsDTO;
 
     @PostConstruct
@@ -33,17 +37,20 @@ public class SpecListController implements Serializable {
         specialistsDTO = specialistEndpoint.getAllSpecialistsAndMakeDTOList();
     }
 
+    public FaultDTO getFaultDTO() {
+        return faultDTO;
+    }
+
     public List<SpecialistDTO> getSpecialistsDTO() {
         return specialistsDTO;
     }
 
-
-    public void activateSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {//obsłużyć
+    public void activateSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {//obsłużyć
         specialistEndpoint.activateSpecialist(specialistDTO);
         init();
     }
 
-    public void deactivateSpecialist(SpecialistDTO specialistDTO)throws AppBaseException {//obsłużyć
+    public void deactivateSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {//obsłużyć
         specialistEndpoint.deactivateSpecialist(specialistDTO);
         init();
     }
@@ -59,7 +66,20 @@ public class SpecListController implements Serializable {
         editSpecialistController.getSpecialistEntityToChange(specialistDTO);
 
         return "editSpecialist";
-        //No init(), @ViewScoped 
+     
 
+    }
+
+    public void setFaultDTO(FaultDTO fDTO) {
+        faultDTO = fDTO;
+        System.out.println("usterka ustawiona" + faultDTO.getWhoNotified());
+    }
+
+    public String assignSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {//obsłużyć
+        System.out.println(specialistDTO);
+        System.out.println(faultDTO);
+        faultEndpoint.assignSpecialist(specialistDTO, faultDTO);
+        conversation.end();
+        return "faultList";
     }
 }

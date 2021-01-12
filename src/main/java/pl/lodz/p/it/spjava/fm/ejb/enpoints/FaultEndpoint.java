@@ -10,11 +10,14 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
+import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.FaultManager;
+import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
 import pl.lodz.p.it.spjava.fm.model.Fault;
+import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 
 @Stateful
@@ -24,8 +27,11 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
 
     @EJB
     private FaultManager faultManager;
+    @EJB
+    private SpecialistManager specialistManager;
 
     private Fault endpointFault;
+    private Specialist endpointSpecialist;
 
     public List<FaultDTO> getAllFaultsAndMakeDTOList() {
         List<Fault> faultsList = faultManager.findAll();
@@ -67,4 +73,9 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
 //        fault.setWhoAssigned(faultDTO.getWhoAssigned());
 //        
 //    }
+    public void assignSpecialist(SpecialistDTO specialistDTO, FaultDTO faultDTO) throws AppBaseException {
+        setEndpointFaultFromDTOToEdit(faultDTO);
+        endpointSpecialist = specialistManager.find(specialistDTO.getId());
+        faultManager.assignSpecialist(endpointSpecialist, endpointFault);
+    }
 }

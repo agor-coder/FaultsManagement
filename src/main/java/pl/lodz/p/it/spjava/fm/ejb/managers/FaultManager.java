@@ -11,6 +11,7 @@ import pl.lodz.p.it.spjava.fm.ejb.facade.FaultFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Fault;
+import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -31,5 +32,9 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
     public void setStatus(Fault fault, String status)throws AppBaseException {
        faultFacade.setStatus(fault, status);
+    }
+
+    public void assignSpecialist(Specialist specialist, Fault fault)throws AppBaseException {
+      faultFacade.assignSpecialist(specialist,fault);
     }
 }
