@@ -12,6 +12,9 @@
         <h:form id="faultsList">
             <h:dataTable value="#{faultListController.faultsDTO}" var="fault">
                 <h:column>
+                    <f:facet name="header">#{msg['fault.creation.time']}</f:facet> ${fault.createTimeStamp} 
+                </h:column>
+                <h:column>
                     <f:facet name="header">#{msg['fault.describe']}</f:facet> ${fault.faultDescribe}
                 </h:column>
                 <h:column>
@@ -29,6 +32,7 @@
                 <h:column>
                     <f:facet name="header">#{msg['fault.status']}</f:facet> ${fault.status} 
                 </h:column>
+                
                 <h:column>
                     <!--<f:facet name="header">Actions</f:facet>-->
                     <h:commandButton value="${msg['fault.assign']}"   action="#{faultListController.assign(fault)}" rendered="#{ fault.notAssigned}"/>

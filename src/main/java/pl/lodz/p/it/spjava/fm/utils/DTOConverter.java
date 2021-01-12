@@ -55,7 +55,7 @@ public class DTOConverter {
     }
 
     public static FaultDTO createFaultDTOFromEntity(Fault fault) {
-        return null == fault ? null : new FaultDTO(fault.getId(), fault.getFaultDescribe(),
+        return null == fault ? null : new FaultDTO(fault.getCreationTimestamp(),fault.getId(), fault.getFaultDescribe(),
                 createFaultStatusDTOFromEntity(fault.getStatus()),
                 createTechAreaDTOFromEntity(fault.getTechArea()),
                 createSpecialistDTOFromEntity(fault.getSpecialist()),
