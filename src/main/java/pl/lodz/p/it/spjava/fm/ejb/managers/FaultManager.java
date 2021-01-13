@@ -7,9 +7,11 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+import pl.lodz.p.it.spjava.fm.ejb.facade.AssignerFacade;
 import pl.lodz.p.it.spjava.fm.ejb.facade.FaultFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
@@ -20,7 +22,8 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
     @EJB
     private FaultFacade faultFacade;
-
+    @EJB
+    private AssignerFacade assignerFacade;
 
     public Fault find(Long id) {
         return faultFacade.find(id);
@@ -30,11 +33,13 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         return faultFacade.findAll();
     }
 
-    public void setStatus(Fault fault, String status)throws AppBaseException {
-       faultFacade.setStatus(fault, status);
+    public void setStatus(Fault fault, String status) throws AppBaseException {
+        faultFacade.setStatus(fault, status);
     }
 
-    public void assignSpecialist(Specialist specialist, Fault fault)throws AppBaseException {
-      faultFacade.assignSpecialist(specialist,fault);
+    public void assignSpecialist(Specialist specialist, Fault fault) throws AppBaseException {
+        System.out.println("PPPPPPPPPPPPPPPPP" + sctx.getCallerPrincipal().getName());
+        Assigner assigner = assignerFacade.find(-4L);
+        faultFacade.assignSpecialist(specialist, fault, assigner);
     }
 }
