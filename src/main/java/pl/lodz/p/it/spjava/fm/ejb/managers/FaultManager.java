@@ -7,6 +7,7 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.ejb.facade.AssignerFacade;
 import pl.lodz.p.it.spjava.fm.ejb.facade.FaultFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
@@ -24,6 +25,8 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     private FaultFacade faultFacade;
     @EJB
     private AssignerFacade assignerFacade;
+    @EJB
+    private AccountEndpoint accountEndpoint;
 
     public Fault find(Long id) {
         return faultFacade.find(id);
@@ -39,6 +42,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
     public void assignSpecialist(Specialist specialist, Fault fault) throws AppBaseException {
         System.out.println("PPPPPPPPPPPPPPPPP" + sctx.getCallerPrincipal().getName());
+//        Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
         Assigner assigner = assignerFacade.find(-4L);
         faultFacade.assignSpecialist(specialist, fault, assigner);
     }

@@ -61,4 +61,9 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
     public void createAccount(Notifier notifier) throws AppBaseException {
         accountFacade.create(notifier);
     }
+
+    public Assigner findAssignerLogin(String myLogin) {
+     return  accountFacade.findAssignerLogin(myLogin);
+       
+    }
 }

@@ -6,10 +6,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
+import pl.lodz.p.it.spjava.fm.model.Assigner;
 
 /**
  *
@@ -76,6 +81,16 @@ public class AccountFacade extends AbstractFacade<Account> {
                 throw ex;
             }
         }
+    }
+    public Assigner findAssignerLogin(String login){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Assigner> query = cb.createQuery(Assigner.class);
+        Root<Assigner> from = query.from(Assigner.class);
+        query = query.select(from);
+        query = query.where(cb.equal(from.get("login"), login)); //Przykład wskazania atrybutu encji poprzez nazwę
+        TypedQuery<Assigner> tq = em.createQuery(query);
+
+        return tq.getSingleResult();
     }
 
 }

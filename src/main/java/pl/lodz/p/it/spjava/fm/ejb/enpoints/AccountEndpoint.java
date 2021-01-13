@@ -109,7 +109,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         accountManager.editAccount(endpointAccount);
     }
 
-    private  void writeEditableDataFromDTOToEntity(AccountDTO accountDTO, Account account) {
+    private void writeEditableDataFromDTOToEntity(AccountDTO accountDTO, Account account) {
         account.setFirstName(accountDTO.getFirstName());
         account.setSureName(accountDTO.getSureName());
         account.setEmail(accountDTO.getEmail());
@@ -237,4 +237,12 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     }
 
+    public Assigner getAssignerAccount() {
+        return accountManager.findAssignerLogin(getMyLogin());
+    }
+
+    public String getMyLogin() throws IllegalStateException {
+       return sctx.getCallerPrincipal().getName();
+//        return "login3";
+    }
 }
