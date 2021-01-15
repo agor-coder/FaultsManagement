@@ -22,7 +22,7 @@ public class FaultException extends AppBaseException {
         super(message, cause);
     }
 
-    public static FaultException faultExceptionWithAccountNotFound() {
+    public static FaultException faultExceptionWithFaultNotFound() {
         FaultException fe = new FaultException(KEY_NOT_FOUND);
         return fe;
     }

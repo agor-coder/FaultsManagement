@@ -55,7 +55,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     public void setEndpointFaultFromDTOToEdit(FaultDTO faultDTO) throws AppBaseException {
         endpointFault = faultManager.find(faultDTO.getId());
         if (null == endpointFault) {
-            throw FaultException.faultExceptionWithAccountNotFound();
+            throw FaultException.faultExceptionWithFaultNotFound();
         }
     }
 

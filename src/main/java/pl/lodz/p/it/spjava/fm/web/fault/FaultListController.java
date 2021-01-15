@@ -48,10 +48,17 @@ public class FaultListController implements Serializable {
         return "editFault";
     }
 
-    public String assign(FaultDTO faultDTO) throws AppBaseException {//obsłużyć
-        conversation.begin(); 
-        specListController.setFaultDTOAndfaultEndpoint(faultDTO);
-        return "specList";
+    public String assign(FaultDTO faultDTO) {
+        try {
+            conversation.begin();
+            specListController.setFaultDTOAndfaultEndpoint(faultDTO);
+            return "specList";
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji zmieńStatus wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+        }
+        return null;
     }
 
     public void setStatusEND(FaultDTO faultDTO) {
@@ -60,8 +67,9 @@ public class FaultListController implements Serializable {
             faultEndpoint.setStatusEND(faultDTO);
             init();
         } catch (AppBaseException abe) {
-            Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji setStatus wyjatku typu: ", abe);
+            Logger.getLogger(EditAccountController.class
+                    .getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji zmieńStatus wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }

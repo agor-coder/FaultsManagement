@@ -42,13 +42,12 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
     public void assignSpecialist(Specialist specialist, Fault fault, Assigner assigner) throws AppBaseException {
         System.out.println("PPPPPPPPPPPPPPPPP" + sctx.getCallerPrincipal().getName());
-
-       
         faultFacade.assignSpecialist(specialist, fault, assigner);
     }
 
     public void editFault(Fault fault) throws AppBaseException {
+        System.out.println("liczba usterek: " + faultFacade.countOfSpecialist(fault.getSpecialist())+" "+fault.getSpecialist().getSureName());
        faultFacade.edit(fault);
-        System.out.println("liczba usterek" + faultFacade.countOfSpecialist(fault.getSpecialist())+" "+fault.getSpecialist().getSureName());
+        System.out.println("liczba usterek: " + faultFacade.countOfSpecialist(fault.getSpecialist())+" "+fault.getSpecialist().getSureName());
     }
 }
