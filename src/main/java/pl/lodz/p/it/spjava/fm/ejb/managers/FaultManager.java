@@ -23,11 +23,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
     @EJB
     private FaultFacade faultFacade;
-    @EJB
-    private AssignerFacade assignerFacade;
-    @EJB
-    private AccountEndpoint accountEndpoint;
-
+    
     public Fault find(Long id) {
         return faultFacade.find(id);
     }
@@ -45,7 +41,11 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     }
 
     public void editFault(Fault fault, Specialist spec) throws AppBaseException {
-       faultFacade.edit(fault);
-        System.out.println("liczba usterek: " + faultFacade.countOfSpecialist(fault.getSpecialist())+" "+fault.getSpecialist().getSureName());
+        faultFacade.edit(fault);
+        System.out.println("liczba usterek: " + faultFacade.countOfSpecialist(fault.getSpecialist()) + " " + fault.getSpecialist().getSureName());
+    }
+
+    public int countOfSpecialist(Specialist specialist) {
+        return faultFacade.countOfSpecialist(specialist);
     }
 }

@@ -8,10 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import pl.lodz.p.it.spjava.fm.model.AppAdmin;
 
-/**
- *
- * @author A
- */
+
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class AppAdminFacade extends AbstractFacade<AppAdmin> {

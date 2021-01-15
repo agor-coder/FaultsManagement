@@ -9,7 +9,7 @@ public class FaultException extends AppBaseException {
     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
     static final public String STATUS_CHANGED_ALREADY = "error.status.changed.already";
-    static final public String FAULT_LIMIT = "error.status.changed.already";
+    static final public String FAULT_LIMIT = "error.fault.limit";
 
     private FaultException(String message) {
         super(message);

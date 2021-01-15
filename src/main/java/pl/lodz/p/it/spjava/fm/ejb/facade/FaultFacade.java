@@ -25,8 +25,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
 
-    @Resource(name = "faultLimit")
-    private int faultLimit;
+
 
     @Override
     protected EntityManager getEntityManager() {
@@ -47,7 +46,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
     }
 
     public void assignSpecialist(Specialist specialist, Fault entity, Assigner assigner) throws AppBaseException {
-        if (countOfSpecialist(specialist) < faultLimit) {
+       
             try {
                 Fault tmp = em.find(entity.getClass(), entity.getId());
                 tmp.setSpecialist(specialist);
@@ -55,10 +54,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
                 tmp.setStatus(Fault.FaultStatus.ASSIGNED);
             } catch (OptimisticLockException oe) {
                 throw FaultException.faultExceptionWithOptimisticLockKey(oe);
-            }
-        } else {
-            throw FaultException.faultExceptionWithFaultLimit();
-        }
+}
     }
 
     @Override

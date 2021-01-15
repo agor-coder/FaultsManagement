@@ -3,6 +3,7 @@ package pl.lodz.p.it.spjava.fm.ejb.enpoints;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -33,6 +34,8 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private SpecialistManager specialistManager;
     @EJB
     private AssignerManager assignerManager;
+    @Resource(name = "faultLimit")
+    private int faultLimit;
 
     private Fault endpointFault;
     private Specialist endpointSpecialist;
@@ -66,14 +69,18 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     }
 
     public void assignSpecialist(SpecialistDTO specialistDTO, FaultDTO faultDTO) throws AppBaseException {
-        
         endpointSpecialist = specialistManager.find(specialistDTO.getId());
+        int specialistFaultsNumber = faultManager.countOfSpecialist(endpointSpecialist);
         
-        // Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
-        Assigner assigner = assignerManager.find(-4L);
-        endpointFault.setSpecialist(endpointSpecialist);
-        endpointFault.setWhoAssigned(assigner);
-        endpointFault.setStatus(Fault.FaultStatus.ASSIGNED);
-        faultManager.editFault(endpointFault, endpointSpecialist);
+        if (specialistFaultsNumber < faultLimit) {
+// Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
+            Assigner assigner = assignerManager.find(-4L);
+            endpointFault.setSpecialist(endpointSpecialist);
+            endpointFault.setWhoAssigned(assigner);
+            endpointFault.setStatus(Fault.FaultStatus.ASSIGNED);
+            faultManager.editFault(endpointFault, endpointSpecialist);
+        } else {
+            throw FaultException.faultExceptionWithFaultLimit();
+        }
     }
 }

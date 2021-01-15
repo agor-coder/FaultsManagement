@@ -8,10 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 
-/**
- *
- * @author A
- */
+
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class NotifierFacade extends AbstractFacade<Notifier> {
