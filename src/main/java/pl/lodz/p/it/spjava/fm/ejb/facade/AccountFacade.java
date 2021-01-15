@@ -2,6 +2,8 @@ package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
@@ -21,6 +23,7 @@ import pl.lodz.p.it.spjava.fm.model.Assigner;
  * @author A
  */
 @Stateless
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class AccountFacade extends AbstractFacade<Account> {
 
     @PersistenceContext(unitName = "FaultsManagementPU")

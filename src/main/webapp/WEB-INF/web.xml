@@ -21,7 +21,7 @@
     <env-entry>
         <env-entry-name>faultLimit</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>3</env-entry-value> 
+        <env-entry-value>2</env-entry-value> 
     </env-entry>
     
     <servlet>

@@ -11,8 +11,8 @@ import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
-import pl.lodz.p.it.spjava.fm.ejb.facade.AssignerFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
+import pl.lodz.p.it.spjava.fm.ejb.managers.AssignerManager;
 import pl.lodz.p.it.spjava.fm.ejb.managers.FaultManager;
 import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
@@ -32,7 +32,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     @EJB
     private SpecialistManager specialistManager;
     @EJB
-    private AssignerFacade assignerFacade;
+    private AssignerManager assignerManager;
 
     private Fault endpointFault;
     private Specialist endpointSpecialist;
@@ -66,12 +66,14 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     }
 
     public void assignSpecialist(SpecialistDTO specialistDTO, FaultDTO faultDTO) throws AppBaseException {
-        // Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
-        Assigner assigner = assignerFacade.find(-4L);
+        
         endpointSpecialist = specialistManager.find(specialistDTO.getId());
+        
+        // Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
+        Assigner assigner = assignerManager.find(-4L);
         endpointFault.setSpecialist(endpointSpecialist);
         endpointFault.setWhoAssigned(assigner);
         endpointFault.setStatus(Fault.FaultStatus.ASSIGNED);
-        faultManager.editFault(endpointFault);
+        faultManager.editFault(endpointFault, endpointSpecialist);
     }
 }

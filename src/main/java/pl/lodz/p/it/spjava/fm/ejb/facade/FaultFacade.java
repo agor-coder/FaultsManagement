@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
@@ -24,6 +25,9 @@ public class FaultFacade extends AbstractFacade<Fault> {
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
 
+    @Resource(name = "faultLimit")
+    private int faultLimit;
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -43,13 +47,17 @@ public class FaultFacade extends AbstractFacade<Fault> {
     }
 
     public void assignSpecialist(Specialist specialist, Fault entity, Assigner assigner) throws AppBaseException {
-        try {
-            Fault tmp = em.find(entity.getClass(), entity.getId());
-            tmp.setSpecialist(specialist);
-            tmp.setWhoAssigned(assigner);
-            tmp.setStatus(Fault.FaultStatus.ASSIGNED);
-        } catch (OptimisticLockException oe) {
-            throw FaultException.faultExceptionWithOptimisticLockKey(oe);
+        if (countOfSpecialist(specialist) < faultLimit) {
+            try {
+                Fault tmp = em.find(entity.getClass(), entity.getId());
+                tmp.setSpecialist(specialist);
+                tmp.setWhoAssigned(assigner);
+                tmp.setStatus(Fault.FaultStatus.ASSIGNED);
+            } catch (OptimisticLockException oe) {
+                throw FaultException.faultExceptionWithOptimisticLockKey(oe);
+            }
+        } else {
+            throw FaultException.faultExceptionWithFaultLimit();
         }
     }
 

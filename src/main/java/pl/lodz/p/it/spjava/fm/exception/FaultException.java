@@ -9,6 +9,7 @@ public class FaultException extends AppBaseException {
     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
     static final public String STATUS_CHANGED_ALREADY = "error.status.changed.already";
+    static final public String FAULT_LIMIT = "error.status.changed.already";
 
     private FaultException(String message) {
         super(message);
@@ -16,6 +17,11 @@ public class FaultException extends AppBaseException {
 
     private FaultException(String message, Throwable cause) {
         super(message, cause);
+    }
+
+    public static FaultException faultExceptionWithFaultLimit() {
+        FaultException fe = new FaultException(FAULT_LIMIT);
+        return fe;
     }
 
     public static FaultException faultExceptionWithStatusChangedAlready() {
