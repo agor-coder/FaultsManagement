@@ -1,11 +1,13 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
+import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
@@ -49,5 +51,11 @@ public class FaultFacade extends AbstractFacade<Fault> {
         } catch (OptimisticLockException oe) {
             throw FaultException.faultExceptionWithOptimisticLockKey(oe);
         }
+    }
+    
+     public int countOfSpecialist(Specialist spec) {
+        Query q = getEntityManager().createNamedQuery("Fault.countOfSpecialist");
+        q.setParameter("specialist", spec);
+        return Integer.valueOf(q.getSingleResult().toString());
     }
 }

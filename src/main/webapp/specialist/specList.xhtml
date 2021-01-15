@@ -47,7 +47,8 @@
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.refresh']}" action="#{specListController.init()}" />
-            <h:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
+            <h:commandButton value="${msg['main.page']}" action="#{specListController.cancelMain()}" immediate="true"/>
+            <h:commandButton value="${msg['menu.faults.list']}" action="#{specListController.cancelFaultList()}" immediate="true"/>
         </h:form>
     </h:body>
 </html>

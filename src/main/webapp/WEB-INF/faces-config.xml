@@ -31,6 +31,7 @@
         </navigation-case>
     </navigation-rule>
     
+    
     <navigation-rule>
         <from-view-id>/account/newAdmin.xhtml</from-view-id>
         <navigation-case>

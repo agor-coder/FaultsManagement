@@ -18,6 +18,12 @@
         <env-entry-value>3</env-entry-value> 
     </env-entry>
     
+    <env-entry>
+        <env-entry-name>faultLimit</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>3</env-entry-value> 
+    </env-entry>
+    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>

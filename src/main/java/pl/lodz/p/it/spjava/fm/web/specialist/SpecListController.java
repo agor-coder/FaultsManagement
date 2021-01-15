@@ -66,7 +66,6 @@ public class SpecListController implements Serializable {
         editSpecialistController.getSpecialistEntityToChange(specialistDTO);
 
         return "editSpecialist";
-     
 
     }
 
@@ -79,6 +78,15 @@ public class SpecListController implements Serializable {
         System.out.println(specialistDTO);
         System.out.println(faultDTO);
         faultEndpoint.assignSpecialist(specialistDTO, faultDTO);
+        return cancelFaultList();
+    }
+
+    public String cancelMain() {
+        conversation.end();
+        return "main";
+    }
+
+    public String cancelFaultList() {
         conversation.end();
         return "faultList";
     }

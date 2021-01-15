@@ -54,11 +54,14 @@ VALUES (-1,'2021-01-01 20:40:54.340','brak gotowości 3PS2', 0,1,-1,-7);
 INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)
 VALUES (-2,'2021-01-02 21:40:54.340','wyłączenie awaryjne', 0,1,-2,-8);
 
-INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id,specialist_id,whoassigned_id)
-VALUES (-3,'2021-01-04 17:40:54.000','brak zasilania', 2,1,-3,-7,-1,-6);
+INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)
+VALUES (-3,'2021-01-04 18:23:54.340','zwarcie OWS2', 0,1,-2,-8);
 
 INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id,specialist_id,whoassigned_id)
-VALUES (-4,'2021-01-04 17:40:54.000','nieszczelność OR2', 1,1,-3,-9,-2,-5);
+VALUES (-4,'2021-01-04 17:40:54.000','brak zasilania', 2,1,-3,-7,-1,-6);
+
+INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id,specialist_id,whoassigned_id)
+VALUES (-5,'2021-01-04 17:40:54.000','nieszczelność OR2', 1,1,-3,-9,-2,-5);
 
 
 
