@@ -74,7 +74,7 @@ public class SpecListController implements Serializable {
 
     }
 
-    public void setFaultDTOAndfaultEndpoint(FaultDTO fDTO) throws AppBaseException {//obsłużyć
+    public void setFaultDTOAndfaultEndpoint(FaultDTO fDTO) throws AppBaseException {
         faultDTO = fDTO;
         faultEndpoint.setEndpointFaultFromDTOToEdit(fDTO);
         System.out.println("usterka ustawiona" + faultDTO.getWhoNotified());
