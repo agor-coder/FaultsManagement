@@ -7,7 +7,7 @@ import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 
 public abstract class AbstractFacade<T> {
 
-    private Class<T> entityClass;
+    private final Class<T> entityClass;
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;

@@ -46,7 +46,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     }
 
     public void editFault(Fault fault) throws AppBaseException {
-        System.out.println("liczba usterek: " + faultFacade.countOfSpecialist(fault.getSpecialist())+" "+fault.getSpecialist().getSureName());
+        
        faultFacade.edit(fault);
         System.out.println("liczba usterek: " + faultFacade.countOfSpecialist(fault.getSpecialist())+" "+fault.getSpecialist().getSureName());
     }

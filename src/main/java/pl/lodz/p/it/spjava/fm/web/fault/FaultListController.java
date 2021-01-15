@@ -62,8 +62,7 @@ public class FaultListController implements Serializable {
     }
 
     public void setStatusEND(FaultDTO faultDTO) {
-        try {
-            faultEndpoint.setEndpointFaultFromDTOToEdit(faultDTO);
+        try { 
             faultEndpoint.setStatusEND(faultDTO);
             init();
         } catch (AppBaseException abe) {

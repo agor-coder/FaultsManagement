@@ -49,6 +49,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     }
 
     public void setStatusEND(FaultDTO faultDTO) throws AppBaseException {
+        setEndpointFaultFromDTOToEdit(faultDTO);
         faultManager.setStatus(endpointFault, "END");
     }
 
@@ -59,7 +60,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         }
     }
 
-    public FaultDTO getFaultToEdit(FaultDTO faultDTO) throws AppBaseException {
+    public FaultDTO getFaultDTOToEdit(FaultDTO faultDTO) throws AppBaseException {
         setEndpointFaultFromDTOToEdit(faultDTO);
         return DTOConverter.createFaultDTOFromEntity(endpointFault);
     }
