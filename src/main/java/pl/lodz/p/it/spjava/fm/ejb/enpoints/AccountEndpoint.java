@@ -46,7 +46,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     @Inject
     private HashGenerator hashGenerator;
 
-    public void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
+    private void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
         endpointAccount = accountManager.find(accDTO.getId());
         System.out.println(endpointAccount + "od enpointa");
         if (null == endpointAccount) {

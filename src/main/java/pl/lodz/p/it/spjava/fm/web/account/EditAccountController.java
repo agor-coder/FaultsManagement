@@ -40,7 +40,7 @@ public class EditAccountController implements Serializable {
         this.passwordRepeat = passwordRepeat;
     }
 
-    void setEditAccountDTOAndGetAccountEntityToEnpoint(AccountDTO accountDTO) {
+    public void setEditAccountDTOAndGetAccountEntityToEnpoint(AccountDTO accountDTO) {
         try {
             editAccountDTO = accountEndpoint.getAccountToEdit(accountDTO);
         } catch (AppBaseException abe) {

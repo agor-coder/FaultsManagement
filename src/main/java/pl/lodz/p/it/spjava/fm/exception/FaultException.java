@@ -1,6 +1,8 @@
 package pl.lodz.p.it.spjava.fm.exception;
 
 import javax.persistence.OptimisticLockException;
+import javax.persistence.PersistenceException;
+import pl.lodz.p.it.spjava.fm.model.Fault;
 
 
 public class FaultException extends AppBaseException {
@@ -9,6 +11,8 @@ public class FaultException extends AppBaseException {
     static final public String ACCOUNT_NOT_REMOVE = "error.account.not.remove";
     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
+
+ 
 
     private FaultException(String message) {
         super(message);

@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.exception;
 
 import javax.persistence.OptimisticLockException;
+import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 
@@ -8,8 +9,6 @@ public class SpecialistException extends AppBaseException {
 
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
-
-  
 
     private SpecialistException(String message) {
         super(message);

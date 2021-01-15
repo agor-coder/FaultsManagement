@@ -48,9 +48,9 @@ public class FaultListController implements Serializable {
         return "editFault";
     }
 
-    public String assign(FaultDTO faultDTO) {
-        conversation.begin();
-        specListController.setFaultDTO(faultDTO);
+    public String assign(FaultDTO faultDTO) throws AppBaseException {//obsłużyć
+        conversation.begin(); 
+        specListController.setFaultDTOAndfaultEndpoint(faultDTO);
         return "specList";
     }
 
@@ -66,13 +66,4 @@ public class FaultListController implements Serializable {
         }
     }
 
-//    public String editFault(FaultDTO faultDTO) {
-//        conversation.begin();
-//        editSpecialistController.setEditSpecialistDTO(specialistDTO);
-//        editSpecialistController.getSpecialistEntityToChange(specialistDTO);
-//
-//        return "editSpecialist";
-//        //No init(), @ViewScoped 
-//
-//    }
 }

@@ -11,11 +11,13 @@ import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
+import pl.lodz.p.it.spjava.fm.ejb.facade.AssignerFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.FaultManager;
 import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
+import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
@@ -29,6 +31,8 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private FaultManager faultManager;
     @EJB
     private SpecialistManager specialistManager;
+    @EJB
+    private AssignerFacade assignerFacade;
 
     private Fault endpointFault;
     private Specialist endpointSpecialist;
@@ -60,22 +64,13 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         return DTOConverter.createFaultDTOFromEntity(endpointFault);
     }
 
-//    public void saveFaultAfterEdit(FaultDTO faultDTO) throws AppBaseException {
-//        writeDataFromFaultDTOToEntity(faultDTO, endpointFault);
-//        faultManager.editFault(endpointFault);
-//    }
-//    private void writeDataFromFaultDTOToEntity(FaultDTO faultDTO, Fault fault) {
-//        fault.setFaultDescribe(faultDTO.getFaultDescribe());
-//        fault.setTechArea(faultDTO.getTechArea());
-//        fault.setStatus(faultDTO.getStatus());
-//        fault.setSpecialist(specialistFromDTO(faultDTO.getSpecialist()));
-//        fault.setWhoNotified(faultDTO.getWhoNotified());
-//        fault.setWhoAssigned(faultDTO.getWhoAssigned());
-//        
-//    }
     public void assignSpecialist(SpecialistDTO specialistDTO, FaultDTO faultDTO) throws AppBaseException {
-        setEndpointFaultFromDTOToEdit(faultDTO);
+        // Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
+        Assigner assigner = assignerFacade.find(-4L);
         endpointSpecialist = specialistManager.find(specialistDTO.getId());
-        faultManager.assignSpecialist(endpointSpecialist, endpointFault);
+        endpointFault.setSpecialist(endpointSpecialist);
+        endpointFault.setWhoAssigned(assigner);
+        endpointFault.setStatus(Fault.FaultStatus.ASSIGNED);
+        faultManager.editFault(endpointFault);
     }
 }

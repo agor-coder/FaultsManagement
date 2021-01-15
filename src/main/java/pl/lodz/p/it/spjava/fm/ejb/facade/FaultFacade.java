@@ -1,5 +1,6 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
@@ -7,9 +8,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
+import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
@@ -20,20 +24,19 @@ import pl.lodz.p.it.spjava.fm.model.Specialist;
  */
 @Stateless
 public class FaultFacade extends AbstractFacade<Fault> {
-
+    
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
-
-
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
     public FaultFacade() {
         super(Fault.class);
     }
-
+    
     public void setStatus(Fault entity, String name) throws AppBaseException {
         try {
             em.find(entity.getClass(), entity.getId()).setStatus(Fault.FaultStatus.valueOf(name));
@@ -41,7 +44,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
             throw FaultException.faultExceptionWithOptimisticLockKey(oe);
         }
     }
-
+    
     public void assignSpecialist(Specialist specialist, Fault entity, Assigner assigner) throws AppBaseException {
         try {
             Fault tmp = em.find(entity.getClass(), entity.getId());
@@ -53,7 +56,23 @@ public class FaultFacade extends AbstractFacade<Fault> {
         }
     }
     
-     public int countOfSpecialist(Specialist spec) {
+    @Override
+    public void edit(Fault entity) throws AppBaseException {
+        try {
+            super.edit(entity);
+            em.flush();
+        } catch (OptimisticLockException oe) {
+            throw FaultException.faultExceptionWithOptimisticLockKey(oe);
+        } catch (PersistenceException ex) {
+            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
+                throw FaultException.createWithDbCheckConstraintKey(ex);
+            } else {
+                throw ex;
+            }
+        }
+    }
+    
+    public int countOfSpecialist(Specialist spec) {
         Query q = getEntityManager().createNamedQuery("Fault.countOfSpecialist");
         q.setParameter("specialist", spec);
         return Integer.valueOf(q.getSingleResult().toString());

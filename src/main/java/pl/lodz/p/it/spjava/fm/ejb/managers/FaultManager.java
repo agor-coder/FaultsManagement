@@ -40,10 +40,14 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.setStatus(fault, status);
     }
 
-    public void assignSpecialist(Specialist specialist, Fault fault) throws AppBaseException {
+    public void assignSpecialist(Specialist specialist, Fault fault, Assigner assigner) throws AppBaseException {
         System.out.println("PPPPPPPPPPPPPPPPP" + sctx.getCallerPrincipal().getName());
-//        Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
-        Assigner assigner = assignerFacade.find(-4L);
+
+       
         faultFacade.assignSpecialist(specialist, fault, assigner);
+    }
+
+    public void editFault(Fault fault) throws AppBaseException {
+       faultFacade.edit(fault);
     }
 }
