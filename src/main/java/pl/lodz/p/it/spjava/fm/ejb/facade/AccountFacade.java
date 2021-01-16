@@ -82,6 +82,16 @@ public class AccountFacade extends AbstractFacade<Account> {
             }
         }
     }
+    public Account findLogin(String login){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Account> query = cb.createQuery(Account.class);
+        Root<Account> from = query.from(Account.class);
+        query = query.select(from);
+        query = query.where(cb.equal(from.get("login"), login)); //Przykład wskazania atrybutu encji poprzez nazwę
+        TypedQuery<Account> tq = em.createQuery(query);
+
+        return tq.getSingleResult();
+    }
     public Assigner findAssignerLogin(String login){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Assigner> query = cb.createQuery(Assigner.class);

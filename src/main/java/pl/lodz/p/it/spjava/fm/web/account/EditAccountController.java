@@ -126,6 +126,21 @@ public class EditAccountController implements Serializable {
             return null;
         }
     }
+    public String changeMyPassword() throws AppBaseException {
+        if (!passwordRepeat.equals(editAccountDTO.getPassword())) {
+            ContextUtils.emitInternationalizedMessage("changePassword:passwordRepeat", "account.password.different");
+            return "";
+        }
+        try {
+            accountEndpoint.changePassword(editAccountDTO);
+            return cancelOrEdit();
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return null;
+        }
+    }
 
     public boolean isAppAdmin() {
         return AccountUtils.isAppAdmin(editAccountDTO);

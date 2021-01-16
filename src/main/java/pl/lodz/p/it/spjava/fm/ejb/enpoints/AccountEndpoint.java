@@ -125,6 +125,16 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     }
 
+    public void changeMyPasword(String oldPass, String newPass) {
+        Account myAcount = getMyAccount();
+        // if (!mojeKonto.getHaslo().equals(KontoUtils.wyliczSkrotHasla(stare)))
+        if (!myAcount.getPassword().equals(oldPass)) {
+            throw new IllegalArgumentException("Podane dotychczasowe hasło nie zgadza się");
+        }
+        //mojeKonto.setHaslo(KontoUtils.wyliczSkrotHasla(nowe));
+        myAcount.setPassword(newPass);
+    }
+
     public void addAdmin(AppAdminDTO adminDTO) throws AppBaseException {
         AppAdmin adm = new AppAdmin();
         writeDataFromDTOToNewEntity(adminDTO, adm);
@@ -237,12 +247,16 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     }
 
+    public Assigner getMyAccount() {
+        return accountManager.findLogin(getMyLogin());
+    }
     public Assigner getAssignerAccount() {
-        return accountManager.findAssignerLogin(getMyLogin());
+        return accountManager.findLogin(getMyLogin());
     }
 
     public String getMyLogin() throws IllegalStateException {
-       return sctx.getCallerPrincipal().getName();
+        return sctx.getCallerPrincipal().getName();
 //        return "login3";
     }
+
 }
