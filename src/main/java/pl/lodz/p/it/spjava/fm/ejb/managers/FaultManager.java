@@ -48,4 +48,8 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     public int countOfSpecialist(Specialist specialist) {
         return faultFacade.countOfSpecialist(specialist);
     }
+
+    public List<Fault> findSpecialistFaults() {
+     return faultFacade.findSpecialistFaults();
+    }
 }

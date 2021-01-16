@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,6 +9,7 @@ import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
@@ -78,4 +80,11 @@ public class FaultFacade extends AbstractFacade<Fault> {
         q.setParameter("specialist", spec);
         return Integer.valueOf(q.getSingleResult().toString());
     }
+
+    public List<Fault> findSpecialistFaults() {
+      TypedQuery tq = getEntityManager().createNamedQuery("Fault.findOfLogin", Fault.class);
+        return tq.getResultList();
+    }
+    
+    
 }

@@ -41,7 +41,8 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private Specialist endpointSpecialist;
 
     public List<FaultDTO> getAllFaultsAndMakeDTOList() {
-        List<Fault> faultsList = faultManager.findAll();
+       List<Fault> faultsList = faultManager.findAll();//wszystkie
+        //List<Fault> faultsList = faultManager.findSpecialistFaults();//dla specjalisty
         List<FaultDTO> faultsListDTO = new ArrayList<>();
         faultsList.stream().map(fault -> DTOConverter.createFaultDTOFromEntity(fault))
                 .sorted(Comparator.comparing(FaultDTO::getStatus))
@@ -50,7 +51,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
                 });
         return faultsListDTO;
     }
-
+   
     public void setStatusEND(FaultDTO faultDTO) throws AppBaseException {
         setEndpointFaultFromDTOToEdit(faultDTO);
         faultManager.setStatus(endpointFault, "END");

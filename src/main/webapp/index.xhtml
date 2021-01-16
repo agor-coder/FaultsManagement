@@ -27,7 +27,7 @@
             
             <li>Użytkownik</li>
             <ul>
-            <li><h:link  value="Moje zadania"/></li>
+            <li><h:link outcome="fault/faultList.xhtml" value="Moje zadania"/></li>
             <li><h:link  outcome="account/changeMyPassword.xhtml" value="Zmień hasło"/></li>
             <li><h:link  value="Szczegóły konta"/></li>
             <li><h:commandLink   action="#{editAccountController.resetSession()}" value="Wyloguj"  /></li>
