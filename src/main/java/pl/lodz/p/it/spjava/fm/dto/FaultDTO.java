@@ -20,7 +20,7 @@ public class FaultDTO {
     private AssignerDTO whoAssigned;
     private Date createTimeStamp;
     private Date modificationTimeStamp;
-    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public FaultDTO() {
 

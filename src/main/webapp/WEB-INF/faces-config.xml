@@ -22,6 +22,7 @@
             <var>bundle</var>
         </resource-bundle>
     </application>
+    
     <navigation-rule>
         <from-view-id>/*</from-view-id>
         <navigation-case>
@@ -31,7 +32,14 @@
         </navigation-case>
     </navigation-rule>
     
-    
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>cancelAction</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
     <navigation-rule>
         <from-view-id>/account/newAdmin.xhtml</from-view-id>
         <navigation-case>

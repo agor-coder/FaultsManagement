@@ -8,7 +8,7 @@
     <h:body>
         #{msg['app.name']} <br />
         <br />
-
+        <h:form>
         <ul>
             <li><h:link  value="Rejestruj?"/></li>
             <li><h:link  value="Zaloguj"/></li>
@@ -28,11 +28,12 @@
             <li>Użytkownik</li>
             <ul>
             <li><h:link  value="Moje zadania"/></li>
-            <li><h:link  value="Zmień hasło"/></li>
+            <li><h:link  outcome="account/changeMyPassword.xhtml" value="Zmień hasło"/></li>
             <li><h:link  value="Szczegóły konta"/></li>
-            <li><h:link  value="Wyloguj"/></li>
+            <li><h:commandLink   action="#{editAccountController.resetSession()}" value="Wyloguj"  /></li>
         </ul>
         </ul>
+            </h:form>
     </h:body>
 </html>
 

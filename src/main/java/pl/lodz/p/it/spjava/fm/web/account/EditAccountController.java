@@ -147,5 +147,10 @@ public class EditAccountController implements Serializable {
         conversation.end();
         return "accountList";
     }
+    
+    public String resetSession() {
+        ContextUtils.invalidateSession();
+        return "cancelAction";
+    }
 
 }
