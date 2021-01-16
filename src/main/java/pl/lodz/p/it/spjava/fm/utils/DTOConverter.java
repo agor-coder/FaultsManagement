@@ -18,15 +18,17 @@ import pl.lodz.p.it.spjava.fm.model.TechArea;
 public class DTOConverter {
 
     private static AccountDTO createAdminDTOFromEntity(AppAdmin adm) {
-       return null == adm ? null : new AppAdminDTO(adm.getId(), adm.getLogin(), adm.isActive(),
+        return null == adm ? null : new AppAdminDTO(adm.getId(), adm.getLogin(), adm.isActive(),
                 adm.isConfirmed(), adm.getFirstName(), adm.getSureName(), adm.getEmail(),
                 adm.getPhone(), adm.getType(), adm.getAlarmPhone());
     }
+
     public static SpecialistDTO createSpecialistDTOFromEntity(Specialist specialist) {
         return null == specialist ? null : new SpecialistDTO(specialist.getId(), specialist.getLogin(), specialist.isActive(),
                 specialist.isConfirmed(), specialist.getFirstName(), specialist.getSureName(), specialist.getEmail(),
                 specialist.getPhone(), specialist.getType(), specialist.getDepartment());
     }
+
     public static AccountDTO createAccountDTOFromEntity(Account account) {
         return null == account ? null : new AccountDTO(account.getId(), account.getLogin(), account.isActive(),
                 account.isConfirmed(), account.getFirstName(), account.getSureName(), account.getEmail(), account.getPhone(),
@@ -45,7 +47,6 @@ public class DTOConverter {
                 assigner.getType(), assigner.getDepartment());
     }
 
-
     public static TechAreaDTO createTechAreaDTOFromEntity(TechArea area) {
         return null == area ? null : new TechAreaDTO(area.getId(), area.getAreaName());
     }
@@ -55,12 +56,13 @@ public class DTOConverter {
     }
 
     public static FaultDTO createFaultDTOFromEntity(Fault fault) {
-        return null == fault ? null : new FaultDTO(fault.getCreationTimestamp(),fault.getId(), fault.getFaultDescribe(),
+        return null == fault ? null : new FaultDTO(fault.getCreationTimestamp(), fault.getId(), fault.getFaultDescribe(),
                 createFaultStatusDTOFromEntity(fault.getStatus()),
                 createTechAreaDTOFromEntity(fault.getTechArea()),
                 createSpecialistDTOFromEntity(fault.getSpecialist()),
                 createNotifierDTOFromEntity(fault.getWhoNotified()),
-                createAssignerDTOFromEntity(fault.getWhoAssigned()));
+                createAssignerDTOFromEntity(fault.getWhoAssigned()),
+                fault.getModificationTimestamp());
     }
 
     public static AccountDTO makeAccountDTOfromUserEntity(Account account) {
@@ -78,8 +80,5 @@ public class DTOConverter {
         }
         return null;
     }
-
-   
-
 
 }

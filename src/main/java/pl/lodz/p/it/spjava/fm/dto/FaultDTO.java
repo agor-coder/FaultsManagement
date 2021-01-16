@@ -14,25 +14,21 @@ public class FaultDTO {
     private String faultDescribe;
 
     private FaultStatusDTO status = FaultStatusDTO.NOT_ASSIGNED;
-
     private TechAreaDTO techArea;
-
     private SpecialistDTO specialist;
-
     private NotifierDTO whoNotified;
-
     private AssignerDTO whoAssigned;
-
     private Date createTimeStamp;
-    private final SimpleDateFormat sdf;
+    private Date modificationTimeStamp;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
     public FaultDTO() {
-        this.sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+
     }
 
     public FaultDTO(Date createTimeStamp, Long id, String faultDescribe, FaultStatusDTO status, TechAreaDTO techArea,
-            SpecialistDTO specialist, NotifierDTO whoNotified, AssignerDTO whoAssigned) {
-        this.sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            SpecialistDTO specialist, NotifierDTO whoNotified, AssignerDTO whoAssigned, Date modificationTimeStamp) {
+
         this.createTimeStamp = createTimeStamp;
         this.id = id;
         this.faultDescribe = faultDescribe;
@@ -41,6 +37,7 @@ public class FaultDTO {
         this.specialist = specialist;
         this.whoNotified = whoNotified;
         this.whoAssigned = whoAssigned;
+        this.modificationTimeStamp = modificationTimeStamp;
     }
 //do formularza "zgłoś" - konstruktor
 
@@ -98,6 +95,11 @@ public class FaultDTO {
 
     public String getCreateTimeStamp() {
         return sdf.format(createTimeStamp);
+    }
+
+    public String getModificationTimeStamp() {
+        return null == modificationTimeStamp ? getCreateTimeStamp() : sdf.format(modificationTimeStamp);
+
     }
 
     public boolean isAssigned() {
