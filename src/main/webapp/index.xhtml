@@ -9,31 +9,31 @@
         #{msg['app.name']} <br />
         <br />
         <h:form>
-        <ul>
-            <li><h:link  value="Rejestruj?"/></li>
-            <li><h:link  value="Zaloguj"/></li>
-            <li>${msg["menu.accounts"]}</li>
             <ul>
-                <li><h:link outcome="account/accountList.xhtml" value="#{msg['menu.accounts.list']}"/></li>
-                <li><h:link outcome="account/newAdmin.xhtml" value="#{msg['menu.accounts.createadmin']}"/></li> 
-                <li><h:link outcome="account/newSpecialist.xhtml" value="#{msg['menu.accounts.createspecialist']}"/></li> 
-                <li><h:link outcome="account/newNotifier.xhtml" value="#{msg['menu.accounts.createnotifier']}"/></li> 
-                <li><h:link outcome="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}"/></li>
+                <li><h:link  value="Rejestruj?"/></li>
+                <li><h:link  value="#{msg['action.login']}"/></li>
+                <li>${msg["menu.accounts"]}</li>
+                <ul>
+                    <li><h:link outcome="account/accountList.xhtml" value="#{msg['menu.accounts.list']}"/></li>
+                    <li><h:link outcome="account/newAdmin.xhtml" value="#{msg['menu.accounts.createadmin']}"/></li> 
+                    <li><h:link outcome="account/newSpecialist.xhtml" value="#{msg['menu.accounts.createspecialist']}"/></li> 
+                    <li><h:link outcome="account/newNotifier.xhtml" value="#{msg['menu.accounts.createnotifier']}"/></li> 
+                    <li><h:link outcome="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}"/></li>
+                </ul>
+                <li>${msg["menu.faults"]}</li>
+                <ul>
+                    <li><h:link outcome="fault/faultList.xhtml" value="#{msg['menu.faults.list']}"/></li>
+                </ul>
+
+                <li>Użytkownik</li>
+                <ul>
+                    <li><h:link outcome="fault/faultList.xhtml" value="#{msg['menu.faults.my']}"/></li>
+                    <li><h:link  outcome="account/changeMyPassword.xhtml" value="#{msg['menu.accounts.changePassword']}"/></li>
+                    <li><h:link  value="#{msg['menu.accounts.details']}"/></li>
+                    <li><h:commandLink   action="#{editAccountController.resetSession()}" value="#{msg['menu.closeSession']}" /></li>
+                </ul>
             </ul>
-            <li>${msg["menu.faults"]}</li>
-            <ul>
-            <li><h:link outcome="fault/faultList.xhtml" value="#{msg['menu.faults.list']}"/></li>
-        </ul>
-            
-            <li>Użytkownik</li>
-            <ul>
-            <li><h:link outcome="fault/faultList.xhtml" value="Moje zadania"/></li>
-            <li><h:link  outcome="account/changeMyPassword.xhtml" value="Zmień hasło"/></li>
-            <li><h:link  value="Szczegóły konta"/></li>
-            <li><h:commandLink   action="#{editAccountController.resetSession()}" value="Wyloguj"  /></li>
-        </ul>
-        </ul>
-            </h:form>
+        </h:form>
     </h:body>
 </html>
 
