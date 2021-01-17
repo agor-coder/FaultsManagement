@@ -77,6 +77,7 @@ public class ContextUtils {
     /**
      * Zwraca zasób (ResourceBundle) o ścieżce wskazywanej przez parametr
      * resourceBundle.path
+     * @return 
      */
     public static ResourceBundle getDefaultBundle() {
         String bundlePath = getContextParameter("resourceBundle.path");

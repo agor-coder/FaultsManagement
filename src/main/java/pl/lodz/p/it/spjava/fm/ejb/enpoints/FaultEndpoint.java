@@ -22,6 +22,7 @@ import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
+import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Stateful
 @Interceptors(LoggingInterceptor.class)
@@ -41,8 +42,8 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private Specialist endpointSpecialist;
 
     public List<FaultDTO> getAllFaultsAndMakeDTOList() {
-       List<Fault> faultsList = faultManager.findAll();//wszystkie
-        //List<Fault> faultsList = faultManager.findSpecialistFaults();//dla specjalisty
+      List<Fault> faultsList = faultManager.findAll();//wszystkie     
+       //List<Fault> faultsList = faultManager.findSpecialistFaults("login0");//  (sctx.getCallerPrincipal().getName());//ContextUtils.getUserName();
         List<FaultDTO> faultsListDTO = new ArrayList<>();
         faultsList.stream().map(fault -> DTOConverter.createFaultDTOFromEntity(fault))
                 .sorted(Comparator.comparing(FaultDTO::getStatus))
