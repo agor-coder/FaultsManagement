@@ -1,11 +1,14 @@
 package pl.lodz.p.it.spjava.fm.web.account;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
+import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
@@ -15,11 +18,11 @@ public class ChangeMyPasswordController implements Serializable {
     @EJB
     private AccountEndpoint accountEndpoint;
 
-    private final AccountDTO account = new AccountDTO();
+    private AccountDTO account = new AccountDTO();
     private String passwordRepeat = "";
     private String passwordOld = "";
 
-    public AccountDTO getKonto() {
+    public AccountDTO getAccount() {
         return account;
     }
 
@@ -44,7 +47,14 @@ public class ChangeMyPasswordController implements Serializable {
             ContextUtils.emitInternationalizedMessage("changeMyPassword:passwordRepeat", "passwords.not.matching");
             return null;
         }
-        accountEndpoint.changeMyPasword(passwordOld, account.getPassword());
-        return "main";
+        try {
+            accountEndpoint.changeMyPasword(passwordOld, account.getPassword());
+            return "main";
+        } catch (RuntimeException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return null;
+        }
     }
 }
