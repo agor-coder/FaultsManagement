@@ -83,6 +83,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     public void assignSpecialist(SpecialistDTO specialistDTO, FaultDTO faultDTO) throws AppBaseException {
         endpointSpecialist = specialistManager.find(specialistDTO.getId());
         int specialistFaultsNumber = faultManager.countOfSpecialist(endpointSpecialist);
+        System.out.println("liczba usterek przed: " + faultManager.countOfSpecialist(endpointSpecialist) + " " + endpointSpecialist.getSureName());
 
         if (specialistFaultsNumber < faultLimit) {
 // Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
@@ -91,6 +92,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
             endpointFault.setWhoAssigned(assigner);
             endpointFault.setStatus(Fault.FaultStatus.ASSIGNED);
             faultManager.editFault(endpointFault, endpointSpecialist);
+            System.out.println("liczba usterek po: " + faultManager.countOfSpecialist(endpointSpecialist) + " " + endpointSpecialist.getSureName());
         } else {
             throw FaultException.faultExceptionWithFaultLimit();
         }
@@ -100,7 +102,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         Fault fault = new Fault();
         fault.setFaultDescribe(faultDTO.getFaultDescribe());
         fault.setWhoNotified(notifierManager.find(-7L));// pobierz konto
-        fault.setTechArea(areaManager.find(faultDTO.getTechArea().getId()));        
+        fault.setTechArea(areaManager.find(faultDTO.getTechArea().getId()));
         boolean rollbackTX;
         int retryTXCounter = 1;
         do {

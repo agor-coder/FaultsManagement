@@ -40,11 +40,10 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
     public void editFault(Fault fault, Specialist spec) throws AppBaseException {
         faultFacade.edit(fault);
-        System.out.println("liczba usterek: " + faultFacade.countOfSpecialist(fault.getSpecialist()) + " " + fault.getSpecialist().getSureName());
     }
 
     public int countOfSpecialist(Specialist specialist) {
-        return faultFacade.countOfSpecialist(specialist);
+        return faultFacade.countOfSpecialist(specialist, Fault.FaultStatus.ASSIGNED);
     }
 
     public List<Fault> findSpecialistFaults(String login) {

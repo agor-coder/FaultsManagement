@@ -14,6 +14,7 @@ import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
+import pl.lodz.p.it.spjava.fm.model.Fault.FaultStatus;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 /**
@@ -70,9 +71,10 @@ public class FaultFacade extends AbstractFacade<Fault> {
         }
     }
 
-    public int countOfSpecialist(Specialist spec) {
+    public int countOfSpecialist(Specialist spec, FaultStatus status) {
         Query q = getEntityManager().createNamedQuery("Fault.countOfSpecialist");
         q.setParameter("specialist", spec);
+        q.setParameter( "status", status);
         return Integer.valueOf(q.getSingleResult().toString());
     }
 
