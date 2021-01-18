@@ -2,7 +2,6 @@ package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
@@ -27,8 +26,6 @@ public class FaultFacade extends AbstractFacade<Fault> {
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
 
-
-
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -44,19 +41,17 @@ public class FaultFacade extends AbstractFacade<Fault> {
         } else {
             throw FaultException.faultExceptionWithStatusChangedAlready();
         }
-
     }
 
     public void assignSpecialist(Specialist specialist, Fault entity, Assigner assigner) throws AppBaseException {
-       
-            try {
-                Fault tmp = em.find(entity.getClass(), entity.getId());
-                tmp.setSpecialist(specialist);
-                tmp.setWhoAssigned(assigner);
-                tmp.setStatus(Fault.FaultStatus.ASSIGNED);
-            } catch (OptimisticLockException oe) {
-                throw FaultException.faultExceptionWithOptimisticLockKey(oe);
-}
+        try {
+            Fault tmp = em.find(entity.getClass(), entity.getId());
+            tmp.setSpecialist(specialist);
+            tmp.setWhoAssigned(assigner);
+            tmp.setStatus(Fault.FaultStatus.ASSIGNED);
+        } catch (OptimisticLockException oe) {
+            throw FaultException.faultExceptionWithOptimisticLockKey(oe);
+        }
     }
 
     @Override
@@ -82,10 +77,9 @@ public class FaultFacade extends AbstractFacade<Fault> {
     }
 
     public List<Fault> findSpecialistFaults(String login) {
-      TypedQuery tq = getEntityManager().createNamedQuery("Fault.findOfLogin", Fault.class);
-       tq.setParameter("login", login);
+        TypedQuery tq = getEntityManager().createNamedQuery("Fault.findOfLogin", Fault.class);
+        tq.setParameter("login", login);
         return tq.getResultList();
     }
-    
-    
+
 }

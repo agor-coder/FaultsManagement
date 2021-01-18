@@ -51,7 +51,7 @@ public class ChangeMyPasswordController implements Serializable {
             accountEndpoint.changeMyPasword(passwordOld, account.getPassword());
             return "main";
         } catch (RuntimeException abe) {
-            Logger.getLogger(EditAccountController.class.getName())
+            Logger.getLogger(ChangeMyPasswordController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;

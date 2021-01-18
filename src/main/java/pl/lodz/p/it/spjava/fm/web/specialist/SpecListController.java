@@ -26,9 +26,7 @@ public class SpecListController implements Serializable {
     @EJB
     private FaultEndpoint faultEndpoint;
 
-    @Inject
-    private EditSpecialistController editSpecialistController;
-
+  
     @Inject
     private Conversation conversation;
 
@@ -48,30 +46,6 @@ public class SpecListController implements Serializable {
         return specialistsDTO;
     }
 
-    public void activateSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {//obsłużyć
-        specialistEndpoint.activateSpecialist(specialistDTO);
-        init();
-    }
-
-    public void deactivateSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {//obsłużyć
-        specialistEndpoint.deactivateSpecialist(specialistDTO);
-        init();
-    }
-
-    public void removeSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {//obsłużyć
-        specialistEndpoint.removeSpecialist(specialistDTO);
-        init();
-    }
-
-    public String editSpecialist(SpecialistDTO specialistDTO) {
-        conversation.begin();
-        editSpecialistController.setEditSpecialistDTO(specialistDTO);
-        editSpecialistController.getSpecialistEntityToChange(specialistDTO);
-
-        return "editSpecialist";
-
-    }
-
     public void setFaultDTOAndfaultEndpoint(FaultDTO fDTO) throws AppBaseException {
         faultDTO = fDTO;
         faultEndpoint.setEndpointFaultFromDTOToEdit(fDTO);
@@ -83,7 +57,7 @@ public class SpecListController implements Serializable {
             faultEndpoint.assignSpecialist(specialistDTO, faultDTO);
             return cancelFaultList();
         } catch (AppBaseException abe) {
-            Logger.getLogger(EditSpecialistController.class.getName())
+            Logger.getLogger(SpecListController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji przydzielSpecjalistę wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;

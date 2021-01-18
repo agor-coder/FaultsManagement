@@ -38,12 +38,7 @@
                     <h:selectBooleanCheckbox value="${specialist.confirmed}" disabled="true" />
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Actions</f:facet>
                     <h:commandButton value="${msg['fault.assign']}"  action="#{specListController.assignSpecialist(specialist)}" />
-                    <h:commandButton value="${msg['action.delete']}"  action="#{specListController.removeSpecialist(specialist)}" />
-                    <h:commandButton value="${msg['action.activate']}"  action="#{specListController.activateSpecialist(specialist)}" /> 
-                    <h:commandButton value="${msg['action.deactivate']}" action="#{specListController.deactivateSpecialist(specialist)}"  /> 
-                    <h:commandButton value="${msg['action.edit']}"  action="#{specListController.editSpecialist(specialist)}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.refresh']}" action="#{specListController.init()}" />

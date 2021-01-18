@@ -34,26 +34,12 @@ public class EditFaultController implements Serializable {
         try {
             editFaultDTO = faultEndpoint.getFaultDTOToEdit(faultDTO);
         } catch (AppBaseException abe) {
-            Logger.getLogger(EditAccountController.class.getName())
+            Logger.getLogger(EditFaultController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujUsterkę wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }
 
-//public String saveEditedFaultDTO() {
-//        if (null == editFaultDTO) {
-//            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
-//        }
-//        try {
-//            faultEndpoint.saveFaultAfterEdit(editFaultDTO);
-//            return cancelOrEdit();
-//        } catch (AppBaseException abe) {
-//            Logger.getLogger(EditAccountController.class.getName())
-//                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
-//            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-//            return null;
-//        }
-//    }
     public String cancelOrEdit() {
         conversation.end();
         return "faultList";
