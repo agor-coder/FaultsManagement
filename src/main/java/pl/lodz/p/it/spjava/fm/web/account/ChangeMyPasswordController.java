@@ -52,7 +52,7 @@ public class ChangeMyPasswordController implements Serializable {
             return "main";
         } catch (RuntimeException abe) {
             Logger.getLogger(ChangeMyPasswordController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changeMyPassword wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }

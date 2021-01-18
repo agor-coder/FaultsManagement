@@ -45,7 +45,7 @@ public class EditAccountController implements Serializable {
             editAccountDTO = accountEndpoint.getAccountToEdit(accountDTO);
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji setEditAccountDTOAndGetAccountEntityToEnpoint wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }
@@ -60,7 +60,7 @@ public class EditAccountController implements Serializable {
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedAdminDTO wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }
@@ -75,7 +75,7 @@ public class EditAccountController implements Serializable {
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedSpecialistDTO wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }
@@ -90,7 +90,7 @@ public class EditAccountController implements Serializable {
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedAssignerDTO wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }
@@ -105,7 +105,7 @@ public class EditAccountController implements Serializable {
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedNotifierDTO wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }
@@ -121,7 +121,7 @@ public class EditAccountController implements Serializable {
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changePassword wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }
@@ -136,7 +136,7 @@ public class EditAccountController implements Serializable {
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changeMyPassword wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }

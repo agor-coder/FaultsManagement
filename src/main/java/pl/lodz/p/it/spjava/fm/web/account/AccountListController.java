@@ -55,7 +55,7 @@ public class AccountListController implements Serializable {
         init();
         }catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujKonto wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji removeAccount wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }

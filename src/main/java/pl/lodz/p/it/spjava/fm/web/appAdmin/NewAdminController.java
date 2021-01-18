@@ -61,7 +61,7 @@ public class NewAdminController implements Serializable {
             conversation.end();
             return "main";
         } catch (AppBaseException abe) {
-            LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzAdmina wyjatku typu: ", abe);
+            LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addAdmin wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }

@@ -35,7 +35,7 @@ public class EditFaultController implements Serializable {
             editFaultDTO = faultEndpoint.getFaultDTOToEdit(faultDTO);
         } catch (AppBaseException abe) {
             Logger.getLogger(EditFaultController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji edytujUsterkę wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji setEditFaultDTOAndGetFaultEntityToEnpoint wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }

@@ -55,7 +55,7 @@ public class FaultListController implements Serializable {
             return "specList";
         } catch (AppBaseException abe) {
             Logger.getLogger(FaultListController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji zmieńStatus wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assign wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
         return null;
@@ -68,7 +68,7 @@ public class FaultListController implements Serializable {
         } catch (AppBaseException abe) {
             Logger.getLogger(FaultListController.class
                     .getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji zmieńStatus wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji setStatusEND wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }

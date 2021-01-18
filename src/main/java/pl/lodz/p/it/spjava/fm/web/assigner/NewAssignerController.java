@@ -62,7 +62,7 @@ public class NewAssignerController implements Serializable {
             conversation.end();
             return "main";
         } catch (AppBaseException abe) {
-            LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji utworzSpecjalistę wyjatku typu: ", abe);
+            LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addAssigner wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }
