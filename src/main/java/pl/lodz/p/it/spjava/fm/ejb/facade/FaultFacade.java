@@ -71,10 +71,10 @@ public class FaultFacade extends AbstractFacade<Fault> {
         }
     }
 
-    public int countOfSpecialist(Specialist spec, FaultStatus status) {
+    public int countOfSpecialist(Specialist spec) {
         Query q = getEntityManager().createNamedQuery("Fault.countOfSpecialist");
         q.setParameter("specialist", spec);
-        q.setParameter( "status", status);
+        q.setParameter( "status", Fault.FaultStatus.ASSIGNED);
         return Integer.valueOf(q.getSingleResult().toString());
     }
 
