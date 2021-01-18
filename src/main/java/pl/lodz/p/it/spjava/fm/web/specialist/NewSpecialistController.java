@@ -69,7 +69,7 @@ public class NewSpecialistController implements Serializable {
     }
     public String cancel() {
         conversation.end();
-        return "main";
+        return "newSpecialist";
     }
 
 }

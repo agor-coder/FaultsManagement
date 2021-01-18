@@ -70,7 +70,7 @@ public class NewNotifierController implements Serializable {
 
     public String cancel() {
         conversation.end();
-        return "main";
+        return "newNotifier";
     }
 
 }

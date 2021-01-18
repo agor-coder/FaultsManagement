@@ -70,7 +70,7 @@ public class NewAssignerController implements Serializable {
     
      public String cancel() {
         conversation.end();
-        return "main";
+        return "newAssigner";
     }
 
 }

@@ -137,7 +137,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     public void addAdmin(AppAdminDTO adminDTO) throws AppBaseException {
         AppAdmin adm = new AppAdmin();
-        writeDataFromDTOToNewEntity(adminDTO, adm);
+        writeAccountDataFromDTOToNewEntity(adminDTO, adm);
         adm.setAlarmPhone(adminDTO.getAlarmPhone());
         boolean rollbackTX;
         int retryTXCounter = 1;
@@ -163,7 +163,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     public void addSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
         Specialist specialist = new Specialist();
-        writeDataFromDTOToNewEntity(specialistDTO, specialist);
+        writeAccountDataFromDTOToNewEntity(specialistDTO, specialist);
         specialist.setDepartment(specialistDTO.getDepartment());
         boolean rollbackTX;
         int retryTXCounter = 1;
@@ -189,7 +189,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     public void addAssigner(AssignerDTO assignerDTO) throws AppBaseException {
         Assigner assigner = new Assigner();
-        writeDataFromDTOToNewEntity(assignerDTO, assigner);
+        writeAccountDataFromDTOToNewEntity(assignerDTO, assigner);
         assigner.setDepartment(assignerDTO.getDepartment());
         boolean rollbackTX;
         int retryTXCounter = 1;
@@ -215,7 +215,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     public void addNotifier(NotifierDTO notifierDTO) throws AppBaseException {
         Notifier notifier = new Notifier();
-        writeDataFromDTOToNewEntity(notifierDTO, notifier);
+        writeAccountDataFromDTOToNewEntity(notifierDTO, notifier);
         notifier.setEmplacement(notifierDTO.getEmplacement());
         boolean rollbackTX;
         int retryTXCounter = 1;
@@ -239,7 +239,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         }
     }
 
-    private void writeDataFromDTOToNewEntity(AccountDTO accountDTO, Account account) {
+    private void writeAccountDataFromDTOToNewEntity(AccountDTO accountDTO, Account account) {
         account.setLogin(accountDTO.getLogin());
         writeEditableDataFromDTOToEntity(accountDTO, account);
         account.setPassword(accountDTO.getPassword());

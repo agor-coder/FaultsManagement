@@ -7,8 +7,6 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
-import pl.lodz.p.it.spjava.fm.ejb.facade.AssignerFacade;
 import pl.lodz.p.it.spjava.fm.ejb.facade.FaultFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
@@ -51,5 +49,9 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
     public List<Fault> findSpecialistFaults(String login) {
      return faultFacade.findSpecialistFaults(login);
+    }
+
+    public void createFault(Fault fault) throws AppBaseException{
+        faultFacade.create(fault);
     }
 }

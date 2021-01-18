@@ -53,5 +53,9 @@ public class FaultException extends AppBaseException {
         FaultException fe = new FaultException(KEY_DB_CONSTRAINT);
         return fe;
     }
+    static public FaultException createFaultExceptionWithTxRetryRollback() {
+        FaultException ke = new FaultException(KEY_TX_RETRY_ROLLBACK);
+        return ke;
+    }
 
 }

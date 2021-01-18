@@ -49,10 +49,26 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>/account/newAdminConfirm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newAdmin</from-outcome>
+            <to-view-id>/account/newAdmin.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <from-view-id>/account/newNotifier.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>newNotifierConfirm</from-outcome>
             <to-view-id>/account/newNotifierConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/account/newNotifierConfirm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newNotifier</from-outcome>
+            <to-view-id>/account/newNotifier.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
@@ -65,10 +81,26 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>/account/newAssignerConfirm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newAssigner</from-outcome>
+            <to-view-id>/account/newAssigner.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <from-view-id>/account/newSpecialist.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>newSpecialistConfirm</from-outcome>
             <to-view-id>/account/newSpecialistConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/account/newSpecialistConfirm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newSpecialist</from-outcome>
+            <to-view-id>/account/newSpecialist.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
@@ -109,14 +141,22 @@
     </navigation-rule>
     
     <navigation-rule>
-        <from-view-id>/fault/faultList.xhtml</from-view-id>
+        <from-view-id>/fault/newFault.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>editFault</from-outcome>
-            <to-view-id>/fault/editFault.xhtml</to-view-id>
+            <from-outcome>newFaultConfirm</from-outcome>
+            <to-view-id>/fault/newFaultConfirm.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
-    
+    <navigation-rule>
+        <from-view-id>/fault/newFaultConfirm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newFault</from-outcome>
+            <to-view-id>/fault/newFault.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+   
     <navigation-rule>
         <from-view-id>/fault/faultList.xhtml</from-view-id>
         <navigation-case>

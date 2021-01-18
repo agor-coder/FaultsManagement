@@ -39,7 +39,11 @@ public class FaultDTO {
         this.whoAssigned = whoAssigned;
         this.modificationTimeStamp = modificationTimeStamp;
     }
+    
 //do formularza "zgłoś" - konstruktor
+    public FaultDTO(String faultDescribe) {
+        this.faultDescribe = faultDescribe;
+    }
 
     public FaultStatusDTO getStatus() {
         return status;

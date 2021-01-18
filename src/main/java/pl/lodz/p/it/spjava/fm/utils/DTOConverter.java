@@ -51,7 +51,7 @@ public class DTOConverter {
         return null == area ? null : new TechAreaDTO(area.getId(), area.getAreaName());
     }
 
-    public static FaultDTO.FaultStatusDTO createFaultStatusDTOFromEntity(Fault.FaultStatus status) {
+    private static FaultDTO.FaultStatusDTO createFaultStatusDTOFromEntity(Fault.FaultStatus status) {
         return null == status ? null : FaultDTO.FaultStatusDTO.valueOf(status.name());
     }
 

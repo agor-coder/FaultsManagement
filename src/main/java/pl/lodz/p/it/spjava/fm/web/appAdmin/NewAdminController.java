@@ -68,7 +68,7 @@ public class NewAdminController implements Serializable {
     }
     public String cancel() {
         conversation.end();
-        return "main";
+        return "newAdmin";
     }
 
 }
