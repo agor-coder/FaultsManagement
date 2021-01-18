@@ -39,7 +39,7 @@ public class FaultDTO {
         this.whoAssigned = whoAssigned;
         this.modificationTimeStamp = modificationTimeStamp;
     }
-    
+
 //do formularza "zgłoś" - konstruktor
     public FaultDTO(String faultDescribe) {
         this.faultDescribe = faultDescribe;
@@ -119,7 +119,19 @@ public class FaultDTO {
     }
 
     public static enum FaultStatusDTO {
-        NOT_ASSIGNED, ASSIGNED, END
+        NOT_ASSIGNED("Nie przydzielona"),
+        ASSIGNED("Przydzielona"),
+        END("Zakończona");
+
+        private final String description;
+
+        private FaultStatusDTO(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
     };
 
 }

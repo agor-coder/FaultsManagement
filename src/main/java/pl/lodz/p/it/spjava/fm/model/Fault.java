@@ -108,7 +108,19 @@ public class Fault extends AbstractEntity implements Serializable {
     }
 
     public static enum FaultStatus {
-        NOT_ASSIGNED, ASSIGNED,  END
+        NOT_ASSIGNED("Nie przydzielona"),
+        ASSIGNED("Przydzielona"),
+        END("Zakończona");
+
+        private final String description;
+
+        private FaultStatus(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
     };
 
 }
