@@ -16,16 +16,10 @@ import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
-import pl.lodz.p.it.spjava.fm.ejb.managers.AssignerManager;
 import pl.lodz.p.it.spjava.fm.ejb.managers.FaultManager;
-import pl.lodz.p.it.spjava.fm.ejb.managers.NotifierManager;
-import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
-import pl.lodz.p.it.spjava.fm.ejb.managers.TechAreaManager;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
-import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
-import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 
 @Stateful
@@ -37,19 +31,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private int txRetryLimit;
     @EJB
     private FaultManager faultManager;
-    @EJB
-    private SpecialistManager specialistManager;
-    @EJB
-    private NotifierManager notifierManager;
-    @EJB
-    private TechAreaManager areaManager;
-    @EJB
-    private AssignerManager assignerManager;
-    @Resource(name = "faultLimit")
-    private int faultLimit;
-
-    private Fault endpointFault;
-    private Specialist endpointSpecialist;
+    private Fault endpointFault; 
 
     public List<FaultDTO> getAllFaultsAndMakeDTOList() {
         List<Fault> faultsList = faultManager.findAll();//wszystkie     
@@ -80,22 +62,9 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         return DTOConverter.createFaultDTOFromEntity(endpointFault);
     }
 
-    public void assignSpecialist(SpecialistDTO specialistDTO, FaultDTO faultDTO) throws AppBaseException {
-        endpointSpecialist = specialistManager.find(specialistDTO.getId());
-        int specialistFaultsNumber = faultManager.countOfSpecialist(endpointSpecialist);
-        System.out.println("liczba usterek przed: " + faultManager.countOfSpecialist(endpointSpecialist) + " " + endpointSpecialist.getSureName());
-
-        if (specialistFaultsNumber < faultLimit) {
-// Assigner assigner = accountEndpoint.getAssignerAccount();//po uwierzytelnieniu sprawdzić
-            Assigner assigner = assignerManager.find(-4L);
-            endpointFault.setSpecialist(endpointSpecialist);
-            endpointFault.setWhoAssigned(assigner);
-            endpointFault.setStatus(Fault.FaultStatus.ASSIGNED);
-            faultManager.editFault(endpointFault, endpointSpecialist);
-            System.out.println("liczba usterek po: " + faultManager.countOfSpecialist(endpointSpecialist) + " " + endpointSpecialist.getSureName());
-        } else {
-            throw FaultException.faultExceptionWithFaultLimit();
-        }
+    public void assignSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
+        Long specId = specialistDTO.getId();
+        faultManager.assignSpecialist(endpointFault, specId);
     }
 
     public void addFault(FaultDTO faultDTO) throws AppBaseException {

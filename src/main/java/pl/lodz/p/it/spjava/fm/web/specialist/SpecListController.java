@@ -26,7 +26,6 @@ public class SpecListController implements Serializable {
     @EJB
     private FaultEndpoint faultEndpoint;
 
-  
     @Inject
     private Conversation conversation;
 
@@ -48,14 +47,14 @@ public class SpecListController implements Serializable {
 
     public void setFaultDTOAndfaultEndpoint(FaultDTO fDTO) throws AppBaseException {
         faultDTO = fDTO;
-        faultEndpoint.setEndpointFaultFromDTOToEdit(fDTO);
+        faultEndpoint.setEndpointFaultFromDTOToEdit(faultDTO);
         System.out.println("usterka ustawiona" + faultDTO.getWhoNotified());
     }
 
     public String assignSpecialist(SpecialistDTO specialistDTO) {
         try {
-            faultEndpoint.assignSpecialist(specialistDTO, faultDTO);
-            return cancelFaultList();
+            faultEndpoint.assignSpecialist(specialistDTO);
+            return cancelFaultList();//end of conversation
         } catch (AppBaseException abe) {
             Logger.getLogger(SpecListController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assignSpecialist wyjatku typu: ", abe);

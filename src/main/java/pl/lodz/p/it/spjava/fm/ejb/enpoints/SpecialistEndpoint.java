@@ -12,8 +12,6 @@ import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.SpecialistManager;
-import pl.lodz.p.it.spjava.fm.exception.AccountException;
-import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 
