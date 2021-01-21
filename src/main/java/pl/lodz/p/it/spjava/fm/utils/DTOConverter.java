@@ -1,5 +1,8 @@
 package pl.lodz.p.it.spjava.fm.utils;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.dto.AppAdminDTO;
 import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;
@@ -53,6 +56,16 @@ public class DTOConverter {
 
     private static FaultDTO.FaultStatusDTO createFaultStatusDTOFromEntity(Fault.FaultStatus status) {
         return null == status ? null : FaultDTO.FaultStatusDTO.valueOf(status.name());
+    }
+
+    public static List<FaultDTO> createFaultListDTOFromFaultEntityList(List<Fault> faultsList) {
+        List<FaultDTO> faultsListDTO = new ArrayList<>();
+        faultsList.stream().map(fault -> createFaultDTOFromEntity(fault))
+                .sorted(Comparator.comparing(FaultDTO::getStatus))
+                .forEachOrdered(faultDTO -> {
+                    faultsListDTO.add(faultDTO);
+                });
+        return faultsListDTO;
     }
 
     public static FaultDTO createFaultDTOFromEntity(Fault fault) {

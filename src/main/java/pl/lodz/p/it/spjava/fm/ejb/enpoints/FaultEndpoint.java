@@ -21,6 +21,7 @@ import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
+import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Stateful
 @Interceptors(LoggingInterceptor.class)
@@ -34,25 +35,16 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private Fault endpointFault;
 
     public List<FaultDTO> getAllFaultsAndMakeDTOList() {
-        List<Fault> faultsList = faultManager.findAll();//wszystkie     
-        //List<Fault> faultsList = faultManager.findSpecialistFaults("login0");//  (sctx.getCallerPrincipal().getName());//ContextUtils.getUserName();
-        List<FaultDTO> faultsListDTO = new ArrayList<>();
-        faultsList.stream().map(fault -> DTOConverter.createFaultDTOFromEntity(fault))
-                .sorted(Comparator.comparing(FaultDTO::getStatus))
-                .forEachOrdered(faultDTO -> {
-                    faultsListDTO.add(faultDTO);
-                });
+        List<Fault> faultsList = faultManager.findAll();
+        List<FaultDTO> faultsListDTO = DTOConverter.createFaultListDTOFromFaultEntityList(faultsList);
         return faultsListDTO;
     }
 
-    public List<FaultDTO> getMyFaultsAndMakeDTOList() {  
-        List<Fault> faultsList = faultManager.findSpecialistFaults("login0");//  (sctx.getCallerPrincipal().getName());//ContextUtils.getUserName();
-        List<FaultDTO> faultsListDTO = new ArrayList<>();
-        faultsList.stream().map(fault -> DTOConverter.createFaultDTOFromEntity(fault))
-                .sorted(Comparator.comparing(FaultDTO::getStatus))
-                .forEachOrdered(faultDTO -> {
-                    faultsListDTO.add(faultDTO);
-                });
+    public List<FaultDTO> getMyFaultsAndMakeDTOList() {
+        String login = ContextUtils.getUserName();
+        // List<Fault> faultsList = faultManager.findSpecialistFaults(login);
+        List<Fault> faultsList = faultManager.findSpecialistFaults("login0");
+        List<FaultDTO> faultsListDTO = DTOConverter.createFaultListDTOFromFaultEntityList(faultsList);
         return faultsListDTO;
     }
 
