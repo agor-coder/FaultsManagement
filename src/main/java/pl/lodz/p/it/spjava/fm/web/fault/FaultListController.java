@@ -34,7 +34,7 @@ public class FaultListController implements Serializable {
     @PostConstruct
     public void init() {
         
-        faultsDTO = faultEndpoint.getAllFaultsAndMakeDTOList();
+        faultsDTO = faultEndpoint.getAllFaultsDTO();
         System.out.println();
     }
 

@@ -58,7 +58,7 @@ public class DTOConverter {
         return null == status ? null : FaultDTO.FaultStatusDTO.valueOf(status.name());
     }
 
-    public static List<FaultDTO> createFaultListDTOFromFaultEntityList(List<Fault> faultsList) {
+    public static List<FaultDTO> createFaultListDTO(List<Fault> faultsList) {
         List<FaultDTO> faultsListDTO = new ArrayList<>();
         faultsList.stream().map(fault -> createFaultDTOFromEntity(fault))
                 .sorted(Comparator.comparing(FaultDTO::getStatus))
