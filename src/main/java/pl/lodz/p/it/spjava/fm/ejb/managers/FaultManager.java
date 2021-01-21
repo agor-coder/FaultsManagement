@@ -60,7 +60,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     public void createFault(Fault fault, Long idTecharea) throws AppBaseException {
         TechArea area = areaFacade.find(idTecharea);
         fault.setTechArea(area);
-        fault.setWhoNotified(notifierFacade.find(-7L));// pobierz kont     
+        fault.setWhoNotified(notifierFacade.findLogin("login6"));// PiszpanZ
         faultFacade.create(fault);
     }
 }
