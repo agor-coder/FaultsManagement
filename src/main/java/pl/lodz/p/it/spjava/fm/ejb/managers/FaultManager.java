@@ -58,7 +58,9 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         int specialistFaultsNumber = countOfSpecialist(spec);
 
         if (specialistFaultsNumber < faultLimit) {
-            Assigner assigner = assignerFacade.find(-4L);//zrobić
+           // String assignerLogin = ContextUtils.getUserName();
+            String assignerLogin = "login3";
+            Assigner assigner = assignerFacade.findLogin(assignerLogin);
             fault.setSpecialist(spec);
             fault.setWhoAssigned(assigner);
             fault.setStatus(Fault.FaultStatus.ASSIGNED);
@@ -80,9 +82,9 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         TechArea area = areaFacade.find(idTecharea);
         fault.setTechArea(area);
 //        String notifierLogin = ContextUtils.getUserName();
-//        Notifier notifier = notifierFacade.findLogin(notifierLogin);
-//        fault.setWhoNotified(notifier);//pobierz konto
-        fault.setWhoNotified(notifierFacade.findLogin("login6"));// PiszpanZ
+       String notifierLogin = "login6";
+        Notifier notifier = notifierFacade.findLogin(notifierLogin);
+        fault.setWhoNotified(notifier);//pobierz konto
         faultFacade.create(fault);
     }
 }

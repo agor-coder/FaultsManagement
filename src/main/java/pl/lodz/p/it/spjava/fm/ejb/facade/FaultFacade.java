@@ -44,8 +44,6 @@ public class FaultFacade extends AbstractFacade<Fault> {
         }
     }
 
-    
-
     @Override
     public void edit(Fault entity) throws AppBaseException {
         try {
