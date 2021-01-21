@@ -31,11 +31,22 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private int txRetryLimit;
     @EJB
     private FaultManager faultManager;
-    private Fault endpointFault; 
+    private Fault endpointFault;
 
     public List<FaultDTO> getAllFaultsAndMakeDTOList() {
         List<Fault> faultsList = faultManager.findAll();//wszystkie     
         //List<Fault> faultsList = faultManager.findSpecialistFaults("login0");//  (sctx.getCallerPrincipal().getName());//ContextUtils.getUserName();
+        List<FaultDTO> faultsListDTO = new ArrayList<>();
+        faultsList.stream().map(fault -> DTOConverter.createFaultDTOFromEntity(fault))
+                .sorted(Comparator.comparing(FaultDTO::getStatus))
+                .forEachOrdered(faultDTO -> {
+                    faultsListDTO.add(faultDTO);
+                });
+        return faultsListDTO;
+    }
+
+    public List<FaultDTO> getMyFaultsAndMakeDTOList() {  
+        List<Fault> faultsList = faultManager.findSpecialistFaults("login0");//  (sctx.getCallerPrincipal().getName());//ContextUtils.getUserName();
         List<FaultDTO> faultsListDTO = new ArrayList<>();
         faultsList.stream().map(fault -> DTOConverter.createFaultDTOFromEntity(fault))
                 .sorted(Comparator.comparing(FaultDTO::getStatus))

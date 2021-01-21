@@ -62,7 +62,6 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
             fault.setSpecialist(spec);
             fault.setWhoAssigned(assigner);
             fault.setStatus(Fault.FaultStatus.ASSIGNED);
-            System.out.println("liczba usterek po: " + countOfSpecialist(spec) + " " + spec.getSureName());
         } else {
             throw FaultException.faultExceptionWithFaultLimit();
         }
