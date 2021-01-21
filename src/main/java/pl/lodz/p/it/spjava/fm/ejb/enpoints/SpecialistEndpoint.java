@@ -23,7 +23,7 @@ public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynch
     @EJB
     private SpecialistManager specialistManager;
 
-    public List<SpecialistDTO> getAllSpecialistsAndMakeDTOList() {
+    public List<SpecialistDTO> getAllSpecialistsDTO() {
         List<Specialist> listSpecialist = specialistManager.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();
         listSpecialist.stream().map(specialist -> DTOConverter.createSpecialistDTOFromEntity(specialist))

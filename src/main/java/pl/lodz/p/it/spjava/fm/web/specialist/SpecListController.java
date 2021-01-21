@@ -35,7 +35,7 @@ public class SpecListController implements Serializable {
 
     @PostConstruct
     public void init() {
-        specialistsDTO = specialistEndpoint.getAllSpecialistsAndMakeDTOList();
+        specialistsDTO = specialistEndpoint.getAllSpecialistsDTO();
     }
 
     public FaultDTO getFaultDTO() {

@@ -92,15 +92,10 @@ public class AccountFacade extends AbstractFacade<Account> {
 
         return tq.getSingleResult();
     }
-    public Assigner findAssignerLogin(String login){
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Assigner> query = cb.createQuery(Assigner.class);
-        Root<Assigner> from = query.from(Assigner.class);
-        query = query.select(from);
-        query = query.where(cb.equal(from.get("login"), login)); //Przykład wskazania atrybutu encji poprzez nazwę
-        TypedQuery<Assigner> tq = em.createQuery(query);
 
-        return tq.getSingleResult();
+    public void changeMyPasword(Account entity, String newPass) {
+         em.find(entity.getClass(), entity.getId()).setPassword(newPass);
     }
+  
 
 }

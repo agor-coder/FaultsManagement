@@ -10,7 +10,7 @@
         #{msg['menu.faults.list']} <br />
         <br />
         <h:form id="faultsList">
-            <h:dataTable value="#{myFaultListController.faultsDTO}" var="fault">
+            <h:dataTable value="#{myFaultListController.myFaultsDTO}" var="fault">
                 <h:column>
                     <f:facet name="header">#{msg['fault.creation.time']}</f:facet> ${fault.createTimeStamp} 
                 </h:column>

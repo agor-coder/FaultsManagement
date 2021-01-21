@@ -6,6 +6,9 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
@@ -26,9 +29,20 @@ public class AssignerFacade extends AbstractFacade<Assigner> {
     }
 
     public Assigner findLogin(String login) {
-        TypedQuery q = getEntityManager().createNamedQuery("Assigner.findLogin", Specialist.class);
+        TypedQuery q = getEntityManager().createNamedQuery("Assigner.findLogin", Assigner.class);
         q.setParameter("login", login);
         return (Assigner) q.getSingleResult();
+    }
+    
+    public Assigner findAssignerLogin(String login){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Assigner> query = cb.createQuery(Assigner.class);
+        Root<Assigner> from = query.from(Assigner.class);
+        query = query.select(from);
+        query = query.where(cb.equal(from.get("login"), login)); 
+        TypedQuery<Assigner> tq = em.createQuery(query);
+
+        return tq.getSingleResult();
     }
 
 }

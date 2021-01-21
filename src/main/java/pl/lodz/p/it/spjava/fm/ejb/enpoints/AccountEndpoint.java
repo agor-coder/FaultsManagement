@@ -30,6 +30,7 @@ import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.security.HashGenerator;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
+import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Stateful
 @Interceptors(LoggingInterceptor.class)
@@ -125,14 +126,16 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     }
 
-    public void changeMyPasword(String oldPass, String newPass) {
-        Account myAcount = getMyAccount();
-        // if (!mojeKonto.getHaslo().equals(KontoUtils.wyliczSkrotHasla(stare)))
-        if (!myAcount.getPassword().equals(oldPass)) {
-            throw new IllegalArgumentException("Podane dotychczasowe hasło nie zgadza się");
+    public void changeMyPasword(String oldPass, String newPass) throws AppBaseException {
+        endpointAccount = getMyAccount();//login4
+        //if (!endpointAccount.getPassword().equals(hashGenerator.generateHash(oldPass))) {
+        if (!endpointAccount.getPassword().equals(oldPass)) {
+            throw AccountException.createWithPreviousGivenPasswordDoesNotMatch();
         }
-        //mojeKonto.setHaslo(KontoUtils.wyliczSkrotHasla(nowe));
-        myAcount.setPassword(newPass);
+        //String newHash = hashGenerator.generateHash(newPass);
+        //accountManager.changeMyPasword(endpointAccount,newHash);
+        accountManager.changeMyPasword(endpointAccount, newPass);
+
     }
 
     public void addAdmin(AppAdminDTO adminDTO) throws AppBaseException {
@@ -244,20 +247,16 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         writeEditableDataFromDTOToEntity(accountDTO, account);
         account.setPassword(accountDTO.getPassword());
         //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
-
     }
 
-    public Account getMyAccount() {
-        return accountManager.findLogin(getMyLogin());
+    private Account getMyAccount() {
+        //return accountManager.findLogin(getMyLogin());
+        return accountManager.findLogin("login4");
     }
 
-    public Assigner getAssignerAccount() {
-        return accountManager.findAssignerLogin(getMyLogin());
-    }
+    private String getMyLogin() throws IllegalStateException {//nie ruszać
+        return ContextUtils.getUserName();
 
-    public String getMyLogin() throws IllegalStateException {
-        return sctx.getCallerPrincipal().getName();
-//        return "login3";
     }
 
 }

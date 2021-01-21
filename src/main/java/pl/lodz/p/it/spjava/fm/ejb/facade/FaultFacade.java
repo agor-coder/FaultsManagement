@@ -12,9 +12,7 @@ import javax.persistence.TypedQuery;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
-import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
-import pl.lodz.p.it.spjava.fm.model.Fault.FaultStatus;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 /**

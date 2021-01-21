@@ -1,7 +1,6 @@
 package pl.lodz.p.it.spjava.fm.ejb.enpoints;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +40,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     }
 
     public List<FaultDTO> getMyFaultsDTO() {
-        String login = ContextUtils.getUserName();
+        //String login = ContextUtils.getUserName();
         // List<Fault> faultsList = faultManager.findSpecialistFaults(login);
         List<Fault> faultsList = faultManager.findSpecialistFaults("login0");
         List<FaultDTO> faultsListDTO = DTOConverter.createFaultListDTO(faultsList);

@@ -18,12 +18,12 @@ public class ChangeMyPasswordController implements Serializable {
     @EJB
     private AccountEndpoint accountEndpoint;
 
-    private AccountDTO account = new AccountDTO();
+    private final AccountDTO accountDTO = new AccountDTO();
     private String passwordRepeat = "";
     private String passwordOld = "";
 
-    public AccountDTO getAccount() {
-        return account;
+    public AccountDTO getAccountDTO() {
+        return accountDTO;
     }
 
     public String getPasswordRepeat() {
@@ -43,17 +43,17 @@ public class ChangeMyPasswordController implements Serializable {
     }
 
     public String changeMyPassword() {
-        if (!(passwordRepeat.equals(account.getPassword()))) {
+        if (!(passwordRepeat.equals(accountDTO.getPassword()))) {
             ContextUtils.emitInternationalizedMessage("changeMyPassword:passwordRepeat", "passwords.not.matching");
             return null;
         }
         try {
-            accountEndpoint.changeMyPasword(passwordOld, account.getPassword());
+            accountEndpoint.changeMyPasword(passwordOld, accountDTO.getPassword());
             return "main";
-        } catch (RuntimeException abe) {
+        } catch (AppBaseException abe) {
             Logger.getLogger(ChangeMyPasswordController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changeMyPassword wyjatku typu: ", abe);
-            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            ContextUtils.emitInternationalizedMessage("changeMyPassword:passwordOld", abe.getMessage());
             return null;
         }
     }

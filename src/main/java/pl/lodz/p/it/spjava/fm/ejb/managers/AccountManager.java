@@ -62,12 +62,11 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
         accountFacade.create(notifier);
     }
 
-    public Assigner findAssignerLogin(String myLogin) {
-     return  accountFacade.findAssignerLogin(myLogin);
-       
+    public Account findLogin(String myLogin) {
+        return accountFacade.findLogin(myLogin);
     }
 
-    public Account findLogin(String myLogin) {
-        return  accountFacade.findLogin(myLogin);
+    public void changeMyPasword(Account account, String newPass) {
+        accountFacade.changeMyPasword(account, newPass);
     }
 }

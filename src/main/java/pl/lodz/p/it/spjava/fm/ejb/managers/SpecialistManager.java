@@ -21,28 +21,6 @@ public class SpecialistManager extends AbstractManager implements SessionSynchro
     @EJB
     private SpecialistFacade specialistFacade;
 
-    @Interceptors(PerformanceInterceptor.class)
-    public void createSpecialist(Specialist specialist) throws AppBaseException {
-        specialistFacade.create(specialist);
-    }
-
-    @Interceptors(PerformanceInterceptor.class)
-    public void editSpecialist(Specialist specialist) throws AppBaseException {
-        specialistFacade.edit(specialist);
-    }
-
-    public void remove(Specialist specialist) throws AppBaseException {
-        specialistFacade.remove(specialist);
-    }
-
-    public void markActive(Specialist specialist, boolean active) {
-        specialistFacade.setActive(specialist, active);
-    }
-
-    public Specialist find(Long id) {
-        return specialistFacade.find(id);
-    }
-
     public List<Specialist> findAll() {
         return specialistFacade.findAll();
     }

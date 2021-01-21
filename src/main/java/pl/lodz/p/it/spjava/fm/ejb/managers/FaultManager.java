@@ -53,6 +53,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.setStatus(fault, status);
     }
 
+    //Roles Assigner
     public void assignSpecialist(Fault fault, Long Id) throws AppBaseException {
         Specialist spec = specFacade.find(Id);
         int specialistFaultsNumber = countOfSpecialist(spec);
@@ -60,7 +61,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         if (specialistFaultsNumber < faultLimit) {
            // String assignerLogin = ContextUtils.getUserName();
             String assignerLogin = "login3";
-            Assigner assigner = assignerFacade.findLogin(assignerLogin);
+            Assigner assigner = assignerFacade.findAssignerLogin(assignerLogin);
             fault.setSpecialist(spec);
             fault.setWhoAssigned(assigner);
             fault.setStatus(Fault.FaultStatus.ASSIGNED);

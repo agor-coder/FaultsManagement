@@ -9,7 +9,9 @@ public class AccountException extends AppBaseException {
     static final public String ACCOUNT_NOT_REMOVE = "error.account.not.remove";
     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
+    static final public String PASS_NOT_MATCH = "error.pass.not.match";
 
+   
     private AccountException(String message) {
         super(message);
     }
@@ -42,6 +44,10 @@ public class AccountException extends AppBaseException {
     }
     static public AccountException createWithDbCheckConstraintKey() {
         AccountException se = new AccountException(KEY_DB_CONSTRAINT);
+        return se;
+    }
+    static public AccountException createWithPreviousGivenPasswordDoesNotMatch() {
+        AccountException se = new AccountException(PASS_NOT_MATCH);
         return se;
     }
 
