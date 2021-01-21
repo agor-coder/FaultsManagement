@@ -101,13 +101,12 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     public void addFault(FaultDTO faultDTO) throws AppBaseException {
         Fault fault = new Fault();
         fault.setFaultDescribe(faultDTO.getFaultDescribe());
-        fault.setWhoNotified(notifierManager.find(-7L));// pobierz konto
-        fault.setTechArea(areaManager.find(faultDTO.getTechArea().getId()));
+        Long idTechArea = faultDTO.getTechArea().getId();
         boolean rollbackTX;
         int retryTXCounter = 1;
         do {
             try {
-                faultManager.createFault(fault);
+                faultManager.createFault(fault, idTechArea);
                 rollbackTX = faultManager.isLastTransactionRollback();
             } catch (AppBaseException | EJBTransactionRolledbackException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter

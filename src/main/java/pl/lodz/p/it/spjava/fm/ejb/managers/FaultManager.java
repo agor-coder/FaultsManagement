@@ -8,11 +8,14 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.ejb.facade.FaultFacade;
+import pl.lodz.p.it.spjava.fm.ejb.facade.NotifierFacade;
+import pl.lodz.p.it.spjava.fm.ejb.facade.TechAreaFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
+import pl.lodz.p.it.spjava.fm.model.TechArea;
 
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -21,7 +24,11 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
     @EJB
     private FaultFacade faultFacade;
-    
+    @EJB
+    private NotifierFacade notifierFacade;
+    @EJB
+    private TechAreaFacade areaFacade;
+
     public Fault find(Long id) {
         return faultFacade.find(id);
     }
@@ -47,10 +54,13 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     }
 
     public List<Fault> findSpecialistFaults(String login) {
-     return faultFacade.findSpecialistFaults(login);
+        return faultFacade.findSpecialistFaults(login);
     }
 
-    public void createFault(Fault fault) throws AppBaseException{
+    public void createFault(Fault fault, Long idTecharea) throws AppBaseException {
+        TechArea area = areaFacade.find(idTecharea);
+        fault.setTechArea(area);
+        fault.setWhoNotified(notifierFacade.find(-7L));// pobierz kont     
         faultFacade.create(fault);
     }
 }
