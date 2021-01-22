@@ -13,8 +13,10 @@ public class ContextUtils {
     /**
      * Creates a new instance of AttributesUtils
      */
+    
     public ContextUtils() {
     }
+
 
     /**
      * Zwraca obiekt FacesContext - kontekst serwletu FacesServlet
@@ -70,8 +72,9 @@ public class ContextUtils {
      * Zwraca nazwę zalogowanego użytkownika
      */
     public static String getUserName() {
+        //sctx.getCallerPrincipal().getName();
         Principal p = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-        return (null == p ? "" : p.getName());
+        return (null == p ? "Brak uwierzytelnienia" : p.getName());
     }
 
     /**

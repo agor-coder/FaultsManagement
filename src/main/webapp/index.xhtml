@@ -26,7 +26,7 @@
                     <li><h:link outcome="fault/newFault.xhtml" value="#{msg['menu.faults.add']}"/></li>
                 </ul>
 
-                <li>Użytkownik</li>
+                <li>${editAccountController.getMyLogin()}</li>
                 <ul>
                     <li><h:link outcome="fault/myFaultList.xhtml" value="#{msg['menu.faults.my']}"/></li>
                     <li><h:link  outcome="account/changeMyPassword.xhtml" value="#{msg['menu.accounts.changePassword']}"/></li>

@@ -250,13 +250,8 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     }
 
     private Account getMyAccount() {
-        //return accountManager.findLogin(getMyLogin());
+        //return accountManager.findLogin(ContextUtils.getUserName());
         return accountManager.findLogin("login4");
-    }
-
-    private String getMyLogin() throws IllegalStateException {//nie ruszać
-        return ContextUtils.getUserName();
-
     }
 
 }

@@ -1,6 +1,5 @@
 package pl.lodz.p.it.spjava.fm.utils;
 
-import javax.inject.Inject;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.dto.AppAdminDTO;
 import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;

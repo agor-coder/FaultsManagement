@@ -21,7 +21,6 @@ import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
-import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -57,7 +56,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     public void assignSpecialist(Fault fault, Long Id) throws AppBaseException {
         Specialist spec = specFacade.find(Id);
         int specialistFaultsNumber = countOfSpecialist(spec);
-
+        
         if (specialistFaultsNumber < faultLimit) {
            // String assignerLogin = ContextUtils.getUserName();
             String assignerLogin = "login3";
@@ -85,7 +84,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 //        String notifierLogin = ContextUtils.getUserName();
        String notifierLogin = "login6";
         Notifier notifier = notifierFacade.findLogin(notifierLogin);
-        fault.setWhoNotified(notifier);//pobierz konto
+        fault.setWhoNotified(notifier);
         faultFacade.create(fault);
     }
 }

@@ -163,6 +163,10 @@ public class EditAccountController implements Serializable {
         return "accountList";
     }
     
+     public String getMyLogin() {
+        return ContextUtils.getUserName();
+    }
+    
     public String resetSession() {
         ContextUtils.invalidateSession();
         return "cancelAction";
