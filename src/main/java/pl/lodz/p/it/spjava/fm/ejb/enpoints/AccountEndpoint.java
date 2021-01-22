@@ -254,4 +254,8 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         return accountManager.findLogin("login4");
     }
 
+    public AccountDTO getMyAccountDTO() {
+        return DTOConverter.makeAccountDTOfromUserEntity(getMyAccount());
+    }
+
 }

@@ -41,6 +41,14 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>accountData</from-outcome>
+            <to-view-id>/accountData.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <from-view-id>/account/newAdmin.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>newAdminConfirm</from-outcome>
