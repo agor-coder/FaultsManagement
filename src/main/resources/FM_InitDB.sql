@@ -46,6 +46,11 @@ INSERT INTO NOTIFIER(id,emplacement) VALUES (-9,'mistrz kotłowni');
 INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-1,'maszynownia','2020-12-07 20:40:54.340',1);
 INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-2,'kotłownia','2020-12-06 18:40:54.340',1);
 INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-3,'elektryczny','2020-12-06 18:40:54.340',1);
+INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-4,'mechaniczny','2020-12-06 18:50:54.340',1);
+INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-5,'chemiczny','2020-12-06 19:57:54.000',1);
+INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-6,'odpopielanie','2020-12-06 19:59:54.025',1);
+INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-7,'odsiarczanie','2020-12-06 20:59:54.025',1);
+INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-8,'nawęglanie','2020-12-06 21:52:47.025',1);
 
 
 INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)

@@ -31,4 +31,9 @@ public class TechAreaDTO {
         this.areaName = areaName;
     }
 
+    @Override
+    public String toString() {
+        return areaName;
+    }
+
 }

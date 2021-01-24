@@ -15,7 +15,7 @@
             <h:outputText   value="#{newFaultController.newFaultDTO.faultDescribe}"  id="describe" /><h:message for="describe" /><br />
 
             <h:outputLabel value="#{msg['fault.area']}" for="area" /><br />
-            <h:outputText value="#{newFaultController.techAreaId}"  id="area" />  <h:message for="area" /><br />
+            <h:outputText value="#{newFaultController.areaDTO.areaName}"  id="area"  />  <h:message for="area" /><br />
 
 
             <h:commandButton value="${msg['action.save']}"   action="#{newFaultController.addFault()}"/>

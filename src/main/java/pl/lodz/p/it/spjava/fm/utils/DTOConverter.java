@@ -3,6 +3,7 @@ package pl.lodz.p.it.spjava.fm.utils;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.dto.AppAdminDTO;
 import pl.lodz.p.it.spjava.fm.dto.AssignerDTO;
@@ -66,6 +67,16 @@ public class DTOConverter {
                     faultsListDTO.add(faultDTO);
                 });
         return faultsListDTO;
+    }
+
+    public static List<TechAreaDTO> createAreaListDTO(List<TechArea> areasList) {
+        List<TechAreaDTO> areasListDTO = new ArrayList<>();
+        areasList.stream().map(area -> createTechAreaDTOFromEntity(area))
+                .sorted(Comparator.comparing(TechAreaDTO::getAreaName))
+                .forEachOrdered(areaDTO -> {
+                    areasListDTO.add(areaDTO);
+                });
+        return areasListDTO;
     }
 
     public static FaultDTO createFaultDTOFromEntity(Fault fault) {

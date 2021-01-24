@@ -31,6 +31,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private int txRetryLimit;
     @EJB
     private FaultManager faultManager;
+    
     private Fault endpointFault;
 
     public List<FaultDTO> getAllFaultsDTO() {
@@ -69,15 +70,15 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         faultManager.assignSpecialist(endpointFault, specId);
     }
 
-    public void addFault(FaultDTO faultDTO) throws AppBaseException {
+    public void addFault(FaultDTO faultDTO, Long id) throws AppBaseException {
         Fault fault = new Fault();
         fault.setFaultDescribe(faultDTO.getFaultDescribe());
-        Long idTechArea = faultDTO.getTechArea().getId();
+      
         boolean rollbackTX;
         int retryTXCounter = 1;
         do {
             try {
-                faultManager.createFault(fault, idTechArea);
+                faultManager.createFault(fault, id);
                 rollbackTX = faultManager.isLastTransactionRollback();
             } catch (AppBaseException | EJBTransactionRolledbackException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter

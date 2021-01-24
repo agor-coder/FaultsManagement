@@ -14,9 +14,12 @@
             <h:outputLabel value="#{msg['fault.describe']}" for="describe" /><br />
             <h:inputTextarea   value="#{newFaultController.newFaultDTO.faultDescribe}"  id="describe" /><h:message for="describe" /><br />
 
-            <h:outputLabel value="#{msg['fault.area']}" for="area" /><br />
-            <h:inputText value="#{newFaultController.techAreaId}"  id="area" />  <h:message for="area" /><br />
-
+            <p>#{msg['fault.choose.area']}</p>
+            <h:selectOneMenu  id="list1" value="#{newFaultController.techAreaId}"   >
+                <f:selectItems value="#{newFaultController.areasDTO}" var="area"  itemValue="#{area.id}" itemLabel="#{area.areaName}"> </f:selectItems>
+            </h:selectOneMenu><h:message for="list1" />
+            <br />
+             <br />
 
             <h:commandButton value="${msg['page.confirm']}"   action="#{newFaultController.confirmFault}"/>
             <h:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
