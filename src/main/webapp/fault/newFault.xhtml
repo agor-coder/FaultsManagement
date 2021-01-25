@@ -11,10 +11,10 @@
         NEW FAULT<br />
         <br />
         <h:form id="newFault">
-            <h:outputLabel value="#{msg['fault.describe']}" for="describe" /><br />
+            <h:outputLabel value="#{msg['fault.describe']}"  style="color: green" for="describe" /><br />
             <h:inputTextarea   value="#{newFaultController.newFaultDTO.faultDescribe}"  id="describe" /><h:message for="describe" /><br />
 
-            <p>#{msg['fault.choose.area']}</p>
+            <h:outputLabel value="#{msg['fault.choose.area']}" style="color: green"/><br />
             <h:selectOneMenu  id="list1" value="#{newFaultController.techAreaId}"   >
                 <f:selectItems value="#{newFaultController.areasDTO}" var="area"  itemValue="#{area.id}" itemLabel="#{area.areaName}"> </f:selectItems>
             </h:selectOneMenu><h:message for="list1" />
