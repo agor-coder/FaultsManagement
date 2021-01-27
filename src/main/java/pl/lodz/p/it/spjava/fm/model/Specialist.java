@@ -11,8 +11,6 @@ import javax.validation.constraints.NotNull;
 @DiscriminatorValue("Specjalista")
 public class Specialist extends Account implements Serializable {
 
-    private static final int MAX_FAULTS_IN_PROGRESS = 3;
-
     @NotNull(message = "{constraint.notnull}")
     private String department;
 

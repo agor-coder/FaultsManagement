@@ -37,6 +37,7 @@
                 </h:column>
 
                 <h:column>
+                    <h:commandButton value="${msg['fault.change.specialist']}"   action="#{faultListController.assign(fault)}" rendered="#{ fault.assigned}"/>
                     <h:commandButton value="${msg['fault.assign']}"   action="#{faultListController.assign(fault)}" rendered="#{ fault.notAssigned}"/>
                     <h:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}" rendered="#{fault.assigned}" />
 
