@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.exception;
 
 import javax.persistence.OptimisticLockException;
+import javax.persistence.PersistenceException;
 
 
 public class AccountException extends AppBaseException {
@@ -10,7 +11,9 @@ public class AccountException extends AppBaseException {
     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
     static final public String PASS_NOT_MATCH = "error.pass.not.match";
+    static final public String KEY_DB_CONSTRAINT_EMAIL = "error.account.db.constraint.uniq.email";
 
+  
    
     private AccountException(String message) {
         super(message);
@@ -46,6 +49,11 @@ public class AccountException extends AppBaseException {
         AccountException se = new AccountException(KEY_DB_CONSTRAINT);
         return se;
     }
+      public static AccountException createWithDbCheckConstraintKeyEmail(PersistenceException ex) {
+        AccountException se = new AccountException(KEY_DB_CONSTRAINT_EMAIL);
+        return se;
+    }
+
     static public AccountException createWithPreviousGivenPasswordDoesNotMatch() {
         AccountException se = new AccountException(PASS_NOT_MATCH);
         return se;

@@ -49,7 +49,7 @@ public class AccountFacade extends AbstractFacade<Account> {
             throw AccountException.createAccountExceptionWithOptimisticLockKey(oe);
         } catch (PersistenceException ex) {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
-                throw AccountException.createWithDbCheckConstraintKey(ex);
+                throw AccountException.createWithDbCheckConstraintKeyEmail(ex);
             } else {
                 throw ex;
             }
