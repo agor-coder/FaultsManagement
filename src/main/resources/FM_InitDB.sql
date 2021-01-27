@@ -18,6 +18,10 @@ VALUES (-3,'Specjalista',0,0,'2020-12-06 18:40:54.340','login2','123456',1,'2@op
 INSERT INTO SPECIALIST(id,department) VALUES (-3,'ER4');
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
+VALUES (-10,'Specjalista',0,0,'2021-01-06 11:40:54.000','login9','123456',1,'21@wp.pl','Zbigniew','SkwarS','5377');
+INSERT INTO SPECIALIST(id,department) VALUES (-10,'ER4');
+
+INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-4,'Przydzielający',0,0,'2020-12-22 15:39:54.340','login3','123456',1,'3@p.pl','Stefan','SmokP','4367');
 INSERT INTO ASSIGNER(id,department) VALUES (-4,'MR4');
 
