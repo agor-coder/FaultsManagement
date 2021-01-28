@@ -39,21 +39,33 @@ public class AccountListController implements Serializable {
         return accountsDTO;
     }
 
-    public void activateAccount(AccountDTO accountDTO) throws AppBaseException {//obsłużyć
-        accountEndpoint.activateAccount(accountDTO);
-        init();
+    public void activateAccount(AccountDTO accountDTO) {
+        try {
+            accountEndpoint.activateAccount(accountDTO);
+            init();
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji activateAccount wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+        }
     }
 
-    public void deactivateAccount(AccountDTO accountDTO) throws AppBaseException {//obsłużyć
-        accountEndpoint.deactivateAccount(accountDTO);
-        init();
+    public void deactivateAccount(AccountDTO accountDTO) {
+        try {
+            accountEndpoint.deactivateAccount(accountDTO);
+            init();
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji deactivateAccount wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+        }
     }
 
-    public void removeAccount(AccountDTO accountDTO)  {//obsłużyć
-        try{
-        accountEndpoint.removeAccount(accountDTO);
-        init();
-        }catch (AppBaseException abe) {
+    public void removeAccount(AccountDTO accountDTO) {
+        try {
+            accountEndpoint.removeAccount(accountDTO);
+            init();
+        } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji removeAccount wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());

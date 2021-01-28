@@ -49,7 +49,6 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     private void setEndpointAccountFromDTOToEdit(AccountDTO accDTO) throws AppBaseException {
         endpointAccount = accountManager.find(accDTO.getId());
-        System.out.println(endpointAccount + "od enpointa");
         if (null == endpointAccount) {
             throw AccountException.createAccountExceptionWithAccountNotFound();
         }
