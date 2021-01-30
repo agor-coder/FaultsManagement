@@ -9,8 +9,8 @@
     <h:body>
         #{msg['menu.faults.list']} <br />
         <br />
-        <h:form id="faultsList">
-            <h:dataTable value="#{myFaultListController.myFaultsDTO}" var="fault">
+        <h:form id="notifierFaultsList">
+            <h:dataTable value="#{notifierFaultListController.myFaultsDTO}" var="fault">
                 <h:column>
                     <f:facet name="header">#{msg['fault.creation.time']}</f:facet> ${fault.createTimeStamp} 
                 </h:column>
@@ -36,13 +36,8 @@
                     <f:facet name="header">#{msg['fault.status']}</f:facet> ${fault.status.description} 
                 </h:column>
 
-                <h:column>
-                    <h:commandButton value="${msg['fault.finish']}"  action="#{myFaultListController.setStatusEND(fault)}" rendered="#{fault.assigned}" />
-
-
-                </h:column>
             </h:dataTable>
-            <h:commandButton value="${msg['action.refresh']}" action="#{myFaultListController.init()}" />
+            <h:commandButton value="${msg['action.refresh']}" action="#{notifierFaultListController.init()}" />
             <h:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
         </h:form>
     </h:body>

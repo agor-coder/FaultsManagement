@@ -80,6 +80,9 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     public List<Fault> findSpecialistFaults(String login) {
         return faultFacade.findSpecialistFaults(login);
     }
+      public List<Fault> findNotifierFaults(String login) {
+       return faultFacade.findNotifierFaults(login);
+    }
 
     public void createFault(Fault fault, Long idTecharea) throws AppBaseException {
         TechArea area = areaFacade.find(idTecharea);
@@ -90,4 +93,6 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         fault.setWhoNotified(notifier);
         faultFacade.create(fault);
     }
+
+  
 }

@@ -66,7 +66,13 @@ public class FaultFacade extends AbstractFacade<Fault> {
     }
 
     public List<Fault> findSpecialistFaults(String login) {
-        TypedQuery tq = getEntityManager().createNamedQuery("Fault.findOfLogin", Fault.class);
+        TypedQuery tq = getEntityManager().createNamedQuery("Fault.findSpecOfLogin", Fault.class);
+        tq.setParameter("login", login);
+        return tq.getResultList();
+    }
+
+    public List<Fault> findNotifierFaults(String login) {
+        TypedQuery tq = getEntityManager().createNamedQuery("Fault.findNotifOfLogin", Fault.class);
         tq.setParameter("login", login);
         return tq.getResultList();
     }

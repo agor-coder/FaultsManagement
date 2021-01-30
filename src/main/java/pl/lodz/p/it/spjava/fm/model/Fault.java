@@ -12,7 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@NamedQuery(name = "Fault.findOfLogin", query = "SELECT i FROM Fault i where i.specialist.login = :login")
+@NamedQuery(name = "Fault.findSpecOfLogin", query = "SELECT i FROM Fault i where i.specialist.login = :login")
+@NamedQuery(name = "Fault.findNotifOfLogin", query = "SELECT i FROM Fault i where i.whoNotified.login = :login")
 @NamedQuery(name = "Fault.countOfSpecialist", query = "SELECT COUNT (i) FROM Fault i where i.specialist = :specialist AND i.status=:status")
 @Entity
 public class Fault extends AbstractEntity implements Serializable {
