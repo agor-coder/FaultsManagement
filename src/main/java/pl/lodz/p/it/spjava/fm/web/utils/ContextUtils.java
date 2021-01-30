@@ -2,12 +2,16 @@ package pl.lodz.p.it.spjava.fm.web.utils;
 
 import java.security.Principal;
 import java.util.ResourceBundle;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 
+@ApplicationScoped
+@Named
 public class ContextUtils {
 
     /**
@@ -56,8 +60,9 @@ public class ContextUtils {
     /**
      * Dokonuje zamknięcia bieżącej sesji
      */
-    public static void invalidateSession() {
+    public String invalidateSession() {
         ((HttpSession) getContext().getSession(true)).invalidate();
+          return "main";
     }
 
     /**

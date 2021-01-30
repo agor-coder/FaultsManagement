@@ -248,7 +248,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
     }
 
-    private Account getMyAccount() {
+    public Account getMyAccount() {
         //return accountManager.findLogin(ContextUtils.getUserName());
         return accountManager.findLogin("login4");
     }

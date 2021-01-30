@@ -8,6 +8,7 @@
     </h:head>
     <h:body>
         #{msg['menu.faults.list']} <br />
+        <h:outputLabel value="#{editAccountController.firstLastName}"  />
         <br />
         <h:form id="notifierFaultsList">
             <h:dataTable value="#{notifierFaultListController.myFaultsDTO}" var="fault">

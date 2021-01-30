@@ -20,17 +20,18 @@ public class MyFaultListController implements Serializable {
     @EJB
     private FaultEndpoint faultEndpoint;
 
+
     private List<FaultDTO> myFaultsDTO;
 
     @PostConstruct
     public void init() {
-       myFaultsDTO = faultEndpoint.getMyFaultsDTO();
+        myFaultsDTO = faultEndpoint.getMyFaultsDTO();
     }
 
     public List<FaultDTO> getMyFaultsDTO() {
         return myFaultsDTO;
     }
- 
+
     public void setStatusEND(FaultDTO faultDTO) {
         try {
             faultEndpoint.setStatusEND(faultDTO);

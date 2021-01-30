@@ -11,6 +11,7 @@ import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.utils.AccountUtils;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
@@ -163,13 +164,14 @@ public class EditAccountController implements Serializable {
         return "accountList";
     }
     
-     public String getMyLogin() {
+     public  String getUserName() {
         return ContextUtils.getUserName();
     }
-    
-    public String resetSession() {
-        ContextUtils.invalidateSession();
-        return "cancelAction";
+       public String getFirstLastName() {
+        Account us = accountEndpoint.getMyAccount();
+        return us.getFirstName() + " " + us.getSureName();
     }
+    
+   
 
 }
