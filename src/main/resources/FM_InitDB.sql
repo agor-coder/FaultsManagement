@@ -6,6 +6,18 @@
 
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
+VALUES (-11,'Administrator',0,0,'2020-11-04 18:39:54.340','login10','123456',1,'10@p.pl','Piotr','SmutnyA','5322');
+INSERT INTO APPADMIN(id,alarmphone) VALUES (-11,'222');
+
+INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
+VALUES (-12,'Administrator',0,0,'2020-11-04 20:39:54.340','login11','123456',1,'11@p.pl','Sławomir','HermanA','5320');
+INSERT INTO APPADMIN(id,alarmphone) VALUES (-12,'221');
+
+INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
+VALUES (-13,'Administrator',0,0,'2020-11-04 18:50:54.340','login12','123456',1,'12@p.pl','Maciej','WolnyA','5321');
+INSERT INTO APPADMIN(id,alarmphone) VALUES (-13,'224');
+
+INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-1,'Specjalista',0,0,'2020-12-04 18:39:54.340','login0','123456',1,'2@p.pl','Andrzej','GorzkiS','5366');
 INSERT INTO SPECIALIST(id,department) VALUES (-1,'ER4');
 

@@ -67,6 +67,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
                 .forEachOrdered(accountDTO -> {
                     listAccountDTO.add(accountDTO);
                 });
+        System.out.println(listAccount);
         return listAccountDTO;
     }
 
