@@ -19,17 +19,14 @@
             <description/>
             <role-name>AppAdmin</role-name>
         </auth-constraint>
-        <user-data-constraint>
-            <description/>
-            <transport-guarantee>NONE</transport-guarantee>
-        </user-data-constraint>
     </security-constraint>
     <security-constraint>
-        <display-name>Szczegóły konta</display-name>
+        <display-name>Strony zalogowanego</display-name>
         <web-resource-collection>
-            <web-resource-name>szczegóły konta</web-resource-name>
+            <web-resource-name>strony zalogowanego</web-resource-name>
             <description/>
             <url-pattern>/faces/account/accountData.xhtml</url-pattern>
+            <url-pattern>/faces/account/changeMyPassword.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -38,10 +35,57 @@
             <role-name>Specialist</role-name>
             <role-name>Assigner</role-name>
         </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>HTTPS</display-name>
+        <web-resource-collection>
+            <web-resource-name>wszystkie</web-resource-name>
+            <description/>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
         <user-data-constraint>
             <description/>
-            <transport-guarantee>NONE</transport-guarantee>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Strony zgłaszającego</display-name>
+        <web-resource-collection>
+            <web-resource-name>strony zgłaszającego</web-resource-name>
+            <description/>
+            <url-pattern>/faces/fault/newFault.xhtml</url-pattern>
+            <url-pattern>/faces/fault/newFaultConfirm.xhtml</url-pattern>
+            <url-pattern>/faces/fault/notifierFaultList.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Notifier</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Strony specjalisty</display-name>
+        <web-resource-collection>
+            <web-resource-name>strony specjalisty</web-resource-name>
+            <description/>
+            <url-pattern>/faces/fault/specFaultList.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Specialist</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Strony przydzielającego</display-name>
+        <web-resource-collection>
+            <web-resource-name>strony przydzielającego</web-resource-name>
+            <description/>
+            <url-pattern>/faces/fault/faultList.xhtml</url-pattern>
+            <url-pattern>/faces/specialist/specList.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Assigner</role-name>
+        </auth-constraint>
     </security-constraint>
     <security-role>
         <description>Administrator</description>

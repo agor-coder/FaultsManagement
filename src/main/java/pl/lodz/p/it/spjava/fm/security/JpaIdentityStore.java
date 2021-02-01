@@ -23,7 +23,6 @@ public class JpaIdentityStore implements IdentityStore {
 
     @Override
     public Set<String> getCallerGroups(CredentialValidationResult validationResult) {
-        // w tym miejscu moglibyśmy potencjalnie manipulować zestawem grup odczytanym przez metodę validate()
         return IdentityStore.super.getCallerGroups(validationResult);
     }
 
@@ -31,8 +30,7 @@ public class JpaIdentityStore implements IdentityStore {
     public CredentialValidationResult validate(Credential credential) {
         if (credential instanceof UsernamePasswordCredential) {
             UsernamePasswordCredential usernamePasswordCredential = (UsernamePasswordCredential) credential;
-            // Metoda fasady wywołana za pośrednictwem endpointa sprawdza identyczność skrótu hasła oraz stan konta (potwierdzone, aktywne). Niczego nie potrzebujemy tu już robić.
-            Account account = securityEndpoint.znajdzKontoSpelniajaceWarunkiUwierzytelnienia(usernamePasswordCredential.getCaller(), usernamePasswordCredential.getPasswordAsString());
+            Account account = securityEndpoint.findAccountWithAuthConditions(usernamePasswordCredential.getCaller(), usernamePasswordCredential.getPasswordAsString());
             return (null != account ? new CredentialValidationResult(account.getLogin(), new HashSet<>(Arrays.asList(account.getType()))) : CredentialValidationResult.INVALID_RESULT);
         }
         return CredentialValidationResult.NOT_VALIDATED_RESULT;

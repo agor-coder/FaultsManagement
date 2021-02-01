@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.managers;
 
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -68,5 +69,10 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
 
     public void changeMyPasword(Account account, String newPass) {
         accountFacade.changeMyPasword(account, newPass);
+    }
+
+    @RolesAllowed("AUTHENTICATOR")
+    public Account findLoginAndHashpassActiveAndConfirmed(String login, String hashPass) {
+       return  accountFacade.findLoginAndHashpassActiveAndConfirmed(login, hashPass);
     }
 }

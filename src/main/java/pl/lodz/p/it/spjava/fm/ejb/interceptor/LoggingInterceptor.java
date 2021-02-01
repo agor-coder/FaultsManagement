@@ -19,7 +19,7 @@ public class LoggingInterceptor {
         StringBuilder sb = new StringBuilder("Wywołanie metody biznesowej ")
                 .append(invocation.getTarget().getClass().getName()).append('.')
                 .append(invocation.getMethod().getName());
-        sb.append("w dn.: ").append(LocalDateTime.now()).append(" z tożsamością: ")
+        sb.append("  dn.: ").append(LocalDateTime.now()).append(" z tożsamością: ")
                 .append(sessionContext.getCallerPrincipal().getName());
         try {
             Object[] parameters = invocation.getParameters();

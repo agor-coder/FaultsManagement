@@ -5,10 +5,6 @@ import javax.faces.annotation.FacesConfig;
 import javax.security.enterprise.authentication.mechanism.http.CustomFormAuthenticationMechanismDefinition;
 import javax.security.enterprise.authentication.mechanism.http.LoginToContinue;
 
-/**
- *
- * @author Marcin Kwapisz
- */
 @FacesConfig
 @ApplicationScoped
 @CustomFormAuthenticationMechanismDefinition(

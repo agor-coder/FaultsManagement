@@ -47,7 +47,7 @@ public class AccountFacade extends AbstractFacade<Account> {
     
      @ExcludeClassInterceptors //Nie chcemy ujawniać w dziennikach skrótu hasła
     @RolesAllowed("AUTHENTICATOR") //"Zwykłe" role nie mają tu dostępu. Musi pośredniczyć odpowiedni endpoint opisany jako @RunAs("AUTHENTICATOR").
-    public Account znajdzLoginISkrotHaslaWsrodAktywnychIPotwierdzonychKont(String login, String skrotHasla) {
+    public Account findLoginAndHashpassActiveAndConfirmed(String login, String skrotHasla) {
         if (null == login || null == skrotHasla || login.isEmpty() || skrotHasla.isEmpty()) {
             return null;
         }
