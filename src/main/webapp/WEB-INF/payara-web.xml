@@ -18,7 +18,10 @@
     <role-name>Specialist</role-name>
     <group-name>Specjalista</group-name>
   </security-role-mapping>
-  
+  <security-role-mapping>
+    <role-name>AUTHENTICATOR</role-name>
+    <principal-name>TheMightyAuthenticator</principal-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

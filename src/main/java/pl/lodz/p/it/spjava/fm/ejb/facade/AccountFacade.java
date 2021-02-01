@@ -1,27 +1,36 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.ExcludeClassInterceptors;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
-import pl.lodz.p.it.spjava.fm.model.Assigner;
+import pl.lodz.p.it.spjava.fm.model.Account_;
 
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class AccountFacade extends AbstractFacade<Account> {
+    
+    private static final Logger LOG = Logger.getLogger(AccountFacade.class.getName());
 
     @PersistenceContext(unitName = "FaultsManagementPU")
     private EntityManager em;
@@ -35,6 +44,33 @@ public class AccountFacade extends AbstractFacade<Account> {
         super(Account.class);
     }
 
+    
+     @ExcludeClassInterceptors //Nie chcemy ujawniać w dziennikach skrótu hasła
+    @RolesAllowed("AUTHENTICATOR") //"Zwykłe" role nie mają tu dostępu. Musi pośredniczyć odpowiedni endpoint opisany jako @RunAs("AUTHENTICATOR").
+    public Account znajdzLoginISkrotHaslaWsrodAktywnychIPotwierdzonychKont(String login, String skrotHasla) {
+        if (null == login || null == skrotHasla || login.isEmpty() || skrotHasla.isEmpty()) {
+            return null;
+        }
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Account> query = cb.createQuery(Account.class);
+        Root<Account> from = query.from(Account.class);
+        Predicate criteria = cb.conjunction();
+        criteria = cb.and(criteria, cb.equal(from.get(Account_.login), login));
+        criteria = cb.and(criteria, cb.equal(from.get(Account_.password), skrotHasla));
+        criteria = cb.and(criteria, cb.isTrue(from.get(Account_.active)));
+        criteria = cb.and(criteria, cb.isTrue(from.get(Account_.confirmed)));
+        query = query.select(from);
+        query = query.where(criteria);
+        TypedQuery<Account> tq = em.createQuery(query);
+
+        try {
+            return tq.getSingleResult();
+        } catch (NoResultException | NonUniqueResultException ex) {
+            LOG.log(Level.SEVERE, "Authentication for login: {0} failed with: {1}", new Object[]{login, ex});
+        }
+        return null;
+
+    }
     public void setActive(Account entity, boolean active) {
         em.find(entity.getClass(), entity.getId()).setActive(active);
         // entity.setActive(active);
