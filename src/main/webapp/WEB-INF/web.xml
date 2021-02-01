@@ -8,7 +8,41 @@
         <param-name>resourceBundle.path</param-name>
         <param-value>i18n.messages</param-value>
     </context-param>
-    
+    <security-constraint>
+        <display-name>Konta</display-name>
+        <web-resource-collection>
+            <web-resource-name>Strony kont</web-resource-name>
+            <description/>
+            <url-pattern>/faces/account/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>AppAdmin</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Szczegóły konta</display-name>
+        <web-resource-collection>
+            <web-resource-name>szczegóły konta</web-resource-name>
+            <description/>
+            <url-pattern>/faces/account/accountData.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>AppAdmin</role-name>
+            <role-name>Notifier</role-name>
+            <role-name>Specialist</role-name>
+            <role-name>Assigner</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
     <security-role>
         <description>Administrator</description>
         <role-name>AppAdmin</role-name>
@@ -25,7 +59,6 @@
         <description/>
         <role-name>Assigner</role-name>
     </security-role>
-    
     <env-entry>
         <env-entry-name>txRetryLimit</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
@@ -53,6 +86,10 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/faces/error/error401.xhtml</location>
+    </error-page>
     <error-page>
         <error-code>403</error-code>
         <location>/faces/error/error403.xhtml</location>

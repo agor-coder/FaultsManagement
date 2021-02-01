@@ -4,7 +4,21 @@
   <context-root>/fm</context-root>
   <security-role-mapping>
     <role-name>AppAdmin</role-name>
+    <group-name>Administrator</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>Assigner</role-name>
+    <group-name>Przydzielający</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>Notifier</role-name>
+    <group-name>Zgłaszający</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>Specialist</role-name>
+    <group-name>Specjalista</group-name>
+  </security-role-mapping>
+  
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">
