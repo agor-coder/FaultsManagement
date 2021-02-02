@@ -7,6 +7,7 @@ import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.ExcludeClassInterceptors;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.ejb.facade.AccountFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
@@ -71,8 +72,9 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
         accountFacade.changeMyPasword(account, newPass);
     }
 
+    @ExcludeClassInterceptors
     @RolesAllowed("AUTHENTICATOR")
     public Account findLoginAndHashpassActiveAndConfirmed(String login, String hashPass) {
-       return  accountFacade.findLoginAndHashpassActiveAndConfirmed(login, hashPass);
+        return accountFacade.findLoginAndHashpassActiveAndConfirmed(login, hashPass);
     }
 }

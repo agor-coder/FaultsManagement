@@ -41,17 +41,17 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     }
 
     public List<FaultDTO> getMyFaultsDTO() {
-        //String login = ContextUtils.getUserName();
-        // List<Fault> faultsList = faultManager.findSpecialistFaults(login);
-        List<Fault> faultsList = faultManager.findSpecialistFaults("login0");
+        String login = ContextUtils.getUserName();
+         List<Fault> faultsList = faultManager.findSpecialistFaults(login);
+        //List<Fault> faultsList = faultManager.findSpecialistFaults("login0");
         List<FaultDTO> faultsListDTO = DTOConverter.createFaultListDTO(faultsList);
         return faultsListDTO;
     }
     
     public List<FaultDTO> getNotifierFaultsDTO() {
-        //String login = ContextUtils.getUserName();
-        // List<Fault> faultsList = faultManager.findNotifierFaults(login);
-        List<Fault> faultsList = faultManager.findNotifierFaults("login7");
+       String login = ContextUtils.getUserName();
+        List<Fault> faultsList = faultManager.findNotifierFaults(login);
+        //List<Fault> faultsList = faultManager.findNotifierFaults("login7");
         List<FaultDTO> faultsListDTO = DTOConverter.createFaultListDTO(faultsList);
         return faultsListDTO;
     }

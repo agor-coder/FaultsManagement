@@ -119,21 +119,21 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     }
 
     public void changePassword(AccountDTO editAccountDTO) throws AppBaseException {
-        endpointAccount.setPassword(editAccountDTO.getPassword());
-        //endpointAccount.setPassword(hashGenerator.generateHash(editAccountDTO.getPassword()));
+        //endpointAccount.setPassword(editAccountDTO.getPassword());
+        endpointAccount.setPassword(hashGenerator.generateHash(editAccountDTO.getPassword()));
         accountManager.editAccount(endpointAccount);
 
     }
 
     public void changeMyPasword(String oldPass, String newPass) throws AppBaseException {
         endpointAccount = getMyAccount();//login4
-        //if (!endpointAccount.getPassword().equals(hashGenerator.generateHash(oldPass))) {
-        if (!endpointAccount.getPassword().equals(oldPass)) {
+        if (!endpointAccount.getPassword().equals(hashGenerator.generateHash(oldPass))) {
+        //if (!endpointAccount.getPassword().equals(oldPass)) {
             throw AccountException.createWithPreviousGivenPasswordDoesNotMatch();
         }
-        //String newHash = hashGenerator.generateHash(newPass);
-        //accountManager.changeMyPasword(endpointAccount,newHash);
-        accountManager.changeMyPasword(endpointAccount, newPass);
+        String newHash = hashGenerator.generateHash(newPass);
+        accountManager.changeMyPasword(endpointAccount,newHash);
+       // accountManager.changeMyPasword(endpointAccount, newPass);
 
     }
 
@@ -244,13 +244,13 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     private void writeAccountDataFromDTOToNewEntity(AccountDTO accountDTO, Account account) {
         account.setLogin(accountDTO.getLogin());
         writeEditableDataFromDTOToEntity(accountDTO, account);
-        account.setPassword(accountDTO.getPassword());
-        //account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
+        //account.setPassword(accountDTO.getPassword());
+        account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
     }
 
     public Account getMyAccount() {
-        //return accountManager.findLogin(ContextUtils.getUserName());
-        return accountManager.findLogin("login4");
+        return accountManager.findLogin(ContextUtils.getUserName());
+        //return accountManager.findLogin("login4");
     }
 
     public AccountDTO getMyAccountDTO() {

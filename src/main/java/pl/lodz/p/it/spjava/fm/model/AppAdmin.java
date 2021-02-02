@@ -16,7 +16,7 @@ public class AppAdmin extends Account implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")
     @Size(max = 4, message = "{constraint.string.length.toolong}")
-    @Column(length = 4, unique = true, nullable = true)
+    @Column(length = 4, nullable = true)
     private String alarmPhone;
 
     public String getAlarmPhone() {

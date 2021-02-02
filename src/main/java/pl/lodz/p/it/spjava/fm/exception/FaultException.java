@@ -11,6 +11,7 @@ public class FaultException extends AppBaseException {
     static final public String STATUS_CHANGED_ALREADY = "error.status.changed.already";
     static final public String FAULT_LIMIT = "error.fault.limit";
     static final public String THE_SAME_SPEC = "fault.same.spec";
+   
 
     private FaultException(String message) {
         super(message);
@@ -26,9 +27,11 @@ public class FaultException extends AppBaseException {
     }
 
     public static FaultException faultExceptionWithSameSpecialist() {
-       FaultException fe = new FaultException(THE_SAME_SPEC);
+        FaultException fe = new FaultException(THE_SAME_SPEC);
         return fe;
     }
+
+    
 
     public static FaultException faultExceptionWithStatusChangedAlready() {
         FaultException fe = new FaultException(STATUS_CHANGED_ALREADY);

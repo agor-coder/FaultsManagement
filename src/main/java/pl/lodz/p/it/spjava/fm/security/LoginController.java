@@ -61,9 +61,6 @@ public class LoginController {
         return (HttpServletRequest) facesContext.getExternalContext().getRequest();
     }
 
-//    private void addError(FacesContext context, String message) {
-//        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
-//    }
     public String getUsername() {
         return username;
     }
@@ -76,9 +73,8 @@ public class LoginController {
         return password;
     }
 
-    // Hasło jest od razu zamieniane na skrót, który posłuży do jego porównania z hasłem zapisanym także jako skrót w bazie
     public void setPassword(String password) {
-       // this.password = hashGenerator.generateHash(password);/// odhaczyć!!!!!!!!!!!!
-        this.password = password;
+        this.password = hashGenerator.generateHash(password);
+       // this.password = password;
     }
 }

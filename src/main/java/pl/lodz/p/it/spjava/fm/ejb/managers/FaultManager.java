@@ -16,11 +16,13 @@ import pl.lodz.p.it.spjava.fm.ejb.facade.TechAreaFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
+import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
+import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
@@ -55,14 +57,17 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     //Roles Assigner
     public void assignSpecialist(Fault fault, Long Id) throws AppBaseException {
         Specialist spec = specFacade.find(Id);
+        if (!spec.isActive()||!spec.isConfirmed()) {
+            throw SpecialistException.specExceptionWithNotActive();
+        }
         if (null != fault.getSpecialist() && fault.getSpecialist().equals(spec)) {
             throw FaultException.faultExceptionWithSameSpecialist();
         }
 
         int specialistFaultsNumber = countOfSpecialist(spec);
         if (specialistFaultsNumber < faultLimit) {
-            // String assignerLogin = ContextUtils.getUserName();
-            String assignerLogin = "login4";
+            String assignerLogin = ContextUtils.getUserName();
+            //String assignerLogin = "login4";
             Assigner assigner = assignerFacade.findAssignerLogin(assignerLogin);
             fault.setSpecialist(spec);
             fault.setWhoAssigned(assigner);
@@ -80,19 +85,19 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     public List<Fault> findSpecialistFaults(String login) {
         return faultFacade.findSpecialistFaults(login);
     }
-      public List<Fault> findNotifierFaults(String login) {
-       return faultFacade.findNotifierFaults(login);
+
+    public List<Fault> findNotifierFaults(String login) {
+        return faultFacade.findNotifierFaults(login);
     }
 
     public void createFault(Fault fault, Long idTecharea) throws AppBaseException {
         TechArea area = areaFacade.find(idTecharea);
         fault.setTechArea(area);
-//        String notifierLogin = ContextUtils.getUserName();
-        String notifierLogin = "login7";
+        String notifierLogin = ContextUtils.getUserName();
+        //String notifierLogin = "login7";
         Notifier notifier = notifierFacade.findLogin(notifierLogin);
         fault.setWhoNotified(notifier);
         faultFacade.create(fault);
     }
 
-  
 }

@@ -45,10 +45,10 @@ public class AccountFacade extends AbstractFacade<Account> {
     }
 
     
-     @ExcludeClassInterceptors //Nie chcemy ujawniać w dziennikach skrótu hasła
-    @RolesAllowed("AUTHENTICATOR") //"Zwykłe" role nie mają tu dostępu. Musi pośredniczyć odpowiedni endpoint opisany jako @RunAs("AUTHENTICATOR").
-    public Account findLoginAndHashpassActiveAndConfirmed(String login, String skrotHasla) {
-        if (null == login || null == skrotHasla || login.isEmpty() || skrotHasla.isEmpty()) {
+     @ExcludeClassInterceptors 
+    @RolesAllowed("AUTHENTICATOR")
+    public Account findLoginAndHashpassActiveAndConfirmed(String login, String hashPass) {
+        if (null == login || null == hashPass || login.isEmpty() || hashPass.isEmpty()) {
             return null;
         }
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -56,7 +56,7 @@ public class AccountFacade extends AbstractFacade<Account> {
         Root<Account> from = query.from(Account.class);
         Predicate criteria = cb.conjunction();
         criteria = cb.and(criteria, cb.equal(from.get(Account_.login), login));
-        criteria = cb.and(criteria, cb.equal(from.get(Account_.password), skrotHasla));
+        criteria = cb.and(criteria, cb.equal(from.get(Account_.password), hashPass));
         criteria = cb.and(criteria, cb.isTrue(from.get(Account_.active)));
         criteria = cb.and(criteria, cb.isTrue(from.get(Account_.confirmed)));
         query = query.select(from);
