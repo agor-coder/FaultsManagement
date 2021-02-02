@@ -11,36 +11,54 @@
         <br />
         <h:form>
             <ul>
-                <f:subview id="menuKontoNotLoggedIn" rendered="#{empty request.remoteUser}">
+                <f:subview id="menuNotLoggedIn" rendered="#{empty request.remoteUser}">
                     <li><h:link  value="Rejestruj?"/></li>
                     <li><h:link outcome="authenticate" >${msg["action.login"]}</h:link></li>
                 </f:subview>
+
+                <f:subview id="konto" rendered="#{request.isUserInRole('AppAdmin')}">
+                    <li>${msg["menu.accounts"]}</li>
+                    <ul>
+                        <li><h:link outcome="account/accountList.xhtml" value="#{msg['menu.accounts.list']}"/></li>
+                        <li><h:link outcome="account/newAdmin.xhtml" value="#{msg['menu.accounts.createadmin']}"/></li> 
+                        <li><h:link outcome="account/newSpecialist.xhtml" value="#{msg['menu.accounts.createspecialist']}"/></li> 
+                        <li><h:link outcome="account/newNotifier.xhtml" value="#{msg['menu.accounts.createnotifier']}"/></li> 
+                        <li><h:link outcome="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}"/></li>
+                    </ul>
+                </f:subview>
+
+                <f:subview id="assignerFaults" rendered="#{request.isUserInRole('Assigner')}">
+                    <li>${msg["menu.faults"]} </li>
+                    <ul>
+                        <li><h:link outcome="fault/faultList.xhtml" value="#{msg['menu.faults.list']}" rendered="#{request.isUserInRole('Assigner')}"/></li>
+                    </ul>
+                </f:subview>
                 
+                <f:subview id="notifierFaults" rendered="#{request.isUserInRole('Notifier')}">
+                    <li>${msg["menu.faults"]} </li>
+                    <ul> 
+                        <li><h:link outcome="fault/newFault.xhtml" value="#{msg['menu.faults.add']}" rendered="#{request.isUserInRole('Notifier')}"/></li>
+                        <li><h:link outcome="fault/notifierFaultList.xhtml" value="#{msg['menu.faults.notifier']}" rendered="#{request.isUserInRole('Notifier')}"/> </li>                   
+                    </ul>
+                </f:subview>
                 
-                <li>${msg["menu.accounts"]}</li>
-                <ul>
-                    <li><h:link outcome="account/accountList.xhtml" value="#{msg['menu.accounts.list']}"/></li>
-                    <li><h:link outcome="account/newAdmin.xhtml" value="#{msg['menu.accounts.createadmin']}"/></li> 
-                    <li><h:link outcome="account/newSpecialist.xhtml" value="#{msg['menu.accounts.createspecialist']}"/></li> 
-                    <li><h:link outcome="account/newNotifier.xhtml" value="#{msg['menu.accounts.createnotifier']}"/></li> 
-                    <li><h:link outcome="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}"/></li>
-                </ul>
-                <li>${msg["menu.faults"]}</li>
-                <ul>
-                    <li><h:link outcome="fault/faultList.xhtml" value="#{msg['menu.faults.list']}"/></li>
-                    <li><h:link outcome="fault/newFault.xhtml" value="#{msg['menu.faults.add']}"/></li>
-                    <li><h:link outcome="fault/notifierFaultList.xhtml" value="#{msg['menu.faults.notifier']}"/></li>
-                </ul>
+                <f:subview id="specFaults" rendered="#{request.isUserInRole('Specialist')}">
+                    <li>${msg["menu.faults"]} </li>
+                    <ul>  
+                        <li><h:link outcome="fault/specFaultList.xhtml" value="#{msg['menu.faults.spec']}" rendered="#{request.isUserInRole('Specialist')}"/></li>
+                    </ul>
+                </f:subview>
+                
+            
 
-                <li>${editAccountController.userName}</li>
-                <ul>
-                    <li><h:link outcome="fault/specFaultList.xhtml" value="#{msg['menu.faults.spec']}"/></li>
-                    <li><h:link  outcome="account/changeMyPassword.xhtml" value="#{msg['menu.accounts.changePassword']}"/></li>
-                    <li><h:link  outcome="account/accountData.xhtml" value="#{msg['menu.accounts.details']}"/></li>
-                    <li><h:commandLink   action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}"  /></li>
-
-
-                </ul>
+                <f:subview id="menuKontoLoggedIn" rendered="#{not empty request.remoteUser}">
+                    <li>${editAccountController.userName}</li>
+                    <ul>
+                        <li><h:link  outcome="account/changeMyPassword.xhtml" value="#{msg['menu.accounts.changePassword']}"/></li>
+                        <li><h:link  outcome="account/accountData.xhtml" value="#{msg['menu.accounts.details']}"/></li>
+                        <li><h:commandLink   action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}"  /></li>
+                    </ul>
+                </f:subview>
             </ul>
         </h:form>
     </h:body>
