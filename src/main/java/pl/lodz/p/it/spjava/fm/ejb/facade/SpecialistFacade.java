@@ -6,6 +6,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
+import static javax.persistence.LockModeType.OPTIMISTIC_FORCE_INCREMENT;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
@@ -61,6 +62,15 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
                 throw ex;
             }
         }
+    }
+
+    public Specialist findSpec(Long id) throws AppBaseException {
+        
+            Specialist spec = super.find(id);
+            em.lock(spec, OPTIMISTIC_FORCE_INCREMENT);
+           // em.flush(); 
+            return spec;
+       
     }
 
     public Specialist findLogin(String login) {

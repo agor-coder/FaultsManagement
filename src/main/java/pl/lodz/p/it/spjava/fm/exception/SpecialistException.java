@@ -47,14 +47,13 @@ public class SpecialistException extends AppBaseException {
     }
 
     public static SpecialistException createSpecialistExceptionWithOptimisticLockKey(Specialist specialist, OptimisticLockException cause) {
-        SpecialistException ze = new SpecialistException(KEY_OPTIMISTIC_LOCK, cause);
-        ze.specialist = specialist;
-        return ze;
+        SpecialistException se = new SpecialistException(KEY_OPTIMISTIC_LOCK, cause);
+        se.specialist = specialist;
+        return se;
     }
 
-    public static SpecialistException createSpecialistExceptionWithOptimisticLockKey(Specialist specialist) {
-        SpecialistException ze = new SpecialistException(KEY_OPTIMISTIC_LOCK);
-        ze.specialist = specialist;
-        return ze;
+    public static SpecialistException createSpecialistExceptionWithOptimisticLockKey(OptimisticLockException cause) {
+        SpecialistException se = new SpecialistException(KEY_OPTIMISTIC_LOCK);
+        return se;
     }
 }

@@ -10,7 +10,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
-import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
