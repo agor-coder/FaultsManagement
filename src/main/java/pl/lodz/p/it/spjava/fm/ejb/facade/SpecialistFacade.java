@@ -1,20 +1,15 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import static javax.persistence.LockModeType.OPTIMISTIC_FORCE_INCREMENT;
-import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
-import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
-import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 @Stateless
@@ -34,35 +29,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
         super(Specialist.class);
     }
 
-    @Override
-    public void create(Specialist entity) throws AppBaseException {
-        try {
-            super.create(entity);
-            em.flush();
-        } catch (PersistenceException ex) {
-            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
-                throw SpecialistException.createWithDbCheckConstraintKey(entity, ex);
-            } else {
-                throw ex;
-            }
-        }
-    }
-
-    @Override
-    public void edit(Specialist entity) throws AppBaseException {
-        try {
-            super.edit(entity);
-            em.flush();
-        } catch (OptimisticLockException oe) {
-            throw SpecialistException.createSpecialistExceptionWithOptimisticLockKey(entity, oe);
-        } catch (PersistenceException ex) {
-            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
-                throw SpecialistException.createWithDbCheckConstraintKey(entity, ex);
-            } else {
-                throw ex;
-            }
-        }
-    }
+ 
 
     public Specialist findSpec(Long id) throws AppBaseException {
         
@@ -79,9 +46,5 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
         return (Specialist) q.getSingleResult();
     }
 
-    public void setActive(Specialist entity, boolean active) {
-        em.find(entity.getClass(), entity.getId()).setActive(active);
-        // entity.setActive(active);
-    }
 
 }

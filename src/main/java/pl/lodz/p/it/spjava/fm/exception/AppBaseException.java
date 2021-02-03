@@ -8,6 +8,8 @@ import javax.ejb.ApplicationException;
 abstract public class AppBaseException extends Exception {
       
     static final public String KEY_TX_RETRY_ROLLBACK = "error.tx.retry.rollback";  
+     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
+   
     
     protected AppBaseException(String message, Throwable cause) {
         super(message, cause);

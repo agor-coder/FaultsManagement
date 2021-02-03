@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TECHAREA LIST</title>
+    </h:head>
+    <h:body>
+        #{msg['menu.areas']} <br />
+        <br />
+        <h:form id="areaList">
+            <h:dataTable value="#{areaListController.areasDTO}" var="area">
+                <h:column>
+                    <f:facet name="header">#{msg['area.creation.time']}</f:facet> ${area.createTimeStamp} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg['fault.area']}</f:facet> ${area.areaName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msg['fault.modification.time']}</f:facet> ${area.modificationTimeStamp} 
+                </h:column>
+                
+
+                <h:column>
+                    <h:commandButton value="${msg['area.change']}" />
+                    <h:commandButton value="${msg['action.delete']}"  action="#{areaListController.remove(area)}" />
+                   
+
+
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="${msg['action.refresh']}" action="#{areaListController.init()}" />
+             <h:commandButton value="${msg['action.create']}"   />
+            <h:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
+        </h:form>
+    </h:body>
+</html>
+

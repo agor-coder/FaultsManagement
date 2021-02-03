@@ -8,7 +8,6 @@ public class AccountException extends AppBaseException {
 
     static final public String KEY_NOT_FOUND = "error.account.not.found";
     static final public String ACCOUNT_NOT_REMOVE = "error.account.not.remove";
-    static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
     static final public String PASS_NOT_MATCH = "error.pass.not.match";
     static final public String KEY_DB_CONSTRAINT_EMAIL = "error.account.db.constraint.uniq.email";

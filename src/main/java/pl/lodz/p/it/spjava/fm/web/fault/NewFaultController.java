@@ -38,7 +38,6 @@ public class NewFaultController implements Serializable {
 
     @PostConstruct
     public void init() {
-        System.out.println("TWORZENIE NEW FAULTCONTROLLERA!!!!!!!!!!!!");
         areasDTO = areaEndpoint.getAllAreasDTO();
     }
 

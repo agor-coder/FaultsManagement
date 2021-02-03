@@ -9,6 +9,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.ejb.facade.TechAreaFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
+import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
 
 @Stateful
@@ -25,6 +26,10 @@ public class TechAreaManager extends AbstractManager implements SessionSynchroni
 
     public List<TechArea> findAll() {
         return areaFacade.findAll();
+    }
+
+    public void remove(TechArea area) throws AppBaseException {
+        areaFacade.remove(area);
     }
 
 }

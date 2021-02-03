@@ -26,14 +26,14 @@
                         <li><h:link outcome="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}"/></li>
                     </ul>
                 </f:subview>
-
+                <li><h:link outcome="techarea/areaList.xhtml" value="#{msg['menu.areas']}"/></li>
                 <f:subview id="assignerFaults" rendered="#{request.isUserInRole('Assigner')}">
                     <li>${msg["menu.faults"]} </li>
                     <ul>
                         <li><h:link outcome="fault/faultList.xhtml" value="#{msg['menu.faults.list']}" rendered="#{request.isUserInRole('Assigner')}"/></li>
                     </ul>
                 </f:subview>
-                
+
                 <f:subview id="notifierFaults" rendered="#{request.isUserInRole('Notifier')}">
                     <li>${msg["menu.faults"]} </li>
                     <ul> 
@@ -41,15 +41,15 @@
                         <li><h:link outcome="fault/notifierFaultList.xhtml" value="#{msg['menu.faults.notifier']}" rendered="#{request.isUserInRole('Notifier')}"/> </li>                   
                     </ul>
                 </f:subview>
-                
+
                 <f:subview id="specFaults" rendered="#{request.isUserInRole('Specialist')}">
                     <li>${msg["menu.faults"]} </li>
                     <ul>  
                         <li><h:link outcome="fault/specFaultList.xhtml" value="#{msg['menu.faults.spec']}" rendered="#{request.isUserInRole('Specialist')}"/></li>
                     </ul>
                 </f:subview>
-                
-            
+
+
 
                 <f:subview id="menuKontoLoggedIn" rendered="#{not empty request.remoteUser}">
                     <li>${editAccountController.userName}</li>
