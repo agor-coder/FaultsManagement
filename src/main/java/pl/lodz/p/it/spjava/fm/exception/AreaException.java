@@ -7,7 +7,7 @@ public class AreaException extends AppBaseException {
 
     static final public String KEY_NOT_FOUND = "error.area.not.found";
     static final public String AREA_NOT_REMOVE = "error.area.not.remove";
-     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
+     static final public String KEY_DB_CONSTRAINT = "error.area.db.constraint.uniq";
   
 
   
