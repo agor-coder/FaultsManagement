@@ -19,12 +19,13 @@ public class TechAreaDTO {
     public TechAreaDTO() {
     }
 
-    public TechAreaDTO(Long id, String areaName, Date createTimeStamp,Date modificationTimestamp) {
+    public TechAreaDTO(Long id, String areaName, Date createTimeStamp, Date modificationTimestamp) {
         this.id = id;
         this.areaName = areaName;
-        this.modificationTimeStamp = modificationTimeStamp;
+        this.modificationTimeStamp = modificationTimestamp;
         this.createTimeStamp = createTimeStamp;
     }
+  
 
     public Long getId() {
         return id;
@@ -44,12 +45,13 @@ public class TechAreaDTO {
 
     public String getModificationTimeStamp() {
         return null == modificationTimeStamp ? getCreateTimeStamp() : sdf.format(modificationTimeStamp);
-
+     
     }
 
+    
     @Override
     public String toString() {
-        return areaName;
+        return areaName ;
     }
 
 }

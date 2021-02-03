@@ -18,6 +18,7 @@ import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
 
+
 public class DTOConverter {
 
     private static AccountDTO createAdminDTOFromEntity(AppAdmin adm) {
@@ -48,11 +49,6 @@ public class DTOConverter {
         return null == assigner ? null : new AssignerDTO(assigner.getId(), assigner.getLogin(), assigner.isActive(),
                 assigner.isConfirmed(), assigner.getFirstName(), assigner.getSureName(), assigner.getEmail(), assigner.getPhone(),
                 assigner.getType(), assigner.getDepartment());
-    }
-
-    public static TechAreaDTO createTechAreaDTOFromEntity(TechArea area) {
-        return null == area ? null : new TechAreaDTO(area.getId(), area.getAreaName(),
-                area.getCreationTimestamp(), area.getModificationTimestamp());
     }
 
     private static FaultDTO.FaultStatusDTO createFaultStatusDTOFromEntity(Fault.FaultStatus status) {
@@ -87,6 +83,11 @@ public class DTOConverter {
                 createNotifierDTOFromEntity(fault.getWhoNotified()),
                 createAssignerDTOFromEntity(fault.getWhoAssigned()),
                 fault.getModificationTimestamp());
+    }
+
+    public static TechAreaDTO createTechAreaDTOFromEntity(TechArea area) {
+        return null == area ? null : new TechAreaDTO(area.getId(), area.getAreaName(),
+                area.getCreationTimestamp(), area.getModificationTimestamp());
     }
 
     public static AccountDTO makeAccountDTOfromUserEntity(Account account) {

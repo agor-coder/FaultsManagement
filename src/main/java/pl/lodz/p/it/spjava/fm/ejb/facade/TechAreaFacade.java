@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import org.eclipse.persistence.exceptions.DatabaseException;
@@ -39,6 +40,22 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
         } catch (PersistenceException ex) {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw AreaException.createAreaExceptionWithAreaNotRemove();
+            } else {
+                throw ex;
+            }
+        }
+    }
+    
+     @Override
+    public void edit(TechArea entity) throws AppBaseException {
+        try {
+            super.edit(entity);
+            em.flush();
+        } catch (OptimisticLockException oe) {
+            throw AreaException.createAreaExceptionWithOptimisticLockKey(oe);
+        } catch (PersistenceException ex) {
+            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
+                throw AreaException.createWithDbCheckConstraintKey(ex);
             } else {
                 throw ex;
             }

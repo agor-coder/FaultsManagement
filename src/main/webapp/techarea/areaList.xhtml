@@ -23,7 +23,7 @@
                 
 
                 <h:column>
-                    <h:commandButton value="${msg['area.change']}" />
+                    <h:commandButton value="${msg['area.change']}" action="#{areaListController.editArea(area)}" />
                     <h:commandButton value="${msg['action.delete']}"  action="#{areaListController.remove(area)}" />
                    
 

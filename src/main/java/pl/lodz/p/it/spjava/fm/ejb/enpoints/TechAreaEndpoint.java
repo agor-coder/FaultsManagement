@@ -7,11 +7,9 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
-import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.dto.TechAreaDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.TechAreaManager;
-import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.AreaException;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
@@ -33,10 +31,11 @@ public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchro
         return areasListDTO;
     }
 
-//    public FaultDTO getAreaDTOToEdit(TechAreaDTO areaDTO) throws AppBaseException {
-//        setEndpointAreaFromDTOToEdit(areaDTO);
-//        return DTOConverter.createAreaDTOFromEntity(endpointArea);
-//    }
+    public TechAreaDTO getTechAreaToEdit(TechAreaDTO areaDTO) throws AppBaseException {
+        setEndpointAreaFromDTOToEdit(areaDTO);
+        return DTOConverter.createTechAreaDTOFromEntity(endpointArea);
+    }
+
     public void remove(TechAreaDTO areaDTO) throws AppBaseException {
         setEndpointAreaFromDTOToEdit(areaDTO);
         areaManager.remove(endpointArea);
@@ -49,4 +48,13 @@ public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchro
         }
     }
 
+    public void saveAreaAfterEdit(TechAreaDTO areaDTO) throws AppBaseException {
+        writeEditableDataFromDTOToEntity(areaDTO, endpointArea);
+        areaManager.editArea(endpointArea);
+    }
+
+    private void writeEditableDataFromDTOToEntity(TechAreaDTO areaDTO, TechArea area) {
+        area.setAreaName(areaDTO.getAreaName());
+
+    }
 }

@@ -130,24 +130,7 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/specialist/specList.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>editSpecialist</from-outcome>
-            <to-view-id>/specialist/editSpecialist.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
-        <from-view-id>/specialist/editSpecialist.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>specList</from-outcome>
-            <to-view-id>/specialist/specList.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
-    
+   
     <navigation-rule>
         <from-view-id>/account/accountList.xhtml</from-view-id>
         <navigation-case>
@@ -222,6 +205,24 @@
         <navigation-case>
             <from-outcome>accountList</from-outcome>
             <to-view-id>/account/accountList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+        <from-view-id>/techarea/areaList.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>editArea</from-outcome>
+            <to-view-id>/techarea/editArea.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/techarea/editArea.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>areaList</from-outcome>
+            <to-view-id>/techarea/areaList.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>

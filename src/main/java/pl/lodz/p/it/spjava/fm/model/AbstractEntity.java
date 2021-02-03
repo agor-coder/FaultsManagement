@@ -9,11 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
-/**
- *
- * Klasa nadrzędna dla wszystkich klas encyjnych. Ustala wspólne metody:
- * toString() equals() hashCode()
- */
+
 @MappedSuperclass
 public abstract class AbstractEntity {
 

@@ -31,6 +31,7 @@ public class AreaListController implements Serializable {
     @PostConstruct
     public void init() {
         areasDTO = areaEndpoint.getAllAreasDTO();
+        
     }
 
     public List<TechAreaDTO> getAreasDTO() {
@@ -48,9 +49,9 @@ public class AreaListController implements Serializable {
         }
     }
 
-//    public String editArea(TechAreaDTO areaDTO) {
-//        conversation.begin();
-//        editAreaController.setEditAreaDTOAndGetAreaEntityToEnpoint(areaDTO);
-//        return "editArea";
-//    }
+    public String editArea(TechAreaDTO areaDTO) {
+        conversation.begin();
+        editAreaController.setAreaDTOAndGetAreaEntityToEnpoint(areaDTO);
+        return "editArea";
+    }
 }

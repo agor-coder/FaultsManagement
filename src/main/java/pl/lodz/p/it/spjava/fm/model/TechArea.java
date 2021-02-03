@@ -41,4 +41,9 @@ public class TechArea extends AbstractEntity implements Serializable {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return areaName + " " +super.getModificationTimestamp();
+    }
+
 }
