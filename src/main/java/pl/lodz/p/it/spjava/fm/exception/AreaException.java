@@ -10,8 +10,6 @@ public class AreaException extends AppBaseException {
      static final public String KEY_DB_CONSTRAINT = "error.area.db.constraint.uniq";
   
 
-  
-   
     private AreaException(String message) {
         super(message);
     }

@@ -54,4 +54,9 @@ public class AreaListController implements Serializable {
         editAreaController.setAreaDTOAndGetAreaEntityToEnpoint(areaDTO);
         return "editArea";
     }
+    
+    public String createArea() {
+        conversation.begin();
+        return "newArea";
+    }
 }

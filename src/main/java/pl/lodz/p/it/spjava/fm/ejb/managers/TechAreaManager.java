@@ -36,4 +36,8 @@ public class TechAreaManager extends AbstractManager implements SessionSynchroni
        areaFacade.edit(area);
     }
 
+    public void createArea(TechArea techArea) throws AppBaseException {
+        areaFacade.create(techArea);
+    }
+
 }

@@ -31,7 +31,7 @@
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.refresh']}" action="#{areaListController.init()}" />
-             <h:commandButton value="${msg['action.create']}"   />
+             <h:commandButton value="${msg['action.create']}"  action="#{areaListController.createArea()}"  />
             <h:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
         </h:form>
     </h:body>

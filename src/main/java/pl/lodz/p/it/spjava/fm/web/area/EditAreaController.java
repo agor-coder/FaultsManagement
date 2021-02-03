@@ -12,11 +12,14 @@ import pl.lodz.p.it.spjava.fm.dto.TechAreaDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.TechAreaEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.account.EditAccountController;
+import pl.lodz.p.it.spjava.fm.web.appAdmin.NewAdminController;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
 @ConversationScoped
 public class EditAreaController implements Serializable {
+
+    private static final Logger LOG = Logger.getLogger(NewAdminController.class.getName());
 
     @Inject
     private Conversation conversation;
@@ -24,15 +27,15 @@ public class EditAreaController implements Serializable {
     @EJB
     private TechAreaEndpoint areaEndpoint;
 
-    private TechAreaDTO AreaDTO;
+    private TechAreaDTO editAreaDTO = new TechAreaDTO();
 
-    public TechAreaDTO getAreaDTO() {
-        return AreaDTO;
+    public TechAreaDTO getEditAreaDTO() {
+        return editAreaDTO;
     }
 
     void setAreaDTOAndGetAreaEntityToEnpoint(TechAreaDTO areaDTO) {
         try {
-            AreaDTO = areaEndpoint.getTechAreaToEdit(areaDTO);
+            editAreaDTO = areaEndpoint.getTechAreaToEdit(areaDTO);
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAreaController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji setAreaDTOAndGetFaultEntityToEnpoint wyjatku typu: ", abe);
@@ -41,16 +44,30 @@ public class EditAreaController implements Serializable {
     }
 
     public String saveEditedArea() {
-        if (null == AreaDTO) {
+        if (null == editAreaDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
         try {
-            areaEndpoint.saveAreaAfterEdit(AreaDTO);
+            areaEndpoint.saveAreaAfterEdit(editAreaDTO);
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedAreaDTO wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return null;
+        }
+    }
+
+    public String addArea() {
+        if (null == editAreaDTO) {
+            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
+        }
+        try {
+            areaEndpoint.addArea(editAreaDTO); 
+            return cancelOrEdit();
+        } catch (AppBaseException abe) {
+            LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addArea wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }
     }

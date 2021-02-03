@@ -227,4 +227,22 @@
         </navigation-case>
     </navigation-rule>
     
+        <navigation-rule>
+        <from-view-id>/techarea/areaList.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>newArea</from-outcome>
+            <to-view-id>/techarea/newArea.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/techarea/newArea.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>areaList</from-outcome>
+            <to-view-id>/techarea/areaList.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>
