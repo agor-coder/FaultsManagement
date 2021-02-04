@@ -8,8 +8,7 @@
         <param-name>resourceBundle.path</param-name>
         <param-value>i18n.messages</param-value>
     </context-param>
-    
-         <servlet>
+    <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -18,17 +17,14 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>
             60
         </session-timeout>
     </session-config>
-    
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
-    
     <security-role>
         <description>Administrator</description>
         <role-name>AppAdmin</role-name>
@@ -45,7 +41,6 @@
         <description/>
         <role-name>Assigner</role-name>
     </security-role>
-    
     <security-constraint>
         <display-name>Konta</display-name>
         <web-resource-collection>
@@ -119,15 +114,13 @@
             <description/>
             <url-pattern>/faces/fault/faultList.xhtml</url-pattern>
             <url-pattern>/faces/specialist/specList.xhtml</url-pattern>
+            <url-pattern>/faces/techarea/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>Assigner</role-name>
         </auth-constraint>
     </security-constraint>
-    
-    
-    
     <env-entry>
         <env-entry-name>txRetryLimit</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
@@ -138,8 +131,6 @@
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>2</env-entry-value>
     </env-entry>
-    
-   
     <error-page>
         <error-code>401</error-code>
         <location>/faces/error/error401.xhtml</location>
