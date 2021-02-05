@@ -25,11 +25,11 @@ import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.Account_;
 
-
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
+@RolesAllowed({"AppAdmin"})
 public class AccountFacade extends AbstractFacade<Account> {
-    
+
     private static final Logger LOG = Logger.getLogger(AccountFacade.class.getName());
 
     @PersistenceContext(unitName = "FaultsManagementPU")
@@ -44,8 +44,7 @@ public class AccountFacade extends AbstractFacade<Account> {
         super(Account.class);
     }
 
-    
-     @ExcludeClassInterceptors 
+    @ExcludeClassInterceptors
     @RolesAllowed("AUTHENTICATOR")
     public Account findLoginAndHashpassActiveAndConfirmed(String login, String hashPass) {
         if (null == login || null == hashPass || login.isEmpty() || hashPass.isEmpty()) {
@@ -71,6 +70,7 @@ public class AccountFacade extends AbstractFacade<Account> {
         return null;
 
     }
+
     public void setActive(Account entity, boolean active) {
         em.find(entity.getClass(), entity.getId()).setActive(active);
         // entity.setActive(active);
@@ -105,6 +105,7 @@ public class AccountFacade extends AbstractFacade<Account> {
             }
         }
     }
+
     @Override
     public void remove(Account entity) throws AppBaseException {
         try {
@@ -118,7 +119,9 @@ public class AccountFacade extends AbstractFacade<Account> {
             }
         }
     }
-    public Account findLogin(String login){
+
+    @RolesAllowed({"AppAdmin", "Notifier", "Specialist", "Assigner"})
+    public Account findLogin(String login) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Account> query = cb.createQuery(Account.class);
         Root<Account> from = query.from(Account.class);
@@ -129,9 +132,9 @@ public class AccountFacade extends AbstractFacade<Account> {
         return tq.getSingleResult();
     }
 
+    @RolesAllowed({"AppAdmin", "Notifier", "Specialist", "Assigner"})
     public void changeMyPasword(Account entity, String newPass) {
-         em.find(entity.getClass(), entity.getId()).setPassword(newPass);
+        em.find(entity.getClass(), entity.getId()).setPassword(newPass);
     }
-  
 
 }

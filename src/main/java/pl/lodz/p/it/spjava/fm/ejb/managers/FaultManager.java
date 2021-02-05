@@ -2,6 +2,7 @@ package pl.lodz.p.it.spjava.fm.ejb.managers;
 
 import java.util.List;
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -42,6 +43,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
     @Resource(name = "faultLimit")
     private int faultLimit;
 
+    @RolesAllowed({"Specialist", "Assigner"})
     public Fault find(Long id) {
         return faultFacade.find(id);
     }
@@ -50,14 +52,15 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         return faultFacade.findAll();
     }
 
+    @RolesAllowed({"Specialist", "Assigner"})
     public void setStatus(Fault fault, String status) throws AppBaseException {
         faultFacade.setStatus(fault, status);
     }
 
-    //Roles Assigner
+    @RolesAllowed("Assigner")
     public void assignSpecialist(Fault fault, Long Id) throws AppBaseException {
         Specialist spec = specFacade.findSpec(Id);
-        if (!spec.isActive()||!spec.isConfirmed()) {
+        if (!spec.isActive() || !spec.isConfirmed()) {
             throw SpecialistException.specExceptionWithNotActive();
         }
         if (null != fault.getSpecialist() && fault.getSpecialist().equals(spec)) {
@@ -78,10 +81,12 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.edit(fault);
     }
 
-    private int countOfSpecialist(Specialist specialist)throws AppBaseException {
+    
+    private int countOfSpecialist(Specialist specialist) throws AppBaseException {
         return faultFacade.countOfSpecialist(specialist);
     }
 
+    @RolesAllowed("Specialist")
     public List<Fault> findSpecialistFaults(String login) {
         return faultFacade.findSpecialistFaults(login);
     }

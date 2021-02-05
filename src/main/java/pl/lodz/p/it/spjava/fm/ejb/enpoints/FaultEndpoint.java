@@ -1,10 +1,10 @@
 package pl.lodz.p.it.spjava.fm.ejb.enpoints;
 
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.SessionSynchronization;
@@ -31,36 +31,40 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     private int txRetryLimit;
     @EJB
     private FaultManager faultManager;
-    
+
     private Fault endpointFault;
 
+    @RolesAllowed("Assigner")
     public List<FaultDTO> getAllFaultsDTO() {
         List<Fault> faultsList = faultManager.findAll();
         List<FaultDTO> faultsListDTO = DTOConverter.createFaultListDTO(faultsList);
         return faultsListDTO;
     }
 
-    public List<FaultDTO> getMyFaultsDTO() {
+    @RolesAllowed("Specialist")
+    public List<FaultDTO> getSpecFaultsDTO() {
         String login = ContextUtils.getUserName();
-         List<Fault> faultsList = faultManager.findSpecialistFaults(login);
+        List<Fault> faultsList = faultManager.findSpecialistFaults(login);
         //List<Fault> faultsList = faultManager.findSpecialistFaults("login0");
         List<FaultDTO> faultsListDTO = DTOConverter.createFaultListDTO(faultsList);
         return faultsListDTO;
     }
-    
+
     public List<FaultDTO> getNotifierFaultsDTO() {
-       String login = ContextUtils.getUserName();
+        String login = ContextUtils.getUserName();
         List<Fault> faultsList = faultManager.findNotifierFaults(login);
         //List<Fault> faultsList = faultManager.findNotifierFaults("login7");
         List<FaultDTO> faultsListDTO = DTOConverter.createFaultListDTO(faultsList);
         return faultsListDTO;
     }
 
+    @RolesAllowed({"Specialist", "Assigner"})
     public void setStatusEND(FaultDTO faultDTO) throws AppBaseException {
         setEndpointFaultFromDTOToEdit(faultDTO);
         faultManager.setStatus(endpointFault, "END");
     }
 
+    @RolesAllowed({"Specialist", "Assigner"})
     public void setEndpointFaultFromDTOToEdit(FaultDTO faultDTO) throws AppBaseException {
         endpointFault = faultManager.find(faultDTO.getId());
         if (null == endpointFault) {
@@ -73,6 +77,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         return DTOConverter.createFaultDTOFromEntity(endpointFault);
     }
 
+    @RolesAllowed("Assigner")
     public void assignSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
         Long specId = specialistDTO.getId();
         faultManager.assignSpecialist(endpointFault, specId);
@@ -81,7 +86,7 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
     public void addFault(FaultDTO faultDTO, Long id) throws AppBaseException {
         Fault fault = new Fault();
         fault.setFaultDescribe(faultDTO.getFaultDescribe());
-      
+
         boolean rollbackTX;
         int retryTXCounter = 1;
         do {
@@ -102,5 +107,4 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         }
     }
 
-    
 }

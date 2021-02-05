@@ -47,10 +47,7 @@ public class ChangeMyPasswordController implements Serializable {
             ContextUtils.emitInternationalizedMessage("changeMyPassword:passwordRepeat", "error.passwords.not.matching");
             return null;
         }
-        if ((passwordOld.equals(accountDTO.getPassword()))) {
-            ContextUtils.emitInternationalizedMessage("changeMyPassword:password", "error.same.password");
-            return null;
-        }
+       
         try {
             accountEndpoint.changeMyPasword(passwordOld, accountDTO.getPassword());
             return "main";

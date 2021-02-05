@@ -2,6 +2,7 @@ package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
@@ -16,10 +17,6 @@ import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
-/**
- *
- * @author A
- */
 @Stateless
 public class FaultFacade extends AbstractFacade<Fault> {
 
@@ -35,6 +32,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
         super(Fault.class);
     }
 
+    @RolesAllowed({"Specialist", "Assigner"})
     public void setStatus(Fault entity, String name) throws AppBaseException {
         if (!entity.getStatus().name().equals(name)) {
             em.find(entity.getClass(), entity.getId()).setStatus(Fault.FaultStatus.valueOf(name));
@@ -44,6 +42,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
     }
 
     @Override
+    @RolesAllowed("Assigner")
     public void edit(Fault entity) throws AppBaseException {
         try {
             super.edit(entity);
@@ -59,6 +58,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
         }
     }
 
+    @RolesAllowed("Assigner")
     public int countOfSpecialist(Specialist spec) throws AppBaseException {
         try {
             Query q = getEntityManager().createNamedQuery("Fault.countOfSpecialist");
@@ -70,6 +70,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
         }
     }
 
+    @RolesAllowed("Specialist")
     public List<Fault> findSpecialistFaults(String login) {
         TypedQuery tq = getEntityManager().createNamedQuery("Fault.findSpecOfLogin", Fault.class);
         tq.setParameter("login", login);

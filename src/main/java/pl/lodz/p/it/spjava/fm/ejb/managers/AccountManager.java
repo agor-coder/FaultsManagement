@@ -22,6 +22,7 @@ import pl.lodz.p.it.spjava.fm.model.Specialist;
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Interceptors(LoggingInterceptor.class)
+@RolesAllowed({"AppAdmin"})
 public class AccountManager extends AbstractManager implements SessionSynchronization {
 
     @EJB
@@ -64,10 +65,12 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
         accountFacade.create(notifier);
     }
 
+    @RolesAllowed({"AppAdmin", "Notifier", "Specialist","Assigner"})
     public Account findLogin(String myLogin) {
         return accountFacade.findLogin(myLogin);
     }
 
+    @RolesAllowed({"AppAdmin", "Notifier", "Specialist","Assigner"})
     public void changeMyPasword(Account account, String newPass) {
         accountFacade.changeMyPasword(account, newPass);
     }

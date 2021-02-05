@@ -1,5 +1,6 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -30,9 +31,8 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
     }
 
  
-
+@RolesAllowed("Assigner")
     public Specialist findSpec(Long id) throws AppBaseException {
-        
             Specialist spec = super.find(id);
             em.lock(spec, OPTIMISTIC_FORCE_INCREMENT);
            // em.flush(); 

@@ -1,5 +1,6 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -33,6 +34,7 @@ public class AssignerFacade extends AbstractFacade<Assigner> {
         return (Assigner) q.getSingleResult();
     }
     
+    @RolesAllowed("Assigner")
     public Assigner findAssignerLogin(String login){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Assigner> query = cb.createQuery(Assigner.class);

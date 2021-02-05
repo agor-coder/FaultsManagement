@@ -34,13 +34,6 @@ public class LoginController {
     @Inject
     private HashGenerator hashGenerator;
 
-    /**
-     * Dokonuje programowo uwierzytelnienia na podstawie loginu i hasła. Dane
-     * pochodzą z formularza uwierzytelniania. Dzięki samodzielnemu wywoływaniu
-     * login() można przechwycić wyjątek który jest rzucany w przypadku
-     * niepoprawnego uwierzytelnienia. Można to wykorzystać np. do blokowania
-     * konta po pewnej liczbie nieudanych prób.
-     */
     public String login() {
         Credential credential = new UsernamePasswordCredential(username, new Password(password));
         AuthenticationStatus status = securityContext.authenticate(getRequest(), getResponse(), withParams().credential(credential));

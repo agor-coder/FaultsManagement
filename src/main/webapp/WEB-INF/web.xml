@@ -30,15 +30,15 @@
         <role-name>AppAdmin</role-name>
     </security-role>
     <security-role>
-        <description/>
+        <description>Zgłaszający</description>
         <role-name>Notifier</role-name>
     </security-role>
     <security-role>
-        <description/>
+        <description>Specjalista</description>
         <role-name>Specialist</role-name>
     </security-role>
     <security-role>
-        <description/>
+        <description>Przydzielający</description>
         <role-name>Assigner</role-name>
     </security-role>
     <security-constraint>

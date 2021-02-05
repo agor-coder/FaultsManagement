@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -50,6 +51,7 @@ public class SpecListController implements Serializable {
         faultEndpoint.setEndpointFaultFromDTOToEdit(faultDTO);
     }
 
+    @RolesAllowed("Assigner")
     public String assignSpecialist(SpecialistDTO specialistDTO) {
         try {
             faultEndpoint.assignSpecialist(specialistDTO);

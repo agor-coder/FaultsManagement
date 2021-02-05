@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.SessionSynchronization;
@@ -35,6 +36,7 @@ import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 @Stateful
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.NEVER)
+@RolesAllowed({"AppAdmin"})
 public class AccountEndpoint extends AbstractEndpoint implements SessionSynchronization {
 
     @EJB
@@ -125,15 +127,17 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     }
 
+    @RolesAllowed({"AppAdmin", "Notifier", "Assigner", "Specialist"})
     public void changeMyPasword(String oldPass, String newPass) throws AppBaseException {
-        endpointAccount = getMyAccount();//login4
+        endpointAccount = getMyAccount();
         if (!endpointAccount.getPassword().equals(hashGenerator.generateHash(oldPass))) {
-        //if (!endpointAccount.getPassword().equals(oldPass)) {
             throw AccountException.createWithPreviousGivenPasswordDoesNotMatch();
         }
+        if (endpointAccount.getPassword().equals(hashGenerator.generateHash(newPass))) {
+            throw AccountException.createWithTheSamePasswordDoesNotMatch();
+        }
         String newHash = hashGenerator.generateHash(newPass);
-        accountManager.changeMyPasword(endpointAccount,newHash);
-       // accountManager.changeMyPasword(endpointAccount, newPass);
+        accountManager.changeMyPasword(endpointAccount, newHash);
 
     }
 
@@ -248,11 +252,13 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
     }
 
+    @RolesAllowed({"AppAdmin", "Notifier", "Assigner", "Specialist"})
     public Account getMyAccount() {
         return accountManager.findLogin(ContextUtils.getUserName());
         //return accountManager.findLogin("login4");
     }
 
+    @RolesAllowed({"AppAdmin", "Notifier", "Assigner", "Specialist"})
     public AccountDTO getMyAccountDTO() {
         return DTOConverter.makeAccountDTOfromUserEntity(getMyAccount());
     }

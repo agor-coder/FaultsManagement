@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -25,13 +26,14 @@ public class MyFaultListController implements Serializable {
 
     @PostConstruct
     public void init() {
-        myFaultsDTO = faultEndpoint.getMyFaultsDTO();
+        myFaultsDTO = faultEndpoint.getSpecFaultsDTO();
     }
 
     public List<FaultDTO> getMyFaultsDTO() {
         return myFaultsDTO;
     }
 
+   
     public void setStatusEND(FaultDTO faultDTO) {
         try {
             faultEndpoint.setStatusEND(faultDTO);
