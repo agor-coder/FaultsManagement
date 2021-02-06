@@ -1,7 +1,7 @@
-
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -10,15 +10,13 @@ import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import org.eclipse.persistence.exceptions.DatabaseException;
-import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.AreaException;
-import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
-
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
+@RolesAllowed("Assigner")
 public class TechAreaFacade extends AbstractFacade<TechArea> {
 
     @PersistenceContext(unitName = "FaultsManagementPU")
@@ -32,7 +30,7 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
     public TechAreaFacade() {
         super(TechArea.class);
     }
-    
+
     @Override
     public void remove(TechArea entity) throws AppBaseException {
         try {
@@ -46,8 +44,8 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
             }
         }
     }
-    
-     @Override
+
+    @Override
     public void edit(TechArea entity) throws AppBaseException {
         try {
             super.edit(entity);
@@ -62,7 +60,8 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
             }
         }
     }
-     @Override
+
+    @Override
     public void create(TechArea entity) throws AppBaseException {
         try {
             super.create(entity);
@@ -75,5 +74,5 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
             }
         }
     }
-    
+
 }

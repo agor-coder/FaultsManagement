@@ -3,6 +3,7 @@ package pl.lodz.p.it.spjava.fm.ejb.enpoints;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -23,6 +24,8 @@ public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynch
     @EJB
     private SpecialistManager specialistManager;
 
+    
+    @RolesAllowed({"AppAdmin","Assigner"})
     public List<SpecialistDTO> getAllSpecialistsDTO() {
         List<Specialist> listSpecialist = specialistManager.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();

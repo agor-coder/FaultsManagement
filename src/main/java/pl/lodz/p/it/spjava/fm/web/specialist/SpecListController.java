@@ -46,12 +46,13 @@ public class SpecListController implements Serializable {
         return specialistsDTO;
     }
 
+
     public void setFaultDTOAndfaultEndpoint(FaultDTO fDTO) throws AppBaseException {
         faultDTO = fDTO;
         faultEndpoint.setEndpointFaultFromDTOToEdit(faultDTO);
     }
 
-    @RolesAllowed("Assigner")
+  
     public String assignSpecialist(SpecialistDTO specialistDTO) {
         try {
             faultEndpoint.assignSpecialist(specialistDTO);

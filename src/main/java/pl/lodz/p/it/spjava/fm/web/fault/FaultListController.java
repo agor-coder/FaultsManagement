@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.faces.view.ViewScoped;
@@ -24,8 +25,7 @@ public class FaultListController implements Serializable {
     private Conversation conversation;
     @EJB
     private FaultEndpoint faultEndpoint;
-    @Inject
-    private EditFaultController editFaultController;
+ 
     @Inject
     private SpecListController specListController;
 
@@ -40,12 +40,7 @@ public class FaultListController implements Serializable {
         return faultsDTO;
     }
 
-    public String editFault(FaultDTO faultDTO) {
-        conversation.begin();
-        editFaultController.setEditFaultDTOAndGetFaultEntityToEnpoint(faultDTO);
-
-        return "editFault";
-    }
+ 
 
     public String assign(FaultDTO faultDTO) {
         try {
@@ -60,8 +55,9 @@ public class FaultListController implements Serializable {
         return null;
     }
 
+  
     public void setStatusEND(FaultDTO faultDTO) {
-        try { 
+        try {
             faultEndpoint.setStatusEND(faultDTO);
             init();
         } catch (AppBaseException abe) {

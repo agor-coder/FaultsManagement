@@ -58,6 +58,7 @@ public class EditAreaController implements Serializable {
         }
     }
 
+    
     public String addArea() {
         if (null == editAreaDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");

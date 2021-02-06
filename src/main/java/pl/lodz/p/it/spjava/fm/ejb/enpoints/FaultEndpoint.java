@@ -50,6 +50,8 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         return faultsListDTO;
     }
 
+    
+    @RolesAllowed("Notifier")
     public List<FaultDTO> getNotifierFaultsDTO() {
         String login = ContextUtils.getUserName();
         List<Fault> faultsList = faultManager.findNotifierFaults(login);
@@ -72,17 +74,15 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         }
     }
 
-    public FaultDTO getFaultDTOToEdit(FaultDTO faultDTO) throws AppBaseException {
-        setEndpointFaultFromDTOToEdit(faultDTO);
-        return DTOConverter.createFaultDTOFromEntity(endpointFault);
-    }
-
+   
     @RolesAllowed("Assigner")
     public void assignSpecialist(SpecialistDTO specialistDTO) throws AppBaseException {
         Long specId = specialistDTO.getId();
         faultManager.assignSpecialist(endpointFault, specId);
     }
 
+    
+    @RolesAllowed("Notifier")
     public void addFault(FaultDTO faultDTO, Long id) throws AppBaseException {
         Fault fault = new Fault();
         fault.setFaultDescribe(faultDTO.getFaultDescribe());

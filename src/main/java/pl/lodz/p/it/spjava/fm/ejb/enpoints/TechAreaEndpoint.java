@@ -23,6 +23,7 @@ import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 @Stateful
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.NEVER)
+@RolesAllowed( "Assigner")
 public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchronization {
 
     @Resource(name = "txRetryLimit")
@@ -33,22 +34,27 @@ public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchro
 
     private TechArea endpointArea;
 
+    @RolesAllowed({"Notifier", "Assigner"})
     public List<TechAreaDTO> getAllAreasDTO() {
         List<TechArea> areasList = areaManager.findAll();
         List<TechAreaDTO> areasListDTO = DTOConverter.createAreaListDTO(areasList);
         return areasListDTO;
     }
 
+    
+ 
     public TechAreaDTO getTechAreaToEdit(TechAreaDTO areaDTO) throws AppBaseException {
         setEndpointAreaFromDTOToEdit(areaDTO);
         return DTOConverter.createTechAreaDTOFromEntity(endpointArea);
     }
 
+    
     public void remove(TechAreaDTO areaDTO) throws AppBaseException {
         setEndpointAreaFromDTOToEdit(areaDTO);
         areaManager.remove(endpointArea);
     }
 
+     
     private void setEndpointAreaFromDTOToEdit(TechAreaDTO areaDTO) throws AppBaseException {
         endpointArea = areaManager.find(areaDTO.getId());
         if (null == endpointArea) {
@@ -56,16 +62,19 @@ public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchro
         }
     }
 
+     
     public void saveAreaAfterEdit(TechAreaDTO areaDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(areaDTO, endpointArea);
         areaManager.editArea(endpointArea);
     }
 
+     
     private void writeEditableDataFromDTOToEntity(TechAreaDTO areaDTO, TechArea area) {
         area.setAreaName(areaDTO.getAreaName());
 
     }
 
+   
     public void addArea(TechAreaDTO areaDTO) throws AppBaseException {
         TechArea techArea = new TechArea();
         techArea.setAreaName(areaDTO.getAreaName());

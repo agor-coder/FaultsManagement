@@ -71,6 +71,7 @@ public class AccountFacade extends AbstractFacade<Account> {
 
     }
 
+   
     public void setActive(Account entity, boolean active) {
         em.find(entity.getClass(), entity.getId()).setActive(active);
         // entity.setActive(active);

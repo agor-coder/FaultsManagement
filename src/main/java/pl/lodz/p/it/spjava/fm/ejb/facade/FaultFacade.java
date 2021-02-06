@@ -77,6 +77,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
         return tq.getResultList();
     }
 
+    @RolesAllowed("Notifier")
     public List<Fault> findNotifierFaults(String login) {
         TypedQuery tq = getEntityManager().createNamedQuery("Fault.findNotifOfLogin", Fault.class);
         tq.setParameter("login", login);

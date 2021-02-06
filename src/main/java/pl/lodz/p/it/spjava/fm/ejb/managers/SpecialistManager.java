@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.managers;
 
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
@@ -19,6 +20,8 @@ public class SpecialistManager extends AbstractManager implements SessionSynchro
     @EJB
     private SpecialistFacade specialistFacade;
 
+    
+      @RolesAllowed({"AppAdmin","Assigner"})
     public List<Specialist> findAll() {
         return specialistFacade.findAll();
     }

@@ -33,10 +33,12 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
         accountFacade.edit(account);
     }
 
+   
     public void remove(Account account) throws AppBaseException {
         accountFacade.remove(account);
     }
 
+   
     public void markActive(Account account, boolean active) {
         accountFacade.setActive(account, active);
     }
@@ -49,17 +51,21 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
         return accountFacade.findAll();
     }
 
+    
     public void createAccount(AppAdmin adm) throws AppBaseException {
         accountFacade.create(adm);
     }
 
+ 
     public void createAccount(Specialist specialist) throws AppBaseException {
         accountFacade.create(specialist);
     }
 
+   
     public void createAccount(Assigner assigner) throws AppBaseException {
         accountFacade.create(assigner);
     }
+
 
     public void createAccount(Notifier notifier) throws AppBaseException {
         accountFacade.create(notifier);

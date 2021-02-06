@@ -28,6 +28,7 @@ import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Interceptors(LoggingInterceptor.class)
+ @RolesAllowed("Assigner")
 public class FaultManager extends AbstractManager implements SessionSynchronization {
 
     @EJB
@@ -48,6 +49,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         return faultFacade.find(id);
     }
 
+   
     public List<Fault> findAll() {
         return faultFacade.findAll();
     }
@@ -57,7 +59,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.setStatus(fault, status);
     }
 
-    @RolesAllowed("Assigner")
+    
     public void assignSpecialist(Fault fault, Long Id) throws AppBaseException {
         Specialist spec = specFacade.findSpec(Id);
         if (!spec.isActive() || !spec.isConfirmed()) {
@@ -81,7 +83,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.edit(fault);
     }
 
-    
+   
     private int countOfSpecialist(Specialist specialist) throws AppBaseException {
         return faultFacade.countOfSpecialist(specialist);
     }
@@ -91,10 +93,13 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         return faultFacade.findSpecialistFaults(login);
     }
 
+    @RolesAllowed("Notifier")
     public List<Fault> findNotifierFaults(String login) {
         return faultFacade.findNotifierFaults(login);
     }
 
+    
+    @RolesAllowed("Notifier")
     public void createFault(Fault fault, Long idTecharea) throws AppBaseException {
         TechArea area = areaFacade.find(idTecharea);
         fault.setTechArea(area);

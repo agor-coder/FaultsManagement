@@ -52,6 +52,7 @@ public class NewAdminController implements Serializable {
         return "newAdminConfirm";
     }
 
+    
     public String addAdmin() {
         if (null == newAdminDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");

@@ -72,39 +72,46 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         return listAccountDTO;
     }
 
+     
     public void activateAccount(AccountDTO accountDTO) throws AppBaseException {
         setEndpointAccountFromDTOToEdit(accountDTO);
         accountManager.markActive(endpointAccount, true);
     }
 
+    
     public void deactivateAccount(AccountDTO accountDTO) throws AppBaseException {
         setEndpointAccountFromDTOToEdit(accountDTO);
         accountManager.markActive(endpointAccount, false);
     }
 
+    
     public void removeAccount(AccountDTO accountDTO) throws AppBaseException {
         setEndpointAccountFromDTOToEdit(accountDTO);
         accountManager.remove(endpointAccount);
     }
 
+   
     public void saveAdminAfterEdit(AccountDTO adminDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(adminDTO, endpointAccount);
         ((AppAdmin) endpointAccount).setAlarmPhone(((AppAdminDTO) adminDTO).getAlarmPhone());
         accountManager.editAccount(endpointAccount);
     }
 
+    
     public void saveSpecialistAfterEdit(AccountDTO specialistDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(specialistDTO, endpointAccount);
         ((Specialist) endpointAccount).setDepartment(((SpecialistDTO) specialistDTO).getDepartment());
         accountManager.editAccount(endpointAccount);
     }
 
+    
     public void saveAssignerAfterEdit(AccountDTO assignerDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(assignerDTO, endpointAccount);
         ((Assigner) endpointAccount).setDepartment(((AssignerDTO) assignerDTO).getDepartment());
         accountManager.editAccount(endpointAccount);
     }
 
+   
     public void saveNotifierAfterEdit(AccountDTO notifierDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(notifierDTO, endpointAccount);
         ((Notifier) endpointAccount).setEmplacement(((NotifierDTO) notifierDTO).getEmplacement());
@@ -120,6 +127,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         account.setConfirmed(accountDTO.isConfirmed());
     }
 
+    
     public void changePassword(AccountDTO editAccountDTO) throws AppBaseException {
         //endpointAccount.setPassword(editAccountDTO.getPassword());
         endpointAccount.setPassword(hashGenerator.generateHash(editAccountDTO.getPassword()));
@@ -141,6 +149,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
 
     }
 
+  
     public void addAdmin(AppAdminDTO adminDTO) throws AppBaseException {
         AppAdmin adm = new AppAdmin();
         writeAccountDataFromDTOToNewEntity(adminDTO, adm);
@@ -193,6 +202,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         }
     }
 
+    
     public void addAssigner(AssignerDTO assignerDTO) throws AppBaseException {
         Assigner assigner = new Assigner();
         writeAccountDataFromDTOToNewEntity(assignerDTO, assigner);
@@ -219,6 +229,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         }
     }
 
+    
     public void addNotifier(NotifierDTO notifierDTO) throws AppBaseException {
         Notifier notifier = new Notifier();
         writeAccountDataFromDTOToNewEntity(notifierDTO, notifier);
