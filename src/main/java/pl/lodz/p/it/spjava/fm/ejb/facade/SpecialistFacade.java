@@ -10,7 +10,6 @@ import static javax.persistence.LockModeType.OPTIMISTIC_FORCE_INCREMENT;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
-import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 @Stateless
@@ -30,14 +29,11 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
         super(Specialist.class);
     }
 
- 
-@RolesAllowed("Assigner")
-    public Specialist findSpec(Long id) throws AppBaseException {
-            Specialist spec = super.find(id);
-            em.lock(spec, OPTIMISTIC_FORCE_INCREMENT);
-           // em.flush(); 
-            return spec;
-       
+    @RolesAllowed("Assigner")
+    public void lockSpecialist(Specialist entity) {
+        em.lock(entity, OPTIMISTIC_FORCE_INCREMENT);
+        // em.flush();    
+
     }
 
     public Specialist findLogin(String login) {
@@ -45,6 +41,5 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
         q.setParameter("login", login);
         return (Specialist) q.getSingleResult();
     }
-
 
 }
