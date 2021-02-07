@@ -10,7 +10,6 @@ import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
-import javax.persistence.OptimisticLockException;
 import pl.lodz.p.it.spjava.fm.ejb.facade.AssignerFacade;
 import pl.lodz.p.it.spjava.fm.ejb.facade.FaultFacade;
 import pl.lodz.p.it.spjava.fm.ejb.facade.NotifierFacade;

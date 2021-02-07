@@ -43,7 +43,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
     public void lockSpecialistAndWait(Specialist entity) {
         lockSpecialist(entity);
         try {
-            Thread.sleep(15000);
+            Thread.sleep(10000);
         } catch (InterruptedException ex) {
             Logger.getLogger(SpecialistEndpoint.class.getName()).log(Level.SEVERE,null, ex);
         }

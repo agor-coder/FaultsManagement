@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
@@ -18,7 +17,7 @@ import pl.lodz.p.it.spjava.fm.web.specialist.SpecListController;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
-@ViewScoped
+@ConversationScoped
 public class FaultListController implements Serializable {
 
     @Inject
