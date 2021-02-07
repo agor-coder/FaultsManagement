@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Faults Management</title>
+    </h:head>
+    <h:body>
+        #{msg['app.name']} <br />
+        <br />
+        <h:form>
+            <ul>
+                <f:subview id="menuNotLoggedIn" rendered="#{empty request.remoteUser}">
+                    <li><h:link  value="Rejestruj?"/></li>
+                    <li><h:link outcome="authenticate" >${msg["action.login"]}</h:link></li>
+                </f:subview>
+z
+                <f:subview id="konto" rendered="#{request.isUserInRole('AppAdmin')}">
+                    <li>${msg["menu.accounts"]}</li>
+                    <ul>
+                        <li><h:link outcome="account/accountList.xhtml" value="#{msg['menu.accounts.list']}"/></li>
+                        <li><h:link outcome="account/newAdmin.xhtml" value="#{msg['menu.accounts.createadmin']}"/></li> 
+                        <li><h:link outcome="account/newSpecialist.xhtml" value="#{msg['menu.accounts.createspecialist']}"/></li> 
+                        <li><h:link outcome="account/newNotifier.xhtml" value="#{msg['menu.accounts.createnotifier']}"/></li> 
+                        <li><h:link outcome="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}"/></li>
+                    </ul>
+                </f:subview>
+              
+                <f:subview id="assignerFaults" rendered="#{request.isUserInRole('Assigner')}">
+                    <li>${msg["menu.faults"]} </li>
+                    <ul>
+                        <li><h:link outcome="fault/faultList.xhtml" value="#{msg['menu.faults.list']}" rendered="#{request.isUserInRole('Assigner')}"/></li>
+                          <li><h:link outcome="techarea/areaList.xhtml" value="#{msg['menu.areas']}"/></li>
+                    </ul>
+                </f:subview>
+
+                <f:subview id="notifierFaults" rendered="#{request.isUserInRole('Notifier')}">
+                    <li>${msg["menu.faults"]} </li>
+                    <ul> 
+                        <li><h:link outcome="fault/newFault.xhtml" value="#{msg['menu.faults.add']}" rendered="#{request.isUserInRole('Notifier')}"/></li>
+                        <li><h:link outcome="fault/notifierFaultList.xhtml" value="#{msg['menu.faults.notifier']}" rendered="#{request.isUserInRole('Notifier')}"/> </li>                   
+                    </ul>
+                </f:subview>
+
+                <f:subview id="specFaults" rendered="#{request.isUserInRole('Specialist')}">
+                    <li>${msg["menu.faults"]} </li>
+                    <ul>  
+                        <li><h:link outcome="fault/specFaultList.xhtml" value="#{msg['menu.faults.spec']}" rendered="#{request.isUserInRole('Specialist')}"/></li>
+                    </ul>
+                </f:subview>
+
+
+
+                <f:subview id="menuKontoLoggedIn" rendered="#{not empty request.remoteUser}">
+                    <li>${editAccountController.userName}</li>
+                    <ul>
+                        <li><h:link  outcome="account/changeMyPassword.xhtml" value="#{msg['menu.accounts.changePassword']}"/></li>
+                        <li><h:link  outcome="account/accountData.xhtml" value="#{msg['menu.accounts.details']}"/></li>
+                        <li><h:commandLink   action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}"  /></li>
+                    </ul>
+                </f:subview>
+            </ul>
+        </h:form>
+    </h:body>
+</html>
+
