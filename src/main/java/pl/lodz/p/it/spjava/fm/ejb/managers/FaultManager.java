@@ -4,11 +4,13 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+import javax.persistence.OptimisticLockException;
 import pl.lodz.p.it.spjava.fm.ejb.facade.AssignerFacade;
 import pl.lodz.p.it.spjava.fm.ejb.facade.FaultFacade;
 import pl.lodz.p.it.spjava.fm.ejb.facade.NotifierFacade;
@@ -28,7 +30,7 @@ import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Interceptors(LoggingInterceptor.class)
- @RolesAllowed("Assigner")
+@RolesAllowed("Assigner")
 public class FaultManager extends AbstractManager implements SessionSynchronization {
 
     @EJB
@@ -49,7 +51,6 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         return faultFacade.find(id);
     }
 
-   
     public List<Fault> findAll() {
         return faultFacade.findAll();
     }
@@ -59,7 +60,6 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.setStatus(fault, status);
     }
 
-    
     public void assignSpecialist(Fault fault, Long Id) throws AppBaseException {
         Specialist spec = specFacade.find(Id);
         if (!spec.isActive() || !spec.isConfirmed()) {
@@ -74,8 +74,8 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
             specFacade.lockSpecialist(spec);
             String assignerLogin = ContextUtils.getUserName();
             Assigner assigner = assignerFacade.findAssignerLogin(assignerLogin);
-            fault.setSpecialist(spec);
             fault.setWhoAssigned(assigner);
+            fault.setSpecialist(spec);
             fault.setStatus(Fault.FaultStatus.ASSIGNED);
         } else {
             throw FaultException.faultExceptionWithFaultLimit();
@@ -83,7 +83,33 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.edit(fault);
     }
 
-   
+    public void assignSpecialist2(Fault fault, Long Id) throws AppBaseException {
+        Specialist spec = specFacade.find(Id);
+        if (!spec.isActive() || !spec.isConfirmed()) {
+            throw SpecialistException.specExceptionWithNotActive();
+        }
+        if (null != fault.getSpecialist() && fault.getSpecialist().equals(spec)) {
+            throw FaultException.faultExceptionWithSameSpecialist();
+        }
+
+        int specialistFaultsNumber = countOfSpecialist(spec);
+        if (specialistFaultsNumber < faultLimit) {
+            try {
+                specFacade.lockSpecialistAndWait(spec);
+                String assignerLogin = ContextUtils.getUserName();
+                Assigner assigner = assignerFacade.findAssignerLogin(assignerLogin);
+                fault.setWhoAssigned(assigner);
+                fault.setSpecialist(spec);
+                fault.setStatus(Fault.FaultStatus.ASSIGNED);
+            } catch (EJBTransactionRolledbackException tre) {
+                throw FaultException.createWithDbOptimisticLockRepeatKey();
+            }
+        } else {
+            throw FaultException.faultExceptionWithFaultLimit();
+        }
+        faultFacade.edit(fault);
+    }
+
     private int countOfSpecialist(Specialist specialist) throws AppBaseException {
         return faultFacade.countOfSpecialist(specialist);
     }
@@ -98,7 +124,6 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         return faultFacade.findNotifierFaults(login);
     }
 
-    
     @RolesAllowed("Notifier")
     public void createFault(Fault fault, Long idTecharea) throws AppBaseException {
         TechArea area = areaFacade.find(idTecharea);

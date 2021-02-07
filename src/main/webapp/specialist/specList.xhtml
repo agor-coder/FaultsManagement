@@ -39,6 +39,7 @@
                 </h:column>
                 <h:column>
                     <h:commandButton value="${msg['fault.assign']}"  action="#{specListController.assignSpecialist(specialist)}" />
+                    <h:commandButton value="${msg['action.refresh']}"  action="#{specListController.assignSpecialist2(specialist)}" />
                 </h:column>
             </h:dataTable>
             <h:commandButton value="${msg['action.refresh']}" action="#{specListController.init()}" />

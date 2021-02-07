@@ -1,5 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -9,6 +11,7 @@ import javax.persistence.EntityManager;
 import static javax.persistence.LockModeType.OPTIMISTIC_FORCE_INCREMENT;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
@@ -32,7 +35,18 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
     @RolesAllowed("Assigner")
     public void lockSpecialist(Specialist entity) {
         em.lock(entity, OPTIMISTIC_FORCE_INCREMENT);
-        // em.flush();    
+     // em.flush();    
+
+    }
+
+    @RolesAllowed("Assigner")
+    public void lockSpecialistAndWait(Specialist entity) {
+        lockSpecialist(entity);
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SpecialistEndpoint.class.getName()).log(Level.SEVERE,null, ex);
+        }
 
     }
 

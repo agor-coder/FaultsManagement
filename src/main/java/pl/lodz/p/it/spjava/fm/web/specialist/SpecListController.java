@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
@@ -56,6 +55,17 @@ public class SpecListController implements Serializable {
     public String assignSpecialist(SpecialistDTO specialistDTO) {
         try {
             faultEndpoint.assignSpecialist(specialistDTO);
+            return cancelFaultList();//end of conversation
+        } catch (AppBaseException abe) {
+            Logger.getLogger(SpecListController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assignSpecialist wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return null;
+        }
+    }
+    public String assignSpecialist2(SpecialistDTO specialistDTO) {
+        try {
+            faultEndpoint.assignSpecialist2(specialistDTO);
             return cancelFaultList();//end of conversation
         } catch (AppBaseException abe) {
             Logger.getLogger(SpecListController.class.getName())

@@ -125,7 +125,7 @@ public class Fault extends AbstractEntity implements Serializable {
     };
      @Override
     public String toString() {
-        return " " + super.getModificationTimestamp();
+        return  faultDescribe;
     }
 
 }

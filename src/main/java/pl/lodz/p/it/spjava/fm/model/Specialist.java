@@ -25,7 +25,7 @@ public class Specialist extends Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Specialist{" + "department=" + department + '}';
+        return "Specialist{" + getSureName() + '}';
     }
     
     
