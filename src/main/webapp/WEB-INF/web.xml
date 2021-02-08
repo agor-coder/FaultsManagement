@@ -22,6 +22,10 @@
             60
         </session-timeout>
     </session-config>
+   <mime-mapping>
+         <extension>xml</extension>
+         <mime-type>application/xml</mime-type>
+     </mime-mapping>
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>

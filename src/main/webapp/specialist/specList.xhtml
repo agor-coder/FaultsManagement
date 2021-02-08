@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>SPECIA-LIST</title>
@@ -45,6 +46,7 @@
             <h:commandButton value="${msg['action.refresh']}" action="#{specListController.init()}" />
             <h:commandButton value="${msg['main.page']}" action="#{specListController.cancelMain()}" immediate="true"/>
             <h:commandButton value="${msg['menu.faults.list']}" action="#{specListController.cancelFaultList()}" immediate="true"/>
+            <b:messages/>
         </h:form>
     </h:body>
 </html>
