@@ -1,71 +1,198 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
-        <title>FM - Edit Account</title>
+        <title> #{msg['app.name']}</title>         
     </h:head>
-    <h:body>
-        EDIT ACCOUNT<br />
-        <br />
-        <h:form id="editAccount">
-            
-                <h:outputLabel value="#{msg['account.type']}" for="type" />
-                <h:outputText value=" - #{editAccountController.editAccountDTO.type}"   id="type"/><h:message for="type" /><br />
+    <h:body style="padding-top: 60px">
 
-                <h:outputLabel value="#{msg['account.login']}" for="login" />
-                <h:outputText value=" - #{editAccountController.editAccountDTO.login}"  id="login"> </h:outputText> <h:message for="login" /><br />
+        <b:navBar brand="#{msg['app.name']}" brandHref="/fm/faces/index.xhtml"    inverse="true" fixed="top" fluid="true"  > 
+            <h:form styleClass="navbar-form navbar-right">
+                <div class="form-group">
+                    <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
+                </div>  
+                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
+                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
+            </h:form>
+        </b:navBar>
 
-                <h:outputLabel value="#{msg['account.name']}" for="firstname" />
-                <h:inputText value="#{editAccountController.editAccountDTO.firstName}" required="true"  id="firstname"/><h:message for="firstname" /><br />
+        <b:container fluid="true">
+            <b:row>
+                <b:column col-sm="3" col-md="2" styleClass="sidebar">
+                    <b:listLinks>
+                        <b:navLink header="#{msg['MENU']}" style="color: #009966" />
+                        <b:navLink outcome ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
+                        <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
+                        <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
+                        <b:navLink outcome ="newSpecialist" value="#{msg['menu.accounts.createspecialist']}" />
+                        <b:navLink outcome ="newNotifier" value="#{msg['menu.accounts.createnotifier']}" />
+                        <b:navLink outcome ="newAssigner" value="#{msg['menu.accounts.createassigner']}" />
+                    </b:listLinks>
+                    <b:listLinks>
+                        <b:navLink header="***#{msg['menu.faults']}"  style="color: chocolate" />
+                        <b:navLink outcome ="faultList" value="#{msg['menu.faults.list']}"  />
+                        <b:navLink outcome ="areaList" value="#{msg['menu.areas']}" />
+                        <b:navLink outcome ="newFault" value="#{msg['menu.faults.add']}" />
+                        <b:navLink outcome ="notifierFaultList" value="#{msg['menu.faults.notifier']}"  />
+                        <b:navLink outcome ="specFaultList" value="#{msg['menu.faults.spec']}" />
+                    </b:listLinks>
+                    <b:listLinks rendered="#{not empty request.remoteUser}" >
+                        <b:navLink header="***${msg['menu.user.name']}   ${editAccountController.userName}" style="color: chocolate"/>
+                        <b:navLink outcome ="changeMyPassword" value="#{msg['menu.accounts.changePassword']}" />
+                        <b:navLink outcome ="accountData" value="#{msg['menu.accounts.details']}" /> 
+                    </b:listLinks>
+                </b:column>
 
-                <h:outputLabel value="#{msg['account.surname']}" for="surename" />
-                <h:inputText value="#{editAccountController.editAccountDTO.sureName}" required="true"  id="surename"/><h:message for="surename" /><br />
+                <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
+                    <h1>#{msg['menu.accounts.edit']}</h1>
+                    <b:jumbotron >
+                        <h:form id="editAccount">
+                            <h:panelGrid columns="3">
 
-                <h:outputLabel value="#{msg['account.email']}" for="email" />
-                <h:inputText value="#{editAccountController.editAccountDTO.email}" required="true"  id="email"/><h:message for="email" /><br />
+                                <h:outputLabel value="#{msg['account.type']}" for="type" />
+                                <h:outputText value=" #{editAccountController.editAccountDTO.type}"   id="type"/><b:message for="type" />
 
-                <h:outputLabel value="#{msg['account.phone']}" for="phone" />
-                <h:inputText value="#{editAccountController.editAccountDTO.phone}"   id="phone"/><h:message for="phone" /><br />
+                                <h:outputLabel value="#{msg['account.login']}" for="login" />
+                                <h:outputText value=" #{editAccountController.editAccountDTO.login}"  id="login"> </h:outputText> <b:message for="login" />
 
-                <c:if test="#{editAccountController.appAdmin}">
-                    <h:outputLabel value="#{msg['account.alarmphone']}" for="alarmphone" />
-                    <h:inputText value="#{editAccountController.editAccountDTO.alarmPhone}" required="true"  id="alarmphone"/><h:message for="alarmphone" /><br />
-                </c:if>
+                                <h:outputLabel value="#{msg['account.name']}" for="firstname" />
+                                <h:inputText value="#{editAccountController.editAccountDTO.firstName}" required="true"  id="firstname"/><b:message for="firstname" />
 
-                <c:if test="#{editAccountController.notifier}">
-                    <h:outputLabel value="#{msg['account.emplacement']}" for="emplacement" />
-                    <h:inputText value="#{editAccountController.editAccountDTO.emplacement}" required="true"  id="emplacement"/><h:message for="emplacement" /><br />
-                </c:if>
+                                <h:outputLabel value="#{msg['account.surname']}" for="surename" />
+                                <h:inputText value="#{editAccountController.editAccountDTO.sureName}" required="true"  id="surename"/><b:message for="surename" />
 
-                <c:if test="#{editAccountController.specialist or editAccountController.assigner}">
-                    <h:outputLabel value="#{msg['account.department']}" for="department" />
-                    <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentsp"/><h:message for="departmentsp" /><br />
-                </c:if>
+                                <h:outputLabel value="#{msg['account.email']}" for="email" />
+                                <h:inputText value="#{editAccountController.editAccountDTO.email}" required="true"  id="email"/><b:message for="email" />
 
-                <h:outputLabel value="#{msg['account.active']}" for="active" />
-                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active"/><h:message for="active" /><br />
+                                <h:outputLabel value="#{msg['account.phone']}" for="phone" />
+                                <h:inputText value="#{editAccountController.editAccountDTO.phone}"   id="phone"/><b:message for="phone" />
 
-                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
-                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.confirmed}"  id="confirmed"/><h:message for="confirmed" /><br />
+                                <c:if test="#{editAccountController.appAdmin}">
+                                    <h:outputLabel value="#{msg['account.alarmphone']}" for="alarmphone" />
+                                    <h:inputText value="#{editAccountController.editAccountDTO.alarmPhone}" required="true"  id="alarmphone"/><b:message for="alarmphone" />
+                                </c:if>
+
+                                <c:if test="#{editAccountController.notifier}">
+                                    <h:outputLabel value="#{msg['account.emplacement']}" for="emplacement" />
+                                    <h:inputText value="#{editAccountController.editAccountDTO.emplacement}" required="true"  id="emplacement"/><b:message for="emplacement" />
+                                </c:if>
+
+                                <c:if test="#{editAccountController.specialist or editAccountController.assigner}">
+                                    <h:outputLabel value="#{msg['account.department']}" for="department" />
+                                    <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentsp"/><b:message for="departmentsp" />
+                                </c:if>
+
+                                <h:outputLabel value="#{msg['account.active']}" for="active" />
+                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active"/><b:message for="active" />
+
+                                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
+                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
 
 
-                <c:if test="#{editAccountController.specialist}">
-                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" />
-                </c:if>
-                <c:if test="#{editAccountController.appAdmin}">
-                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}" />
-                </c:if>
-                <c:if test="#{editAccountController.assigner}">
-                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" />
-                </c:if>
-                <c:if test="#{editAccountController.notifier}">
-                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
-                </c:if>
+                                <c:if test="#{editAccountController.specialist}">
+                                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" />
+                                </c:if>
+                                <c:if test="#{editAccountController.appAdmin}">
+                                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}" />
+                                </c:if>
+                                <c:if test="#{editAccountController.assigner}">
+                                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" />
+                                </c:if>
+                                <c:if test="#{editAccountController.notifier}">
+                                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
+                                </c:if>
+                          
+                                <h:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>
+                             </h:panelGrid>
+                        </h:form>
+                    </b:jumbotron>
+                </b:column>
 
-                <h:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>
-        </h:form>
+            </b:row>
+        </b:container> 
+        <style type="text/css">
+
+            .sub-header {
+                border-bottom: 1px solid #eee;
+                padding-bottom: 10px;
+            }
+            .navbar-fixed-top {
+                background-color: #237038;;
+                border: 0 none;
+
+            }
+            .sidebar {
+                display: none;
+            }
+            @media (min-width: 768px) {
+                .sidebar {
+                    background-color: #addfbb;;
+                    border-right: 1px solid #eee;
+                    bottom: 0;
+                    display: block;
+                    left: 0;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    padding: 20px;
+                    position: fixed;
+                    top: 51px;
+                    z-index: 1000;
+                }
+            }
+            .nav-list {
+                font-family: sans-serif;
+                font-size: initial;
+                font-style: oblique;
+                font-weight: bold;
+                margin-bottom: 20px;
+                margin-left: -20px;
+                margin-right: -21px;
+            }
+            .nav-list > li {
+                font-family: sans-serif;
+                font-size: small;
+                font-style: oblique;
+                font-weight: bold;
+                line-height: 1.0;
+
+            }
+            .nav-list > li > a {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            .nav-list > .active > a, .nav-sidebar > .active > a:hover, .nav-sidebar > .active > a:focus {
+                background-color:  #fff;
+            }
+            .main {
+                padding: 20px;
+            }
+            @media (min-width: 768px) {
+                .main {
+                    padding-left: 50px;
+                    padding-right: 40px;
+
+                }
+            }
+            .main .page-header {
+                margin-top: 0;
+            }
+            .placeholders {
+                margin-bottom: 30px;
+                text-align: center;
+            }
+            .placeholders h4 {
+                margin-bottom: 0;
+            }
+            .placeholder {
+                margin-bottom: 20px;
+            }
+            .placeholder img {
+                border-radius: 50%;
+                display: inline-block;
+            }
+        </style>
     </h:body>
 </html>
-
