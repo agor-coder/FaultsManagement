@@ -9,20 +9,15 @@
     <h:body style="padding-top: 60px">
 
         <b:navBar brand="#{msg['app.name']}" brandHref=""    inverse="true" fixed="top" fluid="true"  >
-
-            <h:form styleClass="navbar-form navbar-left">
+            <h:form styleClass="navbar-form navbar-right">
                 <div class="form-group">
-                    <b:inputText placeholder="${msg['account.email']}" fieldSize="sm"/>
-                </div>
-                <div class="form-group">
-                    <b:inputText placeholder="${msg['account.password']}" fieldSize="sm"/>
-                </div> 
-
-                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look="success" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="login/customFormLogin.xhtml"  value="#{msg['action.login']}"   look="warning" rendered="#{empty request.remoteUser}" />
-
+                    <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
+                </div>  
+                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
+                <b:commandButton action="login/customFormLogin.xhtml"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
+        
         <b:container fluid="true">
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
@@ -49,7 +44,7 @@
                         <b:navLink href="account/accountData.xhtml" value="#{msg['menu.accounts.details']}" /> 
                     </b:listLinks>
                 </b:column>
-                <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main" style="color: darkcyan">
+                <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
 
                 </b:column>
             </b:row>
@@ -61,7 +56,7 @@
                 padding-bottom: 10px;
             }
             .navbar-fixed-top {
-                background-color: #003e26;
+                background-color: #237038;;
                 border: 0 none;
                 
             }
@@ -70,7 +65,7 @@
             }
             @media (min-width: 768px) {
                 .sidebar {
-                    background-color: #ccffcc;
+                    background-color: #addfbb;;
                     border-right: 1px solid #eee;
                     bottom: 0;
                     display: block;
