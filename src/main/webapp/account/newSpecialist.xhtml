@@ -46,42 +46,42 @@
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <h1>#{msg['menu.accounts.createadmin']}</h1>
+                    <h1>#{msg['menu.accounts.createspecialist']}</h1>
                     <b:jumbotron >
                         <h:form id="NewSpecialist">
                             <h:panelGrid columns="3">
-                            <h:outputLabel value="#{msg['account.login']}*" for="login" />
-                            <h:inputText value="#{newSpecialistController.newSpecialistDTO.login}"  id="login"> </h:inputText><b:message for="login" />
+                                <h:outputLabel value="#{msg['account.login']}*" for="login" />
+                                <h:inputText value="#{newSpecialistController.newSpecialistDTO.login}"  id="login"> </h:inputText><b:message for="login" />
 
-                            <h:outputLabel value="#{msg['account.password']}*" for="password" />
-                            <h:inputSecret value="#{newSpecialistController.newSpecialistDTO.password}" required="true" id="password"></h:inputSecret><b:message for="password" />
+                                <h:outputLabel value="#{msg['account.password']}*" for="password" />
+                                <h:inputSecret value="#{newSpecialistController.newSpecialistDTO.password}" required="true" id="password"></h:inputSecret><b:message for="password" />
 
-                            <h:outputLabel value="#{msg['account.passwordRepeat']}*" for="passwordRepeat" />
-                            <h:inputSecret value="#{newSpecialistController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><b:message for="passwordRepeat" />
+                                <h:outputLabel value="#{msg['account.passwordRepeat']}*" for="passwordRepeat" />
+                                <h:inputSecret value="#{newSpecialistController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><b:message for="passwordRepeat" />
 
-                            <h:outputLabel value="#{msg['account.name']}*" for="firstname" />
-                            <h:inputText value="#{newSpecialistController.newSpecialistDTO.firstName}" required="true"  id="firstname"/><b:message for="firstname" />
+                                <h:outputLabel value="#{msg['account.name']}*" for="firstname" />
+                                <h:inputText value="#{newSpecialistController.newSpecialistDTO.firstName}" required="true"  id="firstname"/><b:message for="firstname" />
 
-                            <h:outputLabel value="#{msg['account.surname']}*" for="surename" />
-                            <h:inputText value="#{newSpecialistController.newSpecialistDTO.sureName}" required="true"  id="surename"/><b:message for="surename" />
+                                <h:outputLabel value="#{msg['account.surname']}*" for="surename" />
+                                <h:inputText value="#{newSpecialistController.newSpecialistDTO.sureName}" required="true"  id="surename"/><b:message for="surename" />
 
-                            <h:outputLabel value="#{msg['account.email']}*" for="email" />
-                            <h:inputText value="#{newSpecialistController.newSpecialistDTO.email}" required="true"  id="email"/><b:message for="email" />
+                                <h:outputLabel value="#{msg['account.email']}*" for="email" />
+                                <h:inputText value="#{newSpecialistController.newSpecialistDTO.email}" required="true"  id="email"/><b:message for="email" />
 
-                            <h:outputLabel value="#{msg['account.department']}*" for="department" />
-                            <h:inputText value="#{newSpecialistController.newSpecialistDTO.department}" required="true"  id="department"/><b:message for="department" />
+                                <h:outputLabel value="#{msg['account.department']}*" for="department" />
+                                <h:inputText value="#{newSpecialistController.newSpecialistDTO.department}" required="true"  id="department"/><b:message for="department" />
 
-                            <h:outputLabel value="#{msg['account.phone']}" for="phone" />
-                            <h:inputText value="#{newSpecialistController.newSpecialistDTO.phone}"   id="phone"/><b:message for="phone" />
+                                <h:outputLabel value="#{msg['account.phone']}" for="phone" />
+                                <h:inputText value="#{newSpecialistController.newSpecialistDTO.phone}"   id="phone"/><b:message for="phone" />
 
-                            <h:outputLabel value="#{msg['account.active']}*" for="active" />
-                            <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.active}"  id="active"/><b:message for="active" />
+                                <h:outputLabel value="#{msg['account.active']}*" for="active" />
+                                <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.active}"  id="active"/><b:message for="active" />
 
-                            <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
-                            <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
+                                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
+                                <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
 
-                            <b:commandButton value="${msg['page.confirm']}" action="#{newSpecialistController.confirmSpecialist()}" />
-                            <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
+                                <b:commandButton value="${msg['page.confirm']}" action="#{newSpecialistController.confirmSpecialist()}" />
+                                <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
                             </h:panelGrid>
                         </h:form>
                     </b:jumbotron>
@@ -90,7 +90,12 @@
             </b:row>
         </b:container> 
         <style type="text/css">
-
+            .jumbotron{
+                background-color: #addfbb; 
+                font-size: small;
+                font-weight: 600;
+                font-style: italic;
+            }
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;

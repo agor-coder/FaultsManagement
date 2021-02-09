@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
-       <title> #{msg['app.name']}</title>         
+        <title> #{msg['app.name']}</title>         
     </h:head>
     <h:body style="padding-top: 60px">
 
@@ -51,39 +51,39 @@
                     <b:jumbotron >
                         <h:form id="NewAdmin">
                             <h:panelGrid columns="3">
-                            <h:outputLabel value="#{msg['account.login']}*" for="login" />
-                            <h:inputText value="#{newAdminController.newAdminDTO.login}"  id="login"> </h:inputText><b:message for="login" />
+                                <h:outputLabel value="#{msg['account.login']}*" for="login" />
+                                <h:inputText value="#{newAdminController.newAdminDTO.login}"  id="login"> </h:inputText><b:message for="login" />
 
-                            <h:outputLabel value="#{msg['account.password']}*" for="password" />
-                            <h:inputSecret value="#{newAdminController.newAdminDTO.password}" required="true" id="password"></h:inputSecret><b:message for="password" />
+                                <h:outputLabel value="#{msg['account.password']}*" for="password" />
+                                <h:inputSecret value="#{newAdminController.newAdminDTO.password}" required="true" id="password"></h:inputSecret><b:message for="password" />
 
-                            <h:outputLabel value="#{msg['account.passwordRepeat']}*" for="passwordRepeat" />
-                            <h:inputSecret value="#{newAdminController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><b:message for="passwordRepeat" /> 
+                                <h:outputLabel value="#{msg['account.passwordRepeat']}*" for="passwordRepeat" />
+                                <h:inputSecret value="#{newAdminController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><b:message for="passwordRepeat" /> 
 
-                            <h:outputLabel value="#{msg['account.name']}*" for="firstname" />
-                            <h:inputText value="#{newAdminController.newAdminDTO.firstName}" required="true"  id="firstname"/><b:message for="firstname" />
+                                <h:outputLabel value="#{msg['account.name']}*" for="firstname" />
+                                <h:inputText value="#{newAdminController.newAdminDTO.firstName}" required="true"  id="firstname"/><b:message for="firstname" />
 
-                            <h:outputLabel value="#{msg['account.surname']}*" for="surename" />
-                            <h:inputText value="#{newAdminController.newAdminDTO.sureName}" required="true"  id="surename"/><b:message for="surename" />
+                                <h:outputLabel value="#{msg['account.surname']}*" for="surename" />
+                                <h:inputText value="#{newAdminController.newAdminDTO.sureName}" required="true"  id="surename"/><b:message for="surename" />
 
-                            <h:outputLabel value="#{msg['account.email']}*" for="email" />
-                            <h:inputText value="#{newAdminController.newAdminDTO.email}" required="true"  id="email"/><b:message for="email" />
+                                <h:outputLabel value="#{msg['account.email']}*" for="email" />
+                                <h:inputText value="#{newAdminController.newAdminDTO.email}" required="true"  id="email"/><b:message for="email" />
 
-                            <h:outputLabel value="#{msg['account.alarmphone']}*" for="alarmphone" />
-                            <h:inputText value="#{newAdminController.newAdminDTO.alarmPhone}" required="true"  id="alarmphone"/><b:message for="alarmphone" />
+                                <h:outputLabel value="#{msg['account.alarmphone']}*" for="alarmphone" />
+                                <h:inputText value="#{newAdminController.newAdminDTO.alarmPhone}" required="true"  id="alarmphone"/><b:message for="alarmphone" />
 
-                            <h:outputLabel value="#{msg['account.phone']}" for="phone" />
-                            <h:inputText value="#{newAdminController.newAdminDTO.phone}"   id="phone"/><b:message for="phone" />
+                                <h:outputLabel value="#{msg['account.phone']}" for="phone" />
+                                <h:inputText value="#{newAdminController.newAdminDTO.phone}"   id="phone"/><b:message for="phone" />
 
-                            <h:outputLabel value="#{msg['account.active']}*" for="active" />
-                            <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.active}"  id="active"/><b:message for="active" />
+                                <h:outputLabel value="#{msg['account.active']}*" for="active" />
+                                <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.active}"  id="active"/><b:message for="active" />
 
-                            <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
-                            <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
+                                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
+                                <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
 
-                            <h:commandButton value="${msg['page.confirm']}" action="#{newAdminController.confirmAdmin()}" />
-                            <h:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
-                           
+                                <b:commandButton value="${msg['page.confirm']}" action="#{newAdminController.confirmAdmin()}" />
+                                <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
+
                             </h:panelGrid>
                         </h:form>
                     </b:jumbotron>
@@ -92,7 +92,12 @@
             </b:row>
         </b:container> 
         <style type="text/css">
-
+            .jumbotron{
+                background-color: #addfbb; 
+                font-size: small;
+                font-weight: 600;
+                font-style: italic;
+            }
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;

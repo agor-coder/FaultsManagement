@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title> #{msg['app.name']}</title>          
@@ -12,7 +12,7 @@
         <b:navBar brand="#{msg['app.name']}" brandHref="/fm/faces/index.xhtml"    inverse="true" fixed="top" fluid="true"  > 
             <h:form styleClass="navbar-form navbar-right">
                 <div class="form-group">
-                    <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
+                    <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff"   />  
                 </div>  
                 <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
                 <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
@@ -48,9 +48,10 @@
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>#{msg['menu.accounts.details']}</h1>
-                    <b:jumbotron >
-                        <h:form id="accountData">
-                            <h:panelGrid columns="2">
+                    <b:jumbotron  >
+                        <b:form id="accountData">
+
+                            <h:panelGrid columns="2" >
 
                                 <h:outputLabel value="#{msg['account.login']}" for="login" />
                                 <h:outputText value=" #{accountDataController.accountDTO.login}"  id="login"/>
@@ -91,7 +92,7 @@
                                 <!--<h:commandButton value="${msg['action.cancel']}" action="main"/>-->
                             </h:panelGrid>
 
-                        </h:form>
+                        </b:form>
                     </b:jumbotron>
                 </b:column>
 
@@ -99,6 +100,12 @@
         </b:container> 
         <style type="text/css">
 
+            .jumbotron{
+              background-color: #addfbb; 
+                font-size: medium;
+                font-weight: 600;
+                font-style: italic;
+               }
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;

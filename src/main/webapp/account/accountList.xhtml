@@ -12,7 +12,7 @@
          <b:navBar brand="#{msg['app.name']}" brandHref="/fm/faces/index.xhtml"    inverse="true" fixed="top" fluid="true"  > 
             <h:form styleClass="navbar-form navbar-right">
                 <div class="form-group">
-                    <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
+                    <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff"/>  
                 </div>  
                 <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
                 <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
@@ -49,8 +49,8 @@
                 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>#{msg['menu.accounts.list']}</h1>
-                    <b:jumbotron >
-                        <h:form id="AccountList">
+                    <b:jumbotron  >
+                        <b:form id="AccountList" >
                             <b:dataTable value="#{accountListController.accountsDTO}" var="row" >
                                 <h:column>
                                     <f:facet name="header">#{msg['account.login']}</f:facet> ${row.login}
@@ -80,23 +80,28 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">Akcje</f:facet>
-                                    <b:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" rendered="#{not row.active}" /> 
-                                    <b:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  rendered="#{row.active}" /> 
-                                    <b:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" />
-                                    <b:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"/>
-                                    <b:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}"/>
+                                    <b:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" size='xs' rendered="#{not row.active}" /> 
+                                    <b:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  size='xs' rendered="#{row.active}" /> 
+                                    <b:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" size='xs' />
+                                    <b:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}" size='xs' />
+                                    <b:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" size='xs' />
                                 </h:column>
                             </b:dataTable>
                             <b:commandButton value="${msg['action.refresh']}" action="#{accountListController.init()}" />
                             <b:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
-                        </h:form>
+                        </b:form>
                     </b:jumbotron>
                 </b:column>
                 
             </b:row>
         </b:container> 
       <style type="text/css">
-            
+            .jumbotron{
+              background-color: #addfbb; 
+                font-size: small;
+                font-weight: 600;
+                font-style: italic;
+               }
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;

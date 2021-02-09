@@ -104,9 +104,9 @@
                                 <c:if test="#{editAccountController.notifier}">
                                     <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
                                 </c:if>
-                          
+
                                 <b:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>
-                             </h:panelGrid>
+                            </h:panelGrid>
                         </h:form>
                     </b:jumbotron>
                 </b:column>
@@ -114,7 +114,12 @@
             </b:row>
         </b:container> 
         <style type="text/css">
-
+            .jumbotron{
+                background-color: #addfbb; 
+                font-size: small;
+                font-weight: 600;
+                font-style: italic;
+            }
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;
