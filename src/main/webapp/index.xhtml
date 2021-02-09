@@ -14,7 +14,7 @@
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
                 <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="login/customFormLogin.xhtml"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
+                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
         
@@ -23,26 +23,27 @@
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:listLinks>
                         <b:navLink header="#{msg['MENU']}" style="color: #009966" />
-                        <b:navLink header="***#{msg['menu.accounts']}"   style="color: chocolate"/>
-                        <b:navLink href="account/accountList.xhtml" value="#{msg['menu.accounts.list']}" />
-                        <b:navLink href="account/newAdmin.xhtml" value="#{msg['menu.accounts.createadmin']}" />
-                        <b:navLink href="account/newSpecialist.xhtml" value="#{msg['menu.accounts.createspecialist']}" />
-                        <b:navLink href="account/newNotifier.xhtml" value="#{msg['menu.accounts.createnotifier']}" />
-                        <b:navLink href="account/newAssigner.xhtml" value="#{msg['menu.accounts.createassigner']}" />
+                        <b:navLink outcome ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
+                        <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
+                        <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
+                        <b:navLink outcome ="newSpecialist" value="#{msg['menu.accounts.createspecialist']}" />
+                        <b:navLink outcome ="newNotifier" value="#{msg['menu.accounts.createnotifier']}" />
+                        <b:navLink outcome ="newAssigner" value="#{msg['menu.accounts.createassigner']}" />
                     </b:listLinks>
                     <b:listLinks>
                         <b:navLink header="***#{msg['menu.faults']}"  style="color: chocolate" />
-                        <b:navLink href="fault/faultList.xhtml" value="#{msg['menu.faults.list']}"  />
-                        <b:navLink href="techarea/areaList.xhtml" value="#{msg['menu.areas']}" />
-                        <b:navLink href="fault/newFault.xhtml" value="#{msg['menu.faults.add']}" />
-                        <b:navLink href="fault/notifierFaultList.xhtml" value="#{msg['menu.faults.notifier']}"  />
-                        <b:navLink href="fault/specFaultList.xhtml" value="#{msg['menu.faults.spec']}" />
+                        <b:navLink outcome ="faultList" value="#{msg['menu.faults.list']}"  />
+                        <b:navLink outcome ="areaList" value="#{msg['menu.areas']}" />
+                        <b:navLink outcome ="newFault" value="#{msg['menu.faults.add']}" />
+                        <b:navLink outcome ="notifierFaultList" value="#{msg['menu.faults.notifier']}"  />
+                        <b:navLink outcome ="specFaultList" value="#{msg['menu.faults.spec']}" />
                     </b:listLinks>
                     <b:listLinks rendered="#{not empty request.remoteUser}" >
                         <b:navLink header="***${msg['menu.user.name']}   ${editAccountController.userName}" style="color: chocolate"/>
-                        <b:navLink href="account/changeMyPassword.xhtml" value="#{msg['menu.accounts.changePassword']}" />
-                        <b:navLink href="account/accountData.xhtml" value="#{msg['menu.accounts.details']}" /> 
+                        <b:navLink outcome ="changeMyPassword" value="#{msg['menu.accounts.changePassword']}" />
+                        <b:navLink outcome ="accountData" value="#{msg['menu.accounts.details']}" /> 
                     </b:listLinks>
+                     <b:messages/>
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
 
