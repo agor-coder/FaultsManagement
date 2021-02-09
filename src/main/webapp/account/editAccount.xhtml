@@ -93,19 +93,19 @@
 
 
                                 <c:if test="#{editAccountController.specialist}">
-                                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" />
                                 </c:if>
                                 <c:if test="#{editAccountController.appAdmin}">
-                                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}" />
                                 </c:if>
                                 <c:if test="#{editAccountController.assigner}">
-                                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" />
                                 </c:if>
                                 <c:if test="#{editAccountController.notifier}">
-                                    <h:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
                                 </c:if>
                           
-                                <h:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>
+                                <b:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true"/>
                              </h:panelGrid>
                         </h:form>
                     </b:jumbotron>

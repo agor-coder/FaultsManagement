@@ -52,9 +52,9 @@
                     <b:jumbotron >
                         <h:form id="AccountList">
                             <b:dataTable value="#{accountListController.accountsDTO}" var="row" >
-                                <b:column>
+                                <h:column>
                                     <f:facet name="header">#{msg['account.login']}</f:facet> ${row.login}
-                                </b:column>
+                                </h:column>
                                 <h:column>
                                     <f:facet name="header">#{msg['account.name']}</f:facet> ${row.firstName}         
                                 </h:column>
@@ -80,15 +80,15 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">Akcje</f:facet>
-                                    <h:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" rendered="#{not row.active}" /> 
-                                    <h:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  rendered="#{row.active}" /> 
-                                    <h:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" />
-                                    <h:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"/>
-                                    <h:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}"/>
+                                    <b:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" rendered="#{not row.active}" /> 
+                                    <b:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  rendered="#{row.active}" /> 
+                                    <b:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" />
+                                    <b:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"/>
+                                    <b:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}"/>
                                 </h:column>
                             </b:dataTable>
-                            <h:commandButton value="${msg['action.refresh']}" action="#{accountListController.init()}" />
-                            <h:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
+                            <b:commandButton value="${msg['action.refresh']}" action="#{accountListController.init()}" />
+                            <b:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
                         </h:form>
                     </b:jumbotron>
                 </b:column>

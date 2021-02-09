@@ -80,8 +80,8 @@
                             <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
                             <h:selectBooleanCheckbox value="#{newAssignerController.newAssignerDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
 
-                            <h:commandButton value="${msg['page.confirm']}" action="#{newAssignerController.confirmAssigner()}" />
-                            <h:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
+                            <b:commandButton value="${msg['page.confirm']}" action="#{newAssignerController.confirmAssigner()}" />
+                            <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
                            </h:panelGrid>
                         </h:form>
                     </b:jumbotron>

@@ -80,8 +80,8 @@
                             <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
                             <h:selectBooleanCheckbox value="#{newNotifierController.newNotifierDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
 
-                            <h:commandButton value="${msg['page.confirm']}" action="#{newNotifierController.confirmNotifier()}" />
-                            <h:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
+                            <b:commandButton value="${msg['page.confirm']}" action="#{newNotifierController.confirmNotifier()}" />
+                            <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
                            </h:panelGrid>
                         </h:form>
                     </b:jumbotron>
