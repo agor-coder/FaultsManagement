@@ -13,8 +13,8 @@
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
-                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
+                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
+                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
 
@@ -46,40 +46,24 @@
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <h1>#{msg['page.confirmRegister']}</h1>
+                    <h1>#{msg['action.login']}</h1>
                     <b:jumbotron >
-                        <h:form id="NewSpecialistConfirm" >
+                        <h:form id="form">
+
+                            <b:messages id="messages" showDetail="true"/>
+
                             <h:panelGrid columns="2">
-                                <h:outputLabel value="#{msg['account.login']}" for="login" />
-                                <h:outputText value="#{newAssignerController.newAssignerDTO.login}"  id="login"> </h:outputText>
+                                <h:outputText value="${msg['account.login']}" />
+                                <h:inputText value="#{loginController.username}"/>
 
-                                <h:outputLabel value="#{msg['account.name']}" for="firstname" />
-                                <h:outputText value="#{newAssignerController.newAssignerDTO.firstName}"   id="firstname"/>
+                                <h:outputText value="${msg['account.password']}" />
+                                <h:inputText value="#{loginController.password}"/>
 
-                                <h:outputLabel value="#{msg['account.surname']}" for="surename" />
-                                <h:outputText value="#{newAssignerController.newAssignerDTO.sureName}"  id="surename"/>
+                                <h:commandButton value="Login" type="submit" action="#{loginController.login()}" styleClass="ui-priority-primary"/>
 
-                                <h:outputLabel value="#{msg['account.email']}" for="email" />
-                                <h:outputText value="#{newSpecialistController.newSpecialistDTO.email}"   id="email"/>
-
-                                <h:outputLabel value="#{msg['account.department']}" for="department" />
-                                <h:outputText value="#{newAssignerController.newAssignerDTO.department}"  id="department"/>
-
-                                <h:outputLabel value="#{msg['account.phone']}" for="phone" />
-                                <h:outputText value="#{newAssignerController.newAssignerDTO.phone}"   id="phone"/>
-
-                                <h:outputLabel value="#{msg['account.active']}" for="active" />
-                                <h:selectBooleanCheckbox value="#{newAssignerController.newAssignerDTO.active}"  id="active"  disabled="true"/>
-
-                                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
-                                <h:selectBooleanCheckbox value="#{newAssignerController.newAssignerDTO.confirmed}"  id="confirmed"  disabled="true"/>
-
-                                <b:commandButton value="${msg['page.confirmRegister']}" action="#{newAssignerController.addAssigner()}"/>
-                                <b:commandButton value="${msg['action.correct']}"  action="#{newAssignerController.cancel()}"   immediate="true"  />
                             </h:panelGrid>
-                        </h:form> 
+                        </h:form>
                     </b:jumbotron>
-                    <b:messages/>
                 </b:column>
 
             </b:row>
@@ -87,7 +71,7 @@
         <style type="text/css">
             .jumbotron{
                 background-color: #addfbb; 
-                font-size: small;
+                font-size: medium;
                 font-weight: 600;
                 font-style: italic;
             }

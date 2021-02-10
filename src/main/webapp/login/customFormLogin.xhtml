@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title> #{msg['app.name']}</title>          
@@ -13,8 +14,8 @@
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
-                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
+                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
+                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
 
@@ -48,20 +49,18 @@
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>#{msg['action.login']}</h1>
                     <b:jumbotron >
-                        <h:form id="form">
-
-                            <b:messages id="messages" showDetail="true"/>
-
-                            <h:panelGrid columns="2">
-                                <h:outputText value="${msg['account.login']}" />
-                                <h:inputText value="#{loginController.username}"/>
-
-                                <h:outputText value="${msg['account.password']}" />
-                                <h:inputText value="#{loginController.password}"/>
-
-                                <h:commandButton value="Login" type="submit" action="#{loginController.login()}" styleClass="ui-priority-primary"/>
-
-                            </h:panelGrid>
+                        <h:form styleClass="form-signin" prependId="false">
+                            <b:inputText id="login" value="#{loginController.username}" placeholder="${msg['account.login']}"  >
+                                <f:facet name="prepend">
+                                    <b:icon name="user" />
+                                </f:facet>
+                            </b:inputText>
+                            <b:inputText id="password"  value="#{loginController.password}" placeholder="${msg['account.password']}"  type="password">
+                                <f:facet name="prepend">
+                                    <b:iconAwesome name="key" />
+                                </f:facet>
+                            </b:inputText>
+                            <b:commandButton value="#{msg['action.login']}" action="#{loginController.login()}"  icon="log-in" size="md"/>
                         </h:form>
                     </b:jumbotron>
                 </b:column>
@@ -69,6 +68,11 @@
             </b:row>
         </b:container> 
         <style type="text/css">
+            .form-signin {
+                margin: 0 auto;
+                max-width: 330px;
+                padding: 15px;
+            }
             .jumbotron{
                 background-color: #addfbb; 
                 font-size: medium;

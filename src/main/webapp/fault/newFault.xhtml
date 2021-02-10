@@ -14,8 +14,8 @@
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
-                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
+                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
+                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
 
@@ -60,8 +60,8 @@
                             <br />
                             <br />
 
-                            <h:commandButton value="${msg['page.confirm']}"   action="#{newFaultController.confirmFault}" />
-                            <h:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
+                            <b:commandButton value="${msg['page.confirm']}"   action="#{newFaultController.confirmFault}" />
+                            <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true"/>
                             <!--<h:messages/>-->
                         </h:form>
                     </b:jumbotron>
