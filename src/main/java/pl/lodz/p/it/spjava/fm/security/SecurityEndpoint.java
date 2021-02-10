@@ -8,6 +8,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import pl.lodz.p.it.spjava.fm.ejb.managers.AccountManager;
+import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 
 

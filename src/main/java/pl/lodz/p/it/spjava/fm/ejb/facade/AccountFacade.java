@@ -24,6 +24,7 @@ import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.Account_;
+import pl.lodz.p.it.spjava.fm.model.Assigner;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
@@ -43,6 +44,8 @@ public class AccountFacade extends AbstractFacade<Account> {
     public AccountFacade() {
         super(Account.class);
     }
+
+    
 
     @ExcludeClassInterceptors
     @RolesAllowed("AUTHENTICATOR")
@@ -71,10 +74,9 @@ public class AccountFacade extends AbstractFacade<Account> {
 
     }
 
-   
     public void setActive(Account entity, boolean active) {
         em.find(entity.getClass(), entity.getId()).setActive(active);
-         //entity.setActive(active);
+        //entity.setActive(active);
     }
 
     @Override
@@ -127,7 +129,7 @@ public class AccountFacade extends AbstractFacade<Account> {
         CriteriaQuery<Account> query = cb.createQuery(Account.class);
         Root<Account> from = query.from(Account.class);
         query = query.select(from);
-        query = query.where(cb.equal(from.get("login"), login)); //Przykład wskazania atrybutu encji poprzez nazwę
+        query = query.where(cb.equal(from.get("login"), login)); 
         TypedQuery<Account> tq = em.createQuery(query);
 
         return tq.getSingleResult();

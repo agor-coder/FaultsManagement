@@ -51,9 +51,9 @@
                     <h1>#{msg['menu.accounts.list']}</h1>
                     <b:jumbotron  >
                         <b:form id="AccountList" >
-                            <b:dataTable value="#{accountListController.accountsDTO}" var="row" >
+                            <b:dataTable value="#{accountListController.accountsDTO}"  var="row" >
                                 <h:column>
-                                    <f:facet name="header">#{msg['account.login']}</f:facet> ${row.login}
+                                    <f:facet name="header">#{msg['account.login']} </f:facet> ${row.login}
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">#{msg['account.name']}</f:facet> ${row.firstName}         

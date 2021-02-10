@@ -46,19 +46,24 @@
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    
+
                     <b:jumbotron >
                         <h:form id="form">
-                       <h:outputText value="${msg['general.login.error']}" /><br />
-                       <b:commandButton action="authenticate"  value="#{msg['action.correct']}"/>
-                       </h:form>
+                            <h:outputText value="${msg['general.login.error']}" /><br />
+                            <b:commandButton action="authenticate"  value="#{msg['action.correct']}"/>
+                        </h:form>
                     </b:jumbotron>
                 </b:column>
 
             </b:row>
         </b:container> 
         <style type="text/css">
-
+            .jumbotron{
+                background-color: #addfbb; 
+                font-size: medium;
+                font-weight: 600;
+                font-style: italic;
+            }
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;
