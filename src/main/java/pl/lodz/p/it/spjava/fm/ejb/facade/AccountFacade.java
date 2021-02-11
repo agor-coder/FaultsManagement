@@ -24,7 +24,6 @@ import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.Account_;
-import pl.lodz.p.it.spjava.fm.model.Assigner;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)

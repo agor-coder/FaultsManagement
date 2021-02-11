@@ -64,9 +64,22 @@
                     <b:messages/>
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
+                    <b:jumbotron>
+                        <b:container>
+                            <h:form>
+                                <h2>#{msg['menu.welcome']}</h2><br/>
+                                <p>
+                                    <b:commandButton action="newNotifier"  value="#{msg['menu.welcome.new .user']}"   look="info"   />
+                                </p>
+                                </h:form>
+
+                        </b:container>
+
+                    </b:jumbotron>
                 </b:column>
             </b:row>
         </b:container> 
+
         <style type="text/css">
 
             .sub-header {
