@@ -18,10 +18,10 @@ public class AccountDTO {
     protected String password;
 
     @NotNull(message = "{constraint.notnull}")
-    protected boolean active;
+    protected boolean active=true;
 
     @NotNull(message = "{constraint.notnull}")
-    protected boolean confirmed;
+    protected boolean confirmed=true;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")

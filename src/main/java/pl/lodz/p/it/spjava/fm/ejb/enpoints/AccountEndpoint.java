@@ -250,7 +250,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     public void regNotifier(NotifierDTO notifierDTO) throws AppBaseException {
         Notifier notifier = new Notifier();
         writeAccountDataFromDTOToNewEntity(notifierDTO, notifier);
-        notifier.setActive(true);
+        notifier.setConfirmed(false);
         notifier.setEmplacement(notifierDTO.getEmplacement());
         boolean rollbackTX;
         int retryTXCounter = 1;
