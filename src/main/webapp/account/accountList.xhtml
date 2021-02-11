@@ -9,7 +9,7 @@
     </h:head>
     <h:body style="padding-top: 60px">
 
-         <b:navBar brand="#{msg['app.name']}" brandHref="/fm/faces/index.xhtml"    inverse="true" fixed="top" fluid="true"  > 
+        <b:navBar brand="#{msg['app.name']}" brandHref="/fm/faces/index.xhtml"    inverse="true" fixed="top" fluid="true"  > 
             <h:form styleClass="navbar-form navbar-right">
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff"/>  
@@ -18,11 +18,11 @@
                 <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
-        
+
         <b:container fluid="true">
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
-             <b:listLinks>
+                    <b:listLinks>
                         <b:navLink header="#{msg['MENU']}" style="color: #009966" />
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
@@ -46,62 +46,69 @@
                     </b:listLinks>
                     <b:messages/>
                 </b:column>
-                
+
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>#{msg['menu.accounts.list']}</h1>
-                    <b:jumbotron  >
-                        <b:form id="AccountList" >
-                            <b:dataTable value="#{accountListController.accountsDTO}"  var="row" >
-                                <h:column>
-                                    <f:facet name="header">#{msg['account.login']} </f:facet> ${row.login}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['account.name']}</f:facet> ${row.firstName}         
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header" > #{msg['account.surname']}</f:facet> ${row.sureName}                       
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['account.email']}</f:facet> ${row.email} 
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header"> #{msg['account.phone']}</f:facet>${row.phone}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header"> #{msg['account.type']}</f:facet>${row.type}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['account.active']}</f:facet>
-                                    <h:selectBooleanCheckbox value="${row.active}" disabled="true" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['account.confirmed']}</f:facet>
-                                    <h:selectBooleanCheckbox value="${row.confirmed}" disabled="true" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Akcje</f:facet>
-                                    <b:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" size='xs' rendered="#{not row.active}" /> 
-                                    <b:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  size='xs' rendered="#{row.active}" /> 
-                                    <b:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" size='xs' />
-                                    <b:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}" size='xs' />
-                                    <b:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" size='xs' />
-                                </h:column>
-                            </b:dataTable>
-                            <b:commandButton value="${msg['action.refresh']}" action="#{accountListController.init()}" />
-                            <b:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
-                        </b:form>
-                    </b:jumbotron>
+                    <b:form id="AccountList" >
+                        <b:dataTable value="#{accountListController.accountsDTO}"  var="row"  
+                                     columnVisibility="true"  >
+                            <h:column>
+                                <f:facet name="header">#{msg['account.login']} </f:facet> ${row.login}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['account.name']}</f:facet> ${row.firstName}         
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" > #{msg['account.surname']}</f:facet> ${row.sureName}                       
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['account.email']}</f:facet> ${row.email} 
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> #{msg['account.phone']}</f:facet>${row.phone}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"> #{msg['account.type']}</f:facet>${row.type}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['account.active']}</f:facet>
+                                <h:selectBooleanCheckbox value="${row.active}" disabled="true" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['account.confirmed']}</f:facet>
+                                <h:selectBooleanCheckbox value="${row.confirmed}" disabled="true" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Akcje</f:facet>
+                                <b:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" size='sm' rendered="#{not row.active}" /> 
+                                <b:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  size='sm' rendered="#{row.active}" /> 
+                                <b:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" size='sm' />
+                                <b:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}" size='sm' />
+                                <b:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" size='sm' />
+                            </h:column>
+                        </b:dataTable>
+                        <b:commandButton value="${msg['action.refresh']}" action="#{accountListController.init()}" />
+                        <b:commandButton value="${msg['action.cancel']}" action="main" immediate="true"/>
+                    </b:form>
                 </b:column>
-                
+
             </b:row>
         </b:container> 
-      <style type="text/css">
+        <style type="text/css">
             .jumbotron{
-              background-color: #addfbb; 
+                background-color: #addfbb; 
                 font-size: small;
                 font-weight: 600;
                 font-style: italic;
-               }
+            }
+
+            .dataTable{
+                border-color: #addfbb;
+                background-color:#ccead6 ; 
+                font-size: small;
+                font-weight: 600;
+                font-style: italic;
+            }
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;
@@ -109,7 +116,7 @@
             .navbar-fixed-top {
                 background-color: #237038;;
                 border: 0 none;
-                
+
             }
             .sidebar {
                 display: none;
@@ -144,7 +151,7 @@
                 font-style: oblique;
                 font-weight: bold;
                 line-height: 1.0;
-                
+
             }
             .nav-list > li > a {
                 padding-left: 20px;
@@ -160,7 +167,7 @@
                 .main {
                     padding-left: 50px;
                     padding-right: 40px;
-                    
+
                 }
             }
             .main .page-header {

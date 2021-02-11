@@ -14,8 +14,8 @@
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
-                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
+                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" rendered="#{not empty request.remoteUser}"/>
+                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
 
@@ -50,7 +50,13 @@
                     <h1>#{msg['menu.specialist.list']}</h1>
                     <b:jumbotron >
                         <h:form id="SpecList">
-                            <b:dataTable value="#{specListController.specialistsDTO}" var="specialist">
+                            <b:dataTable value="#{specListController.specialistsDTO}" var="specialist"
+                                         excel="true"
+                                         csv="true"
+                                         pdf="true"
+                                         columnVisibility="true" 
+                                         copy="true"
+                                         print="true">
                                 <h:column>
                                     <f:facet name="header">#{msg['account.login']}</f:facet> ${specialist.login}
                                 </h:column>
@@ -78,7 +84,7 @@
                                     <h:selectBooleanCheckbox value="${specialist.confirmed}" disabled="true" />
                                 </h:column>
                                 <h:column>
-                                      <f:facet name="header">Akcje</f:facet>
+                                    <f:facet name="header">Akcje</f:facet>
                                     <b:commandButton value="${msg['fault.assign']}"  action="#{specListController.assignSpecialist(specialist)}" />
                                     <b:commandButton value="${msg['action.refresh']}"  action="#{specListController.assignSpecialist2(specialist)}" />
                                 </h:column>
@@ -94,7 +100,20 @@
             </b:row>
         </b:container> 
         <style type="text/css">
+            .jumbotron{
+                background-color: #addfbb; 
+                font-size: small;
+                font-weight: 600;
+                font-style: italic;
+            }
 
+            .dataTable{
+                border-color: #addfbb;
+                background-color:#ccead6 ; 
+                font-size: small;
+                font-weight: 600;
+                font-style: italic;
+            }
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;

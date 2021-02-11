@@ -53,41 +53,41 @@
 
                             <h:panelGrid columns="2" >
 
-                                <h:outputLabel value="#{msg['account.login']}" for="login" />
+                                <h:outputLabel value="#{msg['account.login']}" for="login"  style="color: #0066cc"/>
                                 <h:outputText value=" #{accountDataController.accountDTO.login}"  id="login"/>
 
-                                <h:outputLabel value="#{msg['account.name']}" for="firstname" />
+                                <h:outputLabel value="#{msg['account.name']}" for="firstname" style="color: #0066cc" />
                                 <h:outputText value="#{accountDataController.accountDTO.firstName}" id="firstname"/>
 
-                                <h:outputLabel value="#{msg['account.surname']}" for="surename" />
+                                <h:outputLabel value="#{msg['account.surname']}" for="surename" style="color: #0066cc" />
                                 <h:outputText value="#{accountDataController.accountDTO.sureName}"   id="surename"/>
 
-                                <h:outputLabel value="#{msg['account.email']}" for="email" />
+                                <h:outputLabel value="#{msg['account.email']}" for="email"  style="color: #0066cc"/>
                                 <h:outputText value="#{accountDataController.accountDTO.email}"  id="email"/>
 
-                                <h:outputLabel value="#{msg['account.phone']}" for="phone" />
+                                <h:outputLabel value="#{msg['account.phone']}" for="phone" style="color: #0066cc" />
                                 <h:outputText value="#{accountDataController.accountDTO.phone}"   id="phone"/>
 
                                 <c:if test="#{accountDataController.appAdmin}">
-                                    <h:outputLabel value="#{msg['account.alarmphone']}" for="alarmphone" />
+                                    <h:outputLabel value="#{msg['account.alarmphone']}" for="alarmphone" style="color: #0066cc" />
                                     <h:outputText value="#{accountDataController.accountDTO.alarmPhone}"   id="alarmphone"/>
                                 </c:if>
 
                                 <c:if test="#{accountDataController.notifier}">
-                                    <h:outputLabel value="#{msg['account.emplacement']}" for="emplacement" />
+                                    <h:outputLabel value="#{msg['account.emplacement']}" for="emplacement"  style="color: #0066cc"/>
                                     <h:outputText value="#{accountDataController.accountDTO.emplacement}"   id="emplacement"/>
                                 </c:if>
 
                                 <c:if test="#{accountDataController.specialist or accountDataController.assigner}">
-                                    <h:outputLabel value="#{msg['account.department']}" for="department" />
+                                    <h:outputLabel value="#{msg['account.department']}" for="department"  style="color: #0066cc"/>
                                     <h:outputText value="#{accountDataController.accountDTO.department}"   id="departmentsp"/>
                                 </c:if>
 
-                                <h:outputLabel value="#{msg['account.active']}" for="active" />
-                                <h:selectBooleanCheckbox value="#{accountDataController.accountDTO.active}"  id="active"  disabled="true"/>
+                                <h:outputLabel value="#{msg['account.active']}" for="active"  style="color: #0066cc"/>
+                                <h:selectBooleanCheckbox value="#{accountDataController.accountDTO.active}"  id="active"  disabled="true" />
 
-                                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
-                                <h:selectBooleanCheckbox value="#{accountDataController.accountDTO.confirmed}"  id="confirmed" disabled="true"/>
+                                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" style="color: #0066cc" />
+                                <h:selectBooleanCheckbox value="#{accountDataController.accountDTO.confirmed}"  id="confirmed" disabled="true"   />
 
                                 <!--<h:commandButton value="${msg['action.cancel']}" action="main"/>-->
                             </h:panelGrid>
