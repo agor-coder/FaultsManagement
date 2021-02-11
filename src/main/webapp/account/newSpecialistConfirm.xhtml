@@ -75,7 +75,7 @@
                                 <h:selectBooleanCheckbox value="#{newSpecialistController.newSpecialistDTO.confirmed}"  id="confirmed"  disabled="true"/>
 
                                 <b:commandButton value="${msg['page.confirmRegister']}" action="#{newSpecialistController.addSpecialist()}"/>
-                                <b:commandButton value="${msg['action.correct']}"  action="#{newSpecialistController.cancel()}"   immediate="true"/>
+                                <b:commandButton value="${msg['action.correct']}"  action="#{newSpecialistController.cancel()}"   immediate="true" look="warning" />
                             </h:panelGrid>
                         </h:form> 
                     </b:jumbotron>

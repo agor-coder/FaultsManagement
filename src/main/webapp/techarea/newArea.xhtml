@@ -56,7 +56,7 @@
                             <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name"/><h:message for="name" /><br />
                             <br />
                             <b:commandButton value="${msg['action.create']}"   action="#{editAreaController.addArea}"/>
-                            <b:commandButton value="${msg['action.backToList']}"  action="#{editAreaController.cancelOrEdit}"  immediate="true"/>
+                            <b:commandButton value="${msg['action.backToList']}"  action="#{editAreaController.cancelOrEdit}"  immediate="true" look="warning" />
                             <!--<h:messages/>-->
                         </h:form>
                     </b:jumbotron>

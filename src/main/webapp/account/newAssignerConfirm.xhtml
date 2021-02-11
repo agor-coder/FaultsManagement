@@ -75,7 +75,7 @@
                                 <h:selectBooleanCheckbox value="#{newAssignerController.newAssignerDTO.confirmed}"  id="confirmed"  disabled="true"/>
 
                                 <b:commandButton value="${msg['page.confirmRegister']}" action="#{newAssignerController.addAssigner()}"/>
-                                <b:commandButton value="${msg['action.correct']}"  action="#{newAssignerController.cancel()}"   immediate="true"  />
+                                <b:commandButton value="${msg['action.correct']}"  action="#{newAssignerController.cancel()}"   immediate="true" look="warning"  />
                             </h:panelGrid>
                         </h:form> 
                     </b:jumbotron>

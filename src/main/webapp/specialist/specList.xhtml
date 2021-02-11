@@ -90,8 +90,8 @@
                                 </h:column>
                             </b:dataTable>
                             <b:commandButton value="${msg['action.refresh']}" action="#{specListController.init()}" />
-                            <b:commandButton value="${msg['main.page']}" action="#{specListController.cancelMain()}" immediate="true"/>
-                            <b:commandButton value="${msg['menu.faults.list']}" action="#{specListController.cancelFaultList()}" immediate="true"/>
+                            <b:commandButton value="${msg['main.page']}" action="#{specListController.cancelMain()}" immediate="true" look="warning" />
+                            <b:commandButton value="${msg['menu.faults.list']}" action="#{specListController.cancelFaultList()}" immediate="true" look="info" />
                             <b:messages/>
                         </h:form>
                     </b:jumbotron>

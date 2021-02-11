@@ -75,7 +75,7 @@
                                 <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.confirmed}"  id="confirmed"  disabled="true"/>
 
                                 <b:commandButton value="${msg['page.confirmRegister']}" action="#{newAdminController.addAdmin()}"/>
-                                <b:commandButton value="${msg['action.correct']}"  action="#{newAdminController.cancel()}"   immediate="true"/>
+                                <b:commandButton value="${msg['action.correct']}"  action="#{newAdminController.cancel()}"   immediate="true" look="warning" />
                             </h:panelGrid>
 
                         </h:form> 

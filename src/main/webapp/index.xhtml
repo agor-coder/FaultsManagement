@@ -17,12 +17,12 @@
                 <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
-        
+
         <b:container fluid="true" >
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                    <b:listLinks>
-                        <b:navLink header="#{msg['MENU']}" style="color: #009966" />
+                    <b:navLink header="#{msg['MENU']}" style="color: #009966"/>
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -31,19 +31,20 @@
                         <b:navLink outcome ="newAssigner" value="#{msg['menu.accounts.createassigner']}" />
                     </b:listLinks>
                     <b:listLinks>
-                        <b:navLink header="***#{msg['menu.faults']}"  style="color: chocolate" />
-                        <b:navLink outcome ="faultList" value="#{msg['menu.faults.list']}"  />
-                        <b:navLink outcome ="areaList" value="#{msg['menu.areas']}" />
-                        <b:navLink outcome ="newFault" value="#{msg['menu.faults.add']}" />
-                        <b:navLink outcome ="notifierFaultList" value="#{msg['menu.faults.notifier']}"  />
-                        <b:navLink outcome ="specFaultList" value="#{msg['menu.faults.spec']}" />
+                        <b:navLink header="***#{msg['menu.faults']}"  style="color: chocolate"  
+                                   rendered="#{not request.isUserInRole('AppAdmin') and (not empty request.remoteUser)}"/>
+                        <b:navLink outcome ="faultList" value="#{msg['menu.faults.list']}"  rendered="#{request.isUserInRole('Assigner')}"/>
+                        <b:navLink outcome ="areaList" value="#{msg['menu.areas']}" rendered="#{request.isUserInRole('Assigner')}" />
+                        <b:navLink outcome ="newFault" value="#{msg['menu.faults.add']}" rendered="#{request.isUserInRole('Notifier')}"/>
+                        <b:navLink outcome ="notifierFaultList" value="#{msg['menu.faults.notifier']}"  rendered="#{request.isUserInRole('Notifier')}" />
+                        <b:navLink outcome ="specFaultList" value="#{msg['menu.faults.spec']}"  rendered="#{request.isUserInRole('Specialist')}"/>
                     </b:listLinks>
                     <b:listLinks rendered="#{not empty request.remoteUser}" >
                         <b:navLink header="***${msg['menu.user.name']}   ${editAccountController.userName}" style="color: chocolate"/>
                         <b:navLink outcome ="changeMyPassword" value="#{msg['menu.accounts.changePassword']}" />
                         <b:navLink outcome ="accountData" value="#{msg['menu.accounts.details']}" /> 
                     </b:listLinks>
-                     <b:messages/>
+                    <b:messages/>
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
 
@@ -51,7 +52,7 @@
             </b:row>
         </b:container> 
         <style type="text/css">
-            
+
             .sub-header {
                 border-bottom: 1px solid #eee;
                 padding-bottom: 10px;
@@ -59,7 +60,7 @@
             .navbar-fixed-top {
                 background-color: #237038;
                 border: 0 none;
-                
+
             }
             .sidebar {
                 display: none;
@@ -94,7 +95,7 @@
                 font-style: oblique;
                 font-weight: bold;
                 line-height: 1.0;
-                
+
             }
             .nav-list > li > a {
                 padding-left: 20px;
@@ -110,7 +111,7 @@
                 .main {
                     padding-left: 50px;
                     padding-right: 40px;
-                    
+
                 }
             }
             .main .page-header {
