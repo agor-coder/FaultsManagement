@@ -80,6 +80,18 @@
             <to-view-id>/account/newNotifier.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>registerNotifierConfirm</from-outcome>
+            <to-view-id>/register/registerNotifierConfirm.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+   
+        <navigation-case>
+            <from-outcome>registerNotifier</from-outcome>
+            <to-view-id>/register/registerNotifier.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
   
         <navigation-case>
             <from-outcome>newAssignerConfirm</from-outcome>

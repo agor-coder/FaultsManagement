@@ -13,7 +13,7 @@
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
-                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
+               <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
                 <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
@@ -22,7 +22,7 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
-                      <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                     <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -47,42 +47,36 @@
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <h1>#{msg['menu.accounts.createassigner']}</h1>
+                    <h1>#{msg['register.new.notifier']}</h1>
                     <b:jumbotron >
-                        <h:form id="NewAssigner">
+                        <h:form id="RegisterNotifier">
                             <h:panelGrid columns="3">
                                 <h:outputLabel value="#{msg['account.login']}*" for="login" />
-                                <h:inputText value="#{newAssignerController.newAssignerDTO.login}"  id="login"> </h:inputText><b:message for="login" />
+                                <h:inputText value="#{newNotifierController.newNotifierDTO.login}"  id="login"> </h:inputText><b:message for="login" />
 
                                 <h:outputLabel value="#{msg['account.password']}*" for="password" />
-                                <h:inputSecret value="#{newAssignerController.newAssignerDTO.password}" required="true" id="password"></h:inputSecret><b:message for="password" />
+                                <h:inputSecret value="#{newNotifierController.newNotifierDTO.password}" required="true" id="password"></h:inputSecret><b:message for="password" />
 
                                 <h:outputLabel value="#{msg['account.passwordRepeat']}*" for="passwordRepeat" />
-                                <h:inputSecret value="#{newAssignerController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><b:message for="passwordRepeat" /> 
+                                <h:inputSecret value="#{newNotifierController.passwordRepeat}" required="true"  id="passwordRepeat"> </h:inputSecret><b:message for="passwordRepeat" /> 
 
                                 <h:outputLabel value="#{msg['account.name']}*" for="firstname" />
-                                <h:inputText value="#{newAssignerController.newAssignerDTO.firstName}" required="true"  id="firstname"/><b:message for="firstname" />
+                                <h:inputText value="#{newNotifierController.newNotifierDTO.firstName}" required="true"  id="firstname"/><b:message for="firstname" />
 
                                 <h:outputLabel value="#{msg['account.surname']}*" for="surename" />
-                                <h:inputText value="#{newAssignerController.newAssignerDTO.sureName}" required="true"  id="surename"/><b:message for="surename" />
+                                <h:inputText value="#{newNotifierController.newNotifierDTO.sureName}" required="true"  id="surename"/><b:message for="surename" />
 
                                 <h:outputLabel value="#{msg['account.email']}*" for="email" />
-                                <h:inputText value="#{newAssignerController.newAssignerDTO.email}" required="true"  id="email"/><b:message for="email" />
+                                <h:inputText value="#{newNotifierController.newNotifierDTO.email}" required="true"  id="email"/><b:message for="email" />
 
-                                <h:outputLabel value="#{msg['account.department']}*" for="department" />
-                                <h:inputText value="#{newSpecialistController.newSpecialistDTO.department}" required="true"  id="department"/><b:message for="department" />
+                                <h:outputLabel value="#{msg['account.emplacement']}*" for="emplacement" />
+                                <h:inputText value="#{newNotifierController.newNotifierDTO.emplacement}" required="true"  id="department"/><b:message for="department" />
 
                                 <h:outputLabel value="#{msg['account.phone']}" for="phone" />
-                                <h:inputText value="#{newAssignerController.newAssignerDTO.phone}"   id="phone"/><b:message for="phone" />
+                                <h:inputText value="#{newNotifierController.newNotifierDTO.phone}"   id="phone"/><b:message for="phone" />
 
-                                <h:outputLabel value="#{msg['account.active']}" for="active" />
-                                <h:selectBooleanCheckbox value="#{newAssignerController.newAssignerDTO.active}"  id="active"/><b:message for="active" />
-
-                                <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
-                                <h:selectBooleanCheckbox value="#{newAssignerController.newAssignerDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
-
-                                <b:commandButton value="${msg['page.confirm']}" action="#{newAssignerController.confirmAssigner()}" />
-                                <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true" look="warning" />
+                                <b:commandButton value="${msg['page.confirm']}" action="#{newNotifierController.confirmRegisterNotifier()}" />
+                                <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true" look="warning" /><br/><br/><br/>
                             </h:panelGrid>
                         </h:form>
                     </b:jumbotron>

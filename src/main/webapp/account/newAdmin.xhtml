@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
-               <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
+                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
                 <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
@@ -23,7 +23,7 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
-                      <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -76,7 +76,7 @@
                                 <h:outputLabel value="#{msg['account.phone']}" for="phone" />
                                 <h:inputText value="#{newAdminController.newAdminDTO.phone}"   id="phone"/><b:message for="phone" />
 
-                                <h:outputLabel value="#{msg['account.active']}*" for="active" />
+                                <h:outputLabel value="#{msg['account.active']}" for="active" />
                                 <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.active}"  id="active"/><b:message for="active" />
 
                                 <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
@@ -84,8 +84,8 @@
 
                                 <b:commandButton value="${msg['page.confirm']}" action="#{newAdminController.confirmAdmin()}" />
                                 <b:commandButton value="${msg['action.cancel']}" action="main"  immediate="true" look="warning" />
-
-                            </h:panelGrid>
+                                
+                            </h:panelGrid>  
                         </h:form>
                     </b:jumbotron>
                 </b:column>

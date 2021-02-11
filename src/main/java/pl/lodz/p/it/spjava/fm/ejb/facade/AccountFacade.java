@@ -3,6 +3,7 @@ package pl.lodz.p.it.spjava.fm.ejb.facade;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -95,6 +96,7 @@ public class AccountFacade extends AbstractFacade<Account> {
     }
 
     @Override
+    @PermitAll
     public void create(Account entity) throws AppBaseException {
         try {
             super.create(entity);

@@ -1,6 +1,7 @@
 package pl.lodz.p.it.spjava.fm.ejb.managers;
 
 import java.util.List;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.SessionSynchronization;
@@ -33,12 +34,10 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
         accountFacade.edit(account);
     }
 
-   
     public void remove(Account account) throws AppBaseException {
         accountFacade.remove(account);
     }
 
-   
     public void markActive(Account account, boolean active) {
         accountFacade.setActive(account, active);
     }
@@ -51,32 +50,29 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
         return accountFacade.findAll();
     }
 
-    
     public void createAccount(AppAdmin adm) throws AppBaseException {
         accountFacade.create(adm);
     }
 
- 
     public void createAccount(Specialist specialist) throws AppBaseException {
         accountFacade.create(specialist);
     }
 
-   
     public void createAccount(Assigner assigner) throws AppBaseException {
         accountFacade.create(assigner);
     }
 
-
+    @PermitAll
     public void createAccount(Notifier notifier) throws AppBaseException {
         accountFacade.create(notifier);
     }
 
-    @RolesAllowed({"AppAdmin", "Notifier", "Specialist","Assigner"})
+    @RolesAllowed({"AppAdmin", "Notifier", "Specialist", "Assigner"})
     public Account findLogin(String myLogin) {
         return accountFacade.findLogin(myLogin);
     }
 
-    @RolesAllowed({"AppAdmin", "Notifier", "Specialist","Assigner"})
+    @RolesAllowed({"AppAdmin", "Notifier", "Specialist", "Assigner"})
     public void changeMyPasword(Account account, String newPass) {
         accountFacade.changeMyPasword(account, newPass);
     }

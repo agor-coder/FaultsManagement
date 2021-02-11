@@ -48,9 +48,17 @@ public class NewNotifierController implements Serializable {
             ContextUtils.emitInternationalizedMessage("NewNotifier:passwordRepeat", "account.password.different");
             return "";
         }
-
         conversation.begin();
         return "newNotifierConfirm";
+    }
+
+    public String confirmRegisterNotifier() {
+        if (!passwordRepeat.equals(newNotifierDTO.getPassword())) {
+            ContextUtils.emitInternationalizedMessage("RegisterNotifier:passwordRepeat", "account.password.different");
+            return "";
+        }
+        conversation.begin();
+        return "registerNotifierConfirm";
     }
 
     public String addNotifier() {
@@ -67,10 +75,30 @@ public class NewNotifierController implements Serializable {
             return null;
         }
     }
+    
+    public String regNotifier() {
+        if (null == newNotifierDTO) {
+            throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
+        }
+        try {
+            accountEndpoint.regNotifier(newNotifierDTO);
+            conversation.end();
+            return "main";
+        } catch (AppBaseException abe) {
+            LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji regNotifier wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
+            return null;
+        }
+    }
 
     public String cancel() {
         conversation.end();
         return "newNotifier";
+    }
+
+    public String cancelReg() {
+        conversation.end();
+        return "registerNotifier";
     }
 
 }
