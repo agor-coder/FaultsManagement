@@ -65,18 +65,19 @@
                 </b:column >
                 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <f:subview id="menuKontoLoggedIn" rendered="#{ empty request.remoteUser}">
+                    
                         <b:jumbotron>
                             <b:container>
                                 <h:form>
                                     <h2>#{msg['menu.welcome']} </h2><br/>
                                     <p>
-                                        <b:commandButton action="registerNotifier"  value="#{msg['menu.welcome.new .user']}"   look="info"   />
+                                        <b:commandButton action="registerNotifier"  value="#{msg['menu.welcome.new .user']}"  
+                                                         look="info"    rendered="#{ empty request.remoteUser}" />
                                     </p>
                                 </h:form >
                             </b:container>
                         </b:jumbotron>
-                    </f:subview>
+                    
                 </b:column >
                 
             </b:row >

@@ -21,7 +21,7 @@ public class NewAdminController implements Serializable {
 
     @Inject
     private Conversation conversation;
-    
+
     @EJB
     private AccountEndpoint accountEndpoint;
 
@@ -30,6 +30,11 @@ public class NewAdminController implements Serializable {
     //private final AppAdminDTO newAdminDTO = new AppAdminDTO();
 
     private String passwordRepeat;
+    private boolean success;
+
+    public boolean isSuccess() {
+        return success;
+    }
 
     public String getPasswordRepeat() {
         return passwordRepeat;
@@ -52,7 +57,6 @@ public class NewAdminController implements Serializable {
         return "newAdminConfirm";
     }
 
-    
     public String addAdmin() {
         if (null == newAdminDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
@@ -60,13 +64,15 @@ public class NewAdminController implements Serializable {
         try {
             accountEndpoint.addAdmin(newAdminDTO);
             conversation.end();
-            return "main";
+            success=true;
+            return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addAdmin wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }
     }
+
     public String cancel() {
         conversation.end();
         return "newAdmin";

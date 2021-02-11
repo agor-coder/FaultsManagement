@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title> #{msg['app.name']}</title>          
@@ -22,7 +23,7 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
-                     <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -75,14 +76,16 @@
                                 <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
                                 <h:selectBooleanCheckbox value="#{newAdminController.newAdminDTO.confirmed}"  id="confirmed"  disabled="true"/>
 
-                                <b:commandButton value="${msg['page.confirmRegister']}" action="#{newAdminController.addAdmin()}"/>
-                                <b:commandButton value="${msg['action.correct']}"  action="#{newAdminController.cancel()}"   immediate="true" look="warning" />
                             </h:panelGrid>
-
+                            <b:commandButton value="${msg['page.confirmRegister']}" action="#{newAdminController.addAdmin()}" rendered="#{not newAdminController.success}"/>
+                            <b:commandButton value="${msg['action.correct']}"  action="#{newAdminController.cancel()}"   immediate="true" look="warning" rendered="#{not newAdminController.success}" />
                         </h:form> 
-
+                        
                     </b:jumbotron>
-                    <b:messages/>
+                    <c:if test="#{newAdminController.success}">
+                        <b:alert severity="success"><strong>${msg['general.success.message']}</strong> </b:alert>
+                    </c:if>
+                    <b:messages />
                 </b:column>
 
             </b:row>
