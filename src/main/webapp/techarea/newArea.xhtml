@@ -14,15 +14,18 @@
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
-                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
+                <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}"
+                                 look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
+                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   
+                                 look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
             </h:form>
         </b:navBar>
 
         <b:container fluid="true">
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                      <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                    <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />

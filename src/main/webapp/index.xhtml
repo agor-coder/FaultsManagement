@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title> #{msg['app.name']}</title>      
@@ -9,19 +10,35 @@
     <h:body style="padding-top: 60px">
 
         <b:navBar brand="#{msg['app.name']}" brandHref=""    inverse="true" fixed="top" fluid="true"  >
+
             <h:form styleClass="navbar-form navbar-right">
                 <div class="form-group">
-                    <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
-                </div>  
+                    <b:inputText placeholder="${msg['account.login']}" value="#{loginController.username}" fieldSize="sm"  rendered="#{empty request.remoteUser}">
+                        <f:facet name="prepend">
+                            <b:icon name="user" />
+                        </f:facet>
+                    </b:inputText>
+                </div>
+                <div class="form-group">
+                    <b:inputText placeholder="${msg['account.password']}" value="#{loginController.password}"  type="password" fieldSize="sm" rendered="#{empty request.remoteUser}">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key" />
+                        </f:facet>
+                    </b:inputText>
+                </div>   
                 <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="authenticate"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
+                <b:commandButton action="#{loginController.login()}"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
             </h:form>
+            <h:form styleClass="navbar-form navbar-right">
+                <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
+            </h:form>
+
         </b:navBar>
 
         <b:container fluid="true" >
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                    <b:navLink header="#{msg['MENU']}" style="color: #009966"/>
+                    <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
                     <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />

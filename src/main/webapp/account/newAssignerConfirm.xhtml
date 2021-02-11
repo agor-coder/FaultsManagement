@@ -22,6 +22,7 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                      <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                         <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />

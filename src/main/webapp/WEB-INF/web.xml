@@ -27,7 +27,7 @@
          <mime-type>application/xml</mime-type>
      </mime-mapping>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/login/customFormLogin.xhtml</welcome-file>
     </welcome-file-list>
     <security-role>
         <description>Administrator</description>
