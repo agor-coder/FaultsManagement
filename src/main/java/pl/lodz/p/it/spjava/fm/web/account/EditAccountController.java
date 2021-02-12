@@ -28,6 +28,11 @@ public class EditAccountController implements Serializable {
     private AccountDTO editAccountDTO;
 
     private String passwordRepeat;
+    private boolean success;
+
+    public boolean isSuccess() {
+        return success;
+    }
 
     public AccountDTO getEditAccountDTO() {
         return editAccountDTO;
@@ -50,7 +55,6 @@ public class EditAccountController implements Serializable {
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
     }
-
 
     public String saveEditedAdminDTO() {
         if (null == editAccountDTO) {
@@ -119,27 +123,15 @@ public class EditAccountController implements Serializable {
         }
         try {
             accountEndpoint.changePassword(editAccountDTO);
-            return cancelOrEdit();
+            success = true;
+            
+            return "";
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changePassword wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-            return null;
-        }
-    }
-    public String changeMyPassword() throws AppBaseException {
-        if (!passwordRepeat.equals(editAccountDTO.getPassword())) {
-            ContextUtils.emitInternationalizedMessage("changePassword:passwordRepeat", "account.password.different");
+           
             return "";
-        }
-        try {
-            accountEndpoint.changePassword(editAccountDTO);
-            return cancelOrEdit();
-        } catch (AppBaseException abe) {
-            Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changeMyPassword wyjatku typu: ", abe);
-            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-            return null;
         }
     }
 
@@ -163,15 +155,14 @@ public class EditAccountController implements Serializable {
         conversation.end();
         return "accountList";
     }
-    
-     public  String getUserName() {
+
+    public String getUserName() {
         return ContextUtils.getUserName();
     }
-       public String getFirstLastName() {
+
+    public String getFirstLastName() {
         Account us = accountEndpoint.getMyAccount();
         return us.getFirstName() + " " + us.getSureName();
     }
-    
-   
 
 }
