@@ -51,14 +51,16 @@
                     <h1>#{msg['area.change.name']}</h1>
                     <b:jumbotron >
                         <h:form id="editArea">
-                            <h:outputLabel value="#{msg['area.name']}" for="name" /><br />
-                            <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name"/><b:message for="name" /><br />
-
+                            <h:panelGrid columns="3">
+                            <h:outputLabel value="#{msg['area.name']}" for="name" />
+                            <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name"/><b:message for="name" /> <br/>
+                            </h:panelGrid>
                             <b:commandButton value="${msg['action.save']}"   action="#{editAreaController.saveEditedArea}"/>
                             <b:commandButton value="${msg['action.backToList']}"  action="#{editAreaController.cancelOrEdit}"  immediate="true" look="warning"/><!--<h:messages/>-->
+                           
                         </h:form>
                     </b:jumbotron>
-                    <b:messages/>
+                    <b:messages global-only="true"/>
                 </b:column>
 
             </b:row>

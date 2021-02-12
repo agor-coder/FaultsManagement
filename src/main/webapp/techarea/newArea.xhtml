@@ -54,14 +54,14 @@
                     <b:jumbotron >
                         <h:form id="newArea">
                             <h:outputLabel value="#{msg['area.name']}" for="name" /><br />
-                            <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name"/><h:message for="name" /><br />
+                            <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name"/>
                             <br />
                             <b:commandButton value="${msg['action.create']}"   action="#{editAreaController.addArea}"/>
                             <b:commandButton value="${msg['action.backToList']}"  action="#{editAreaController.cancelOrEdit}"  immediate="true" look="warning" />
                             <!--<h:messages/>-->
                         </h:form>
                     </b:jumbotron>
-                    <b:messages/>
+                    <b:messages />
                 </b:column>
 
             </b:row>
