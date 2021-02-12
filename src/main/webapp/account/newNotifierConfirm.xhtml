@@ -76,8 +76,8 @@
                                 <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
                                 <h:selectBooleanCheckbox value="#{newNotifierController.newNotifierDTO.confirmed}"  id="confirmed"  disabled="true"/>
 
-                                <b:commandButton value="${msg['page.confirmRegister']}" action="#{newNotifierController.addNotifier()}"/>
-                                <b:commandButton value="${msg['action.correct']}"  action="#{newNotifierController.cancel()}"   immediate="true" look="warning"  />
+                                <b:commandButton value="${msg['action.save']}" action="#{newNotifierController.addNotifier()}" rendered="#{not newNotifierController.success}" />
+                                <b:commandButton value="${msg['action.correct']}"  action="#{newNotifierController.cancel()}"   immediate="true" look="warning" rendered="#{not newNotifierController.success}"  />
                             </h:panelGrid>
                         </h:form> 
                     </b:jumbotron>

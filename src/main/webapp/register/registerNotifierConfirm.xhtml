@@ -69,7 +69,7 @@
                                 <h:outputLabel value="#{msg['account.phone']}" for="phone" />
                                 <h:outputText value="#{newNotifierController.newNotifierDTO.phone}"   id="phone"/>
 
-                                <b:commandButton value="${msg['page.confirmRegister']}" action="#{newNotifierController.regNotifier()}"/>
+                                <b:commandButton value="${msg['action.save']}" action="#{newNotifierController.regNotifier()}"/>
                                 <b:commandButton value="${msg['action.correct']}"  action="#{newNotifierController.cancelReg()}"   immediate="true" look="warning"  />
                             </h:panelGrid>
                         </h:form> 

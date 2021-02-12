@@ -76,8 +76,8 @@
                                 <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
                                 <h:selectBooleanCheckbox value="#{newAssignerController.newAssignerDTO.confirmed}"  id="confirmed"  disabled="true"/>
 
-                                <b:commandButton value="${msg['page.confirmRegister']}" action="#{newAssignerController.addAssigner()}"/>
-                                <b:commandButton value="${msg['action.correct']}"  action="#{newAssignerController.cancel()}"   immediate="true" look="warning"  />
+                                <b:commandButton value="${msg['action.save']}" action="#{newAssignerController.addAssigner()}" rendered="#{not newAssignerController.success}"/>
+                                <b:commandButton value="${msg['action.correct']}"  action="#{newAssignerController.cancel()}"   immediate="true" look="warning"  rendered="#{not newAssignerController.success}" />
                             </h:panelGrid>
                         </h:form> 
                     </b:jumbotron>
