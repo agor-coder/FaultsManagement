@@ -21,7 +21,7 @@ public class NewAssignerController implements Serializable {
 
     @Inject
     private Conversation conversation;
-    
+
     @EJB
     private AccountEndpoint accountEndpoint;
 
@@ -30,6 +30,11 @@ public class NewAssignerController implements Serializable {
     // private final AssignerDTO newAssignerDTO = new AssignerDTO();
 
     private String passwordRepeat;
+    private boolean success;
+
+    public boolean isSuccess() {
+        return success;
+    }
 
     public String getPasswordRepeat() {
         return passwordRepeat;
@@ -59,16 +64,17 @@ public class NewAssignerController implements Serializable {
         }
         try {
             accountEndpoint.addAssigner(newAssignerDTO);
+             success=true;
             conversation.end();
-            return "main";
+            return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addAssigner wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }
     }
-    
-     public String cancel() {
+
+    public String cancel() {
         conversation.end();
         return "newAssigner";
     }

@@ -30,6 +30,12 @@ public class NewNotifierController implements Serializable {
     // private final NotifierDTO newNotifierDTO = new NotifierDTO();
 
     private String passwordRepeat;
+    
+      private boolean success;
+
+    public boolean isSuccess() {
+        return success;
+    }
 
     public String getPasswordRepeat() {
         return passwordRepeat;
@@ -67,8 +73,9 @@ public class NewNotifierController implements Serializable {
         }
         try {
             accountEndpoint.addNotifier(newNotifierDTO);
+             success=true;
             conversation.end();
-            return "main";
+            return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addNotifier wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());

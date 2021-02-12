@@ -21,7 +21,7 @@ public class NewSpecialistController implements Serializable {
 
     @Inject
     private Conversation conversation;
-    
+
     @EJB
     private AccountEndpoint accountEndpoint;
 
@@ -30,6 +30,11 @@ public class NewSpecialistController implements Serializable {
     // private final SpecialistDTO newSpecialistDTO = new SpecialistDTO();
 
     private String passwordRepeat;
+    private boolean success;
+
+    public boolean isSuccess() {
+        return success;
+    }
 
     public String getPasswordRepeat() {
         return passwordRepeat;
@@ -59,14 +64,16 @@ public class NewSpecialistController implements Serializable {
         }
         try {
             accountEndpoint.addSpecialist(newSpecialistDTO);
+            success = true;
             conversation.end();
-            return "main";
+            return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addSpecialist wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
             return null;
         }
     }
+
     public String cancel() {
         conversation.end();
         return "newSpecialist";
