@@ -73,9 +73,8 @@ public class AccountListController implements Serializable {
     }
 
     public String editAccount(AccountDTO accountDTO) {
-        conversation.begin();
         editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
-
+        conversation.begin();
         return "editAccount";
     }
 

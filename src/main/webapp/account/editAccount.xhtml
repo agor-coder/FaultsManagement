@@ -23,7 +23,7 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
-                      <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -60,56 +60,59 @@
                                 <h:outputText value=" #{editAccountController.editAccountDTO.login}"  id="login"> </h:outputText> <b:message for="login" />
 
                                 <h:outputLabel value="#{msg['account.name']}" for="firstname" />
-                                <h:inputText value="#{editAccountController.editAccountDTO.firstName}" required="true"  id="firstname"/><b:message for="firstname" />
+                                <h:inputText value="#{editAccountController.editAccountDTO.firstName}" required="true"  id="firstname" disabled="#{ editAccountController.success}"/><b:message for="firstname" />
 
                                 <h:outputLabel value="#{msg['account.surname']}" for="surename" />
-                                <h:inputText value="#{editAccountController.editAccountDTO.sureName}" required="true"  id="surename"/><b:message for="surename" />
+                                <h:inputText value="#{editAccountController.editAccountDTO.sureName}" required="true"  id="surename" disabled="#{ editAccountController.success}"/><b:message for="surename" />
 
                                 <h:outputLabel value="#{msg['account.email']}" for="email" />
-                                <h:inputText value="#{editAccountController.editAccountDTO.email}" required="true"  id="email"/><b:message for="email" />
+                                <h:inputText value="#{editAccountController.editAccountDTO.email}" required="true"  id="email" disabled="#{ editAccountController.success}"/><b:message for="email" />
 
                                 <h:outputLabel value="#{msg['account.phone']}" for="phone" />
-                                <h:inputText value="#{editAccountController.editAccountDTO.phone}"   id="phone"/><b:message for="phone" />
+                                <h:inputText value="#{editAccountController.editAccountDTO.phone}"   id="phone" disabled="#{ editAccountController.success}"/><b:message for="phone" />
 
                                 <c:if test="#{editAccountController.appAdmin}">
                                     <h:outputLabel value="#{msg['account.alarmphone']}" for="alarmphone" />
-                                    <h:inputText value="#{editAccountController.editAccountDTO.alarmPhone}" required="true"  id="alarmphone"/><b:message for="alarmphone" />
+                                    <h:inputText value="#{editAccountController.editAccountDTO.alarmPhone}" required="true"  id="alarmphone" disabled="#{ editAccountController.success}"/><b:message for="alarmphone" />
                                 </c:if>
 
                                 <c:if test="#{editAccountController.notifier}">
                                     <h:outputLabel value="#{msg['account.emplacement']}" for="emplacement" />
-                                    <h:inputText value="#{editAccountController.editAccountDTO.emplacement}" required="true"  id="emplacement"/><b:message for="emplacement" />
+                                    <h:inputText value="#{editAccountController.editAccountDTO.emplacement}" required="true"  id="emplacement" disabled="#{ editAccountController.success}"/><b:message for="emplacement" />
                                 </c:if>
 
                                 <c:if test="#{editAccountController.specialist or editAccountController.assigner}">
                                     <h:outputLabel value="#{msg['account.department']}" for="department" />
-                                    <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentsp"/><b:message for="departmentsp" />
+                                    <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentsp" disabled="#{ editAccountController.success}"/><b:message for="departmentsp" />
                                 </c:if>
 
                                 <h:outputLabel value="#{msg['account.active']}" for="active" />
-                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active"/><b:message for="active" />
+                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active" disabled="#{ editAccountController.success}"/><b:message for="active" />
 
                                 <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
-                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.confirmed}"  id="confirmed"/><b:message for="confirmed" />
+                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.confirmed}"  id="confirmed" disabled="#{ editAccountController.success}"/><b:message for="confirmed" />
 
 
                                 <c:if test="#{editAccountController.specialist}">
-                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" rendered="#{not editAccountController.success}"/>
                                 </c:if>
                                 <c:if test="#{editAccountController.appAdmin}">
-                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}"  /> 
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}"   rendered="#{not editAccountController.success}"/> 
                                 </c:if>
                                 <c:if test="#{editAccountController.assigner}">
-                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" rendered="#{not editAccountController.success}" />
                                 </c:if>
                                 <c:if test="#{editAccountController.notifier}">
-                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" rendered="#{not editAccountController.success}" />
                                 </c:if>
 
-                                <b:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true" look="warning" />
+                                <b:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true" look="warning"  rendered="#{not editAccountController.success}"/>
                             </h:panelGrid>
                         </h:form>
                     </b:jumbotron>
+                    <c:if test="#{editAccountController.success}">
+                        <b:alert severity="success"><strong>${msg['general.success.message']}</strong> </b:alert>
+                    </c:if>
                     <b:messages global-only="true" />
                 </b:column>
 

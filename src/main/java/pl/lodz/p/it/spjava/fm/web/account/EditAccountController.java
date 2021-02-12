@@ -28,7 +28,11 @@ public class EditAccountController implements Serializable {
     private AccountDTO editAccountDTO;
 
     private String passwordRepeat;
-   
+    private boolean success;
+
+    public boolean isSuccess() {
+        return success;
+    }
 
     public AccountDTO getEditAccountDTO() {
         return editAccountDTO;
@@ -58,8 +62,7 @@ public class EditAccountController implements Serializable {
         }
         try {
             accountEndpoint.saveAdminAfterEdit(editAccountDTO);
-            return cancelOrEdit();
-           
+            return success();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedAdminDTO wyjatku typu: ", abe);
@@ -74,7 +77,7 @@ public class EditAccountController implements Serializable {
         }
         try {
             accountEndpoint.saveSpecialistAfterEdit(editAccountDTO);
-            return cancelOrEdit();
+            return success();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedSpecialistDTO wyjatku typu: ", abe);
@@ -89,7 +92,7 @@ public class EditAccountController implements Serializable {
         }
         try {
             accountEndpoint.saveAssignerAfterEdit(editAccountDTO);
-            return cancelOrEdit();
+            return success();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedAssignerDTO wyjatku typu: ", abe);
@@ -104,7 +107,7 @@ public class EditAccountController implements Serializable {
         }
         try {
             accountEndpoint.saveNotifierAfterEdit(editAccountDTO);
-            return cancelOrEdit();
+            return success();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedNotifierDTO wyjatku typu: ", abe);
@@ -125,7 +128,6 @@ public class EditAccountController implements Serializable {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changePassword wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-
             return "";
         }
     }
@@ -146,11 +148,6 @@ public class EditAccountController implements Serializable {
         return AccountUtils.isAssigner(editAccountDTO);
     }
 
-    public String cancelOrEdit() {
-        conversation.end();
-        return "accountList";
-    }
-
     public String getUserName() {
         return ContextUtils.getUserName();
     }
@@ -158,6 +155,16 @@ public class EditAccountController implements Serializable {
     public String getFirstLastName() {
         Account us = accountEndpoint.getMyAccount();
         return us.getFirstName() + " " + us.getSureName();
+    }
+
+    public String cancelOrEdit() {
+        conversation.end();
+        return "accountList";
+    }
+
+    private String success() {
+        success = true;
+        return "";
     }
 
 }
