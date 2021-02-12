@@ -28,11 +28,7 @@ public class EditAccountController implements Serializable {
     private AccountDTO editAccountDTO;
 
     private String passwordRepeat;
-    private boolean success;
-
-    public boolean isSuccess() {
-        return success;
-    }
+   
 
     public AccountDTO getEditAccountDTO() {
         return editAccountDTO;
@@ -123,9 +119,7 @@ public class EditAccountController implements Serializable {
         }
         try {
             accountEndpoint.changePassword(editAccountDTO);
-            success = true;
-            
-            return "";
+            return cancelOrEdit();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changePassword wyjatku typu: ", abe);

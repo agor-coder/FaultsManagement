@@ -8,7 +8,6 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
 import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
@@ -22,7 +21,7 @@ public class ChangeMyPasswordController implements Serializable {
     @Inject
     private Conversation conversation;
 
-    private final AccountDTO accountDTO = new AccountDTO();
+    private String password = "";
     private String passwordRepeat = "";
     private String passwordOld = "";
     private boolean success;
@@ -31,8 +30,12 @@ public class ChangeMyPasswordController implements Serializable {
         return success;
     }
 
-    public AccountDTO getAccountDTO() {
-        return accountDTO;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPasswordRepeat() {
@@ -52,13 +55,13 @@ public class ChangeMyPasswordController implements Serializable {
     }
 
     public String changeMyPassword() {
-        if (!(passwordRepeat.equals(accountDTO.getPassword()))) {
+        if (!(passwordRepeat.equals(password))) {
             ContextUtils.emitInternationalizedMessage("changeMyPassword:passwordRepeat", "error.passwords.not.matching");
             return "";
         }
         try {
             conversation.begin();
-            accountEndpoint.changeMyPasword(passwordOld, accountDTO.getPassword());
+            accountEndpoint.changeMyPasword(passwordOld, password);
             success = true;
             conversation.end();
             return "";
