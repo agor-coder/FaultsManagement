@@ -74,7 +74,6 @@ public class NewNotifierController implements Serializable {
         try {
             accountEndpoint.addNotifier(newNotifierDTO);
              success=true;
-            conversation.end();
             return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addNotifier wyjatku typu: ", abe);

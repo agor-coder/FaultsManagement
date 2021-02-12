@@ -64,7 +64,6 @@ public class NewAdminController implements Serializable {
         try {
             accountEndpoint.addAdmin(newAdminDTO);
              success = true;
-            conversation.end();
             return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addAdmin wyjatku typu: ", abe);

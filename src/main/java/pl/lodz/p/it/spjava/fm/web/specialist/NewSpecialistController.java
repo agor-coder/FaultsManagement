@@ -65,7 +65,6 @@ public class NewSpecialistController implements Serializable {
         try {
             accountEndpoint.addSpecialist(newSpecialistDTO);
             success = true;
-            conversation.end();
             return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addSpecialist wyjatku typu: ", abe);

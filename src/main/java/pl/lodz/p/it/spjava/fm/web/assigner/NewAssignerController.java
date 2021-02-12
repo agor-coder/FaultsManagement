@@ -64,8 +64,7 @@ public class NewAssignerController implements Serializable {
         }
         try {
             accountEndpoint.addAssigner(newAssignerDTO);
-             success=true;
-            conversation.end();
+             success=true;   
             return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addAssigner wyjatku typu: ", abe);
