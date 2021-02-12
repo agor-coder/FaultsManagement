@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title> #{msg['app.name']}</title>          
     </h:head>
@@ -21,8 +22,8 @@
         <b:container fluid="true">
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                     <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
-                         <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                        <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -69,11 +70,15 @@
                                 <h:outputLabel value="#{msg['account.phone']}" for="phone" />
                                 <h:outputText value="#{newNotifierController.newNotifierDTO.phone}"   id="phone"/>
 
-                                <b:commandButton value="${msg['action.save']}" action="#{newNotifierController.regNotifier()}"/>
-                                <b:commandButton value="${msg['action.correct']}"  action="#{newNotifierController.cancelReg()}"   immediate="true" look="warning"  />
+                                <b:commandButton value="${msg['action.save']}" action="#{newNotifierController.regNotifier()}"  rendered="#{not newNotifierController.success}"/>
+                                <b:commandButton value="${msg['action.correct']}"  action="#{newNotifierController.cancelReg()}"   immediate="true" look="warning"  rendered="#{not newNotifierController.success}" />
+                                <b:commandButton value="${msg['page.main']}"  action="#{newNotifierController.mainPage()}"   immediate="true" look="warning"  rendered="#{newNotifierController.success}" />
                             </h:panelGrid>
                         </h:form> 
                     </b:jumbotron>
+                    <c:if test="#{newNotifierController.success}">
+                        <b:alert severity="success"><strong>${msg['general.success.message']}</strong> </b:alert>
+                    </c:if>
                     <b:messages/>
                 </b:column>
 

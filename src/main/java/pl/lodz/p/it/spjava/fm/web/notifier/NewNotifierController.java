@@ -30,8 +30,8 @@ public class NewNotifierController implements Serializable {
     // private final NotifierDTO newNotifierDTO = new NotifierDTO();
 
     private String passwordRepeat;
-    
-      private boolean success;
+
+    private boolean success;
 
     public boolean isSuccess() {
         return success;
@@ -73,7 +73,7 @@ public class NewNotifierController implements Serializable {
         }
         try {
             accountEndpoint.addNotifier(newNotifierDTO);
-             success=true;
+            success = true;
             return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addNotifier wyjatku typu: ", abe);
@@ -81,15 +81,15 @@ public class NewNotifierController implements Serializable {
             return null;
         }
     }
-    
+
     public String regNotifier() {
         if (null == newNotifierDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
         try {
             accountEndpoint.regNotifier(newNotifierDTO);
-            conversation.end();
-            return "main";
+            success = true;
+            return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji regNotifier wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());
@@ -105,6 +105,10 @@ public class NewNotifierController implements Serializable {
     public String cancelReg() {
         conversation.end();
         return "registerNotifier";
+    }
+    public String mainPage() {
+        conversation.end();
+        return "main";
     }
 
 }
