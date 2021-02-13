@@ -46,14 +46,8 @@ public class EditAccountController implements Serializable {
         this.passwordRepeat = passwordRepeat;
     }
 
-    public void setEditAccountDTOAndGetAccountEntityToEnpoint(AccountDTO accountDTO) {
-        try {
-            editAccountDTO = accountEndpoint.getAccountToEdit(accountDTO);
-        } catch (AppBaseException abe) {
-            Logger.getLogger(EditAccountController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji setEditAccountDTOAndGetAccountEntityToEnpoint wyjatku typu: ", abe);
-            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-        }
+    public void setEditAccountDTOAndGetAccountEntityToEnpoint(AccountDTO accountDTO) throws AppBaseException {
+        editAccountDTO = accountEndpoint.getAccountToEdit(accountDTO);
     }
 
     public String saveEditedAdminDTO() {

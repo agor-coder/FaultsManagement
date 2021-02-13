@@ -73,17 +73,29 @@ public class AccountListController implements Serializable {
     }
 
     public String editAccount(AccountDTO accountDTO) {
-        editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
+        try {
+            editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji editAccount wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return "";
+        }
         conversation.begin();
         return "editAccount";
     }
 
     public String changePassword(AccountDTO accountDTO) {
+        try {
+            editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changePassword wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return "";
+        }
         conversation.begin();
-        editAccountController.setEditAccountDTOAndGetAccountEntityToEnpoint(accountDTO);
-
         return "changePassword";
         //No init(), @ViewScoped 
-
     }
 }
