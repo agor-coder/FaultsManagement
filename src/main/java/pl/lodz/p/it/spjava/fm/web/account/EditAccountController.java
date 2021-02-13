@@ -106,7 +106,7 @@ public class EditAccountController implements Serializable {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedNotifierDTO wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-            return null;
+            return "";
         }
     }
 
@@ -117,7 +117,7 @@ public class EditAccountController implements Serializable {
         }
         try {
             accountEndpoint.changePassword(editAccountDTO);
-            return cancelOrEdit();
+            return success();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changePassword wyjatku typu: ", abe);

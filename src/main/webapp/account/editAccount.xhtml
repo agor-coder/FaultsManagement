@@ -78,35 +78,43 @@
 
                                 <c:if test="#{editAccountController.notifier}">
                                     <h:outputLabel value="#{msg['account.emplacement']}" for="emplacement" />
-                                    <h:inputText value="#{editAccountController.editAccountDTO.emplacement}" required="true"  id="emplacement" disabled="#{ editAccountController.success}"/><b:message for="emplacement" />
+                                    <h:inputText value="#{editAccountController.editAccountDTO.emplacement}" required="true" 
+                                                 id="emplacement" disabled="#{ editAccountController.success}"/><b:message for="emplacement" />
                                 </c:if>
 
                                 <c:if test="#{editAccountController.specialist or editAccountController.assigner}">
                                     <h:outputLabel value="#{msg['account.department']}" for="department" />
-                                    <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  id="departmentsp" disabled="#{ editAccountController.success}"/><b:message for="departmentsp" />
+                                    <h:inputText value="#{editAccountController.editAccountDTO.department}" required="true"  
+                                                 id="departmentsp" disabled="#{ editAccountController.success}"/><b:message for="departmentsp" />
                                 </c:if>
 
                                 <h:outputLabel value="#{msg['account.active']}" for="active" />
-                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active" disabled="#{ editAccountController.success}"/><b:message for="active" />
+                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.active}"  id="active" 
+                                                         disabled="#{ editAccountController.success}"/><b:message for="active" />
 
                                 <h:outputLabel value="#{msg['account.confirmed']}" for="confirmed" />
-                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.confirmed}"  id="confirmed" disabled="#{ editAccountController.success}"/><b:message for="confirmed" />
+                                <h:selectBooleanCheckbox value="#{editAccountController.editAccountDTO.confirmed}"  id="confirmed" 
+                                                         disabled="#{ editAccountController.success}"/><b:message for="confirmed" />
 
 
                                 <c:if test="#{editAccountController.specialist}">
-                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" rendered="#{not editAccountController.success}"/>
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedSpecialistDTO()}" 
+                                                     rendered="#{not editAccountController.success}"/>
                                 </c:if>
                                 <c:if test="#{editAccountController.appAdmin}">
-                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}"   rendered="#{not editAccountController.success}"/> 
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAdminDTO()}"   
+                                                     rendered="#{not editAccountController.success}"/> 
                                 </c:if>
                                 <c:if test="#{editAccountController.assigner}">
-                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" rendered="#{not editAccountController.success}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedAssignerDTO()}" 
+                                                     rendered="#{not editAccountController.success}" />
                                 </c:if>
                                 <c:if test="#{editAccountController.notifier}">
-                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" rendered="#{not editAccountController.success}" />
+                                    <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" 
+                                                     />
                                 </c:if>
 
-                                <b:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true" look="warning"  rendered="#{not editAccountController.success}"/>
+                                <b:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true" look="warning" />
                             </h:panelGrid>
                         </h:form>
                     </b:jumbotron>
