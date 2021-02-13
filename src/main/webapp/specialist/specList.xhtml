@@ -22,7 +22,7 @@
         <b:container fluid="true">
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                      <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -44,6 +44,7 @@
                         <b:navLink outcome ="changeMyPassword" value="#{msg['menu.accounts.changePassword']}" />
                         <b:navLink outcome ="accountData" value="#{msg['menu.accounts.details']}" /> 
                     </b:listLinks>
+                    <b:messages/>
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
@@ -85,14 +86,13 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">Akcje</f:facet>
-                                    <b:commandButton value="${msg['fault.assign']}"  action="#{specListController.assignSpecialist(specialist)}" />
-                                    <b:commandButton value="${msg['action.refresh']}"  action="#{specListController.assignSpecialist2(specialist)}" />
+                                    <b:commandButton value="${msg['fault.assign']}"  action="#{specListController.assignSpecialist(specialist)}"  size='sm'/>
+                                    <b:commandButton value="${msg['action.refresh']}"  action="#{specListController.assignSpecialist2(specialist)}"  size='sm'/>
                                 </h:column>
                             </b:dataTable>
-                            <b:commandButton value="${msg['action.refresh']}" action="#{specListController.init()}" />
-                            <b:commandButton value="${msg['main.page']}" action="#{specListController.cancelMain()}" immediate="true" look="warning" />
-                            <b:commandButton value="${msg['menu.faults.list']}" action="#{specListController.cancelFaultList()}" immediate="true" look="info" />
-                            <b:messages/>
+                            <!--<b:commandButton value="${msg['action.refresh']}" action="#{specListController.init()}" />-->
+                            <b:commandButton value="${msg['main.page']}" action="#{specListController.cancelMain()}" immediate="true"   look="warning" />
+                            <b:commandButton value="${msg['menu.faults.list']}" action="#{specListController.cancelFaultList()}" immediate="true"   look="info" />
                         </h:form>
                     </b:jumbotron>
                 </b:column>
