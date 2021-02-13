@@ -23,7 +23,7 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
-                      <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -52,7 +52,13 @@
                     <h1>  #{msg['menu.areas']} </h1>
 
                     <h:form id="areaList">
-                        <b:dataTable value="#{areaListController.areasDTO}" var="area" >
+                        <b:dataTable value="#{areaListController.areasDTO}" var="area" 
+                                     excel="true"
+                                     csv="true"
+                                     pdf="true"
+                                     columnVisibility="true" 
+                                     copy="true"
+                                     print="true">
                             <h:column>
                                 <f:facet name="header">#{msg['area.creation.time']}</f:facet> ${area.createTimeStamp} 
                             </h:column>
