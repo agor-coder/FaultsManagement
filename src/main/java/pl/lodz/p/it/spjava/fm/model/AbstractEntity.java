@@ -8,6 +8,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 
 @MappedSuperclass
@@ -20,11 +21,13 @@ public abstract class AbstractEntity {
     protected abstract Object getBusinessKey();
 
     @Version
+    @NotNull(message = "{constraint.notnull}")
     @Column(nullable = false)
     private int version;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "creation_timestamp")
+    @NotNull(message = "{constraint.notnull}")
+    @Column(name = "creation_timestamp", nullable = false)
     private Date creationTimestamp;
     
     @Temporal(TemporalType.TIMESTAMP)

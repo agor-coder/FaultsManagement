@@ -1,12 +1,12 @@
 package pl.lodz.p.it.spjava.fm.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class SpecialistDTO extends AccountDTO {
 
-    private static final int MAX_FAULTS_IN_PROGRESS = 3;
-
     @NotNull(message = "{constraint.notnull}")
+    @Size(max = 16, message = "{constraint.string.length.toolong}")
     private String department;
 
     public SpecialistDTO() {

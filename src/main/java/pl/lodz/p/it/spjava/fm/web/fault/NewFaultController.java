@@ -30,11 +30,11 @@ public class NewFaultController implements Serializable {
     private FaultEndpoint faultEndpoint;
     @EJB
     private TechAreaEndpoint areaEndpoint;
-  
 
     private List<TechAreaDTO> areasDTO;
     private long techAreaId;
     private TechAreaDTO areaDTO;
+    private boolean success;
 
     @PostConstruct
     public void init() {
@@ -66,6 +66,10 @@ public class NewFaultController implements Serializable {
         this.techAreaId = techAreaId;
     }
 
+    public boolean isSuccess() {
+        return success;
+    }
+
     public String confirmFault() {
         for (TechAreaDTO a : areasDTO) {
             if (techAreaId == a.getId()) {
@@ -82,8 +86,8 @@ public class NewFaultController implements Serializable {
         }
         try {
             faultEndpoint.addFault(newFaultDTO, techAreaId);
-            conversation.end();
-            return "main";
+           success = true;
+            return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addFault wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());

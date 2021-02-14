@@ -27,14 +27,13 @@ public abstract class Account extends AbstractEntity implements Serializable {
     protected Long id;
 
     @NotNull(message = "{constraint.notnull}")
-    @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
-    @Pattern(regexp = "^[_a-zA-Z0-9-]*$", message = "{constraint.string.incorrectchar}")
+    @Size(min = 5, max = 32, message = "{constraint.string.length.notinrange}")
+    @Pattern(regexp = "^[_a-zA-Z0-9-]*$", message = "{constraint.string.length.tooshort}")
     @Column(length = 32, nullable = false, unique = true, updatable = false)
     protected String login;
 
     @NotNull(message = "{constraint.notnull}")
-    //@Size(min = 64, max = 64, message = "{constraint.string.length.notinrange}")
-    @Size(min = 2, max = 64, message = "{constraint.string.length.notinrange}")
+    @Size(min = 64, max = 64, message = "{constraint.string.length.notinrange}")
     @Column(length = 64, nullable = false)
     protected String password;
 

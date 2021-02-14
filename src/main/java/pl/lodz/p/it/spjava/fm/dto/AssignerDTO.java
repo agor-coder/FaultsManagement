@@ -1,10 +1,12 @@
 package pl.lodz.p.it.spjava.fm.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class AssignerDTO extends AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
+    @Size(max = 16, message = "{constraint.string.length.toolong}")
     private String department;
 
     public AssignerDTO() {

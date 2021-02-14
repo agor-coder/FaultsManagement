@@ -9,12 +9,12 @@ public class AccountDTO {
     protected Long id;
 
     @NotNull(message = "{constraint.notnull}")
-    @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
+    @Size(min = 5, max = 32, message = "{constraint.string.length.notinrange}")
     @Pattern(regexp = "^[_a-zA-Z0-9-]*$", message = "{constraint.string.incorrectchar}")
     protected String login;
 
     @NotNull(message = "{constraint.notnull}")
-    @Size(min = 2, max = 64, message = "{constraint.string.length.notinrange}")
+    @Size(min = 2, max = 32, message = "{constraint.string.length.notinrange}")
     protected String password;
 
     @NotNull(message = "{constraint.notnull}")

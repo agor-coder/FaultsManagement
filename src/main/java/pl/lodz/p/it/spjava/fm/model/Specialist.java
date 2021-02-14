@@ -5,6 +5,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @NamedQuery(name = "Specialist.findLogin", query = "SELECT i FROM Specialist i where i.login = :login")
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotNull;
 public class Specialist extends Account implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")
+    @Size(max = 16, message = "{constraint.string.length.toolong}")
     private String department;
 
     @NotNull(message = "{constraint.notnull}")

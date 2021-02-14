@@ -52,7 +52,7 @@
                     <b:jumbotron >
                         <h:form id="newFault">
                             <h:outputLabel value="#{msg['fault.describe']}"  style="color: green" for="describe" /><br />
-                            <b:inputTextarea   value="#{newFaultController.newFaultDTO.faultDescribe}"  id="describe" /><h:message for="describe" /><br />
+                            <b:inputTextarea   value="#{newFaultController.newFaultDTO.faultDescribe}"  id="describe" required="true" /><h:message for="describe" /><br />
 
                             <h:outputLabel value="#{msg['fault.choose.area']}" style="color: green"/><br />
                             <h:selectOneMenu  id="list1" value="#{newFaultController.techAreaId}"   >

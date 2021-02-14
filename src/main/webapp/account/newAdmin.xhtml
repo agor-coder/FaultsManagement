@@ -54,7 +54,7 @@
                         <h:form id="NewAdmin">
                             <h:panelGrid columns="3">
                                 <h:outputLabel value="#{msg['account.login']}*" for="login" />
-                                <h:inputText value="#{newAdminController.newAdminDTO.login}"  id="login"> </h:inputText><b:message for="login" />
+                                <h:inputText value="#{newAdminController.newAdminDTO.login}"  id="login" required="true"> </h:inputText><b:message for="login" />
 
                                 <h:outputLabel value="#{msg['account.password']}*" for="password" />
                                 <h:inputSecret value="#{newAdminController.newAdminDTO.password}" required="true" id="password"></h:inputSecret><b:message for="password" />
