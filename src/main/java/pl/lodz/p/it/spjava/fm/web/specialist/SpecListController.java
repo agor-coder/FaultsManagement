@@ -54,7 +54,7 @@ public class SpecListController implements Serializable {
   
     public String assignSpecialist(SpecialistDTO specialistDTO) {
         try {
-            faultEndpoint.assignSpecialist(specialistDTO);
+                faultEndpoint.assignSpecialist(specialistDTO);
             return cancelFaultList();//end of conversation
         } catch (AppBaseException abe) {
             Logger.getLogger(SpecListController.class.getName())

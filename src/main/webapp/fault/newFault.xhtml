@@ -48,16 +48,17 @@
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <h1>#{msg['action.login']}</h1>
+                    <h1>#{msg['fault.new']}</h1>
                     <b:jumbotron >
                         <h:form id="newFault">
                             <h:outputLabel value="#{msg['fault.describe']}"  style="color: green" for="describe" /><br />
-                            <b:inputTextarea   value="#{newFaultController.newFaultDTO.faultDescribe}"  id="describe" required="true" /><h:message for="describe" /><br />
+                            <b:inputTextarea   value="#{newFaultController.newFaultDTO.faultDescribe}"  id="describe" required="true" /><b:message for="describe" /><br />
 
                             <h:outputLabel value="#{msg['fault.choose.area']}" style="color: green"/><br />
-                            <h:selectOneMenu  id="list1" value="#{newFaultController.techAreaId}"   >
+                            <h:selectOneMenu  id="list1" value="#{newFaultController.techAreaId}"  required="true" >
+                                <f:selectItem itemValue="#{null}" itemLabel=""/>
                                 <f:selectItems value="#{newFaultController.areasDTO}" var="area"  itemValue="#{area.id}" itemLabel="#{area.areaName}"  > </f:selectItems>
-                            </h:selectOneMenu><h:message for="list1" />
+                            </h:selectOneMenu><h:message  for="list1" />
                             <br />
                             <br />
 
