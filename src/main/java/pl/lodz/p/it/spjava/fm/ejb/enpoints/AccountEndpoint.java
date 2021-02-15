@@ -55,9 +55,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         if (null == endpointAccount) {
             throw AccountException.createAccountExceptionWithAccountNotFound();
         }
-        if (endpointAccount.getLogin().equals(ContextUtils.getUserName())) {
-            throw AccountException.createAccountExceptionWithAccountNotRemove();
-        }
+
     }
 
     public AccountDTO getAccountToEdit(AccountDTO accountDTO) throws AppBaseException {
@@ -87,6 +85,9 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     }
 
     public void removeAccount(AccountDTO accountDTO) throws AppBaseException {
+        if (accountDTO.getLogin().equals(ContextUtils.getUserName())) {
+            throw AccountException.createAccountExceptionWithAccountNotRemove();
+        }
         setEndpointAccountFromDTOToEdit(accountDTO);
         accountManager.remove(endpointAccount);
     }
