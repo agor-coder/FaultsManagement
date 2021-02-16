@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title> #{msg['app.name']}</title>          
     </h:head>
@@ -52,15 +53,20 @@
                     <b:jumbotron >
                         <h:form id="editArea">
                             <h:panelGrid columns="3">
-                            <h:outputLabel value="#{msg['area.name']}" for="name" />
-                            <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name"/><b:message for="name" /> <br/>
+                                <h:outputLabel value="#{msg['area.name']}" for="name" />
+                                <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name"/><b:message for="name" /> <br/>
                             </h:panelGrid>
-                            <b:commandButton value="${msg['action.save']}"   action="#{editAreaController.saveEditedArea}"/>
-                            <b:commandButton value="${msg['action.backToList']}"  action="#{editAreaController.cancelOrEdit}"  immediate="true" look="warning"/><!--<h:messages/>-->
-                           
+                            <b:commandButton value="${msg['action.save']}"   action="#{editAreaController.saveEditedArea}" 
+                                             rendered="#{not editAreaController.success}" />
+                            <b:commandButton value="${msg['action.backToList']}"  action="#{editAreaController.cancelOrEdit}" 
+                                             immediate="true" look="warning"/>
+
                         </h:form>
                     </b:jumbotron>
-                    <b:messages global-only="true"/>
+                     <c:if test="#{editAreaController.success}">
+                        <b:alert severity="success"><strong>${msg['general.success.message']}</strong> </b:alert>
+                    </c:if>
+                    <b:messages global-only="true" />  
                 </b:column>
 
             </b:row>

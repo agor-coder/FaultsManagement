@@ -28,6 +28,12 @@ public class EditAreaController implements Serializable {
     private TechAreaEndpoint areaEndpoint;
 
     private TechAreaDTO editAreaDTO = new TechAreaDTO();
+    
+    private boolean success;
+
+    public boolean isSuccess() {
+        return success;
+    }
 
     public TechAreaDTO getEditAreaDTO() {
         return editAreaDTO;
@@ -49,7 +55,7 @@ public class EditAreaController implements Serializable {
         }
         try {
             areaEndpoint.saveAreaAfterEdit(editAreaDTO);
-            return cancelOrEdit();
+            return success();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji saveEditedAreaDTO wyjatku typu: ", abe);
@@ -58,13 +64,12 @@ public class EditAreaController implements Serializable {
         }
     }
 
-    
     public String addArea() {
         if (null == editAreaDTO) {
             throw new IllegalArgumentException("Proba zatwierdzenia danych bez wypelnienia formularza");
         }
         try {
-            areaEndpoint.addArea(editAreaDTO); 
+            areaEndpoint.addArea(editAreaDTO);
             return cancelOrEdit();
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addArea wyjatku typu: ", abe);
@@ -76,5 +81,10 @@ public class EditAreaController implements Serializable {
     public String cancelOrEdit() {
         conversation.end();
         return "areaList";
+    }
+
+    private String success() {
+        success = true;
+        return "";
     }
 }

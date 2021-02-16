@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -41,6 +43,8 @@ public class AreaListController implements Serializable {
     public void remove(TechAreaDTO areaDTO) {
         try {
             areaEndpoint.remove(areaDTO);
+             FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"",  "Operacja zakończona powodzeniem"));
             init();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAreaController.class.getName())

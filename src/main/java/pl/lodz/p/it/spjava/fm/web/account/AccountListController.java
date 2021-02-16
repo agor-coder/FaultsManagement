@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -64,12 +66,15 @@ public class AccountListController implements Serializable {
     public void removeAccount(AccountDTO accountDTO) {
         try {
             accountEndpoint.removeAccount(accountDTO);
+            FacesContext.getCurrentInstance()
+                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"",  "Operacja zakończona powodzeniem"));
             init();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji removeAccount wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
+
     }
 
     public String editAccount(AccountDTO accountDTO) {
