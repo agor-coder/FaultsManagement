@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui">
     <h:head>
         <title> #{msg['app.name']}</title>        
@@ -81,17 +82,26 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Akcje</f:facet>
-                                <b:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" size='sm' rendered="#{not row.active}" /> 
-                                <b:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  size='sm' rendered="#{row.active}" /> 
-                                <b:commandButton value="${msg['action.delete']}"  action="#{accountListController.removeAccount(row)}" size='sm' />
-                                <b:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}" size='sm' />
-                                <b:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" size='sm' />
+                                <p:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}" size='sm' rendered="#{not row.active}" /> 
+                                <p:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"  size='sm' rendered="#{row.active}" /> 
+
+                                <p:commandButton value="${msg['action.delete']}" action="#{accountListController.removeAccount(row)}" update="message"  >
+                                    <p:confirm header="Potwierdzenie" message="Czy na pewno?" icon="ui-icon-alert" />  
+                                </p:commandButton>  
+                                <p:confirmDialog  global="true" showEffect="fade" hideEffect="fade">  
+                                    <p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                                    <p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+                                </p:confirmDialog>  
+
+                                <p:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}" size='sm' />
+                                <p:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" size='sm' />
                             </h:column>
                         </b:dataTable>
                         <b:commandButton value="${msg['action.refresh']}" action="#{accountListController.init()}" />
                         <b:commandButton value="${msg['action.cancel']}" action="main" immediate="true" look="warning" />
                     </b:form>
                 </b:column>
+                <b:growl id="message" placement-align="center" />
             </b:row>
         </b:container> 
         <style type="text/css">
