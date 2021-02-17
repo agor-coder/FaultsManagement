@@ -87,7 +87,7 @@
                             <h:column>
                                 <f:facet name="header">*</f:facet>
                                 <b:commandButton value="${msg['fault.finish']}" 
-                                                 action="#{myFaultListController.setStatusEND(fault)}" size='xs'  rendered="#{fault.assigned}" />
+                                                 action="#{myFaultListController.setStatusEND(fault)}" size='sm'  look="success" rendered="#{fault.assigned}" />
                             </h:column>
                         </b:dataTable>
                         <b:commandButton value="${msg['action.refresh']}" action="#{myFaultListController.init()}" />
