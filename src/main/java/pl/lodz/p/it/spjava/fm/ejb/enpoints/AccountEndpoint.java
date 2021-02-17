@@ -95,25 +95,93 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     public void saveAdminAfterEdit(AccountDTO adminDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(adminDTO, endpointAccount);
         ((AppAdmin) endpointAccount).setAlarmPhone(((AppAdminDTO) adminDTO).getAlarmPhone());
-        accountManager.editAccount(endpointAccount);
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        do {
+            try {
+                accountManager.editAccount(endpointAccount);
+                rollbackTX = accountManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
+        }
     }
 
     public void saveSpecialistAfterEdit(AccountDTO specialistDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(specialistDTO, endpointAccount);
         ((Specialist) endpointAccount).setDepartment(((SpecialistDTO) specialistDTO).getDepartment());
-        accountManager.editAccount(endpointAccount);
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        do {
+            try {
+                accountManager.editAccount(endpointAccount);
+                rollbackTX = accountManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
+        }
     }
 
     public void saveAssignerAfterEdit(AccountDTO assignerDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(assignerDTO, endpointAccount);
         ((Assigner) endpointAccount).setDepartment(((AssignerDTO) assignerDTO).getDepartment());
-        accountManager.editAccount(endpointAccount);
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        do {
+            try {
+                accountManager.editAccount(endpointAccount);
+                rollbackTX = accountManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
+        }
     }
 
     public void saveNotifierAfterEdit(AccountDTO notifierDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(notifierDTO, endpointAccount);
         ((Notifier) endpointAccount).setEmplacement(((NotifierDTO) notifierDTO).getEmplacement());
-        accountManager.editAccount(endpointAccount);
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        do {
+            try {
+                accountManager.editAccount(endpointAccount);
+                rollbackTX = accountManager.isLastTransactionRollback();
+            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
+        }
     }
 
     private void writeEditableDataFromDTOToEntity(AccountDTO accountDTO, Account account) {

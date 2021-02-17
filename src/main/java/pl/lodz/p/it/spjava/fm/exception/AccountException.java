@@ -42,25 +42,29 @@ public class AccountException extends AppBaseException {
         return ae;
     }
       static public AccountException createWithDbCheckConstraintKey( Throwable cause) {
-        AccountException se = new AccountException(KEY_DB_CONSTRAINT, cause);
-        return se;
+        AccountException ae = new AccountException(KEY_DB_CONSTRAINT, cause);
+        return ae;
     }
     static public AccountException createWithDbCheckConstraintKey() {
-        AccountException se = new AccountException(KEY_DB_CONSTRAINT);
-        return se;
+        AccountException ae = new AccountException(KEY_DB_CONSTRAINT);
+        return ae;
     }
       public static AccountException createWithDbCheckConstraintKeyEmail(PersistenceException ex) {
-        AccountException se = new AccountException(KEY_DB_CONSTRAINT_EMAIL);
-        return se;
+        AccountException ae = new AccountException(KEY_DB_CONSTRAINT_EMAIL);
+        return ae;
     }
 
     static public AccountException createWithPreviousGivenPasswordDoesNotMatch() {
-        AccountException se = new AccountException(PASS_NOT_MATCH);
-        return se;
+        AccountException ae = new AccountException(PASS_NOT_MATCH);
+        return ae;
     }
     static public AccountException createWithTheSamePasswordDoesNotMatch() {
-        AccountException se = new AccountException(PASS_THE_SAME);
-        return se;
+        AccountException ae = new AccountException(PASS_THE_SAME);
+        return ae;
+    }
+    static public AccountException createAccountExceptionWithTxRetryRollback() {
+        AccountException ae = new AccountException(KEY_TX_RETRY_ROLLBACK);
+        return ae;
     }
 
 }
