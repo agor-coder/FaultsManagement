@@ -1,15 +1,15 @@
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-11,'Administrator',1,1,'2020-11-04 18:39:54.340','admin1','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'10@p.pl','Piotr','SmutnyA','5322');
-INSERT INTO APPADMIN(id,alarmphone) VALUES (-11,'222');
+INSERT INTO APPADMIN(id,alarmphone) VALUES (-11,'2222');
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-12,'Administrator',1,1,'2020-11-04 20:39:54.340','admin2','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'11@p.pl','Sławomir','HermanA','5320');
-INSERT INTO APPADMIN(id,alarmphone) VALUES (-12,'221');
+INSERT INTO APPADMIN(id,alarmphone) VALUES (-12,'2231');
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-13,'Administrator',1,1,'2020-11-04 18:50:54.340','admin3','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'12@p.pl','Maciej','WolnyA','5321');
-INSERT INTO APPADMIN(id,alarmphone) VALUES (-13,'224');
+INSERT INTO APPADMIN(id,alarmphone) VALUES (-13,'2324');
 
 INSERT INTO ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-1,'Specjalista',0,1,'2020-12-04 18:39:54.340','spec1','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'2@p.pl','Andrzej','GorzkiS','5366');

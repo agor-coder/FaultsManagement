@@ -25,10 +25,12 @@ public class AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
+    @Pattern(regexp = "^[\\pL \\'-]*$", message = "{constraint.string.incorrectchar}")
     private String firstName;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
+    @Pattern(regexp = "^[\\pL \\'-]*$", message = "{constraint.string.incorrectchar}")
     private String sureName;
 
     @NotNull(message = "{constraint.notnull}")
@@ -37,6 +39,7 @@ public class AccountDTO {
     private String email;
 
     @Size(max = 9, message = "{constraint.string.length.toolong}")
+    @Pattern(regexp = "^[0-9]*$", message = "{constraint.string.incorrectchar}")
     private String phone;
 
     private String type;

@@ -44,7 +44,7 @@
                         <b:navLink outcome ="changeMyPassword" value="#{msg['menu.accounts.changePassword']}" />
                         <b:navLink outcome ="accountData" value="#{msg['menu.accounts.details']}" /> 
                     </b:listLinks>
-                    <b:messages/>
+                    
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
@@ -96,7 +96,7 @@
                         </h:form>
                     </b:jumbotron>
                 </b:column>
-
+                <b:growl id="message" placement-align="center" />
             </b:row>
         </b:container> 
         <style type="text/css">

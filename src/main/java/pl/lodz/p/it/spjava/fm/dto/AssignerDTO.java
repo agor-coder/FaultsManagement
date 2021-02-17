@@ -1,12 +1,14 @@
 package pl.lodz.p.it.spjava.fm.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class AssignerDTO extends AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
     @Size(max = 16, message = "{constraint.string.length.toolong}")
+    @Pattern(regexp = "^[A-z0-9]*$", message = "{constraint.string.incorrectchar}")
     private String department;
 
     public AssignerDTO() {

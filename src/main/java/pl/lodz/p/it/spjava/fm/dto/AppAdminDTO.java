@@ -1,12 +1,14 @@
 package pl.lodz.p.it.spjava.fm.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class AppAdminDTO extends AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
-    @Size(max = 4, message = "{constraint.string.length.toolong}")
+    @Size(min = 4, max = 4, message = "{constraint.string.length.incorrect}")
+    @Pattern(regexp = "^[0-9]*$", message = "{constraint.string.incorrectchar}")
     private String alarmPhone;
 
     public AppAdminDTO() {
@@ -18,6 +20,7 @@ public class AppAdminDTO extends AccountDTO {
         this.alarmPhone = alarmPhone;
     }
 //do form new
+
     public AppAdminDTO(String firstName, String sureName,
             String email, String phone, String alarmPhone) {
         super(firstName, sureName, email, phone);

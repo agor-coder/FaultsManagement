@@ -1,12 +1,14 @@
 package pl.lodz.p.it.spjava.fm.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class NotifierDTO extends AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
     @Size(max = 16, message = "{constraint.string.length.toolong}")
+    @Pattern(regexp = "^[0-9\\pL \\'-]*$", message = "{constraint.string.incorrectchar}")
     private String emplacement;
 
     public NotifierDTO() {
