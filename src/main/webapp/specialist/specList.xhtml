@@ -59,9 +59,6 @@
                                          copy="true"
                                          print="true">
                                 <h:column>
-                                    <f:facet name="header">#{msg['account.login']}</f:facet> ${specialist.login}
-                                </h:column>
-                                <h:column>
                                     <f:facet name="header">#{msg['account.name']}</f:facet> ${specialist.firstName}         
                                 </h:column>
                                 <h:column>
@@ -87,7 +84,7 @@
                                 <h:column>
                                     <f:facet name="header">Akcje</f:facet>
                                     <b:commandButton value="${msg['fault.assign']}"  action="#{specListController.assignSpecialist(specialist)}"  size='sm'  look="info"/>
-                                    <b:commandButton value="${msg['action.refresh']}"  action="#{specListController.assignSpecialist2(specialist)}"  size='sm'/>
+                                    <b:commandButton value="10s"  action="#{specListController.assignSpecialist2(specialist)}"  size='sm'/>
                                 </h:column>
                             </b:dataTable>
                             <!--<b:commandButton value="${msg['action.refresh']}" action="#{specListController.init()}" />-->

@@ -68,8 +68,6 @@ public class AccountListController implements Serializable {
     public String removeAccount(AccountDTO accountDTO) {
         try {
             accountEndpoint.removeAccount(accountDTO);
-            FacesContext.getCurrentInstance()
-                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Operacja zakończona powodzeniem"));
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji removeAccount wyjatku typu: ", abe);

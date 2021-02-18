@@ -41,7 +41,6 @@ public class AreaListController implements Serializable {
     public String remove(TechAreaDTO areaDTO) {
         try {
             areaEndpoint.remove(areaDTO);
-            ContextUtils.emitInternationalizedMessage(null, "general.success.message");
             init();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAreaController.class.getName())
@@ -49,7 +48,7 @@ public class AreaListController implements Serializable {
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return "";
         }
-        return "";
+        return "areaList";
     }
 
     public String editArea(TechAreaDTO areaDTO) {

@@ -50,7 +50,24 @@ public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchro
 
     public void remove(TechAreaDTO areaDTO) throws AppBaseException {
         setEndpointAreaFromDTOToEdit(areaDTO);
-        areaManager.remove(endpointArea);
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        do {
+            try {
+                areaManager.remove(endpointArea);
+                rollbackTX = areaManager.isLastTransactionRollback();
+            } catch (AppBasePersistenceException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
+        }
     }
 
     private void setEndpointAreaFromDTOToEdit(TechAreaDTO areaDTO) throws AppBaseException {
@@ -92,23 +109,21 @@ public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchro
         techArea.setAreaName(areaDTO.getAreaName());
         boolean rollbackTX;
         int retryTXCounter = 1;
-        Throwable cause = null;
         do {
             try {
                 areaManager.createArea(techArea);
                 rollbackTX = areaManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
                 retryTXCounter++;
-                cause = ex.getCause();
             }
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
         if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AreaException.createWithDbCheckConstraintKey(cause);
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
         }
     }
 }

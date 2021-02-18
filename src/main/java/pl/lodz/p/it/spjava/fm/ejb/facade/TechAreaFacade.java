@@ -74,7 +74,7 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw AreaException.createWithDbCheckConstraintKey(ex);
             } else {
-                throw ex;
+                 throw AppBasePersistenceException.createPersistenceException();
             }
         }
     }
