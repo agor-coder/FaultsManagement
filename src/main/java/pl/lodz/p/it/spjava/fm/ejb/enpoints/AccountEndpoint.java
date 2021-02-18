@@ -25,6 +25,7 @@ import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.AccountManager;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.exception.AppBasePersistenceException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.AppAdmin;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
@@ -220,23 +221,21 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         adm.setAlarmPhone(adminDTO.getAlarmPhone());
         boolean rollbackTX;
         int retryTXCounter = 1;
-        Throwable cause = null;
         do {
             try {
                 accountManager.createAccount(adm);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
                 retryTXCounter++;
-                cause = ex.getCause();
             }
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
         if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createWithDbCheckConstraintKey(cause);
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
         }
     }
 
@@ -246,23 +245,21 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         specialist.setDepartment(specialistDTO.getDepartment());
         boolean rollbackTX;
         int retryTXCounter = 1;
-        Throwable cause = null;
         do {
             try {
                 accountManager.createAccount(specialist);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
                 retryTXCounter++;
-                cause = ex.getCause();
             }
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
         if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createWithDbCheckConstraintKey(cause);
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
         }
     }
 
@@ -272,23 +269,21 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         assigner.setDepartment(assignerDTO.getDepartment());
         boolean rollbackTX;
         int retryTXCounter = 1;
-        Throwable cause = null;
         do {
             try {
                 accountManager.createAccount(assigner);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
                 retryTXCounter++;
-                cause = ex.getCause();
             }
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
         if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createWithDbCheckConstraintKey(cause);
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
         }
     }
 
@@ -303,18 +298,17 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
             try {
                 accountManager.createAccount(notifier);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
                 retryTXCounter++;
-                cause = ex.getCause();
             }
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
         if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createWithDbCheckConstraintKey(cause);
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
         }
     }
 
@@ -326,23 +320,21 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         notifier.setEmplacement(notifierDTO.getEmplacement());
         boolean rollbackTX;
         int retryTXCounter = 1;
-        Throwable cause = null;
         do {
             try {
                 accountManager.createAccount(notifier);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
                 retryTXCounter++;
-                cause = ex.getCause();
             }
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
         if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createWithDbCheckConstraintKey(cause);
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
         }
     }
 

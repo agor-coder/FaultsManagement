@@ -5,10 +5,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.ExcludeClassInterceptors;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -21,13 +23,16 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.eclipse.persistence.exceptions.DatabaseException;
+import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.exception.AppBasePersistenceException;
 import pl.lodz.p.it.spjava.fm.model.Account;
 import pl.lodz.p.it.spjava.fm.model.Account_;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
+@Interceptors(LoggingInterceptor.class)
 @RolesAllowed({"AppAdmin"})
 public class AccountFacade extends AbstractFacade<Account> {
 
@@ -44,8 +49,6 @@ public class AccountFacade extends AbstractFacade<Account> {
     public AccountFacade() {
         super(Account.class);
     }
-
-    
 
     @ExcludeClassInterceptors
     @RolesAllowed("AUTHENTICATOR")
@@ -98,6 +101,7 @@ public class AccountFacade extends AbstractFacade<Account> {
     @Override
     @PermitAll
     public void create(Account entity) throws AppBaseException {
+//        throw AppBasePersistenceException.createPersistenceException();
         try {
             super.create(entity);
             em.flush();
@@ -105,7 +109,7 @@ public class AccountFacade extends AbstractFacade<Account> {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw AccountException.createWithDbCheckConstraintKey(ex);
             } else {
-                throw ex;
+                throw AppBasePersistenceException.createPersistenceException();
             }
         }
     }
@@ -130,7 +134,7 @@ public class AccountFacade extends AbstractFacade<Account> {
         CriteriaQuery<Account> query = cb.createQuery(Account.class);
         Root<Account> from = query.from(Account.class);
         query = query.select(from);
-        query = query.where(cb.equal(from.get("login"), login)); 
+        query = query.where(cb.equal(from.get("login"), login));
         TypedQuery<Account> tq = em.createQuery(query);
 
         return tq.getSingleResult();

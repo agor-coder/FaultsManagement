@@ -3,13 +3,16 @@ package pl.lodz.p.it.spjava.fm.ejb.facade;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.model.Notifier;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
+@Interceptors(LoggingInterceptor.class)
 public class NotifierFacade extends AbstractFacade<Notifier> {
 
     @PersistenceContext(unitName = "FaultsManagementPU")
