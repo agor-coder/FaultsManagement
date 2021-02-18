@@ -18,6 +18,7 @@ import pl.lodz.p.it.spjava.fm.ejb.facade.TechAreaFacade;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
+import pl.lodz.p.it.spjava.fm.exception.LockSpecialistException;
 import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Assigner;
 import pl.lodz.p.it.spjava.fm.model.Fault;
@@ -70,12 +71,16 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
 
         int specialistFaultsNumber = countOfSpecialist(spec);
         if (specialistFaultsNumber < faultLimit) {
-            specFacade.lockSpecialist(spec);
-            String assignerLogin = ContextUtils.getUserName();
-            Assigner assigner = assignerFacade.findAssignerLogin(assignerLogin);
-            fault.setWhoAssigned(assigner);
-            fault.setSpecialist(spec);
-            fault.setStatus(Fault.FaultStatus.ASSIGNED);
+            try {
+                specFacade.lockSpecialist(spec);
+                String assignerLogin = ContextUtils.getUserName();
+                Assigner assigner = assignerFacade.findAssignerLogin(assignerLogin);
+                fault.setWhoAssigned(assigner);
+                fault.setSpecialist(spec);
+                fault.setStatus(Fault.FaultStatus.ASSIGNED);
+            } catch (EJBTransactionRolledbackException tre) {
+                throw LockSpecialistException.createLockExceptionWithOptimistickForceIncrement();
+            }
         } else {
             throw FaultException.faultExceptionWithFaultLimit();
         }
@@ -101,7 +106,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
                 fault.setSpecialist(spec);
                 fault.setStatus(Fault.FaultStatus.ASSIGNED);
             } catch (EJBTransactionRolledbackException tre) {
-                throw FaultException.createWithDbOptimisticLockRepeatKey();
+                throw LockSpecialistException.createLockExceptionWithOptimistickForceIncrement();
             }
         } else {
             throw FaultException.faultExceptionWithFaultLimit();

@@ -18,6 +18,7 @@ import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.FaultManager;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
+import pl.lodz.p.it.spjava.fm.exception.LockSpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Fault;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
@@ -82,25 +83,41 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
             try {
                 faultManager.assignSpecialist(endpointFault, specId);
                 rollbackTX = faultManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (LockSpecialistException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
                 rollbackTX = true;
                 retryTXCounter++;
-                throw ex;
             }
         } while (rollbackTX && retryTXCounter <= txRetryLimit);
 
         if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw FaultException.createFaultExceptionWithTxRetryRollback();
+            throw FaultException.createWithDbOptimisticLockRepeatKey();
         }
     }
 
     @RolesAllowed("Assigner")
     public void assignSpecialist2(SpecialistDTO specialistDTO) throws AppBaseException {
         Long specId = specialistDTO.getId();
-        faultManager.assignSpecialist2(endpointFault, specId);
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        do {
+            try {
+                faultManager.assignSpecialist2(endpointFault, specId);
+                rollbackTX = faultManager.isLastTransactionRollback();
+            } catch (LockSpecialistException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw FaultException.createWithDbOptimisticLockRepeatKey();
+        }
 
     }
 
