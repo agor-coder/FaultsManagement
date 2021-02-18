@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -93,7 +92,7 @@ public class AccountFacade extends AbstractFacade<Account> {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw AccountException.createWithDbCheckConstraintKeyEmail(ex);
             } else {
-                throw ex;
+                throw AppBasePersistenceException.createPersistenceException();
             }
         }
     }
@@ -101,7 +100,7 @@ public class AccountFacade extends AbstractFacade<Account> {
     @Override
     @PermitAll
     public void create(Account entity) throws AppBaseException {
-//        throw AppBasePersistenceException.createPersistenceException();
+//    throw AppBasePersistenceException.createPersistenceException();
         try {
             super.create(entity);
             em.flush();

@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
@@ -102,7 +101,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
             try {
                 accountManager.editAccount(endpointAccount);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
@@ -125,7 +124,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
             try {
                 accountManager.editAccount(endpointAccount);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
@@ -148,7 +147,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
             try {
                 accountManager.editAccount(endpointAccount);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
@@ -171,7 +170,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
             try {
                 accountManager.editAccount(endpointAccount);
                 rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBaseException | EJBTransactionRolledbackException ex) {
+            } catch (AppBasePersistenceException ex) {
                 Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
                         + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
                         + ex.getClass().getName());
