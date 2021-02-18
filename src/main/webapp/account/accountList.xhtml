@@ -87,11 +87,11 @@
                                 <p:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}" />
                                 <p:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" />
                                 <p:commandButton value="${msg['action.delete']}" action="#{accountListController.removeAccount(row)}" update="message"  >
-                                    <p:confirm header="Potwierdzenie" message="Czy na pewno?" icon="ui-icon-alert" />  
+                                    <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
                                 </p:commandButton>  
                                 <p:confirmDialog  global="true" showEffect="fade" hideEffect="fade">  
-                                    <p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
-                                    <p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+                                    <p:commandButton value="${msg['confirm.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                                    <p:commandButton value="${msg['confirm.no']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
                                 </p:confirmDialog>  
                             </h:column>
                         </b:dataTable>
