@@ -95,75 +95,28 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     public void saveAdminAfterEdit(AccountDTO adminDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(adminDTO, endpointAccount);
         ((AppAdmin) endpointAccount).setAlarmPhone(((AppAdminDTO) adminDTO).getAlarmPhone());
-        boolean rollbackTX;
-        int retryTXCounter = 1;
-        do {
-            try {
-                accountManager.editAccount(endpointAccount);
-                rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBasePersistenceException ex) {
-                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
-                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
-                        + ex.getClass().getName());
-                rollbackTX = true;
-                retryTXCounter++;
-            }
-        } while (rollbackTX && retryTXCounter <= txRetryLimit);
-
-        if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createAccountExceptionWithTxRetryRollback();
-        }
+        editAccount();
     }
 
     public void saveSpecialistAfterEdit(AccountDTO specialistDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(specialistDTO, endpointAccount);
         ((Specialist) endpointAccount).setDepartment(((SpecialistDTO) specialistDTO).getDepartment());
-        boolean rollbackTX;
-        int retryTXCounter = 1;
-        do {
-            try {
-                accountManager.editAccount(endpointAccount);
-                rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBasePersistenceException ex) {
-                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
-                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
-                        + ex.getClass().getName());
-                rollbackTX = true;
-                retryTXCounter++;
-            }
-        } while (rollbackTX && retryTXCounter <= txRetryLimit);
-
-        if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createAccountExceptionWithTxRetryRollback();
-        }
+        editAccount();
     }
 
     public void saveAssignerAfterEdit(AccountDTO assignerDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(assignerDTO, endpointAccount);
         ((Assigner) endpointAccount).setDepartment(((AssignerDTO) assignerDTO).getDepartment());
-        boolean rollbackTX;
-        int retryTXCounter = 1;
-        do {
-            try {
-                accountManager.editAccount(endpointAccount);
-                rollbackTX = accountManager.isLastTransactionRollback();
-            } catch (AppBasePersistenceException ex) {
-                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
-                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
-                        + ex.getClass().getName());
-                rollbackTX = true;
-                retryTXCounter++;
-            }
-        } while (rollbackTX && retryTXCounter <= txRetryLimit);
-
-        if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw AccountException.createAccountExceptionWithTxRetryRollback();
-        }
+        editAccount();
     }
 
     public void saveNotifierAfterEdit(AccountDTO notifierDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(notifierDTO, endpointAccount);
         ((Notifier) endpointAccount).setEmplacement(((NotifierDTO) notifierDTO).getEmplacement());
+        editAccount();
+    }
+
+    private void editAccount() throws AccountException, AppBaseException {
         boolean rollbackTX;
         int retryTXCounter = 1;
         do {
@@ -292,7 +245,6 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         notifier.setEmplacement(notifierDTO.getEmplacement());
         boolean rollbackTX;
         int retryTXCounter = 1;
-        Throwable cause = null;
         do {
             try {
                 accountManager.createAccount(notifier);
@@ -340,14 +292,12 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     private void writeAccountDataFromDTOToNewEntity(AccountDTO accountDTO, Account account) {
         account.setLogin(accountDTO.getLogin());
         writeEditableDataFromDTOToEntity(accountDTO, account);
-        //account.setPassword(accountDTO.getPassword());
         account.setPassword(hashGenerator.generateHash(accountDTO.getPassword()));
     }
 
     @RolesAllowed({"AppAdmin", "Notifier", "Assigner", "Specialist"})
     public Account getMyAccount() {
         return accountManager.findLogin(ContextUtils.getUserName());
-        //return accountManager.findLogin("login4");
     }
 
     @RolesAllowed({"AppAdmin", "Notifier", "Assigner", "Specialist"})
