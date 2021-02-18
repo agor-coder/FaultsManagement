@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.exception.AppBasePersistenceException;
 import pl.lodz.p.it.spjava.fm.exception.FaultException;
 import pl.lodz.p.it.spjava.fm.exception.SpecialistException;
 import pl.lodz.p.it.spjava.fm.model.Fault;
@@ -32,6 +33,18 @@ public class FaultFacade extends AbstractFacade<Fault> {
         super(Fault.class);
     }
 
+    @Override
+    @RolesAllowed("Notifier")
+
+    public void create(Fault entity) throws AppBaseException {
+        try {
+            super.create(entity);
+            em.flush();
+        } catch (PersistenceException ex) {
+            throw AppBasePersistenceException.createPersistenceException();
+        }
+    }
+
     @RolesAllowed({"Specialist", "Assigner"})
     public void setStatus(Fault entity, String name) throws AppBaseException {
         if (!entity.getStatus().name().equals(name)) {
@@ -50,7 +63,8 @@ public class FaultFacade extends AbstractFacade<Fault> {
         } catch (OptimisticLockException oe) {
             throw FaultException.faultExceptionWithOptimisticLockKey(oe);
         } catch (PersistenceException ex) {
-            if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
+            if (ex.getCause() instanceof DatabaseException
+                    && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw FaultException.createWithDbCheckConstraintKey(ex);
             } else {
                 throw ex;

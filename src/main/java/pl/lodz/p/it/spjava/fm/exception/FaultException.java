@@ -8,9 +8,8 @@ public class FaultException extends AppBaseException {
     static final public String STATUS_CHANGED_ALREADY = "error.status.changed.already";
     static final public String FAULT_LIMIT = "error.fault.limit";
     static final public String THE_SAME_SPEC = "fault.same.spec";
-     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
-     static final public String KEY_OPTIMISTIC_LOCK_REPEAT = "error.optimisticlock.repeat";
-   
+    static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
+    static final public String KEY_OPTIMISTIC_LOCK_REPEAT = "error.optimisticlock.repeat";
 
     private FaultException(String message) {
         super(message);
@@ -30,7 +29,6 @@ public class FaultException extends AppBaseException {
         return fe;
     }
 
-    
     public static FaultException faultExceptionWithStatusChangedAlready() {
         FaultException fe = new FaultException(STATUS_CHANGED_ALREADY);
         return fe;
@@ -55,12 +53,11 @@ public class FaultException extends AppBaseException {
         FaultException fe = new FaultException(KEY_DB_CONSTRAINT, cause);
         return fe;
     }
+
     static public FaultException createWithDbOptimisticLockRepeatKey() {
         FaultException fe = new FaultException(KEY_OPTIMISTIC_LOCK_REPEAT);
         return fe;
     }
-
-  
 
     static public FaultException createFaultExceptionWithTxRetryRollback() {
         FaultException ke = new FaultException(KEY_TX_RETRY_ROLLBACK);

@@ -86,7 +86,7 @@ public class NewFaultController implements Serializable {
         }
         try {
             faultEndpoint.addFault(newFaultDTO, techAreaId);
-           success = true;
+            success = true;
             return "";
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addFault wyjatku typu: ", abe);

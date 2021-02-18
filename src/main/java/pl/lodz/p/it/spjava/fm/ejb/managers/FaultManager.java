@@ -133,7 +133,6 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         TechArea area = areaFacade.find(idTecharea);
         fault.setTechArea(area);
         String notifierLogin = ContextUtils.getUserName();
-        //String notifierLogin = "login7";
         Notifier notifier = notifierFacade.findLogin(notifierLogin);
         fault.setWhoNotified(notifier);
         faultFacade.create(fault);
