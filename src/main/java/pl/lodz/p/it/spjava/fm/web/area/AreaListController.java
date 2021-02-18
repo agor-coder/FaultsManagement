@@ -7,8 +7,6 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,24 +31,25 @@ public class AreaListController implements Serializable {
     @PostConstruct
     public void init() {
         areasDTO = areaEndpoint.getAllAreasDTO();
-        
+
     }
 
     public List<TechAreaDTO> getAreasDTO() {
         return areasDTO;
     }
 
-    public void remove(TechAreaDTO areaDTO) {
+    public String remove(TechAreaDTO areaDTO) {
         try {
             areaEndpoint.remove(areaDTO);
-             FacesContext.getCurrentInstance()
-                    .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"",  "Operacja zakończona powodzeniem"));
+            ContextUtils.emitInternationalizedMessage(null, "general.success.message");
             init();
         } catch (AppBaseException abe) {
             Logger.getLogger(EditAreaController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji removeAccount wyjatku typu: ", abe);
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji removeArea wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return "";
         }
+        return "";
     }
 
     public String editArea(TechAreaDTO areaDTO) {
@@ -58,7 +57,7 @@ public class AreaListController implements Serializable {
         editAreaController.setAreaDTOAndGetAreaEntityToEnpoint(areaDTO);
         return "editArea";
     }
-    
+
     public String createArea() {
         conversation.begin();
         return "newArea";

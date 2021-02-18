@@ -15,7 +15,9 @@ import javax.interceptor.Interceptors;
 import pl.lodz.p.it.spjava.fm.dto.TechAreaDTO;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.ejb.managers.TechAreaManager;
+import pl.lodz.p.it.spjava.fm.exception.AccountException;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.exception.AppBasePersistenceException;
 import pl.lodz.p.it.spjava.fm.exception.AreaException;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
 import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
@@ -23,7 +25,7 @@ import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 @Stateful
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.NEVER)
-@RolesAllowed( "Assigner")
+@RolesAllowed("Assigner")
 public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchronization {
 
     @Resource(name = "txRetryLimit")
@@ -41,20 +43,16 @@ public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchro
         return areasListDTO;
     }
 
-    
- 
     public TechAreaDTO getTechAreaToEdit(TechAreaDTO areaDTO) throws AppBaseException {
         setEndpointAreaFromDTOToEdit(areaDTO);
         return DTOConverter.createTechAreaDTOFromEntity(endpointArea);
     }
 
-    
     public void remove(TechAreaDTO areaDTO) throws AppBaseException {
         setEndpointAreaFromDTOToEdit(areaDTO);
         areaManager.remove(endpointArea);
     }
 
-     
     private void setEndpointAreaFromDTOToEdit(TechAreaDTO areaDTO) throws AppBaseException {
         endpointArea = areaManager.find(areaDTO.getId());
         if (null == endpointArea) {
@@ -62,19 +60,33 @@ public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchro
         }
     }
 
-     
     public void saveAreaAfterEdit(TechAreaDTO areaDTO) throws AppBaseException {
         writeEditableDataFromDTOToEntity(areaDTO, endpointArea);
-        areaManager.editArea(endpointArea);
+        boolean rollbackTX;
+        int retryTXCounter = 1;
+        do {
+            try {
+                areaManager.editArea(endpointArea);
+                rollbackTX = areaManager.isLastTransactionRollback();
+            } catch (AppBasePersistenceException ex) {
+                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
+                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
+                        + ex.getClass().getName());
+                rollbackTX = true;
+                retryTXCounter++;
+            }
+        } while (rollbackTX && retryTXCounter <= txRetryLimit);
+
+        if (rollbackTX && retryTXCounter > txRetryLimit) {
+            throw AccountException.createAccountExceptionWithTxRetryRollback();
+        }
     }
 
-     
     private void writeEditableDataFromDTOToEntity(TechAreaDTO areaDTO, TechArea area) {
         area.setAreaName(areaDTO.getAreaName());
 
     }
 
-   
     public void addArea(TechAreaDTO areaDTO) throws AppBaseException {
         TechArea techArea = new TechArea();
         techArea.setAreaName(areaDTO.getAreaName());

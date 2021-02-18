@@ -70,7 +70,7 @@ public class EditAreaController implements Serializable {
         }
         try {
             areaEndpoint.addArea(editAreaDTO);
-            return cancelOrEdit();
+            return success();
         } catch (AppBaseException abe) {
             LOG.log(Level.SEVERE, "Zgłoszenie w metodzie akcji addArea wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("login", abe.getMessage());

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title> #{msg['app.name']}</title>          
     </h:head>
@@ -54,13 +55,16 @@
                     <b:jumbotron >
                         <h:form id="newArea">
                             <h:outputLabel value="#{msg['area.name']}" for="name" /><br />
-                            <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name" required="true"/>
+                            <h:inputText value="#{editAreaController.editAreaDTO.areaName}"  id="name" required="true" disabled="#{ editAreaController.success}"/>
                             <br />
-                            <b:commandButton value="${msg['action.create']}"   action="#{editAreaController.addArea}"/>
+                            <b:commandButton value="${msg['action.create']}"   action="#{editAreaController.addArea}" rendered="#{not  editAreaController.success}"/>
                             <b:commandButton value="${msg['action.backToList']}"  action="#{editAreaController.cancelOrEdit}"  immediate="true" look="warning" />
                             <!--<h:messages/>-->
                         </h:form>
                     </b:jumbotron>
+                    <c:if test="#{editAreaController.success}">
+                        <b:alert severity="success"><strong>${msg['general.success.message']}</strong> </b:alert>
+                    </c:if>
                     <b:messages />
                 </b:column>
 

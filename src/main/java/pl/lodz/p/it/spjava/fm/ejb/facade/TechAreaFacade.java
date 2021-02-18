@@ -13,6 +13,7 @@ import javax.persistence.PersistenceException;
 import org.eclipse.persistence.exceptions.DatabaseException;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.exception.AppBasePersistenceException;
 import pl.lodz.p.it.spjava.fm.exception.AreaException;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
 
@@ -43,7 +44,7 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw AreaException.createAreaExceptionWithAreaNotRemove();
             } else {
-                throw ex;
+                throw AppBasePersistenceException.createPersistenceException();
             }
         }
     }
@@ -59,7 +60,7 @@ public class TechAreaFacade extends AbstractFacade<TechArea> {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw AreaException.createWithDbCheckConstraintKey(ex);
             } else {
-                throw ex;
+                throw AppBasePersistenceException.createPersistenceException();
             }
         }
     }
