@@ -1,5 +1,5 @@
 
-package pl.lodz.p.it.spjava.fm.ejb.enpoints;
+package pl.lodz.p.it.spjava.fm.ejb.endpoints;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;

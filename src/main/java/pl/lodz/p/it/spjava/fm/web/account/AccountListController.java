@@ -13,7 +13,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.AccountDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 

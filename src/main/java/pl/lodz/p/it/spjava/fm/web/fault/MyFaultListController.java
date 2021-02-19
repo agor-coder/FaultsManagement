@@ -10,7 +10,7 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.FaultEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.FaultEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 

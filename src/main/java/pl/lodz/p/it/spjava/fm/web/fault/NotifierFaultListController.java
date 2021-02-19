@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.FaultEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.FaultEndpoint;
 
 @Named
 @ViewScoped

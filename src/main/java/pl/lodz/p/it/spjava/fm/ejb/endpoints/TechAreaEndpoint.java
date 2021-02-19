@@ -1,4 +1,4 @@
-package pl.lodz.p.it.spjava.fm.ejb.enpoints;
+package pl.lodz.p.it.spjava.fm.ejb.endpoints;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;

@@ -11,7 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.TechAreaDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.TechAreaEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.TechAreaEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 

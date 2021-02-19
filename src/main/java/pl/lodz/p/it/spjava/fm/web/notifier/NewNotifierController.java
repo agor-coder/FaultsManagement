@@ -9,7 +9,7 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.NotifierDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.AccountEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 

@@ -1,4 +1,4 @@
-package pl.lodz.p.it.spjava.fm.ejb.enpoints;
+package pl.lodz.p.it.spjava.fm.ejb.endpoints;
 
 import java.util.ArrayList;
 import java.util.Comparator;

@@ -12,8 +12,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.FaultEndpoint;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.FaultEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 

@@ -9,7 +9,7 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.TechAreaDTO;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.TechAreaEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.TechAreaEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.account.EditAccountController;
 import pl.lodz.p.it.spjava.fm.web.appAdmin.NewAdminController;

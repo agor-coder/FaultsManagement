@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import static javax.persistence.LockModeType.OPTIMISTIC_FORCE_INCREMENT;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import pl.lodz.p.it.spjava.fm.ejb.enpoints.SpecialistEndpoint;
+import pl.lodz.p.it.spjava.fm.ejb.endpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 
