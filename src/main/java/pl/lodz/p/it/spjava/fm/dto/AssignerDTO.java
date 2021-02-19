@@ -24,6 +24,7 @@ public class AssignerDTO extends AccountDTO {
     public AssignerDTO(String firstName, String sureName,
             String email, String phone, String department) {
         super(firstName, sureName, email, phone);
+        super.login="przykladowe_konto_assign";
         this.department = department;
 
     }

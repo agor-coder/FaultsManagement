@@ -26,7 +26,7 @@ public class NewAdminController implements Serializable {
     private AccountEndpoint accountEndpoint;
 
 //do formularza new
-    private final AppAdminDTO newAdminDTO = new AppAdminDTO("Peter", "Gabriel", "pete@op.pl", "5288", "997");
+    private final AppAdminDTO newAdminDTO = new AppAdminDTO("Adam", "Admin", "pete@op.pl", "5288", "9978");
     //private final AppAdminDTO newAdminDTO = new AppAdminDTO();
 
     private String passwordRepeat;

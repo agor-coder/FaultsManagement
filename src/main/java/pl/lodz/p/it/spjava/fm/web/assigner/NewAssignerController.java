@@ -26,7 +26,7 @@ public class NewAssignerController implements Serializable {
     private AccountEndpoint accountEndpoint;
 
 //do formularza new
-    private final AssignerDTO newAssignerDTO = new AssignerDTO("John", "Lennon", "john@op.pl", "5388", "IM5");
+    private final AssignerDTO newAssignerDTO = new AssignerDTO("Zenon", "Assign", "john@op.pl", "5388", "IM5");
     // private final AssignerDTO newAssignerDTO = new AssignerDTO();
 
     private String passwordRepeat;

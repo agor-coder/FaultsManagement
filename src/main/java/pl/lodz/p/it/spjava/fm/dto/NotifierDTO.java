@@ -24,6 +24,7 @@ public class NotifierDTO extends AccountDTO {
     public NotifierDTO(String firstName, String sureName,
             String email, String phone, String emplacement) {
         super(firstName, sureName, email, phone);
+        super.login="przykladowe_konto_notif";
         this.emplacement = emplacement;
 
     }

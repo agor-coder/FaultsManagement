@@ -47,7 +47,7 @@ public class AccountDTO {
     public AccountDTO() {
     }
 
-    //bez hasła
+    
     public AccountDTO(Long id, String login, boolean active, boolean confirmed, String firstName, String sureName, String email, String phone, String type) {
         this.id = id;
         this.login = login;
@@ -59,8 +59,7 @@ public class AccountDTO {
         this.phone = phone;
         this.type = type;
     }
-    //do formularza newAccount
-
+    
     public AccountDTO(String firstName, String sureName, String email, String phone) {
         this.password = password;
         this.firstName = firstName;

@@ -26,7 +26,7 @@ public class NewNotifierController implements Serializable {
     private AccountEndpoint accountEndpoint;
 
 //do formularza new
-    private final NotifierDTO newNotifierDTO = new NotifierDTO("Rod", "Stewart", "rod@op.pl", "5388", "MistrzER4");
+    private final NotifierDTO newNotifierDTO = new NotifierDTO("Roman", "Notif", "rod@op.pl", "5388", "MistrzER4");
     // private final NotifierDTO newNotifierDTO = new NotifierDTO();
 
     private String passwordRepeat;

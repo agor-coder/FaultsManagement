@@ -24,6 +24,7 @@ public class SpecialistDTO extends AccountDTO {
     public SpecialistDTO(String firstName, String sureName,
             String email, String phone, String department) {
         super(firstName, sureName, email, phone);
+        super.login="przykladowe_konto_spec";
         this.department = department;
 
     }
