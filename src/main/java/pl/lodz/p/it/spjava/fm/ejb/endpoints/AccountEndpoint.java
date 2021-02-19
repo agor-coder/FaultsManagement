@@ -250,6 +250,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         Notifier notifier = new Notifier();
         writeAccountDataFromDTOToNewEntity(notifierDTO, notifier);
         notifier.setConfirmed(false);
+        notifier.setActive(false);
         notifier.setEmplacement(notifierDTO.getEmplacement());
         createNotifierWithTXRetry(notifier);
     }
