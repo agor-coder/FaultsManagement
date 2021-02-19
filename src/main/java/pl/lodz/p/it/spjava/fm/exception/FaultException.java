@@ -10,6 +10,7 @@ public class FaultException extends AppBaseException {
     static final public String THE_SAME_SPEC = "fault.same.spec";
     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
     static final public String KEY_OPTIMISTIC_LOCK_REPEAT = "error.optimisticlock.repeat";
+    static final public String KEY_OPTIMISTIC_LOCK_FAULT = "error.optimisticlock.fault";
 
     private FaultException(String message) {
         super(message);
@@ -40,12 +41,12 @@ public class FaultException extends AppBaseException {
     }
 
     public static FaultException faultExceptionWithOptimisticLockKey(OptimisticLockException cause) {
-        FaultException fe = new FaultException(KEY_OPTIMISTIC_LOCK, cause);
+        FaultException fe = new FaultException(KEY_OPTIMISTIC_LOCK_FAULT, cause);
         return fe;
     }
 
     public static FaultException faultExceptionWithOptimisticLockKey() {
-        FaultException fe = new FaultException(KEY_OPTIMISTIC_LOCK);
+        FaultException fe = new FaultException(KEY_OPTIMISTIC_LOCK_FAULT);
         return fe;
     }
 
