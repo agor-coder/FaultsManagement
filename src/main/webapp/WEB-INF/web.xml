@@ -156,4 +156,13 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/faces/error/error.xhtml</location>
     </error-page>
+    
+     <context-param>
+        <!--        Ustawienie tego parametru na wartość true powoduje, że JSF będzie traktować puste pola formularza
+        jako wartości null, nie zaś puste napisy ("")-->
+        <param-name>
+            javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL
+        </param-name>
+        <param-value>true</param-value>
+    </context-param>
 </web-app>
