@@ -18,7 +18,6 @@ import pl.lodz.p.it.spjava.fm.model.Notifier;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 import pl.lodz.p.it.spjava.fm.model.TechArea;
 
-
 public class DTOConverter {
 
     private static AccountDTO createAdminDTOFromEntity(AppAdmin adm) {
@@ -58,7 +57,7 @@ public class DTOConverter {
     public static List<FaultDTO> createFaultListDTO(List<Fault> faultsList) {
         List<FaultDTO> faultsListDTO = new ArrayList<>();
         faultsList.stream().map(fault -> createFaultDTOFromEntity(fault))
-                .sorted(Comparator.comparing(FaultDTO::getCreateTime).reversed())
+                .sorted(Comparator.comparing(FaultDTO::getCreateTimeStamp).reversed())
                 .forEachOrdered(faultDTO -> {
                     faultsListDTO.add(faultDTO);
                 });

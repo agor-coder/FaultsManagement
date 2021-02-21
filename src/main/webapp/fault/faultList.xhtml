@@ -60,7 +60,7 @@
                                          copy="true"
                                          print="true">
                                 <h:column>
-                                    <f:facet name="header">#{msg['fault.creation.time']}</f:facet> ${fault.createTimeStamp} 
+                                    <f:facet name="header">#{msg['fault.creation.time']}</f:facet> ${fault.createTimeStampSDF} 
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">#{msg['fault.describe']}</f:facet> ${fault.faultDescribe}
@@ -78,7 +78,7 @@
                                     <f:facet name="header">#{msg['fault.whoAssigned']}</f:facet> ${fault.whoAssigned.sureName} 
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">#{msg['fault.modification.time']}</f:facet> ${fault.modificationTimeStamp} 
+                                    <f:facet name="header">#{msg['fault.modification.time']}</f:facet> ${fault.modificationTimeStampSDF} 
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">#{msg['fault.status']}</f:facet> ${fault.status.description} 

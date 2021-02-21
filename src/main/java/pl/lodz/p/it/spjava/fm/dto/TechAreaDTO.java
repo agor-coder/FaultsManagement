@@ -39,12 +39,20 @@ public class TechAreaDTO {
         this.areaName = areaName;
     }
 
-    public String getCreateTimeStamp() {
+    public Date getCreateTimeStamp() {
+        return createTimeStamp;
+    }
+
+    public Date getModificationTimeStamp() {
+        return modificationTimeStamp;
+    }
+
+    public String getCreateTimeStampSDF() {
         return sdf.format(createTimeStamp);
     }
 
-    public String getModificationTimeStamp() {
-        return null == modificationTimeStamp ? getCreateTimeStamp() : sdf.format(modificationTimeStamp);
+    public String getModificationTimeStampSDF() {
+        return null == modificationTimeStamp ? getCreateTimeStampSDF() : sdf.format(modificationTimeStamp);
      
     }
 
