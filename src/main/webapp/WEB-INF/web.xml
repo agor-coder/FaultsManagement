@@ -4,10 +4,12 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    
     <context-param>
         <param-name>resourceBundle.path</param-name>
         <param-value>i18n.messages</param-value>
     </context-param>
+    
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -125,6 +127,7 @@
             <role-name>Assigner</role-name>
         </auth-constraint>
     </security-constraint>
+    
     <env-entry>
         <env-entry-name>txRetryLimit</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
@@ -133,8 +136,9 @@
     <env-entry>
         <env-entry-name>faultLimit</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>2</env-entry-value>
+        <env-entry-value>3</env-entry-value>
     </env-entry>
+    
     <error-page>
         <error-code>401</error-code>
         <location>/faces/error/error401.xhtml</location>
@@ -156,12 +160,12 @@
         <exception-type>java.lang.Exception</exception-type>
         <location>/faces/error/error.xhtml</location>
     </error-page>
+    
     <context-param>
-        <!--        Ustawienie tego parametru na wartość true powoduje, że JSF będzie traktować puste pola formularza
-        jako wartości null, nie zaś puste napisy ("")-->
         <param-name>
             javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL
         </param-name>
         <param-value>true</param-value>
     </context-param>
+    
 </web-app>

@@ -76,22 +76,31 @@ INSERT INTO TECHAREA(id,areaname,creation_timestamp,version) VALUES (-8,'nawęgl
 
 
 INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)
-VALUES (-1,'2021-01-01 20:40:54.340','brak gotowości 3PS2', 0,1,-1,-7);
+VALUES (-1,'2021-01-10 17:40:54.340','brak gotowości 3PS2', 0,1,-1,-7);
 
 INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)
-VALUES (-2,'2021-01-02 21:40:54.340','wyłączenie awaryjne', 0,1,-2,-8);
+VALUES (-2,'2021-01-05 11:23:54.340','wyłączenie awaryjne', 0,1,-2,-8);
 
 INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)
-VALUES (-3,'2021-01-04 18:23:54.340','zwarcie OWS2', 0,1,-2,-8);
+VALUES (-3,'2021-01-04 18:23:54.340','zwarcie OWS2', 0,1,-3,-9);
+
+INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)
+VALUES (-7,'2021-01-24 10:23:45.340','brak napięcia', 0,1,-4,-7);
+
+INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)
+VALUES (-8,'2021-02-12 19:00:54.340','zwarcie OWS2', 0,1,-5,-8);
+
+INSERT INTO FAULT(id,creation_timestamp,faultdescribe,status,version,techarea_id,whonotified_id)
+VALUES (-9,'2021-01-27 12:24:54.340','zwarcie OWS2', 0,1,-6,-9);
 
 INSERT INTO FAULT(id,creation_timestamp,modify_timestamp,faultdescribe,status,version,techarea_id,whonotified_id,specialist_id,whoassigned_id)
-VALUES (-4,'2021-01-04 17:40:54.000','2021-02-04 17:40:54.000','brak zasilania', 1,1,-3,-7,-1,-6);
+VALUES (-4,'2021-01-30 23:44:54.000','2021-02-04 17:40:54.000','brak zasilania', 1,1,-3,-7,-1,-6);
 
 INSERT INTO FAULT(id,creation_timestamp,modify_timestamp,faultdescribe,status,version,techarea_id,whonotified_id,specialist_id,whoassigned_id)
-VALUES (-5,'2021-01-04 17:40:54.000','2021-01-04 19:40:54.000','nieszczelność OR2', 1,1,-3,-9,-2,-5);
+VALUES (-5,'2021-02-17 22:34:51.000','2021-01-04 19:40:54.000','nieszczelność OR2', 1,1,-3,-9,-2,-5);
 
 INSERT INTO FAULT(id,creation_timestamp,modify_timestamp,faultdescribe,status,version,techarea_id,whonotified_id,specialist_id,whoassigned_id)
-VALUES (-6,'2021-01-04 17:40:54.000','2021-02-04 12:40:54.000','awaria klapy', 1,1,-2,-8,-1,-4);
+VALUES (-6,'2021-02-20 10:09:52.000','2021-02-04 12:40:54.000','awaria klapy', 1,1,-2,-8,-1,-4);
 
 
 

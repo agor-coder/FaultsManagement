@@ -10,7 +10,6 @@ import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import static javax.persistence.LockModeType.OPTIMISTIC_FORCE_INCREMENT;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import pl.lodz.p.it.spjava.fm.ejb.endpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
@@ -35,7 +34,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
     @RolesAllowed("Assigner")
     public void lockSpecialist(Specialist entity) {
         em.lock(entity, OPTIMISTIC_FORCE_INCREMENT);
-     // em.flush();    
+        // em.flush();    
 
     }
 
@@ -45,15 +44,10 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
         try {
             Thread.sleep(10000);
         } catch (InterruptedException ex) {
-            Logger.getLogger(SpecialistEndpoint.class.getName()).log(Level.SEVERE,null, ex);
+            Logger.getLogger(SpecialistEndpoint.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public Specialist findLogin(String login) {
-        TypedQuery q = getEntityManager().createNamedQuery("Specialist.findLogin", Specialist.class);
-        q.setParameter("login", login);
-        return (Specialist) q.getSingleResult();
-    }
 
 }

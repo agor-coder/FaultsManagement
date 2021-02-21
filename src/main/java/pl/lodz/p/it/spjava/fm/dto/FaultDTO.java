@@ -97,6 +97,10 @@ public class FaultDTO {
         return id;
     }
 
+    public Date getCreateTime() {
+        return createTimeStamp;
+    }
+
     public String getCreateTimeStamp() {
         return sdf.format(createTimeStamp);
     }
@@ -118,6 +122,11 @@ public class FaultDTO {
         return status.name().equals("END");
     }
 
+    @Override
+    public String toString() {
+        return "Fault: " + createTimeStamp + " ";
+    }
+
     public static enum FaultStatusDTO {
         NOT_ASSIGNED("Nie przydzielona"),
         ASSIGNED("Przydzielona"),
@@ -133,7 +142,5 @@ public class FaultDTO {
             return description;
         }
     };
-
-    
 
 }

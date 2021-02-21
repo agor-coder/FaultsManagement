@@ -58,7 +58,7 @@ public class DTOConverter {
     public static List<FaultDTO> createFaultListDTO(List<Fault> faultsList) {
         List<FaultDTO> faultsListDTO = new ArrayList<>();
         faultsList.stream().map(fault -> createFaultDTOFromEntity(fault))
-                .sorted(Comparator.comparing(FaultDTO::getCreateTimeStamp).reversed())
+                .sorted(Comparator.comparing(FaultDTO::getCreateTime).reversed())
                 .forEachOrdered(faultDTO -> {
                     faultsListDTO.add(faultDTO);
                 });

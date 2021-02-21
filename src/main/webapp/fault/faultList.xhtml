@@ -86,9 +86,9 @@
 
                                 <h:column>
                                     <f:facet name="header">Akcje</f:facet>
-                                    <b:commandButton value="${msg['fault.change.specialist']}"   action="#{faultListController.assign(fault)}" size='sm'   rendered="#{ fault.assigned}"/>
-                                    <b:commandButton value="${msg['fault.assign']}"   action="#{faultListController.assign(fault)}" size='sm'    rendered="#{ fault.notAssigned}"/>
-                                    <b:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}"  size='sm'  rendered="#{fault.assigned}" />
+                                    <b:commandButton value="${msg['fault.change.specialist']}"   action="#{faultListController.assign(fault)}" rendered="#{ fault.assigned}"/>
+                                    <b:commandButton value="${msg['fault.assign']}"   action="#{faultListController.assign(fault)}"    rendered="#{ fault.notAssigned}"/>
+                                    <b:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}"  rendered="#{fault.assigned}" />
                                 </h:column>
                             </b:dataTable>
                             <b:commandButton value="${msg['action.refresh']}" action="#{faultListController.init()}" />

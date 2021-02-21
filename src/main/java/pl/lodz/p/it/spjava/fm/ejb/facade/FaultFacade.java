@@ -73,15 +73,12 @@ public class FaultFacade extends AbstractFacade<Fault> {
     }
 
     @RolesAllowed("Assigner")
-    public int countOfSpecialist(Specialist spec) throws AppBaseException {
-        try {
+    public int countOfSpecialist(Specialist spec)  {
             Query q = getEntityManager().createNamedQuery("Fault.countOfSpecialist");
             q.setParameter("specialist", spec);
             q.setParameter("status", Fault.FaultStatus.ASSIGNED);
             return Integer.valueOf(q.getSingleResult().toString());
-        } catch (OptimisticLockException oe) {
-            throw SpecialistException.createSpecialistExceptionWithOptimisticLockKey(oe);
-        }
+        
     }
 
     @RolesAllowed("Specialist")
