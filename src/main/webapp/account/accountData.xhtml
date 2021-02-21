@@ -54,6 +54,9 @@
 
                             <h:panelGrid columns="2" >
 
+                                <h:outputLabel value="#{msg['account.type']}" for="login"  style="color: #0066cc"/>
+                                <h:outputText value=" #{accountDataController.accountDTO.type}"  id="type"/>
+                                
                                 <h:outputLabel value="#{msg['account.login']}" for="login"  style="color: #0066cc"/>
                                 <h:outputText value=" #{accountDataController.accountDTO.login}"  id="login"/>
 
