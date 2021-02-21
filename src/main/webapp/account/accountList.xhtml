@@ -82,10 +82,10 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Akcje</f:facet>
-                                <p:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}"  rendered="#{not row.active}"  update="mess"/> 
-                                <p:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"   rendered="#{row.active}"  update="mess"/> 
-                                <p:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"  update="mess"/>
-                                <p:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" update="mess" />
+                                <p:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}"  rendered="#{not row.active}"  update="message"/> 
+                                <p:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"   rendered="#{row.active}"  update="message"/> 
+                                <p:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"  update="message"/>
+                                <p:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" update="message"/>
                                 <p:commandButton value="${msg['action.delete']}" action="#{accountListController.removeAccount(row)}" update="message"  >
                                     <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
                                 </p:commandButton>  
