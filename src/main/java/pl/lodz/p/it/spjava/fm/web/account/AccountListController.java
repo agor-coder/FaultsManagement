@@ -49,6 +49,7 @@ public class AccountListController implements Serializable {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji activateAccount wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+             return "";
         }
         return "accountList";
     }
@@ -61,6 +62,7 @@ public class AccountListController implements Serializable {
             Logger.getLogger(EditAccountController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji deactivateAccount wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return "";
         }
         return "accountList";
     }

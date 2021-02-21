@@ -146,7 +146,7 @@ public class EditAccountController implements Serializable {
         return ContextUtils.getUserName();
     }
 
-    public String getFirstLastName() {
+    public String getFirstLastName() throws AppBaseException {
         Account us = accountEndpoint.getMyAccount();
         return us.getFirstName() + " " + us.getSureName();
     }

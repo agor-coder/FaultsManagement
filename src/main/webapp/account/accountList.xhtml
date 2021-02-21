@@ -46,7 +46,7 @@
                         <b:navLink outcome ="changeMyPassword" value="#{msg['menu.accounts.changePassword']}" />
                         <b:navLink outcome ="accountData" value="#{msg['menu.accounts.details']}" /> 
                     </b:listLinks>
-                    <b:messages/>
+                    <b:messages  id="mess"/>
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
@@ -82,10 +82,10 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Akcje</f:facet>
-                                <p:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}"  rendered="#{not row.active}" /> 
-                                <p:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"   rendered="#{row.active}" /> 
-                                <p:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}" />
-                                <p:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" />
+                                <p:commandButton value="${msg['action.activate']}"  action="#{accountListController.activateAccount(row)}"  rendered="#{not row.active}"  update="mess"/> 
+                                <p:commandButton value="${msg['action.deactivate']}" action="#{accountListController.deactivateAccount(row)}"   rendered="#{row.active}"  update="mess"/> 
+                                <p:commandButton value="${msg['action.edit']}"  action="#{accountListController.editAccount(row)}"  update="mess"/>
+                                <p:commandButton value="${msg['menu.accounts.changePassword']}"  action="#{accountListController.changePassword(row)}" update="mess" />
                                 <p:commandButton value="${msg['action.delete']}" action="#{accountListController.removeAccount(row)}" update="message"  >
                                     <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
                                 </p:commandButton>  
@@ -99,6 +99,7 @@
                         <b:commandButton value="${msg['action.cancel']}" action="main" immediate="true" look="warning" />
                     </b:form>
                 </b:column>
+                 
                 <b:growl id="message" placement-align="center" />
             </b:row>
         </b:container> 

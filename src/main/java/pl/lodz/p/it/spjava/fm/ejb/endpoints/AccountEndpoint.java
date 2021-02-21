@@ -85,9 +85,9 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     }
 
     public void removeAccount(AccountDTO accountDTO) throws AppBaseException {
-        if (accountDTO.getLogin().equals(ContextUtils.getUserName())) {
-            throw AccountException.createAccountExceptionWithAccountNotRemove();
-        }
+//        if (accountDTO.getLogin().equals(ContextUtils.getUserName())) {
+//            throw AccountException.createAccountExceptionWithAccountNotRemove();
+//        }
         setEndpointAccountFromDTOToEdit(accountDTO);
         accountManager.remove(endpointAccount);
     }
@@ -283,12 +283,12 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
     }
 
     @RolesAllowed({"AppAdmin", "Notifier", "Assigner", "Specialist"})
-    public Account getMyAccount() {
+    public Account getMyAccount() throws AppBaseException {
         return accountManager.findLogin(ContextUtils.getUserName());
     }
 
     @RolesAllowed({"AppAdmin", "Notifier", "Assigner", "Specialist"})
-    public AccountDTO getMyAccountDTO() {
+    public AccountDTO getMyAccountDTO() throws AppBaseException {
         return DTOConverter.makeAccountDTOfromUserEntity(getMyAccount());
     }
 

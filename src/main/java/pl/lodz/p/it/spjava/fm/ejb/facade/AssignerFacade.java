@@ -31,11 +31,7 @@ public class AssignerFacade extends AbstractFacade<Assigner> {
         super(Assigner.class);
     }
 
-    public Assigner findLogin(String login) {
-        TypedQuery q = getEntityManager().createNamedQuery("Assigner.findLogin", Assigner.class);
-        q.setParameter("login", login);
-        return (Assigner) q.getSingleResult();
-    }
+  
     
     @RolesAllowed("Assigner")
     public Assigner findAssignerLogin(String login){

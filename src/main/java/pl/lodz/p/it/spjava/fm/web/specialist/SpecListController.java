@@ -45,24 +45,23 @@ public class SpecListController implements Serializable {
         return specialistsDTO;
     }
 
-
     public void setFaultDTOAndfaultEndpoint(FaultDTO fDTO) throws AppBaseException {
         faultDTO = fDTO;
         faultEndpoint.setEndpointFaultFromDTOToEdit(faultDTO);
     }
 
-  
     public String assignSpecialist(SpecialistDTO specialistDTO) {
         try {
-                faultEndpoint.assignSpecialist(specialistDTO);
+            faultEndpoint.assignSpecialist(specialistDTO);
             return cancelFaultList();//end of conversation
         } catch (AppBaseException abe) {
             Logger.getLogger(SpecListController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assignSpecialist wyjatku typu: ", abe); 
-            ContextUtils.emitInternationalizedMessage(null, abe.getMessage()); 
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assignSpecialist wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }
     }
+
     public String assignSpecialist2(SpecialistDTO specialistDTO) {
         try {
             faultEndpoint.assignSpecialist2(specialistDTO);

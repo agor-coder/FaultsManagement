@@ -126,15 +126,18 @@ public class AccountFacade extends AbstractFacade<Account> {
     }
 
     @RolesAllowed({"AppAdmin", "Notifier", "Specialist", "Assigner"})
-    public Account findLogin(String login) {
+    public Account findLogin(String login) throws AppBaseException {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Account> query = cb.createQuery(Account.class);
         Root<Account> from = query.from(Account.class);
         query = query.select(from);
         query = query.where(cb.equal(from.get("login"), login));
         TypedQuery<Account> tq = em.createQuery(query);
-
-        return tq.getSingleResult();
+        try {
+            return tq.getSingleResult();
+        } catch (NoResultException ex) {
+            throw AccountException.createAccountExceptionWithAccountNotFound();
+        }
     }
 
     @RolesAllowed({"AppAdmin", "Notifier", "Specialist", "Assigner"})

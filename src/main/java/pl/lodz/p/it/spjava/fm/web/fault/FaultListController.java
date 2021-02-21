@@ -24,7 +24,7 @@ public class FaultListController implements Serializable {
     private Conversation conversation;
     @EJB
     private FaultEndpoint faultEndpoint;
- 
+
     @Inject
     private SpecListController specListController;
 
@@ -39,22 +39,20 @@ public class FaultListController implements Serializable {
         return faultsDTO;
     }
 
- 
-
     public String assign(FaultDTO faultDTO) {
         try {
             conversation.begin();
             specListController.setFaultDTOAndfaultEndpoint(faultDTO);
-            return "specList";
+
         } catch (AppBaseException abe) {
             Logger.getLogger(FaultListController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assign wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return "";
         }
-        return null;
+        return "specList";
     }
 
-  
     public void setStatusEND(FaultDTO faultDTO) {
         try {
             faultEndpoint.setStatusEND(faultDTO);

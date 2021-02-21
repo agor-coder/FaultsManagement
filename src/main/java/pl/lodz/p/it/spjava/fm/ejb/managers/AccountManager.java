@@ -68,7 +68,7 @@ public class AccountManager extends AbstractManager implements SessionSynchroniz
     }
 
     @RolesAllowed({"AppAdmin", "Notifier", "Specialist", "Assigner"})
-    public Account findLogin(String myLogin) {
+    public Account findLogin(String myLogin) throws AppBaseException{
         return accountFacade.findLogin(myLogin);
     }
 
