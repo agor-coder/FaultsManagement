@@ -33,8 +33,7 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
 
     @RolesAllowed("Assigner")
     public void lockSpecialist(Specialist entity) {
-        em.lock(entity, OPTIMISTIC_FORCE_INCREMENT);
-        // em.flush();    
+        em.lock(entity, OPTIMISTIC_FORCE_INCREMENT);   
 
     }
 
