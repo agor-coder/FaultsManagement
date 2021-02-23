@@ -20,14 +20,6 @@ public class NotifierDTO extends AccountDTO {
         this.emplacement = emplacement;
     }
 
-    //do formularza newNotifier
-    public NotifierDTO(String firstName, String sureName,
-            String email, String phone, String emplacement) {
-        super(firstName, sureName, email, phone);
-        super.login="przykladowe_konto_notif";
-        this.emplacement = emplacement;
-
-    }
 
     public String getEmplacement() {
         return emplacement;

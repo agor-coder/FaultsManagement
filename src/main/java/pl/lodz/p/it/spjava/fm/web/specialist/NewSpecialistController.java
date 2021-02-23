@@ -25,9 +25,7 @@ public class NewSpecialistController implements Serializable {
     @EJB
     private AccountEndpoint accountEndpoint;
 
-//do formularza new
-    private final SpecialistDTO newSpecialistDTO = new SpecialistDTO("Paweł", "Spec", "paul@op.pl", "5345", "er4");
-    // private final SpecialistDTO newSpecialistDTO = new SpecialistDTO();
+    private final SpecialistDTO newSpecialistDTO = new SpecialistDTO();
 
     private String passwordRepeat;
     private boolean success;

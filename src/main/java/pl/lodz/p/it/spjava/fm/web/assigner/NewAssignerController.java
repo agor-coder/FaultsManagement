@@ -25,9 +25,7 @@ public class NewAssignerController implements Serializable {
     @EJB
     private AccountEndpoint accountEndpoint;
 
-//do formularza new
-    private final AssignerDTO newAssignerDTO = new AssignerDTO("Zenon", "Assign", "john@op.pl", "5388", "IM5");
-    // private final AssignerDTO newAssignerDTO = new AssignerDTO();
+  private final AssignerDTO newAssignerDTO = new AssignerDTO();
 
     private String passwordRepeat;
     private boolean success;

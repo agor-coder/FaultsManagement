@@ -20,15 +20,6 @@ public class SpecialistDTO extends AccountDTO {
         this.department = department;
     }
 
-    //do formularza newSpec
-    public SpecialistDTO(String firstName, String sureName,
-            String email, String phone, String department) {
-        super(firstName, sureName, email, phone);
-        super.login="przykladowe_konto_spec";
-        this.department = department;
-
-    }
-
     @NotNull(message = "{constraint.notnull}")
     public String getDepartment() {
         return department;

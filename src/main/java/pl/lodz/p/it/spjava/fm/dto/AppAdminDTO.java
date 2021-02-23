@@ -19,13 +19,7 @@ public class AppAdminDTO extends AccountDTO {
         super(id, login, active, confirmed, firstName, sureName, email, phone, typ);
         this.alarmPhone = alarmPhone;
     }
-//do form new
-    public AppAdminDTO(String firstName, String sureName,
-            String email, String phone, String alarmPhone) {
-        super(firstName, sureName, email, phone);
-        super.login="przykladowe_konto_admin";
-        this.alarmPhone = alarmPhone;
-    }
+
 
     public String getAlarmPhone() {
         return alarmPhone;

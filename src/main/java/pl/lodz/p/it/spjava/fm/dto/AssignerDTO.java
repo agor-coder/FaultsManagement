@@ -20,15 +20,6 @@ public class AssignerDTO extends AccountDTO {
         this.department = department;
     }
 
-    //do formularza newSpec
-    public AssignerDTO(String firstName, String sureName,
-            String email, String phone, String department) {
-        super(firstName, sureName, email, phone);
-        super.login="przykladowe_konto_assign";
-        this.department = department;
-
-    }
-
     public String getDepartment() {
         return department;
     }

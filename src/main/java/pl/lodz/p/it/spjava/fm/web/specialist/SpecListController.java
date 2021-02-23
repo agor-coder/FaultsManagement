@@ -62,17 +62,6 @@ public class SpecListController implements Serializable {
         }
     }
 
-    public String assignSpecialist2(SpecialistDTO specialistDTO) {
-        try {
-            faultEndpoint.assignSpecialist2(specialistDTO);
-            return cancelFaultList();//end of conversation
-        } catch (AppBaseException abe) {
-            Logger.getLogger(SpecListController.class.getName())
-                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assignSpecialist wyjatku typu: ", abe);
-            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
-            return null;
-        }
-    }
 
     public String cancelMain() {
         conversation.end();

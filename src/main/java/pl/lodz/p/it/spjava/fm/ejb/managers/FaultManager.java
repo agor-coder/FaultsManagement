@@ -87,33 +87,6 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.edit(fault);
     }
 
-    public void assignSpecialist2(Fault fault, Long Id) throws AppBaseException {
-        Specialist spec = specFacade.find(Id);
-        if (!spec.isActive() || !spec.isConfirmed()) {
-            throw SpecialistException.specExceptionWithNotActive();
-        }
-        if (null != fault.getSpecialist() && fault.getSpecialist().equals(spec)) {
-            throw FaultException.faultExceptionWithSameSpecialist();
-        }
-
-        int specialistFaultsNumber = countOfSpecialist(spec);
-        if (specialistFaultsNumber < faultLimit) {
-            try {
-                specFacade.lockSpecialistAndWait(spec);
-                String assignerLogin = ContextUtils.getUserName();
-                Assigner assigner = assignerFacade.findAssignerLogin(assignerLogin);
-                fault.setWhoAssigned(assigner);
-                fault.setSpecialist(spec);
-                fault.setStatus(Fault.FaultStatus.ASSIGNED);
-            } catch (EJBTransactionRolledbackException tre) {
-                throw LockSpecialistException.createLockExceptionWithOptimistickForceIncrement();
-            }
-        } else {
-            throw FaultException.faultExceptionWithFaultLimit();
-        }
-        faultFacade.edit(fault);
-    }
-
     private int countOfSpecialist(Specialist specialist) throws AppBaseException {
         return faultFacade.countOfSpecialist(specialist);
     }

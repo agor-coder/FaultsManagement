@@ -41,10 +41,7 @@ public class NewFaultController implements Serializable {
         areasDTO = areaEndpoint.getAllAreasDTO();
     }
 
-//
-////do formularza new
-    private final FaultDTO newFaultDTO = new FaultDTO("uszkodzony przetwornik mocy 3PS3");
-//    //private final FaultDTO newFaultDTO = new FaultDTO();
+    private final FaultDTO newFaultDTO = new FaultDTO();
 
     public List<TechAreaDTO> getAreasDTO() {
         return areasDTO;

@@ -14,14 +14,14 @@
                 <div class="form-group">
                     <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
                 </div>  
-                
+
             </h:form>
         </b:navBar>
 
         <b:container fluid="true">
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                     <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -49,17 +49,19 @@
                     <h1>#{msg['action.login']}</h1>
                     <b:jumbotron >
                         <h:form styleClass="form-signin" prependId="false">
-                            <b:inputText id="login" value="#{loginController.username}" placeholder="${msg['account.login']}"  >
-                                <f:facet name="prepend">
-                                    <b:icon name="user" />
-                                </f:facet>
-                            </b:inputText>
-                            <b:inputText id="password"  value="#{loginController.password}" placeholder="${msg['account.password']}"  type="password">
-                                <f:facet name="prepend">
-                                    <b:iconAwesome name="key" />
-                                </f:facet>
-                            </b:inputText>
-                            <b:commandButton value="#{msg['action.login']}" action="#{loginController.login()}"  icon="log-in" size="md"  look= "info"/>
+                                <b:inputText id="login" value="#{loginController.username}" placeholder="${msg['account.login']}"  ><b:message for="login" />
+                                    <f:facet name="prepend">
+                                        <b:icon name="user" />
+                                    </f:facet>
+                                </b:inputText>
+                                <b:inputText id="password"  value="#{loginController.password}" placeholder="${msg['account.password']}" 
+                                             type="password"><b:message for="password" />
+                                    <f:facet name="prepend">
+                                        <b:iconAwesome name="key" />
+                                    </f:facet>
+                                </b:inputText>
+                                <b:commandButton value="#{msg['action.login']}" action="#{loginController.login()}"  icon="log-in" size="md"  look= "info"/>
+                           
                         </h:form>
                     </b:jumbotron>
                 </b:column>

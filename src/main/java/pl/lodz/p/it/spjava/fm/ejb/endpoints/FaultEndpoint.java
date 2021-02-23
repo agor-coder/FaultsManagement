@@ -95,30 +95,6 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         }
     }
 
-    @RolesAllowed("Assigner")
-    public void assignSpecialist2(SpecialistDTO specialistDTO) throws AppBaseException {
-        Long specId = specialistDTO.getId();
-        boolean rollbackTX;
-        int retryTXCounter = 1;
-        do {
-            try {
-                faultManager.assignSpecialist2(endpointFault, specId);
-                rollbackTX = faultManager.isLastTransactionRollback();
-            } catch (LockSpecialistException ex) {
-                Logger.getGlobal().log(Level.SEVERE, "Próba " + retryTXCounter
-                        + " wykonania metody biznesowej zakończona wyjątkiem klasy:"
-                        + ex.getClass().getName());
-                rollbackTX = true;
-                retryTXCounter++;
-            }
-        } while (rollbackTX && retryTXCounter <= txRetryLimit);
-
-        if (rollbackTX && retryTXCounter > txRetryLimit) {
-            throw FaultException.createWithDbOptimisticLockRepeatKey();
-        }
-
-    }
-
     @RolesAllowed("Notifier")
     public void addFault(FaultDTO faultDTO, Long id) throws AppBaseException {
         Fault fault = new Fault();

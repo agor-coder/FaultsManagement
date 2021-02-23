@@ -34,19 +34,9 @@ public class SpecialistFacade extends AbstractFacade<Specialist> {
     @RolesAllowed("Assigner")
     public void lockSpecialist(Specialist entity) {
         em.lock(entity, OPTIMISTIC_FORCE_INCREMENT);   
-
     }
 
-    @RolesAllowed("Assigner")
-    public void lockSpecialistAndWait(Specialist entity) {
-        lockSpecialist(entity);
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(SpecialistEndpoint.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+  
 
 
 }

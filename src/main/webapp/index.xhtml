@@ -13,7 +13,7 @@
 
             <h:form styleClass="navbar-form navbar-right">
                 <div class="form-group">
-                    <b:inputText placeholder="${msg['account.login']}" value="#{loginController.username}" fieldSize="sm"  rendered="#{empty request.remoteUser}">
+                    <b:inputText   placeholder="${msg['account.login']}" value="#{loginController.username}" fieldSize="sm"  rendered="#{empty request.remoteUser}">
                         <f:facet name="prepend">
                             <b:icon name="user" />
                         </f:facet>
@@ -27,12 +27,11 @@
                     </b:inputText>
                 </div>   
                 <b:commandButton action="#{contextUtils.invalidateSession()}" value="#{msg['menu.closeSession']}" look= "info" icon="log-out" rendered="#{not empty request.remoteUser}"/>
-                <b:commandButton action="#{loginController.login()}"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}" />
+                <b:commandButton action="#{loginController.login()}"  value="#{msg['action.login']}"   look="success" icon="log-in"   rendered="#{empty request.remoteUser}"  />
             </h:form>
             <h:form styleClass="navbar-form navbar-right">
                 <h:outputLabel value="**${editAccountController.userName}**" style="color: #fff" />  
             </h:form>
-
         </b:navBar>
 
         <b:container fluid="true" >
@@ -61,25 +60,25 @@
                         <b:navLink outcome ="changeMyPassword" value="#{msg['menu.accounts.changePassword']}" />
                         <b:navLink outcome ="accountData" value="#{msg['menu.accounts.details']}" /> 
                     </b:listLinks>
-                    <b:messages/>
+                   
                 </b:column >
-                
+
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    
-                        <b:jumbotron>
-                            <b:container>
-                                <h:form>
-                                    <h2>#{msg['menu.welcome']} </h2><br/>
-                                    <p>
-                                        <b:commandButton action="registerNotifier"  value="#{msg['menu.welcome.new .user']}"  
-                                                         look="info"    rendered="#{ empty request.remoteUser}" />
-                                    </p>
-                                </h:form >
-                            </b:container>
-                        </b:jumbotron>
-                    
+
+                    <b:jumbotron>
+                        <b:container>
+                            <h:form>
+                                <h2>#{msg['menu.welcome']} </h2><br/>
+                                <p>
+                                    <b:commandButton action="registerNotifier"  value="#{msg['menu.welcome.new .user']}"  
+                                                     look="info"    rendered="#{ empty request.remoteUser}" />
+                                </p>
+                            </h:form >
+                        </b:container>
+                    </b:jumbotron>
+
                 </b:column >
-                
+
             </b:row >
         </b:container> 
 

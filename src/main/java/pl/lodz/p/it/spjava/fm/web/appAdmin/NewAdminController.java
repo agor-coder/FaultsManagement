@@ -25,9 +25,7 @@ public class NewAdminController implements Serializable {
     @EJB
     private AccountEndpoint accountEndpoint;
 
-//do formularza new
-    private final AppAdminDTO newAdminDTO = new AppAdminDTO("Adam", "Admin", "pete@op.pl", "5288", "9978");
-    //private final AppAdminDTO newAdminDTO = new AppAdminDTO();
+    private final AppAdminDTO newAdminDTO = new AppAdminDTO();
 
     private String passwordRepeat;
     private boolean success;
