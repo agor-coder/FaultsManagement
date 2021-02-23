@@ -8,23 +8,7 @@
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
-      <!--<property name="eclipselink.canonicalmodel.subpackage" value="FaultsManagementPU"/>-->
-      <!--    Wartość DISABLE_SELECTIVE oznacza, że cache L2 będzie buforował wszystkie encje poza tymi oznaczonymi adnotacją @Cacheable(false).
-    Tu dotyczy to encji , które są modyfikowane z poziomu dodatkowej jednostki składowania.-->
       <shared-cache-mode>NONE</shared-cache-mode>
     </properties>
   </persistence-unit>
-  <!--Dodatkowa jednostka składowania umożliwiająca działanie z innym poziomem izolacji transakcji.-->
-  <!--  <persistence-unit name="FaultsManagementPU_Serializable" transaction-type="JTA">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>jdbc/FaultsManagementDS_Serializable</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-        Ustawienie to powoduje, że jednostka nie używa cache L2. Jest to potrzebne, aby uniknąć niezgodności
-    stanu encji ze zmianami wprowadzanymi przez podstawową jednostke składowania.
-     <shared-cache-mode>NONE</shared-cache-mode>
-    <properties>
-      <property name="eclipselink.logging.level" value="FINE"/>
-      <property name="eclipselink.canonicalmodel.subpackage" value="FaultsManagementPU_Serializable"/>
-    </properties>
-  </persistence-unit>-->
 </persistence>
