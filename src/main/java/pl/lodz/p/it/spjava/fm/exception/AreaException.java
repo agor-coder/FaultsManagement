@@ -45,6 +45,4 @@ public class AreaException extends AppBaseException {
         return se;
     }
     
-
-
 }

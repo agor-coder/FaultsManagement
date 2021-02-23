@@ -13,11 +13,8 @@ abstract public class AbstractManager {
 
     @Resource
     protected SessionContext sctx;
-    
-    private String transactionId;
-    
+    private String transactionId; 
     private boolean lastTransactionRollback;
-
     public boolean isLastTransactionRollback() {
         return lastTransactionRollback;
     }

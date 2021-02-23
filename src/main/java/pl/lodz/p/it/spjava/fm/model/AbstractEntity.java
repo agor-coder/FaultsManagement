@@ -15,9 +15,7 @@ import javax.validation.constraints.NotNull;
 public abstract class AbstractEntity {
 
     protected static final long serialVersionUID = 1L;
-
     protected abstract Object getId();
-  
     protected abstract Object getBusinessKey();
 
     @Version

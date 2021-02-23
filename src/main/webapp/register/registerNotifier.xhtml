@@ -52,7 +52,7 @@
                         <h:form id="RegisterNotifier">
                             <h:panelGrid columns="3">
                                 <h:outputLabel value="#{msg['account.login']}*" for="login" />
-                                <h:inputText value="#{newNotifierController.newNotifierDTO.login}"  id="login"> </h:inputText><b:message for="login" />
+                                <h:inputText value="#{newNotifierController.newNotifierDTO.login}"  id="login"  required="true"> </h:inputText><b:message for="login" />
 
                                 <h:outputLabel value="#{msg['account.password']}*" for="password" />
                                 <h:inputSecret value="#{newNotifierController.newNotifierDTO.password}" required="true" id="password"></h:inputSecret><b:message for="password" />

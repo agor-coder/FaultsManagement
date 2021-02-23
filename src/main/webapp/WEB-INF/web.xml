@@ -152,7 +152,7 @@
         <location>/faces/error/error.xhtml</location>
     </error-page>
     <error-page>
-        <!--obsługa błędów systemowych zgłaszanych przez kontener-->
+        
         <exception-type>java.lang.Exception</exception-type>
         <location>/faces/error/error.xhtml</location>
     </error-page>
