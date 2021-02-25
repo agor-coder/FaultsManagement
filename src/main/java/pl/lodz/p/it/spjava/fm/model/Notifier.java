@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@DiscriminatorValue("Zgłaszajacy")
+@DiscriminatorValue("Zglaszajacy")
 @NamedQuery(name = "Notifier.findLogin", query = "SELECT i FROM Notifier i where i.login = :login")
 public class Notifier extends Account implements Serializable {
 

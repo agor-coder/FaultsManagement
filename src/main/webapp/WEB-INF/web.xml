@@ -34,7 +34,7 @@
         <role-name>AppAdmin</role-name>
     </security-role>
     <security-role>
-        <description>Zgłaszajacy</description>
+        <description>Zglaszajacy</description>
         <role-name>Notifier</role-name>
     </security-role>
     <security-role>
@@ -86,9 +86,9 @@
         </user-data-constraint>
     </security-constraint>
     <security-constraint>
-        <display-name>Strony zgłaszającego</display-name>
+        <display-name>Strony zglaszającego</display-name>
         <web-resource-collection>
-            <web-resource-name>strony zgłaszającego</web-resource-name>
+            <web-resource-name>strony zglaszającego</web-resource-name>
             <description/>
             <url-pattern>/faces/fault/newFault.xhtml</url-pattern>
             <url-pattern>/faces/fault/newFaultConfirm.xhtml</url-pattern>

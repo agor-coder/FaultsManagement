@@ -53,15 +53,15 @@ VALUES (-6,'Przydzielajacy',1,1,'2020-12-22 17:39:54.340','assign3','6b51d431df5
 INSERT INTO FM.ASSIGNER(id,department) VALUES (-6,'IR3');
 
 INSERT INTO FM.ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
-VALUES (-7,'Zgłaszajacy',1,1,'2020-11-22 12:39:54.340','notif1','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'5@p.pl','Karol','Piszpan','4457');
+VALUES (-7,'Zglaszajacy',1,1,'2020-11-22 12:39:54.340','notif1','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'5@p.pl','Karol','Piszpan','4457');
 INSERT INTO FM.NOTIFIER(id,emplacement) VALUES (-7,'mistrz elektryk');
 
 INSERT INTO FM.ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
-VALUES (-8,'Zgłaszajacy',1,1,'2020-11-22 12:50:54.340','notif2','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'50@p.pl','Marek','Król','4487');
+VALUES (-8,'Zglaszajacy',1,1,'2020-11-22 12:50:54.340','notif2','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'50@p.pl','Marek','Król','4487');
 INSERT INTO FM.NOTIFIER(id,emplacement) VALUES (-8,'mistrz maszynowni');
 
 INSERT INTO FM.ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
-VALUES (-9,'Zgłaszajacy',1,1,'2020-11-22 12:57:54.340','notif3','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'40@p.pl','Paweł','Mol','4587');
+VALUES (-9,'Zglaszajacy',1,1,'2020-11-22 12:57:54.340','notif3','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'40@p.pl','Paweł','Mol','4587');
 INSERT INTO FM.NOTIFIER(id,emplacement) VALUES (-9,'mistrz kotłowni');
 
 

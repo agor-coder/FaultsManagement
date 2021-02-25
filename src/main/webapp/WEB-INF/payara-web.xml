@@ -12,7 +12,7 @@
     </security-role-mapping>
     <security-role-mapping>
         <role-name>Notifier</role-name>
-        <group-name>Zgłaszajacy</group-name>
+        <group-name>Zglaszajacy</group-name>
     </security-role-mapping>
     <security-role-mapping>
         <role-name>Specialist</role-name>
