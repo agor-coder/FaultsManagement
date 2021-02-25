@@ -111,7 +111,7 @@
                                 </c:if>
                                 <c:if test="#{editAccountController.notifier}">
                                     <b:commandButton value="${msg['action.account.edit']}" action="#{editAccountController.saveEditedNotifierDTO()}" 
-                                                     />
+                                                   rendered="#{not editAccountController.success}"   />
                                 </c:if>
 
                                 <b:commandButton value="${msg['action.backToList']}" action="#{editAccountController.cancelOrEdit}"  immediate="true" look="warning" />

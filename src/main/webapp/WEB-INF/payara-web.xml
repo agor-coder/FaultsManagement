@@ -8,11 +8,11 @@
     </security-role-mapping>
     <security-role-mapping>
         <role-name>Assigner</role-name>
-        <group-name>Przydzielający</group-name>
+        <group-name>Przydzielajacy</group-name>
     </security-role-mapping>
     <security-role-mapping>
         <role-name>Notifier</role-name>
-        <group-name>Zgłaszający</group-name>
+        <group-name>Zgłaszajacy</group-name>
     </security-role-mapping>
     <security-role-mapping>
         <role-name>Specialist</role-name>

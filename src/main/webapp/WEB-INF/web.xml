@@ -34,7 +34,7 @@
         <role-name>AppAdmin</role-name>
     </security-role>
     <security-role>
-        <description>Zgłaszający</description>
+        <description>Zgłaszajacy</description>
         <role-name>Notifier</role-name>
     </security-role>
     <security-role>
@@ -42,7 +42,7 @@
         <role-name>Specialist</role-name>
     </security-role>
     <security-role>
-        <description>Przydzielający</description>
+        <description>Przydzielajacy</description>
         <role-name>Assigner</role-name>
     </security-role>
     <security-constraint>

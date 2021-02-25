@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@DiscriminatorValue("Przydzielający")
+@DiscriminatorValue("Przydzielajacy")
 @NamedQuery(name = "Assigner.findLogin", query = "SELECT i FROM Assigner i where i.login = :login")
 public class Assigner extends Account implements Serializable {
 
