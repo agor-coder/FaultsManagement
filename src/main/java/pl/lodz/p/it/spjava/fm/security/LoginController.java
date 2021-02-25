@@ -68,6 +68,5 @@ public class LoginController {
 
     public void setPassword(String password) {
         this.password = hashGenerator.generateHash(password);
-       // this.password = password;
     }
 }

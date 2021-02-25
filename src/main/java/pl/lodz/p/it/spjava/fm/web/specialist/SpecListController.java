@@ -53,7 +53,7 @@ public class SpecListController implements Serializable {
     public String assignSpecialist(SpecialistDTO specialistDTO) {
         try {
             faultEndpoint.assignSpecialist(specialistDTO);
-            return cancelFaultList();//end of conversation
+            return cancelFaultList();
         } catch (AppBaseException abe) {
             Logger.getLogger(SpecListController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assignSpecialist wyjatku typu: ", abe);
