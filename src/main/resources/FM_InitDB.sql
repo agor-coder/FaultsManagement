@@ -22,7 +22,7 @@ INSERT INTO FM.APPADMIN(id,alarmphone) VALUES (-13,'2324');
 
 INSERT INTO FM.ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-1,'Specjalista',0,1,'2020-12-04 18:39:54.340','spec1','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'2@p.pl','Andrzej','Gorzki','5366');
-INSERT INTO SPECIALIST(id,department) VALUES (-1,'ER4');
+INSERT INTO FM.SPECIALIST(id,department) VALUES (-1,'ER4');
 
 INSERT INTO FM.ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
  VALUES (-2,'Specjalista',1,1,'2020-11-04 18:39:54.340','spec2','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'21@p.pl','Bartłomiej','Hyży','5367');
@@ -42,7 +42,7 @@ INSERT INTO FM.SPECIALIST(id,department) VALUES (-14,'ER4');
 
 INSERT INTO FM.ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-4,'Przydzielający',1,1,'2020-12-22 15:39:54.340','assign1','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'3@p.pl','Stefan','Smok','4367');
-INSERT INTO ASSIGNER(id,department) VALUES (-4,'MR4');
+INSERT INTO FM.ASSIGNER(id,department) VALUES (-4,'MR4');
 
 INSERT INTO FM.ACCOUNT (id,type,active,confirmed,creation_timestamp,login,password,version,email,firstname,surename,phone) 
 VALUES (-5,'Przydzielający',1,1,'2020-12-22 16:39:54.340','assign2','6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918',1,'35@p.pl','Julian','Ptak','4467');
