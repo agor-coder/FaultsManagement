@@ -63,7 +63,7 @@ public class AccountEndpoint extends AbstractEndpoint implements SessionSynchron
         return DTOConverter.makeAccountDTOfromUserEntity(endpointAccount);
     }
 
-    public List<AccountDTO> getAllAccountsAndMakeDTOList() {
+    public List<AccountDTO> getAllAccountsDTO() {
         List<Account> listAccount = accountManager.findAll();
         List<AccountDTO> listAccountDTO = new ArrayList<>();
         listAccount.stream().map(account -> DTOConverter.createAccountDTOFromEntity(account))
