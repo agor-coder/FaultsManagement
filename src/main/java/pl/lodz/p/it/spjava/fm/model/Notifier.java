@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class Notifier extends Account implements Serializable {
 
     @NotNull(message = "{constraint.notnull}")
-    @Size(max = 16, message = "{constraint.string.length.toolong}")
+    @Size(max = 32, message = "{constraint.string.length.toolong}")
     private String emplacement;
 
     public String getEmplacement() {

@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 public class NotifierDTO extends AccountDTO {
 
     @NotNull(message = "{constraint.notnull}")
-    @Size(max = 16, message = "{constraint.string.length.toolong}")
+    @Size(max = 32, message = "{constraint.string.length.toolong}")
     @Pattern(regexp = "^[0-9\\pL \\'-]*$", message = "{constraint.string.incorrectchar}")
     private String emplacement;
 
