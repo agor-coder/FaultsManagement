@@ -52,7 +52,7 @@
                     <h2> #{editAccountController.firstLastName}</h2>
 
                     <h:form id="notifierFaultsList">
-                        <b:dataTable value="#{notifierFaultListController.myFaultsDTO}" var="fault"
+                        <b:dataTable value="#{notifierFaultListController.myFaultsDTO}" var="fault" page-length-menu="5,10,20"
                                      excel="true"
                                      csv="true"
                                      pdf="true"

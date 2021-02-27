@@ -72,7 +72,7 @@
 
                                 <b:commandButton value="${msg['action.save']}" action="#{newNotifierController.regNotifier()}"  rendered="#{not newNotifierController.success}"/>
                                 <b:commandButton value="${msg['action.correct']}"  action="#{newNotifierController.cancelReg()}"   immediate="true" look="warning"  rendered="#{not newNotifierController.success}" />
-                                <b:commandButton value="${msg['page.main']}"  action="#{newNotifierController.mainPage()}"   immediate="true" look="warning"  rendered="#{newNotifierController.success}" />
+                                <b:commandButton value="${msg['page.login']}"  action="#{newNotifierController.mainPage()}"   immediate="true" look="warning"  rendered="#{newNotifierController.success}" />
                             </h:panelGrid>
                         </h:form> 
                     </b:jumbotron>

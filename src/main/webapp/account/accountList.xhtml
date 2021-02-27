@@ -52,7 +52,7 @@
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>#{msg['menu.accounts.list']}</h1>
                     <b:form id="AccountList" >
-                        <b:dataTable value="#{accountListController.accountsDTO}"  var="row"  
+                        <b:dataTable value="#{accountListController.accountsDTO}"  var="row"  page-length-menu="5,10,20" 
                                      columnVisibility="true"  >
                             <h:column>
                                 <f:facet name="header">#{msg['account.login']} </f:facet> ${row.login}
