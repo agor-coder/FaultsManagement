@@ -40,7 +40,6 @@ public class FaultDTO {
         this.modificationTimeStamp = modificationTimeStamp;
     }
 
-
     public FaultStatusDTO getStatus() {
         return status;
     }
@@ -96,7 +95,7 @@ public class FaultDTO {
     public Date getCreateTimeStamp() {
         return createTimeStamp;
     }
-    
+
     public Date getModificationTimeStamp() {
         return modificationTimeStamp;
     }
@@ -104,7 +103,6 @@ public class FaultDTO {
     public String getCreateTimeStampSDF() {
         return sdf.format(createTimeStamp);
     }
-
 
     public String getModificationTimeStampSDF() {
         return null == modificationTimeStamp ? getCreateTimeStampSDF() : sdf.format(modificationTimeStamp);
@@ -128,14 +126,14 @@ public class FaultDTO {
         return "Fault: " + createTimeStamp + " ";
     }
 
-    public static enum FaultStatusDTO {
+    public enum FaultStatusDTO {
         NOT_ASSIGNED("Nie przydzielona"),
         ASSIGNED("Przydzielona"),
         END("Zakończona");
 
         private final String description;
 
-        private FaultStatusDTO(String description) {
+        FaultStatusDTO(String description) {
             this.description = description;
         }
 

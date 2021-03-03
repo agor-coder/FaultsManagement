@@ -14,16 +14,13 @@ import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 @Named
 public class ContextUtils {
 
-    
     public ContextUtils() {
     }
-
 
     public static ExternalContext getContext() {
         return FacesContext.getCurrentInstance().getExternalContext();
     }
 
-   
     public static Object getApplicationAttribute(String attributeName) {
         return getContext().getApplicationMap().get(attributeName);
     }
@@ -32,7 +29,6 @@ public class ContextUtils {
         return getContext().getSessionMap().get(attributeName);
     }
 
-    
     public static Object getRequestAttribute(String attributeName) {
         return getContext().getRequestMap().get(attributeName);
     }
@@ -43,7 +39,7 @@ public class ContextUtils {
 
     public String invalidateSession() {
         ((HttpSession) getContext().getSession(true)).invalidate();
-          return "main";
+        return "main";
     }
 
     public static String getSessionID() {

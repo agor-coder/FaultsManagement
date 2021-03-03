@@ -5,14 +5,14 @@ import javax.persistence.PersistenceException;
 
 public class AccountException extends AppBaseException {
 
-    static final public String KEY_NOT_FOUND = "error.account.not.found";
-    static final public String ACCOUNT_NOT_REMOVE = "error.account.not.remove";
-    static final public String OWN_ACCOUNT_NOT_REMOVE = "error.own.account.not.remove";
-    static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
-    static final public String PASS_NOT_MATCH = "error.pass.not.match";
-    static final public String PASS_THE_SAME = "error.same.password";
-    static final public String KEY_DB_CONSTRAINT_EMAIL = "error.account.db.constraint.uniq.email";
-    static final public String ASSIGNER_NOT_FOUND = "error.assigner.not.found";
+    static final String KEY_NOT_FOUND = "error.account.not.found";
+    static final String ACCOUNT_NOT_REMOVE = "error.account.not.remove";
+    static final String OWN_ACCOUNT_NOT_REMOVE = "error.own.account.not.remove";
+    static final String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
+    static final String PASS_NOT_MATCH = "error.pass.not.match";
+    static final String PASS_THE_SAME = "error.same.password";
+    static final String KEY_DB_CONSTRAINT_EMAIL = "error.account.db.constraint.uniq.email";
+    static final String ASSIGNER_NOT_FOUND = "error.assigner.not.found";
 
     private AccountException(String message) {
         super(message);
@@ -57,7 +57,7 @@ public class AccountException extends AppBaseException {
         return ae;
     }
 
-    static public AccountException createWithDbCheckConstraintKey() {
+    public static AccountException createWithDbCheckConstraintKey() {
         AccountException ae = new AccountException(KEY_DB_CONSTRAINT);
         return ae;
     }
@@ -67,17 +67,17 @@ public class AccountException extends AppBaseException {
         return ae;
     }
 
-    static public AccountException createWithPreviousGivenPasswordDoesNotMatch() {
+    public static AccountException createWithPreviousGivenPasswordDoesNotMatch() {
         AccountException ae = new AccountException(PASS_NOT_MATCH);
         return ae;
     }
 
-    static public AccountException createWithTheSamePasswordDoesNotMatch() {
+    public static AccountException createWithTheSamePasswordDoesNotMatch() {
         AccountException ae = new AccountException(PASS_THE_SAME);
         return ae;
     }
 
-    static public AccountException createAccountExceptionWithTxRetryRollback() {
+    public static AccountException createAccountExceptionWithTxRetryRollback() {
         AccountException ae = new AccountException(KEY_TX_RETRY_ROLLBACK);
         return ae;
     }

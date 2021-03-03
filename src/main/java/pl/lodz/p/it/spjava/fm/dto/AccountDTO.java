@@ -18,10 +18,10 @@ public class AccountDTO {
     protected String password;
 
     @NotNull(message = "{constraint.notnull}")
-    protected boolean active=true;
+    protected boolean active = true;
 
     @NotNull(message = "{constraint.notnull}")
-    protected boolean confirmed=true;
+    protected boolean confirmed = true;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
@@ -47,7 +47,6 @@ public class AccountDTO {
     public AccountDTO() {
     }
 
-    
     public AccountDTO(Long id, String login, boolean active, boolean confirmed, String firstName, String sureName, String email, String phone, String type) {
         this.id = id;
         this.login = login;
@@ -59,7 +58,7 @@ public class AccountDTO {
         this.phone = phone;
         this.type = type;
     }
-    
+
     public AccountDTO(String firstName, String sureName, String email, String phone) {
         this.password = password;
         this.firstName = firstName;

@@ -1,7 +1,5 @@
 package pl.lodz.p.it.spjava.fm.ejb.facade;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -10,7 +8,6 @@ import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import static javax.persistence.LockModeType.OPTIMISTIC_FORCE_INCREMENT;
 import javax.persistence.PersistenceContext;
-import pl.lodz.p.it.spjava.fm.ejb.endpoints.SpecialistEndpoint;
 import pl.lodz.p.it.spjava.fm.ejb.interceptor.LoggingInterceptor;
 import pl.lodz.p.it.spjava.fm.model.Specialist;
 

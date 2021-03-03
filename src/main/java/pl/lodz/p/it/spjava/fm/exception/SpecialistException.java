@@ -5,9 +5,8 @@ import pl.lodz.p.it.spjava.fm.model.Specialist;
 
 public class SpecialistException extends AppBaseException {
 
-   
     static final public String NOT_ACTIVE = "fault.assign.not.active.spec";
-     static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
+    static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
 
     private SpecialistException(String message) {
         super(message);
@@ -28,12 +27,10 @@ public class SpecialistException extends AppBaseException {
         return se;
     }
 
-    static public SpecialistException createSpecialistExceptionWithTxRetryRollback() {
+    public static SpecialistException createSpecialistExceptionWithTxRetryRollback() {
         SpecialistException se = new SpecialistException(KEY_TX_RETRY_ROLLBACK);
         return se;
     }
-
- 
 
     public static SpecialistException createSpecialistExceptionWithOptimisticLockKey(Specialist specialist, OptimisticLockException cause) {
         SpecialistException se = new SpecialistException(KEY_OPTIMISTIC_LOCK, cause);

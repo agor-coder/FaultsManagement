@@ -13,12 +13,10 @@ import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
 @NamedQueries({
-@NamedQuery(name = "Fault.findSpecOfLogin", query = "SELECT i FROM Fault i where i.specialist.login = :login"),
-@NamedQuery(name = "Fault.findNotifOfLogin", query = "SELECT i FROM Fault i where i.whoNotified.login = :login"),
-@NamedQuery(name = "Fault.countOfSpecialist", query = "SELECT COUNT (i) FROM Fault i where i.specialist = :specialist AND i.status=:status"),
-}) 
+    @NamedQuery(name = "Fault.findSpecOfLogin", query = "SELECT i FROM Fault i where i.specialist.login = :login"),
+    @NamedQuery(name = "Fault.findNotifOfLogin", query = "SELECT i FROM Fault i where i.whoNotified.login = :login"),
+    @NamedQuery(name = "Fault.countOfSpecialist", query = "SELECT COUNT (i) FROM Fault i where i.specialist = :specialist AND i.status=:status"),})
 @Entity
 public class Fault extends AbstractEntity implements Serializable {
 
@@ -112,14 +110,14 @@ public class Fault extends AbstractEntity implements Serializable {
         return id;
     }
 
-    public static enum FaultStatus {
+    public enum FaultStatus {
         NOT_ASSIGNED("Nie przydzielona"),
         ASSIGNED("Przydzielona"),
         END("Zakończona");
 
         private final String description;
 
-        private FaultStatus(String description) {
+        FaultStatus(String description) {
             this.description = description;
         }
 
@@ -127,9 +125,10 @@ public class Fault extends AbstractEntity implements Serializable {
             return description;
         }
     };
-     @Override
+
+    @Override
     public String toString() {
-        return  faultDescribe;
+        return faultDescribe;
     }
 
 }

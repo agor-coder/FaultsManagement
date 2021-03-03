@@ -4,13 +4,13 @@ import javax.persistence.OptimisticLockException;
 
 public class FaultException extends AppBaseException {
 
-    static final public String KEY_NOT_FOUND = "error.fault.not.found";
-    static final public String STATUS_CHANGED_ALREADY = "error.status.changed.already";
-    static final public String FAULT_LIMIT = "error.fault.limit";
-    static final public String THE_SAME_SPEC = "fault.same.spec";
-    static final public String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
-    static final public String KEY_OPTIMISTIC_LOCK_REPEAT = "error.optimisticlock.repeat";
-    static final public String KEY_OPTIMISTIC_LOCK_FAULT = "error.optimisticlock.fault";
+    static final String KEY_NOT_FOUND = "error.fault.not.found";
+    static final String STATUS_CHANGED_ALREADY = "error.status.changed.already";
+    static final String FAULT_LIMIT = "error.fault.limit";
+    static final String THE_SAME_SPEC = "fault.same.spec";
+    static final String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
+    static final String KEY_OPTIMISTIC_LOCK_REPEAT = "error.optimisticlock.repeat";
+    static final String KEY_OPTIMISTIC_LOCK_FAULT = "error.optimisticlock.fault";
 
     private FaultException(String message) {
         super(message);

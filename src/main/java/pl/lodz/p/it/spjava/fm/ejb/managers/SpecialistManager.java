@@ -20,8 +20,7 @@ public class SpecialistManager extends AbstractManager implements SessionSynchro
     @EJB
     private SpecialistFacade specialistFacade;
 
-    
-      @RolesAllowed({"AppAdmin","Assigner"})
+    @RolesAllowed({"AppAdmin", "Assigner"})
     public List<Specialist> findAll() {
         return specialistFacade.findAll();
     }

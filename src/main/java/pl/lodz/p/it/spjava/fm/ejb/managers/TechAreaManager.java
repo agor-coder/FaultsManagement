@@ -16,14 +16,12 @@ import pl.lodz.p.it.spjava.fm.model.TechArea;
 @Stateful
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Interceptors(LoggingInterceptor.class)
-@RolesAllowed( "Assigner")
+@RolesAllowed("Assigner")
 public class TechAreaManager extends AbstractManager implements SessionSynchronization {
 
     @EJB
     private TechAreaFacade areaFacade;
 
-    
-     
     public TechArea find(Long id) {
         return areaFacade.find(id);
     }
@@ -37,12 +35,10 @@ public class TechAreaManager extends AbstractManager implements SessionSynchroni
         areaFacade.remove(area);
     }
 
-   
     public void editArea(TechArea area) throws AppBaseException {
         areaFacade.edit(area);
     }
 
-     
     public void createArea(TechArea techArea) throws AppBaseException {
         areaFacade.create(techArea);
     }

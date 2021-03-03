@@ -34,15 +34,13 @@ public class AssignerFacade extends AbstractFacade<Assigner> {
         super(Assigner.class);
     }
 
-  
-    
     @RolesAllowed("Assigner")
-    public Assigner findAssignerLogin(String login) throws AppBaseException{
+    public Assigner findAssignerLogin(String login) throws AppBaseException {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Assigner> query = cb.createQuery(Assigner.class);
         Root<Assigner> from = query.from(Assigner.class);
         query = query.select(from);
-        query = query.where(cb.equal(from.get("login"), login)); 
+        query = query.where(cb.equal(from.get("login"), login));
         TypedQuery<Assigner> tq = em.createQuery(query);
 
         try {

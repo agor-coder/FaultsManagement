@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-site:deploy</actionName>
+            <displayName>site:deploy</displayName>
+            <goals>
+                <goal>site:deploy</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-site:site</actionName>
+            <displayName>site:site</displayName>
+            <goals>
+                <goal>site:site</goal>
+            </goals>
+        </action>
+    </actions>

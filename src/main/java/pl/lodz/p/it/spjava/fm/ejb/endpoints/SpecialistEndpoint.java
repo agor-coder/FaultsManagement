@@ -24,8 +24,7 @@ public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynch
     @EJB
     private SpecialistManager specialistManager;
 
-    
-    @RolesAllowed({"AppAdmin","Assigner"})
+    @RolesAllowed({"AppAdmin", "Assigner"})
     public List<SpecialistDTO> getAllSpecialistsDTO() {
         List<Specialist> listSpecialist = specialistManager.findAll();
         List<SpecialistDTO> listSpecialistDTO = new ArrayList<>();

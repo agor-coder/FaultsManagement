@@ -1,16 +1,13 @@
-
 package pl.lodz.p.it.spjava.fm.exception;
 
 import javax.ejb.ApplicationException;
 
-
-@ApplicationException(rollback=true)
+@ApplicationException(rollback = true)
 abstract public class AppBaseException extends Exception {
-      
-    static final public String KEY_TX_RETRY_ROLLBACK = "error.tx.retry.rollback";  
-     static final public String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
-   
-    
+
+   public  static final String KEY_TX_RETRY_ROLLBACK = "error.tx.retry.rollback";
+    public  static final  String KEY_OPTIMISTIC_LOCK = "error.optimisticlock";
+
     protected AppBaseException(String message, Throwable cause) {
         super(message, cause);
     }
@@ -18,5 +15,5 @@ abstract public class AppBaseException extends Exception {
     protected AppBaseException(String message) {
         super(message);
     }
-    
+
 }
