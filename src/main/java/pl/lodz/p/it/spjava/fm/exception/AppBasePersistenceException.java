@@ -13,7 +13,7 @@ public class AppBasePersistenceException extends AppBaseException {
     }
 
     public static AppBasePersistenceException createPersistenceException() {
-       AppBasePersistenceException abpe = new  AppBasePersistenceException("persistence");
+       AppBasePersistenceException abpe = new  AppBasePersistenceException("persistence exception");
         return abpe;
     }
 }

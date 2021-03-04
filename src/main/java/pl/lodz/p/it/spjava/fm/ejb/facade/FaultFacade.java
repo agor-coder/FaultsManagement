@@ -72,7 +72,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
                     && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw FaultException.createWithDbCheckConstraintKey(ex);
             } else {
-                throw ex;
+                throw AppBasePersistenceException.createPersistenceException();
             }
         }
     }

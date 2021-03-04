@@ -120,7 +120,7 @@ public class AccountFacade extends AbstractFacade<Account> {
             if (ex.getCause() instanceof DatabaseException && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {
                 throw AccountException.createAccountExceptionWithAccountNotRemove();
             } else {
-                throw ex;
+                throw AppBasePersistenceException.createPersistenceException();
             }
         }
     }
