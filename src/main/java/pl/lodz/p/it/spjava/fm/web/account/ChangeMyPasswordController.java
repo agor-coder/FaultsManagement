@@ -4,22 +4,18 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
-import javax.inject.Inject;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.ejb.endpoints.AccountEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
 @Named
-@ConversationScoped
+@ViewScoped
 public class ChangeMyPasswordController implements Serializable {
 
     @EJB
     private AccountEndpoint accountEndpoint;
-    @Inject
-    private Conversation conversation;
 
     private String password = "";
     private String passwordRepeat = "";
@@ -57,20 +53,27 @@ public class ChangeMyPasswordController implements Serializable {
     public String changeMyPassword() {
         if (!(passwordRepeat.equals(password))) {
             ContextUtils.emitInternationalizedMessage("changeMyPassword:passwordRepeat", "error.passwords.not.matching");
+            passwordNull();
             return "";
         }
         try {
-            conversation.begin();
             accountEndpoint.changeMyPasword(passwordOld, password);
             success = true;
-            conversation.end();
+            passwordNull();
             return "";
         } catch (AppBaseException abe) {
             Logger.getLogger(ChangeMyPasswordController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji changeMyPassword wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage("changeMyPassword:passwordOld", abe.getMessage());
-            conversation.end();
+            passwordNull();
             return "";
         }
+    }
+
+    private void passwordNull() {
+        password = "";
+        passwordOld = "";
+        passwordRepeat = "";
+
     }
 }
