@@ -3,6 +3,8 @@ package pl.lodz.p.it.spjava.fm.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,6 +35,7 @@ public class Fault extends AbstractEntity implements Serializable {
     @Column(nullable = false, length = 256)
     private String faultDescribe;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private FaultStatus status = FaultStatus.NOT_ASSIGNED;
 
