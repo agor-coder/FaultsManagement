@@ -119,4 +119,9 @@ public class FaultEndpoint extends AbstractEndpoint implements SessionSynchroniz
         }
     }
 
+    public void removeFault(FaultDTO faultDTO) throws AppBaseException {
+        setEndpointFaultFromDTOToEdit(faultDTO);
+        faultManager.remove(endpointFault);
+    }
+
 }

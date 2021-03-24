@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title> #{msg['app.name']}</title>        
     </h:head>
@@ -86,9 +87,16 @@
 
                                 <h:column>
                                     <f:facet name="header">Akcje</f:facet>
-                                    <b:commandButton value="${msg['fault.change.specialist']}"   action="#{faultListController.assign(fault)}" rendered="#{ fault.assigned}"/>
-                                    <b:commandButton value="${msg['fault.assign']}"   action="#{faultListController.assign(fault)}"    rendered="#{ fault.notAssigned}"/>
-                                    <b:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}"  rendered="#{fault.assigned}" />
+                                    <p:commandButton value="${msg['fault.change.specialist']}"   action="#{faultListController.assign(fault)}" rendered="#{ fault.assigned}"/>
+                                    <p:commandButton value="${msg['fault.assign']}"   action="#{faultListController.assign(fault)}"    rendered="#{ fault.notAssigned}"/>
+                                    <p:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}"  rendered="#{fault.assigned}" />
+                                    <p:commandButton value="${msg['action.delete']}"  action="#{faultListController.removeFault(fault)}"  rendered="#{fault.notAssigned}" >
+                                     <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
+                                </p:commandButton>  
+                                <p:confirmDialog  global="true" showEffect="fade" hideEffect="fade">  
+                                    <p:commandButton value="${msg['confirm.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
+                                    <p:commandButton value="${msg['confirm.no']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
+                                </p:confirmDialog>  
                                 </h:column>
                             </b:dataTable>
                             <b:commandButton value="${msg['action.refresh']}" action="#{faultListController.init()}" />

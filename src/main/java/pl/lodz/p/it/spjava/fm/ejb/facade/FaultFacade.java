@@ -40,7 +40,6 @@ public class FaultFacade extends AbstractFacade<Fault> {
 
     @Override
     @RolesAllowed("Notifier")
-
     public void create(Fault entity) throws AppBaseException {
         try {
             super.create(entity);
@@ -76,6 +75,18 @@ public class FaultFacade extends AbstractFacade<Fault> {
             }
         }
     }
+    
+    @Override
+    @RolesAllowed("Assigner")
+    public void remove(Fault entity) throws AppBaseException {
+        try {
+            super.remove(entity);
+            em.flush();
+        } catch (PersistenceException ex) {
+                throw AppBasePersistenceException.createPersistenceException();
+            }
+        }
+    
 
     @RolesAllowed("Assigner")
     public int countOfSpecialist(Specialist spec)  {

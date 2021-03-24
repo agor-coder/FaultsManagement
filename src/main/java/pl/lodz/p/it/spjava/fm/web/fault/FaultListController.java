@@ -13,6 +13,7 @@ import javax.inject.Named;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.ejb.endpoints.FaultEndpoint;
 import pl.lodz.p.it.spjava.fm.exception.AppBaseException;
+import pl.lodz.p.it.spjava.fm.web.account.EditAccountController;
 import pl.lodz.p.it.spjava.fm.web.specialist.SpecListController;
 import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 
@@ -63,6 +64,18 @@ public class FaultListController implements Serializable {
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji setStatusEND wyjatku typu: ", abe);
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
         }
+    }
+
+    public String removeFault(FaultDTO faultDTO) {
+        try {
+            faultEndpoint.removeFault(faultDTO);
+        } catch (AppBaseException abe) {
+            Logger.getLogger(EditAccountController.class.getName())
+                    .log(Level.SEVERE, "Zgłoszenie w metodzie akcji removeFault wyjatku typu: ", abe);
+            ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
+            return "";
+        }
+        return "faultList";
     }
 
 }

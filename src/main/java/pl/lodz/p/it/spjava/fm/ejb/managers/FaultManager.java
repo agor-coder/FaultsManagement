@@ -111,4 +111,8 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
         faultFacade.create(fault);
     }
 
+    public void remove(Fault fault) throws AppBaseException {
+        faultFacade.remove(fault);
+    }
+
 }
