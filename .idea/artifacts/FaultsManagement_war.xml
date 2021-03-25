@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="FaultsManagement:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>FaultsManagement</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="FaultsManagement-1.0.war">
+      <element id="artifact" artifact-name="FaultsManagement:war exploded" />
+    </root>
+  </artifact>
+</component>
