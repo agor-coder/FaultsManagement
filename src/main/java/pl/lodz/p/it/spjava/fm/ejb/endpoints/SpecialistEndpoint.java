@@ -19,7 +19,7 @@ import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 @Stateful
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.NEVER)
-public class SpecialistEndpoint extends AbstractEndpoint implements SessionSynchronization {
+public class SpecialistEndpoint  {
 
     @EJB
     private SpecialistManager specialistManager;

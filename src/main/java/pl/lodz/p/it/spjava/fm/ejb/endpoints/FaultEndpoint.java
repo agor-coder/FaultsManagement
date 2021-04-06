@@ -26,7 +26,7 @@ import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 @Stateful
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.NEVER)
-public class FaultEndpoint extends AbstractEndpoint implements SessionSynchronization {
+public class FaultEndpoint {
 
     @Resource(name = "txRetryLimit")
     private int txRetryLimit;

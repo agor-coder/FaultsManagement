@@ -25,7 +25,7 @@ import pl.lodz.p.it.spjava.fm.utils.DTOConverter;
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.NEVER)
 @RolesAllowed("Assigner")
-public class TechAreaEndpoint extends AbstractEndpoint implements SessionSynchronization {
+public class TechAreaEndpoint {
 
     @Resource(name = "txRetryLimit")
     private int txRetryLimit;

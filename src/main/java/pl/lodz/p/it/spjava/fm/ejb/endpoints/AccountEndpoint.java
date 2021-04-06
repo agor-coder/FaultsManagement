@@ -38,7 +38,7 @@ import pl.lodz.p.it.spjava.fm.web.utils.ContextUtils;
 @Interceptors(LoggingInterceptor.class)
 @TransactionAttribute(TransactionAttributeType.NEVER)
 @RolesAllowed({"AppAdmin"})
-public class AccountEndpoint extends AbstractEndpoint implements SessionSynchronization {
+public class AccountEndpoint   {
 
     @EJB
     private AccountManager accountManager;
