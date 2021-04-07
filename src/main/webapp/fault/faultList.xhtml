@@ -24,7 +24,7 @@
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
                     <b:navLink header="#{msg['MENU']}" style="color: #009966" rendered="#{not empty request.remoteUser}"/>
-                      <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
+                    <b:listLinks rendered="#{request.isUserInRole('AppAdmin')}">
                         <b:navLink header ="***#{msg['menu.accounts']}"   style="color: chocolate"/>
                         <b:navLink outcome ="accountList" value="#{msg['menu.accounts.list']}" />
                         <b:navLink outcome = "newAdmin" value="#{msg['menu.accounts.createadmin']}" />
@@ -46,71 +46,73 @@
                         <b:navLink outcome ="changeMyPassword" value="#{msg['menu.accounts.changePassword']}" />
                         <b:navLink outcome ="accountData" value="#{msg['menu.accounts.details']}" /> 
                     </b:listLinks>
-                    <b:messages/>
+                    <h:messages/>
                 </b:column>
 
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>#{msg['menu.faults.list']}</h1>
-                    
-                        <h:form id="faultsList">
-                            <b:dataTable value="#{faultListController.faultsDTO}"  var="fault" 
-                                         excel="true"
-                                         csv="true"
-                                         pdf="true"
-                                         columnVisibility="true" 
-                                         copy="true"
-                                         print="true">
-                                <h:column>
-                                    <f:facet name="header">#{msg['fault.creation.time']}</f:facet> ${fault.createTimeStampSDF} 
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['fault.describe']}</f:facet> ${fault.faultDescribe}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['fault.area']}</f:facet> ${fault.techArea.areaName}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header" > #{msg['fault.whoNotified']}</f:facet> ${fault.whoNotified.sureName}                       
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['fault.specialist']}</f:facet> ${fault.specialist.sureName}         
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['fault.whoAssigned']}</f:facet> ${fault.whoAssigned.sureName} 
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['fault.modification.time']}</f:facet> ${fault.modificationTimeStampSDF} 
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">#{msg['fault.status']}</f:facet> ${fault.status.description} 
-                                </h:column>
 
-                                <h:column>
-                                    <f:facet name="header">Akcje</f:facet>
-                                    <p:commandButton value="${msg['fault.change.specialist']}"   action="#{faultListController.assign(fault)}" rendered="#{ fault.assigned}"/>
-                                    <p:commandButton value="${msg['fault.assign']}"   action="#{faultListController.assign(fault)}"    rendered="#{ fault.notAssigned}"/>
-                                    <p:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}"  rendered="#{fault.assigned}" />
-                                    <p:commandButton value="${msg['action.delete']}"  action="#{faultListController.removeFault(fault)}"  rendered="#{fault.notAssigned}" >
-                                     <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
+                    <h:form id="faultsList">
+                        <b:dataTable value="#{faultListController.faultsDTO}"  var="fault" 
+                                     excel="true"
+                                     csv="true"
+                                     pdf="true"
+                                     columnVisibility="true" 
+                                     copy="true"
+                                     print="true">
+                            <h:column>
+                                <f:facet name="header">#{msg['fault.creation.time']}</f:facet> ${fault.createTimeStampSDF} 
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['fault.describe']}</f:facet> ${fault.faultDescribe}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['fault.area']}</f:facet> ${fault.techArea.areaName}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" > #{msg['fault.whoNotified']}</f:facet> ${fault.whoNotified.sureName}                       
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['fault.specialist']}</f:facet> ${fault.specialist.sureName}         
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['fault.whoAssigned']}</f:facet> ${fault.whoAssigned.sureName} 
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['fault.modification.time']}</f:facet> ${fault.modificationTimeStampSDF} 
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">#{msg['fault.status']}</f:facet> ${fault.status.description} 
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Akcje</f:facet>
+                                <p:commandButton value="${msg['fault.change.specialist']}"   action="#{faultListController.assign(fault)}" rendered="#{ fault.assigned}"/>
+                                <p:commandButton value="${msg['fault.assign']}"   action="#{faultListController.assign(fault)}"    rendered="#{ fault.notAssigned}"/>
+                                <p:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}"   rendered="#{ fault.assigned}" update="message"  >
+                                 <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
+                                </p:commandButton>  
+                                <p:commandButton value="${msg['action.delete']}"  action="#{faultListController.removeFault(fault)}"  update="message"  >
+                                    <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
                                 </p:commandButton>  
                                 <p:confirmDialog  global="true" showEffect="fade" hideEffect="fade">  
                                     <p:commandButton value="${msg['confirm.yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />  
                                     <p:commandButton value="${msg['confirm.no']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />  
                                 </p:confirmDialog>  
-                                </h:column>
-                            </b:dataTable>
-                            <b:commandButton value="${msg['action.refresh']}" action="#{faultListController.init()}" />
-                            <b:commandButton value="${msg['action.cancel']}" action="main" immediate="true" look="warning" />
-                        </h:form>
-                    
-                </b:column>
+                            </h:column>
+                        </b:dataTable>
+                        <b:commandButton value="${msg['action.refresh']}" action="#{faultListController.init()}" />
+                        <b:commandButton value="${msg['action.cancel']}" action="main" immediate="true" look="warning" />
+                    </h:form>
 
+                </b:column>
+                <b:growl id="message" placement-align="center" />
             </b:row>
         </b:container> 
         <style type="text/css">
             .jumbotron{
                 background-color: #addfbb; 
-               
+
             }
             .dataTable{
                 border-color: #addfbb;
