@@ -3,6 +3,8 @@ package pl.lodz.p.it.spjava.fm.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 public class AccountDTO {
 
@@ -11,35 +13,51 @@ public class AccountDTO {
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 5, max = 32, message = "{constraint.string.length.notinrange}")
     @Pattern(regexp = "^[_a-zA-Z0-9-]*$", message = "{constraint.string.incorrectchar}")
+    @Getter
+    @Setter
     protected String login;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 2, max = 32, message = "{constraint.string.length.notinrange}")
+    @Getter
+    @Setter
     protected String password;
 
     @NotNull(message = "{constraint.notnull}")
+    @Getter
+    @Setter
     protected boolean active = true;
 
     @NotNull(message = "{constraint.notnull}")
+    @Getter
+    @Setter
     protected boolean confirmed = true;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
     @Pattern(regexp = "^[\\pL \\'-]*$", message = "{constraint.string.incorrectchar}")
+    @Getter
+    @Setter
     private String firstName;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
     @Pattern(regexp = "^[\\pL \\'-]*$", message = "{constraint.string.incorrectchar}")
+    @Getter
+    @Setter
     private String sureName;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 6, max = 64, message = "{constraint.string.length.notinrange}")
     @Pattern(regexp = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$", message = "{constraint.string.incorrectemail}")
+    @Getter
+    @Setter
     private String email;
 
     @Size(max = 9, message = "{constraint.string.length.toolong}")
     @Pattern(regexp = "^[0-9]*$", message = "{constraint.string.incorrectchar}")
+    @Getter
+    @Setter
     private String phone;
 
     private String type;
@@ -65,70 +83,6 @@ public class AccountDTO {
         this.sureName = sureName;
         this.email = email;
         this.phone = phone;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getSureName() {
-        return sureName;
-    }
-
-    public void setSureName(String sureName) {
-        this.sureName = sureName;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public boolean isConfirmed() {
-        return confirmed;
-    }
-
-    public void setConfirmed(boolean confirmed) {
-        this.confirmed = confirmed;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getType() {

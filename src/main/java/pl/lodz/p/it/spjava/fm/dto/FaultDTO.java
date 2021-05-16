@@ -4,21 +4,44 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 public class FaultDTO {
 
+    @Getter
     private Long id;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 2, max = 256, message = "{constraint.string.length.notinrange}")
+    @Getter
+    @Setter
     private String faultDescribe;
 
+    @Getter
+    @Setter
     private FaultStatusDTO status = FaultStatusDTO.NOT_ASSIGNED;
+
+    @Getter
+    @Setter
     private TechAreaDTO techArea;
+
+    @Getter
+    @Setter
     private SpecialistDTO specialist;
+
+    @Getter
+    @Setter
     private NotifierDTO whoNotified;
+
+    @Getter
+    @Setter
     private AssignerDTO whoAssigned;
+
+    @Getter
     private Date createTimeStamp;
+
+    @Getter
     private Date modificationTimeStamp;
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -40,65 +63,6 @@ public class FaultDTO {
         this.modificationTimeStamp = modificationTimeStamp;
     }
 
-    public FaultStatusDTO getStatus() {
-        return status;
-    }
-
-    public void setStatus(FaultStatusDTO status) {
-        this.status = status;
-    }
-
-    public TechAreaDTO getTechArea() {
-        return techArea;
-    }
-
-    public void setTechArea(TechAreaDTO techArea) {
-        this.techArea = techArea;
-    }
-
-    public String getFaultDescribe() {
-        return faultDescribe;
-    }
-
-    public void setFaultDescribe(String faultDescribe) {
-        this.faultDescribe = faultDescribe;
-    }
-
-    public SpecialistDTO getSpecialist() {
-        return specialist;
-    }
-
-    public void setSpecialist(SpecialistDTO specialist) {
-        this.specialist = specialist;
-    }
-
-    public NotifierDTO getWhoNotified() {
-        return whoNotified;
-    }
-
-    public void setWhoNotified(NotifierDTO whoNotified) {
-        this.whoNotified = whoNotified;
-    }
-
-    public AssignerDTO getWhoAssigned() {
-        return whoAssigned;
-    }
-
-    public void setWhoAssigned(AssignerDTO whoAssigned) {
-        this.whoAssigned = whoAssigned;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Date getCreateTimeStamp() {
-        return createTimeStamp;
-    }
-
-    public Date getModificationTimeStamp() {
-        return modificationTimeStamp;
-    }
 
     public String getCreateTimeStampSDF() {
         return sdf.format(createTimeStamp);

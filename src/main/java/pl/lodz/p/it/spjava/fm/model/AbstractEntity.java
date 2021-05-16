@@ -9,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import lombok.Getter;
 
 
 @MappedSuperclass
@@ -21,30 +22,20 @@ public abstract class AbstractEntity {
     @Version
     @NotNull(message = "{constraint.notnull}")
     @Column(nullable = false)
+    @Getter
     private int version;
 
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull(message = "{constraint.notnull}")
     @Column(name = "creation_timestamp", nullable = false)
+    @Getter
     private Date creationTimestamp;
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "modify_timestamp")
+    @Getter
     private Date modificationTimestamp;
 
-    public Date getCreationTimestamp() {
-        return creationTimestamp;
-    }
-
-    public Date getModificationTimestamp() {
-        return modificationTimestamp;
-    }
-
-    public int getVersion() {
-        return version;
-    }
-
-    
     @PreUpdate
     private void updateTimestamp() {
         modificationTimestamp = new Date();

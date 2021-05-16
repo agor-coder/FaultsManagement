@@ -4,15 +4,24 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 public class TechAreaDTO {
 
+    @Getter
     private Long id;
 
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
+    @Getter
+    @Setter
     private String areaName;
+
+    @Getter
     private Date createTimeStamp;
+    
+    @Getter
     private Date modificationTimeStamp;
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -25,27 +34,7 @@ public class TechAreaDTO {
         this.modificationTimeStamp = modificationTimestamp;
         this.createTimeStamp = createTimeStamp;
     }
-  
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getAreaName() {
-        return areaName;
-    }
-
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
-    }
-
-    public Date getCreateTimeStamp() {
-        return createTimeStamp;
-    }
-
-    public Date getModificationTimeStamp() {
-        return modificationTimeStamp;
-    }
 
     public String getCreateTimeStampSDF() {
         return sdf.format(createTimeStamp);
@@ -53,13 +42,12 @@ public class TechAreaDTO {
 
     public String getModificationTimeStampSDF() {
         return null == modificationTimeStamp ? getCreateTimeStampSDF() : sdf.format(modificationTimeStamp);
-     
+
     }
 
-    
     @Override
     public String toString() {
-        return areaName ;
+        return areaName;
     }
 
 }

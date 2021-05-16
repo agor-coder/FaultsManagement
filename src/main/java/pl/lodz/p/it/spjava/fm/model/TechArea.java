@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class TechArea extends AbstractEntity implements Serializable {
@@ -20,21 +22,14 @@ public class TechArea extends AbstractEntity implements Serializable {
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 3, max = 32, message = "{constraint.string.length.notinrange}")
     @Column(nullable = false, length = 32, unique = true)
+    @Getter
+    @Setter
     private String areaName;
 
     @Override
     public Long getId() {
         return id;
     }
-
-    public String getAreaName() {
-        return areaName;
-    }
-
-    public void setAreaName(String areaName) {
-        this.areaName = areaName;
-    }
-
 
     @Override
     protected Object getBusinessKey() {
@@ -43,7 +38,7 @@ public class TechArea extends AbstractEntity implements Serializable {
 
     @Override
     public String toString() {
-        return areaName + " " +super.getModificationTimestamp();
+        return areaName + " " + super.getModificationTimestamp();
     }
 
 }

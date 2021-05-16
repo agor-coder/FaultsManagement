@@ -14,6 +14,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
 @NamedQueries({
     @NamedQuery(name = "Fault.findSpecOfLogin", query = "SELECT i FROM Fault i where i.specialist.login = :login"),
@@ -33,75 +35,39 @@ public class Fault extends AbstractEntity implements Serializable {
     @NotNull(message = "{constraint.notnull}")
     @Size(min = 2, max = 256, message = "{constraint.string.length.notinrange}")
     @Column(nullable = false, length = 256)
+    @Getter
+    @Setter
     private String faultDescribe;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Getter
+    @Setter
     private FaultStatus status = FaultStatus.NOT_ASSIGNED;
 
     @JoinColumn(nullable = false, updatable = false)
     @ManyToOne
+    @Getter
+    @Setter
     private TechArea techArea;
 
     @JoinColumn(nullable = true)
     @ManyToOne
+    @Getter
+    @Setter
     private Specialist specialist;
 
     @JoinColumn(nullable = false, updatable = false)
     @ManyToOne
+    @Getter
+    @Setter
     private Notifier whoNotified;
 
     @JoinColumn(nullable = true)
     @ManyToOne
+    @Getter
+    @Setter
     private Assigner whoAssigned;
-
-    public FaultStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(FaultStatus status) {
-        this.status = status;
-    }
-
-    public TechArea getTechArea() {
-        return techArea;
-    }
-
-    public void setTechArea(TechArea techArea) {
-        this.techArea = techArea;
-    }
-
-    public String getFaultDescribe() {
-        return faultDescribe;
-    }
-
-    public void setFaultDescribe(String faultDescribe) {
-        this.faultDescribe = faultDescribe;
-    }
-
-    public Specialist getSpecialist() {
-        return specialist;
-    }
-
-    public void setSpecialist(Specialist specialist) {
-        this.specialist = specialist;
-    }
-
-    public Notifier getWhoNotified() {
-        return whoNotified;
-    }
-
-    public void setWhoNotified(Notifier whoNotified) {
-        this.whoNotified = whoNotified;
-    }
-
-    public Assigner getWhoAssigned() {
-        return whoAssigned;
-    }
-
-    public void setWhoAssigned(Assigner whoAssigned) {
-        this.whoAssigned = whoAssigned;
-    }
 
     @Override
     public Long getId() {
