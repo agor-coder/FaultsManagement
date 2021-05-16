@@ -92,7 +92,7 @@
                                 <p:commandButton value="${msg['fault.finish']}"  action="#{faultListController.setStatusEND(fault)}"   rendered="#{ fault.assigned}" update="message"  >
                                  <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
                                 </p:commandButton>  
-                                <p:commandButton value="${msg['action.delete']}"  action="#{faultListController.removeFault(fault)}"  update="message"  >
+                                <p:commandButton value="${msg['action.delete']}"  action="#{faultListController.removeFault(fault)}"  rendered="#{not fault.assigned}"  update="message"  >
                                     <p:confirm header="${msg['general.success']}" message="${msg['confirm.question']}" icon="ui-icon-alert" />  
                                 </p:commandButton>  
                                 <p:confirmDialog  global="true" showEffect="fade" hideEffect="fade">  
