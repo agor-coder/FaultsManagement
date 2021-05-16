@@ -88,4 +88,10 @@ public class ContextUtils {
     public static void emitSuccessMessage(String id) {
         emitInternationalizedMessage(id, "general.success.message");
     }
+    public static void emitMessage(String text) {
+       FacesContext context = FacesContext.getCurrentInstance();
+        FacesMessage message = new FacesMessage();
+        message.setSummary(text);
+        context.addMessage(null, message);
+    }
 }

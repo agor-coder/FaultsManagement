@@ -57,6 +57,7 @@ public class SpecListController implements Serializable {
         } catch (AppBaseException abe) {
             Logger.getLogger(SpecListController.class.getName())
                     .log(Level.SEVERE, "Zgłoszenie w metodzie akcji assignSpecialist wyjatku typu: ", abe);
+            ContextUtils.emitMessage("specialist:  "+specialistDTO.getSureName());
             ContextUtils.emitInternationalizedMessage(null, abe.getMessage());
             return null;
         }
