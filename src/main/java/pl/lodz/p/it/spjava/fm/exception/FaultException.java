@@ -11,6 +11,7 @@ public class FaultException extends AppBaseException {
     static final String KEY_DB_CONSTRAINT = "error.account.db.constraint.uniq";
     static final String KEY_OPTIMISTIC_LOCK_REPEAT = "error.optimisticlock.repeat";
     static final String KEY_OPTIMISTIC_LOCK_FAULT = "error.optimisticlock.fault";
+    static final String FAULT_IS_ASSIGNED = "fault.is.assigned";
 
     private FaultException(String message) {
         super(message);
@@ -20,32 +21,32 @@ public class FaultException extends AppBaseException {
         super(message, cause);
     }
 
-    public static FaultException faultExceptionWithFaultLimit() {
+    public static FaultException createFaultExceptionWithFaultLimit() {
         FaultException fe = new FaultException(FAULT_LIMIT);
         return fe;
     }
 
-    public static FaultException faultExceptionWithSameSpecialist() {
+    public static FaultException createFaultExceptionWithSameSpecialist() {
         FaultException fe = new FaultException(THE_SAME_SPEC);
         return fe;
     }
 
-    public static FaultException faultExceptionWithStatusChangedAlready() {
+    public static FaultException createFaultExceptionWithStatusChangedAlready() {
         FaultException fe = new FaultException(STATUS_CHANGED_ALREADY);
         return fe;
     }
 
-    public static FaultException faultExceptionWithFaultNotFound() {
+    public static FaultException createFaultExceptionWithFaultNotFound() {
         FaultException fe = new FaultException(KEY_NOT_FOUND);
         return fe;
     }
 
-    public static FaultException faultExceptionWithOptimisticLockKey(OptimisticLockException cause) {
+    public static FaultException createFaultExceptionWithOptimisticLockKey(OptimisticLockException cause) {
         FaultException fe = new FaultException(KEY_OPTIMISTIC_LOCK_FAULT, cause);
         return fe;
     }
 
-    public static FaultException faultExceptionWithOptimisticLockKey() {
+    public static FaultException createFaultExceptionWithOptimisticLockKey() {
         FaultException fe = new FaultException(KEY_OPTIMISTIC_LOCK_FAULT);
         return fe;
     }
@@ -63,6 +64,11 @@ public class FaultException extends AppBaseException {
     static public FaultException createFaultExceptionWithTxRetryRollback() {
         FaultException ke = new FaultException(KEY_TX_RETRY_ROLLBACK);
         return ke;
+    }
+    
+     public static FaultException createFaultExceptionWithIsAssigned() {
+        FaultException fe = new FaultException(FAULT_IS_ASSIGNED);
+        return fe;
     }
 
 }

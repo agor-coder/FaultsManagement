@@ -67,7 +67,7 @@ public class FaultEndpoint {
     public void setEndpointFaultFromDTOToEdit(FaultDTO faultDTO) throws AppBaseException {
         endpointFault = faultManager.find(faultDTO.getId());
         if (null == endpointFault) {
-            throw FaultException.faultExceptionWithFaultNotFound();
+            throw FaultException.createFaultExceptionWithFaultNotFound();
         }
     }
 
@@ -120,6 +120,9 @@ public class FaultEndpoint {
 
     public void removeFault(FaultDTO faultDTO) throws AppBaseException {
         setEndpointFaultFromDTOToEdit(faultDTO);
+        if (endpointFault.getStatus().name().equals("ASSIGNED")) {
+            throw FaultException.createFaultExceptionWithIsAssigned();
+        }
         faultManager.remove(endpointFault);
     }
 

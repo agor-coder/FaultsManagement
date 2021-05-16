@@ -54,7 +54,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
         if (!entity.getStatus().name().equals(name)) {
             em.find(entity.getClass(), entity.getId()).setStatus(Fault.FaultStatus.valueOf(name));
         } else {
-            throw FaultException.faultExceptionWithStatusChangedAlready();
+            throw FaultException.createFaultExceptionWithStatusChangedAlready();
         }
     }
 
@@ -65,7 +65,7 @@ public class FaultFacade extends AbstractFacade<Fault> {
             super.edit(entity);
             em.flush();
         } catch (OptimisticLockException oe) {
-            throw FaultException.faultExceptionWithOptimisticLockKey(oe);
+            throw FaultException.createFaultExceptionWithOptimisticLockKey(oe);
         } catch (PersistenceException ex) {
             if (ex.getCause() instanceof DatabaseException
                     && ex.getCause().getCause() instanceof SQLIntegrityConstraintViolationException) {

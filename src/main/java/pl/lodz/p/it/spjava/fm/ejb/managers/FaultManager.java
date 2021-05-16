@@ -66,7 +66,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
             throw SpecialistException.specExceptionWithNotActive();
         }
         if (null != fault.getSpecialist() && fault.getSpecialist().equals(spec)) {
-            throw FaultException.faultExceptionWithSameSpecialist();
+            throw FaultException.createFaultExceptionWithSameSpecialist();
         }
 
         int specialistFaultsNumber = countOfSpecialist(spec);
@@ -82,7 +82,7 @@ public class FaultManager extends AbstractManager implements SessionSynchronizat
                 throw LockSpecialistException.createLockExceptionWithOptimistickForceIncrement();
             }
         } else {
-            throw FaultException.faultExceptionWithFaultLimit();
+            throw FaultException.createFaultExceptionWithFaultLimit();
         }
         faultFacade.edit(fault);
     }
