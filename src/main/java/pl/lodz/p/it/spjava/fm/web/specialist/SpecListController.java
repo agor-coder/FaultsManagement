@@ -10,6 +10,8 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import lombok.Getter;
 import pl.lodz.p.it.spjava.fm.dto.FaultDTO;
 import pl.lodz.p.it.spjava.fm.dto.SpecialistDTO;
 import pl.lodz.p.it.spjava.fm.ejb.endpoints.FaultEndpoint;
@@ -29,7 +31,9 @@ public class SpecListController implements Serializable {
     @Inject
     private Conversation conversation;
 
+    @Getter
     private FaultDTO faultDTO;
+    @Getter
     private List<SpecialistDTO> specialistsDTO;
 
     @PostConstruct
@@ -37,13 +41,6 @@ public class SpecListController implements Serializable {
         specialistsDTO = specialistEndpoint.getAllSpecialistsDTO();
     }
 
-    public FaultDTO getFaultDTO() {
-        return faultDTO;
-    }
-
-    public List<SpecialistDTO> getSpecialistsDTO() {
-        return specialistsDTO;
-    }
 
     public void setFaultDTOAndfaultEndpoint(FaultDTO fDTO) throws AppBaseException {
         faultDTO = fDTO;

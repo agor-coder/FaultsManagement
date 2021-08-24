@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Payara 5.194.0" type="PayaraServerConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Payara 5.201" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="$PROJECT_DIR$/../../../../Program Files/java/jdk-11" nameIsGenerated="true">
+  <configuration default="false" name="Payara 5.164" type="PayaraServerConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Payara 5.164" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="$PROJECT_DIR$/../../../../../Program Files/java/jdk-11" nameIsGenerated="true">
     <option name="OPEN_IN_BROWSER_URL" value="https://localhost:8181/fm/" />
     <option name="BROWSER_ID" value="b2a9dca7-9d0b-4e1e-98a8-afb19c1328d2" />
     <option name="UPDATING_POLICY" value="restart-server" />
@@ -53,16 +53,16 @@
     <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
       <option name="USE_ENV_VARIABLES" value="true" />
       <STARTUP>
-        <option name="USE_DEFAULT" value="false" />
-        <option name="SCRIPT" value="$PROJECT_DIR$/../../../../servers/Payara_Server5194/bin/asadmin.bat" />
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
         <option name="VM_PARAMETERS" value="" />
-        <option name="PROGRAM_PARAMETERS" value="start-domain domain1" />
+        <option name="PROGRAM_PARAMETERS" value="" />
       </STARTUP>
       <SHUTDOWN>
-        <option name="USE_DEFAULT" value="false" />
-        <option name="SCRIPT" value="$PROJECT_DIR$/../../../../servers/Payara_Server5194/bin/asadmin.bat" />
+        <option name="USE_DEFAULT" value="true" />
+        <option name="SCRIPT" value="" />
         <option name="VM_PARAMETERS" value="" />
-        <option name="PROGRAM_PARAMETERS" value="stop-domain domain1" />
+        <option name="PROGRAM_PARAMETERS" value="" />
       </SHUTDOWN>
     </ConfigurationWrapper>
     <method v="2">
