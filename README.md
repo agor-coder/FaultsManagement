@@ -1,8 +1,8 @@
 ## FaultsManagement
-- NetBeans 12,
-- Java EE 8,
+- JDK 13,
+- Jakarta EE 8,
 - Maven 4.0.0,
-- Payara 5.201,
+- Payara 5.194,
 - EJB 3.2,
 - JPA 2.5,
 - JavaDB 10.15,
