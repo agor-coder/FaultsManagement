@@ -16,7 +16,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="FaultsManagement" options="-endorseddirs C:\Users\ER4\IdeaProjects\1\FaultsManagement\target/endorsed" />
+      <module name="FaultsManagement" options="-endorseddirs E:\IdeaProjects\1\FaultsManagement\target/endorsed" />
     </option>
   </component>
 </project>

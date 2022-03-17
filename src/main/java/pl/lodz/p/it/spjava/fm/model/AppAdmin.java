@@ -1,14 +1,14 @@
 package pl.lodz.p.it.spjava.fm.model;
 
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Entity
@@ -16,7 +16,7 @@ import lombok.Setter;
 @DiscriminatorValue("Administrator")
 @Getter
 @Setter
-public class AppAdmin extends Account implements Serializable {
+public class AppAdmin extends Account {
 
     @NotNull(message = "{constraint.notnull}")
     @Size(max = 4, message = "{constraint.string.length.toolong}")
